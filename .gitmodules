@@ -1,0 +1,6 @@
+[submodule "tools/verso-harness"]
+	path = tools/verso-harness
+	url = git@github.com:ejgallego/leanblueprint-to-verso.git
+[submodule "Carleson"]
+	path = Carleson
+	url = https://github.com/fpvandoorn/carleson

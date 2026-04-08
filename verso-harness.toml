@@ -1,0 +1,15 @@
+package_name = "CarlesonBlueprint"
+blueprint_main = "BlueprintMain"
+chapter_root = "CarlesonBlueprint/Chapters"
+tex_source_glob = "Carleson/blueprint/src/chapter/main.tex"
+
+[lt]
+default_chapters = [
+  "CarlesonBlueprint/Chapters/Main.lean",
+]
+
+[harness]
+non_port_chapters = [
+  "CarlesonBlueprint/Chapters/Introduction.lean",
+  "CarlesonBlueprint/Chapters/PortingStatus.lean",
+]
