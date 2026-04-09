@@ -5,29 +5,29 @@ import VersoBlueprint
 open Informal
 
 tex_prelude
-  r#"\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\tQ}{Q}
-\newcommand{\mfa}{\vartheta}
-\newcommand{\mfb}{\theta}
-\newcommand{\Mf}{\Theta}
-\newcommand{\fp}{\mathfrak p}
-\newcommand{\fq}{\mathfrak q}
-\newcommand{\fP}{\mathfrak P}
-\newcommand{\fu}{\mathfrak u}
-\newcommand{\fU}{\mathfrak U}
-\newcommand{\fT}{\mathfrak T}
-\newcommand{\fL}{\mathfrak L}
-\newcommand{\fC}{\mathfrak C}
-\newcommand{\pc}{\mathrm{c}}
-\newcommand{\ps}{\mathrm{s}}
-\newcommand{\fc}{\Omega}
-\newcommand{\scI}{\mathcal{I}}
-\newcommand{\fcc}{\mathcal{Q}}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\supp}{\operatorname{supp}}
-\DeclareMathOperator{\Lip}{\operatorname{Lip}}
-\DeclareMathOperator{\dens}{\operatorname{dens}}"#
+  r#"\providecommand{\N}{\mathbb{N}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\Q}{\mathbb{Q}}
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\tQ}{Q}
+\providecommand{\mfa}{\vartheta}
+\providecommand{\mfb}{\theta}
+\providecommand{\Mf}{\Theta}
+\providecommand{\fp}{\mathfrak p}
+\providecommand{\fq}{\mathfrak q}
+\providecommand{\fP}{\mathfrak P}
+\providecommand{\fu}{\mathfrak u}
+\providecommand{\fU}{\mathfrak U}
+\providecommand{\fT}{\mathfrak T}
+\providecommand{\fL}{\mathfrak L}
+\providecommand{\fC}{\mathfrak C}
+\providecommand{\pc}{\mathrm{c}}
+\providecommand{\ps}{\mathrm{s}}
+\providecommand{\fc}{\Omega}
+\providecommand{\scI}{\mathcal{I}}
+\providecommand{\fcc}{\mathcal{Q}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\supp}{\operatorname{supp}}
+\providecommand{\Lip}{\operatorname{Lip}}
+\providecommand{\dens}{\operatorname{dens}}"#
