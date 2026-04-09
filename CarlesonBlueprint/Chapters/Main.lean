@@ -1479,7 +1479,7 @@ doubling property `thirddb`.
 First, we record an estimate for the metrical entropy numbers of balls in the space $\Mf$ equipped with any of the metrics $d_B$, following from the doubling property \eqref{thirddb}.
 ```
 
-:::theorem "ball-metric-entropy" (lean := "Θ.finite_and_mk_le_of_le_dist")
+:::lemma_ "ball-metric-entropy" (lean := "Θ.finite_and_mk_le_of_le_dist")
 Let $`B' \subset X` be a ball. Let $`r > 0`, $`\mfa \in \Mf` and
 $`k \in \mathbb{N}`. Suppose that $`\mathcal{Z} \subset B_{B'}(\mfa, r2^k)`
 satisfies that $`\{B_{B'}(z,r)\mid z \in \mathcal{Z}\}` is a collection of
@@ -1524,7 +1524,7 @@ grid.
 The next lemma concerns monotonicity of the metrics $d_{B(c(I), \frac 14 D^{s(I)})}$ with respect to inclusion of cubes $I$ in a grid.
 ```
 
-:::theorem "monotone-cube-metrics" (lean := "Grid.dist_mono, Grid.dist_strictMono")
+:::lemma_ "monotone-cube-metrics" (lean := "Grid.dist_mono, Grid.dist_strictMono")
 Let $`(\mathcal{D}, c, s)` be a grid structure. Denote for cubes
 $`I \in \mathcal{D}`
 $$`I^\circ := B(c(I), \frac{1}{4} D^{s(I)}).`$$
@@ -1606,7 +1606,7 @@ We also record the following basic estimates for the kernels $`K_s`.
 We also record the following basic estimates for the kernels $K_s$.
 ```
 
-:::theorem "kernel-summand" (lean := "dist_mem_Icc_of_Ks_ne_zero, enorm_Ks_le, enorm_Ks_sub_Ks_le")
+:::lemma_ "kernel-summand" (lean := "dist_mem_Icc_of_Ks_ne_zero, enorm_Ks_le, enorm_Ks_sub_Ks_le")
 Let $`-S\le s\le S` and $`x,y,y'\in X`. If $`K_s(x,y)\neq 0`, then we have
 $$`\frac{1}{4} D^{s-1} \leq \rho(x,y) \leq \frac{1}{2} D^s.`$$
 We have
@@ -1763,7 +1763,7 @@ We begin by proving some continuity properties of the integrand in
 We begin by proving some continuity properties of the integrand in \eqref{def-main-op}.
 ```
 
-:::theorem "int-continuous" (lean := "continuous_carlesonOperatorIntegrand, rightContinuous_carlesonOperatorIntegrand, leftContinuous_carlesonOperatorIntegrand, measurable_carlesonOperatorIntegrand, enorm_carlesonOperatorIntegrand_le")
+:::lemma_ "int-continuous" (lean := "continuous_carlesonOperatorIntegrand, rightContinuous_carlesonOperatorIntegrand, leftContinuous_carlesonOperatorIntegrand, measurable_carlesonOperatorIntegrand, enorm_carlesonOperatorIntegrand_le")
 Let $`f` be a measurable function with $`|f| \le 1`. Then the function
 $$`G: X \times \Theta \times (0,\infty) \times (0, \infty) \to \mathbb{C}`$$
 $$`G(x, \mfa, R_1, R_2) := \int_{R_1 < \rho(x,y) < R_2} K(x,y) f(y) e(\mfa(y)) \, \mathrm{d}\mu(y)`$$
@@ -1978,7 +1978,7 @@ For each $x$ and all $f$, the functions $\sup_{2^{-n} < R_1 < R_2 < 2^n} T_{R_1,
 \end{proof}
 ```
 
-:::theorem "R-truncation" (lean := "R_truncation")
+:::lemma_ "R-truncation" (lean := "R_truncation")
 {uses "S-truncation"}[]
 Let $`F`, $`G` be Borel sets in $`X`. Let $`f:X\to \C` be a Borel function
 with $`|f|\le 1_F`. Then for all $`R\in 2^\N` we have
@@ -2102,7 +2102,7 @@ Summing the contributions from \eqref{middles} and \eqref{boundarys} completes t
 \end{proof}
 ```
 
-:::theorem "S-truncation" (lean := "S_truncation")
+:::lemma_ "S-truncation" (lean := "S_truncation")
 {uses "Hardy-Littlewood"}[]
 {uses "linearized-truncation"}[]
 Let $`F`, $`G` be bounded Borel sets in $`X`. Let $`f:X\to \C` be a Borel
@@ -2166,7 +2166,7 @@ Therefore, `S-truncation` follows from `linearized-truncation`.
 \end{proof}
 ```
 
-:::theorem "linearized-truncation" (lean := "linearized_truncation")
+:::lemma_ "linearized-truncation" (lean := "linearized_truncation")
 {uses "finitary-Carleson"}[]
 Let $`\sigma_1,\sigma_2\colon X\to \mathbb{Z}` be measurable functions with
 finite range and $`\sigma_1\leq \sigma_2`. Then we have
@@ -2276,7 +2276,7 @@ The proof of the next lemma is done in \Cref{subsecdyadic},
 following the construction of dyadic cubes in \cite[\S 3]{christ1990b}.
 ```
 
-:::theorem "grid-existence" (lean := "grid_existence")
+:::lemma_ "grid-existence" (lean := "grid_existence")
 {uses "counting-balls"}[]
 {uses "boundary-measure"}[]
 There exists a grid structure $`(\mathcal{D}, c,s)`.
@@ -2299,7 +2299,7 @@ The next lemma, which we prove in \Cref{subsectiles}, should be compared
 with the construction in \cite[Lemma 2.12]{zk-polynomial}.
 ```
 
-:::theorem "tile-structure" (lean := "tile_existence")
+:::lemma_ "tile-structure" (lean := "tile_existence")
 {uses "ball-metric-entropy"}[]
 {uses "frequency-ball-cover"}[]
 {uses "disjoint-frequency-cubes"}[]
@@ -2332,7 +2332,7 @@ Applying \Cref{discrete-Carleson}, we obtain a Borel set $G'$ in $X$ with $2\mu(
 we have \eqref{disclesssim}.
 ```
 
-:::theorem "tile-sum-operator" (lean := "tile_sum_operator, integrable_tile_sum_operator")
+:::lemma_ "tile-sum-operator" (lean := "tile_sum_operator, integrable_tile_sum_operator")
 We have for all $`x\in G\setminus G'`
 $$`\sum_{\fp\in \fP}T_{\fp} f(x)= \sum_{s=\sigma_1(x)}^{\sigma_2(x)}
         \int K_{s}(x,y) f(y) e(\tQ(x)(y)-\tQ(x)(x))\, d\mu(y).`$$
@@ -2446,7 +2446,7 @@ We begin with the construction of the centers of the dyadic cubes.
 We begin with the construction of the centers of the dyadic cubes.
 ```
 
-:::theorem "counting-balls" (lean := "counting_balls")
+:::lemma_ "counting-balls" (lean := "counting_balls")
 Let $`-S\le k\le S`. Consider $`Y\subset X` such that for any $`y\in Y`, we
 have
 $$`y\in B(o,4D^S-D^k),`$$
@@ -2534,7 +2534,7 @@ For each $-S\le k\le S$, choose an enumeration of the points in the finite set $
 order $<$ on $Y_{k}$.
 ```
 
-:::theorem "cover-big-ball" (lean := "cover_big_ball")
+:::lemma_ "cover-big-ball" (lean := "cover_big_ball")
 For each $`-S\le k\le S`, the ball $`B(o, 4D^S-D^k)` is contained in the union
 of the balls $`B(y,2D^k)` with $`y\in Y_k`.
 :::
@@ -2618,7 +2618,7 @@ with
 \end{equation}
 ```
 
-:::theorem "basic-grid-structure" (lean := "I1_prop_1,I3_prop_1,I2_prop_2,I3_prop_2,I3_prop_3_1,I3_prop_3_2")
+:::lemma_ "basic-grid-structure" (lean := "I1_prop_1,I3_prop_1,I2_prop_2,I3_prop_2,I3_prop_3_1,I3_prop_3_2")
 {uses "cover-big-ball"}[]
 For each $`-S\le k\le S` and $`1\le j\le 3` the following holds.
 
@@ -2730,7 +2730,7 @@ We show the second inclusion in \eqref{squeezedyadic}. Let $x\in I_3(y,k)$. As $
 \end{proof}
 ```
 
-:::theorem "cover-by-cubes" (lean := "cover_by_cubes")
+:::lemma_ "cover-by-cubes" (lean := "cover_by_cubes")
 Let $`-S\le l\le k\le S` and $`y\in Y_k`. We have
 $$`I_3(y,k)\subset \bigcup_{y'\in Y_l} I_3(y',l).`$$
 :::
@@ -2772,7 +2772,7 @@ induction.
 \end{proof}
 ```
 
-:::theorem "dyadic-property" (lean := "dyadic_property")
+:::lemma_ "dyadic-property" (lean := "dyadic_property")
 {uses "basic-grid-structure"}[]
 {uses "cover-by-cubes"}[]
 Let $`-S\le l\le k\le S` and $`y\in Y_k` and $`y'\in Y_l` with
@@ -2846,7 +2846,7 @@ write $(y',k'|y,k)$ if $I_3(y',k')\subset I_3(y,k)$ and
 \end{equation}
 ```
 
-:::theorem "transitive-boundary" (lean := "transitive_boundary")
+:::lemma_ "transitive-boundary" (lean := "transitive_boundary")
 {uses "dyadic-property"}[]
 Assume $`-S\le k''< k'< k\le S` and $`y''\in Y_{k''}`, $`y'\in Y_{k'}`,
 $`y\in Y_k`. Assume there is $`x\in X` such that
@@ -2911,7 +2911,7 @@ where we have used $`D>5` and $`k''<k'`. We conclude $`(y',k'|y,k)`.
 \end{proof}
 ```
 
-:::theorem "small-boundary" (lean := "small_boundary")
+:::lemma_ "small-boundary" (lean := "small_boundary")
 {uses "transitive-boundary"}[]
 Let $`K = 2^{4a+1}`. For each $`-S+K\le k\le S` and $`y\in Y_k` we have
 $$`\sum_{z\in Y_{k-K}: (z,k-K|y,k)}\mu(I_3(z,k-K)) \le \frac 12 \mu(I_3(y,k)).`$$
@@ -3041,7 +3041,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::theorem "smaller-boundary" (lean := "smaller_boundary")
+:::lemma_ "smaller-boundary" (lean := "smaller_boundary")
 {uses "small-boundary"}[]
 Let $`K = 2^{4a+1}` and let $`n\ge 0` be an integer. Then for each
 $`-S+nK\le k\le S` we have
@@ -3099,7 +3099,7 @@ Applying `new-small-boundary` gives `very-new-small`, and proves the lemma.
 \end{proof}
 ```
 
-:::theorem "boundary-measure" (lean := "boundary_measure")
+:::lemma_ "boundary-measure" (lean := "boundary_measure")
 {uses "smaller-boundary"}[]
 For each $`-S\le k\le S` and $`y\in Y_k` and $`0<t<1` with
 $`tD^k\ge D^{-S}` we have
@@ -3298,7 +3298,7 @@ is such that for any $\mfa, \mfb \in \mathcal{Z}$ with $\mfa\ne \mfb$ we have
 Since $\tQ(X)$ is finite, there exists a set $\mathcal{Z}$ satisfying both \eqref{eq-tile-Z} and \eqref{eq-tile-disjoint-Z} of maximal cardinality among all such sets. We pick for each $I \in \mathcal{D}$ such a set $\mathcal{Z}(I)$.
 ```
 
-:::theorem "frequency-ball-cover" (lean := "frequency_ball_cover")
+:::lemma_ "frequency-ball-cover" (lean := "frequency_ball_cover")
 For each $`I \in \mathcal{D}`, we have
 $$`\tQ(X) \subset \bigcup_{z \in \mathcal{Z}(I)} B_{I^\circ}(z, 0.7).`$$
 :::
@@ -3377,7 +3377,7 @@ and then define iteratively
 \end{equation}
 ```
 
-:::theorem "disjoint-frequency-cubes" (lean := "Construction.disjoint_frequency_cubes")
+:::lemma_ "disjoint-frequency-cubes" (lean := "Construction.disjoint_frequency_cubes")
 For each $`I \in \mathcal{D}`, and $`\fp_1, \fp_2\in \fP(I)`, if
 $$`\Omega_1(\fp_1)\cap \Omega_1(\fp_2)\neq \emptyset`$$
 then $`\fp_1=\fp_2`.
@@ -3410,7 +3410,7 @@ $`\fp \in \fP(I)` are pairwise disjoint.
 \end{proof}
 ```
 
-:::theorem "frequency-cube-cover" (lean := "Construction.iUnion_ball_subset_iUnion_Ω₁, Construction.ball_subset_Ω₁, Construction.Ω₁_subset_ball")
+:::lemma_ "frequency-cube-cover" (lean := "Construction.iUnion_ball_subset_iUnion_Ω₁, Construction.ball_subset_Ω₁, Construction.Ω₁_subset_ball")
 For each $`I \in \mathcal{D}`, it holds that
 $$`\bigcup_{z \in \mathcal{Z}(I)} B_{I^\circ}(z, 0.7)\subset \bigcup_{\fp \in \fP(I)} \Omega_1(\fp).`$$
 For every $`\fp \in \fP`, it holds that
@@ -3934,7 +3934,7 @@ Define
 Define $G'=G_1\cup G_2 \cup G_3$. The following bound of the measure of $G'$ will be proven in \Cref{subsetexcset}.
 ```
 
-:::theorem "exceptional-set" (lean := "exceptional_set")
+:::lemma_ "exceptional-set" (lean := "exceptional_set")
 {uses "first-exception"}[]
 {uses "second-exception"}[]
 {uses "third-exception"}[]
@@ -3963,7 +3963,7 @@ In \Cref{subsecforest}, we identify each set $\fC_5(k,n,j)$ outside $G'$ as fore
 \ref{forest-operator} to prove the following lemma.
 ```
 
-:::theorem "forest-union" (lean := "forest_union")
+:::lemma_ "forest-union" (lean := "forest_union")
 {uses "forest-operator"}[]
 {uses "C-dens1"}[]
 {uses "C6-forest"}[]
@@ -4009,7 +4009,7 @@ the complement of the set of tiles in Lemma
 \Cref{antichain-operator} to prove the following lemma.
 ```
 
-:::theorem "forest-complement" (lean := "forest_complement")
+:::lemma_ "forest-complement" (lean := "forest_complement")
 {uses "antichain-operator"}[]
 {uses "antichain-decomposition"}[]
 {uses "L0-antichain"}[]
@@ -4077,7 +4077,7 @@ in Lemmas \ref{first-exception},
 The bound for $G_1$ follows from the Vitali covering lemma, \Cref{Hardy-Littlewood}.
 ```
 
-:::theorem "first-exception" (lean := "first_exception")
+:::lemma_ "first-exception" (lean := "first_exception")
 {uses "Hardy-Littlewood"}[]
 We have
 $$`\mu(G_1)\le 2^{-5}\mu(G).`$$
@@ -4146,7 +4146,7 @@ We turn to the bound of $G_2$, which relies on the Dyadic Covering \Cref{dense-c
 John-Nirenberg \Cref{John-Nirenberg} below.
 ```
 
-:::theorem "dense-cover" (lean := "dense_cover")
+:::lemma_ "dense-cover" (lean := "dense_cover")
 For each $`k\ge 0`, the union of all dyadic cubes in $`\mathcal{C}(G,k)` has
 measure at most $`2^{k+1} \mu(G)`.
 :::
@@ -4204,7 +4204,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::theorem "pairwise-disjoint" (lean := "pairwiseDisjoint_E1")
+:::lemma_ "pairwise-disjoint" (lean := "pairwiseDisjoint_E1")
 If $`\fp, \fp' \in {\mathfrak{M}}(k,n)` and
 $$`{E_1}(\fp)\cap {E_1}(\fp')\neq \emptyset`$$
 then $`\fp=\fp'`.
@@ -4247,7 +4247,7 @@ of $\fp'$, we have $\fp'=\fp$. This proves the lemma.
 \end{proof}
 ```
 
-:::theorem "dyadic-union" (lean := "dyadic_union")
+:::lemma_ "dyadic-union" (lean := "dyadic_union")
 For each $`x\in A(\lambda,k,n)`, there is a dyadic cube $`I` that contains
 $`x` and is a subset of $`A(\lambda,k,n)`.
 :::
@@ -4285,7 +4285,7 @@ It follows that $I\subset A(\lambda,k,n)$.
 \end{proof}
 ```
 
-:::theorem "John-Nirenberg" (lean := "john_nirenberg")
+:::lemma_ "John-Nirenberg" (lean := "john_nirenberg")
 {uses "dense-cover"}[]
 {uses "pairwise-disjoint"}[]
 {uses "dyadic-union"}[]
@@ -4411,7 +4411,7 @@ Using the induction hypothesis, this proves
 \end{proof}
 ```
 
-:::theorem "second-exception" (lean := "second_exception")
+:::lemma_ "second-exception" (lean := "second_exception")
 {uses "John-Nirenberg"}[]
 We have
 $$`\mu(G_2)\le 2^{-2} \mu(G).`$$
@@ -4458,7 +4458,7 @@ We turn to the set $`G_3`.
 We turn to the set $G_3$.
 ```
 
-:::theorem "top-tiles" (lean := "top_tiles")
+:::lemma_ "top-tiles" (lean := "top_tiles")
 {uses "John-Nirenberg"}[]
 We have
 $$`\sum_{\mathfrak{m} \in \mathfrak{M}(k,n)} \mu(\scI(\mathfrak{m}))\le 2^{n+k+3}\mu(G).`$$
@@ -4509,7 +4509,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::theorem "tree-count" (lean := "tree_count")
+:::lemma_ "tree-count" (lean := "tree_count")
 Let $`k,n,j\ge 0`. We have for every $`x\in X`
 $$`\sum_{\fu\in \fU_1(k,n,j)} \mathbf{1}_{\scI(\fu)}(x)
     \le 2^{-j}
@@ -4637,7 +4637,7 @@ Inserting this into \eqref{usumbymsum} proves the lemma.
 \end{proof}
 ```
 
-:::theorem "boundary-exception" (lean := "boundary_exception")
+:::lemma_ "boundary-exception" (lean := "boundary_exception")
 Let $`\mathcal{L}(\fu)` be as defined in `eq-L-def`. We have for each
 $`\fu\in \fU_1(k,n,l)`,
 $$`\mu(\bigcup_{I\in \mathcal{L}(\fu)} I)
@@ -4698,7 +4698,7 @@ Using $\kappa<1$ and $D \ge 12$, this proves the lemma.
 \end{proof}
 ```
 
-:::theorem "third-exception" (lean := "third_exception")
+:::lemma_ "third-exception" (lean := "third_exception")
 {uses "tree-count"}[]
 {uses "boundary-exception"}[]
 {uses "top-tiles"}[]
@@ -4837,7 +4837,7 @@ properties of $`\lesssim`.
 Before proving \Cref{forest-union} and \Cref{forest-complement}, we collect some useful properties of $\lesssim$.
 ```
 
-:::theorem "wiggle-order-1" (lean := "smul_mono")
+:::lemma_ "wiggle-order-1" (lean := "smul_mono")
 If $`n\fp \lesssim m\fp'` and $`n' \ge n` and $`m \ge m'` then
 $`n'\fp \lesssim m'\fp'`.
 :::
@@ -4864,7 +4864,7 @@ $`B_{\fp'}(\fcc(\fp'), m') \subset B_{\fp'}(\fcc(\fp'), m)`.
 \end{proof}
 ```
 
-:::theorem "wiggle-order-2" (lean := "smul_C2_1_2")
+:::lemma_ "wiggle-order-2" (lean := "smul_C2_1_2")
 {uses "monotone-cube-metrics"}[]
 Let $`n, m \ge 1` and $`k > 0`. If $`\fp, \fp' \in \fP` with
 $`\scI(\fp) \ne \scI(\fp')` and
@@ -4927,7 +4927,7 @@ with $`\scI(\fp) \subset \scI(\fp')`, this yields `eq-wiggle2`.
 \end{proof}
 ```
 
-:::theorem "wiggle-order-3" (lean := "wiggle_order_11_10, wiggle_order_100, wiggle_order_500")
+:::lemma_ "wiggle-order-3" (lean := "wiggle_order_11_10, wiggle_order_100, wiggle_order_500")
 {uses "wiggle-order-1"}[]
 {uses "wiggle-order-2"}[]
 The following implications hold for all $`\fq, \fq' \in \fP`:
@@ -4990,7 +4990,7 @@ We call a collection $\mathfrak{A}$ of tiles convex if
 \end{equation}
 ```
 
-:::theorem "P-convex" (lean := "ordConnected_tilesAt")
+:::lemma_ "P-convex" (lean := "ordConnected_tilesAt")
 For each $`k`, the collection $`\fP(k)` is convex.
 :::
 
@@ -5028,7 +5028,7 @@ $`\scI(\fp')`. Hence $`\scI(\fp') \in \mathcal{C}(G,k)`, and therefore by
 \end{proof}
 ```
 
-:::theorem "C-convex" (lean := "ordConnected_C")
+:::lemma_ "C-convex" (lean := "ordConnected_C")
 {uses "P-convex"}[]
 For each $`k,n`, the collection $`\fC(k,n)` is convex.
 :::
@@ -5077,7 +5077,7 @@ Thus $`\fp' \in \fC(k,n)`.
 \end{proof}
 ```
 
-:::theorem "C1-convex" (lean := "ordConnected_C1")
+:::lemma_ "C1-convex" (lean := "ordConnected_C1")
 {uses "C-convex"}[]
 For each $`k,n,j`, the collection $`\fC_1(k,n,j)` is convex.
 :::
@@ -5114,7 +5114,7 @@ thus $`\fp' \in \fC_1(k,n,j)`.
 \end{proof}
 ```
 
-:::theorem "C2-convex" (lean := "ordConnected_C2")
+:::lemma_ "C2-convex" (lean := "ordConnected_C2")
 {uses "C1-convex"}[]
 For each $`k,n,j`, the collection $`\fC_2(k,n,j)` is convex.
 :::
@@ -5156,7 +5156,7 @@ $`\fp\le\fp'` and $`\fp\in\fC_2(k,n,j)`, $`\fp=\fp'`, a contradiction.
 \end{proof}
 ```
 
-:::theorem "C3-convex" (lean := "ordConnected_C3")
+:::lemma_ "C3-convex" (lean := "ordConnected_C3")
 {uses "C2-convex"}[]
 For each $`k,n,j`, the collection $`\fC_3(k,n,j)` is convex.
 :::
@@ -5192,7 +5192,7 @@ $`\fp' \in \fC_3(k,n,j)`.
 \end{proof}
 ```
 
-:::theorem "C4-convex" (lean := "ordConnected_C4")
+:::lemma_ "C4-convex" (lean := "ordConnected_C4")
 {uses "C3-convex"}[]
 For each $`k,n,j`, the collection $`\fC_4(k,n,j)` is convex.
 :::
@@ -5219,7 +5219,7 @@ $`\fp'\le\fp''` for $`\fp\le\fp'`.
 \end{proof}
 ```
 
-:::theorem "C5-convex" (lean := "ordConnected_C5")
+:::lemma_ "C5-convex" (lean := "ordConnected_C5")
 {uses "C4-convex"}[]
 For each $`k,n,j`, the collection $`\fC_5(k,n,j)` is convex.
 :::
@@ -5251,7 +5251,7 @@ is true by `eq-L4-def` and $`\fp\le\fp'`.
 \end{proof}
 ```
 
-:::theorem "dens-compare" (lean := "dens1_le_dens'")
+:::lemma_ "dens-compare" (lean := "dens1_le_dens'")
 We have for every $`k\ge 0` and $`\fP'\subset \fP(k)`
 $$`\dens_1(\fP')\le \dens_k'(\fP').`$$
 :::
@@ -5327,7 +5327,7 @@ there exists $J\in \mathcal{D}$ with
 \end{proof}
 ```
 
-:::theorem "C-dens1" (lean := "dens1_le")
+:::lemma_ "C-dens1" (lean := "dens1_le")
 {uses "dens-compare"}[]
 For each set $`\mathfrak{A} \subset \mathfrak{C}(k,n)`, we have
 $$`\dens_1(\mathfrak{A}) \le 2^{4a}2^{-n+1}.`$$
@@ -5421,7 +5421,7 @@ if $\fu=\fu'$ or there exists $\fp$ in $\mathfrak{T}_1(\fu)$
 with $10 \fp\lesssim \fu'$.
 ```
 
-:::theorem "relation-geometry" (lean := "URel.eq, URel.not_disjoint")
+:::lemma_ "relation-geometry" (lean := "URel.eq, URel.not_disjoint")
 {uses "wiggle-order-3"}[]
 If $`\fu \sim \fu'`, then $`\scI(u) = \scI(u')` and
 $$`B_{\fu}(\fcc(\fu), 100) \cap B_{\fu'}(\fcc(\fu'), 100) \neq \emptyset.`$$
@@ -5480,7 +5480,7 @@ $`\scI(\fu) = \scI(\fu')`.
     Combining this with the conclusion of the last paragraph and definition \eqref{defunkj} of $\fU_1(k,n,j)$, we obtain that $\scI(\fu) = \scI(\fu')$.
 ```
 
-:::theorem "equivalence-relation" (lean := "equivalenceOn_urel")
+:::lemma_ "equivalence-relation" (lean := "equivalenceOn_urel")
 {uses "relation-geometry"}[]
 For each $`k,n,j`, the relation $`\sim` on $`\fU_2(k,n,j)` is an equivalence
 relation.
@@ -5598,7 +5598,7 @@ Define for each $\fu\in \fU_3(k,n,j)$
 \end{equation}
 ```
 
-:::theorem "C6-forest" (lean := "C6_forest")
+:::lemma_ "C6-forest" (lean := "C6_forest")
 {uses "equivalence-relation"}[]
 We have
 $$`\fC_6(k,n,j)=\bigcup_{\fu\in \fU_3(k,n,j)}\mathfrak{T}_2(\fu).`$$
@@ -5635,7 +5635,7 @@ $`\fp \in \mathfrak{T}_2(\fu')`.
 \end{proof}
 ```
 
-:::theorem "forest-geometry" (lean := "forest_geometry")
+:::lemma_ "forest-geometry" (lean := "forest_geometry")
 {uses "relation-geometry"}[]
 For each $`\fu\in \fU_3(k,n,j)`, the set $`\mathfrak{T}_2(\fu)` satisfies
 `forest1`.
@@ -5688,7 +5688,7 @@ $`4\fp \lesssim \fu`, which is `forest1`.
 \end{proof}
 ```
 
-:::theorem "forest-convex" (lean := "forest_convex")
+:::lemma_ "forest-convex" (lean := "forest_convex")
 {uses "C5-convex"}[]
 For each $`\fu\in \fU_3(k,n,j)`, the set $`\mathfrak{T}_2(\fu)` satisfies the
 convexity condition `forest2`.
@@ -5733,7 +5733,7 @@ It follows that $`\fp' \in \mathfrak{T}_2(\fu)`, which shows `forest2`.
 \end{proof}
 ```
 
-:::theorem "forest-separation" (lean := "forest_separation")
+:::lemma_ "forest-separation" (lean := "forest_separation")
 {uses "monotone-cube-metrics"}[]
 For each $`\fu,\fu'\in \fU_3(k,n,j)` with $`\fu\neq \fu'` and each
 $`\fp \in \fT_2(\fu)` with $`\scI(\fp)\subset \scI(\fu')` we have
@@ -5791,7 +5791,7 @@ claimed lower bound.
 \end{proof}
 ```
 
-:::theorem "forest-inner" (lean := "forest_inner")
+:::lemma_ "forest-inner" (lean := "forest_inner")
 {uses "relation-geometry"}[]
 For each $`\fu\in \fU_3(k,n,j)` and each $`\fp \in \mathfrak{T}_2(\fu)` we
 have
@@ -5859,7 +5859,7 @@ $`\scI(\fp) \subset I`.
 \end{proof}
 ```
 
-:::theorem "forest-stacking" (lean := "forest_stacking")
+:::lemma_ "forest-stacking" (lean := "forest_stacking")
 It holds for $`k\le n` that
 $$`\sum_{\fu \in \fU_3(k,n,j)} \mathbf{1}_{\scI(\fu)} \le (4n+12)2^{n}.`$$
 :::
@@ -6019,7 +6019,7 @@ $`\mu(\scI(\fp) \cap (G \setminus  G')) > 0`.
 Define $\fP_{G \setminus G'}$ to be the set of all $\fp \in \fP$ such that $\mu(\scI(\fp) \cap (G \setminus  G')) > 0$.
 ```
 
-:::theorem "antichain-decomposition" (lean := "antichain_decomposition")
+:::lemma_ "antichain-decomposition" (lean := "antichain_decomposition")
 We have that
 $$`\fP_2 \cap \fP_{G \setminus G'}
  = \bigcup_{k \ge 0} \bigcup_{n \ge k} \fL_0(k,n) \cap \fP_{G \setminus G'}
@@ -6074,7 +6074,7 @@ definitions of the collections $`\fC_i` and $`\fL_i`.
 \end{proof}
 ```
 
-:::theorem "L0-antichain" (lean := "iUnion_L0', pairwiseDisjoint_L0', antichain_L0'")
+:::lemma_ "L0-antichain" (lean := "iUnion_L0', pairwiseDisjoint_L0', antichain_L0'")
 {uses "monotone-cube-metrics"}[]
 We have that
 $$`\fL_0(k,n) = \dot{\bigcup_{0 \le l < n}} \fL_0(k,n,l),`$$
@@ -6179,7 +6179,7 @@ $`\fp_0 \notin \fC(k,n)`.
 \end{proof}
 ```
 
-:::theorem "L2-antichain" (lean := "antichain_L2")
+:::lemma_ "L2-antichain" (lean := "antichain_L2")
 {uses "monotone-cube-metrics"}[]
 Each of the sets $`\fL_2(k,n,j)` is an antichain.
 :::
@@ -6219,7 +6219,7 @@ $`200 \fp_l \lesssim 200\fp_{l+1}`. This contradicts maximality of $`l`.
 \end{proof}
 ```
 
-:::theorem "L1-L3-antichain" (lean := "antichain_L1, antichain_L3")
+:::lemma_ "L1-L3-antichain" (lean := "antichain_L1, antichain_L3")
 Each of the sets $`\fL_1(k,n,j,l)` and $`\fL_3(k,n,j,l)` is an antichain.
 :::
 
@@ -6390,7 +6390,7 @@ $`E(\fp)` with $`\fp \in \mathfrak{A}`.
 We begin with the following crucial disjointedness property of the sets $E(\fp)$ with $\fp \in \mathfrak{A}$.
 ```
 
-:::theorem "tile-disjointness" (lean := "tile_disjointness")
+:::lemma_ "tile-disjointness" (lean := "tile_disjointness")
 Let $`\fp,\fp'\in \mathfrak{A}`. If there exists an $`x\in X` with
 $`x\in E(\fp)\cap E(\fp')`, then $`\fp= \fp'`.
 :::
@@ -6442,7 +6442,7 @@ with $\fp\in \mathfrak{A}$ and recall the definition of
 $M_{\mathcal{B}}$ from Definition \ref{def-hlm}.
 ```
 
-:::theorem "maximal-bound-antichain" (lean := "maximal_bound_antichain")
+:::lemma_ "maximal-bound-antichain" (lean := "maximal_bound_antichain")
 {uses "tile-disjointness"}[]
 Let $`x\in X`. Then
 $$`| \sum_{\fp \in \mathfrak{A}}T_{\fp} f(x)|\le 2^{102 a^3} M_{\mathcal{B}} f (x).`$$
@@ -6600,7 +6600,7 @@ Set
 Since $1< q\le 2$, we have $1<\tilde{q}<q\le 2$.
 ```
 
-:::theorem "dens2-antichain" (lean := "dens2_antichain")
+:::lemma_ "dens2-antichain" (lean := "dens2_antichain")
 {uses "Hardy-Littlewood"}[]
 {uses "maximal-bound-antichain"}[]
 We have that
@@ -6724,7 +6724,7 @@ proves the lemma.
 \end{proof}
 ```
 
-:::theorem "dens1-antichain" (lean := "dens1_antichain")
+:::lemma_ "dens1-antichain" (lean := "dens1_antichain")
 {uses "Hardy-Littlewood"}[]
 {uses "tile-correlation"}[]
 {uses "antichain-tile-count"}[]
@@ -6947,7 +6947,7 @@ The following basic $`TT^*` estimate will be proved in `sec-tile-operator`.
 The following basic $TT^*$ estimate will be proved in \Cref{sec-tile-operator}.
 ```
 
-:::theorem "tile-correlation" (lean := "Tile.correlation_le, Tile.correlation_zero_of_ne_subset")
+:::lemma_ "tile-correlation" (lean := "Tile.correlation_le, Tile.correlation_zero_of_ne_subset")
 {uses "Holder-van-der-Corput"}[]
 {uses "correlation-kernel-bound"}[]
 {uses "tile-uncertainty"}[]
@@ -6988,7 +6988,7 @@ The following lemma will be proved in `subsec-geolem`.
 The following lemma will be proved in \Cref{subsec-geolem}.
 ```
 
-:::theorem "antichain-tile-count" (lean := "Antichain.tile_count")
+:::lemma_ "antichain-tile-count" (lean := "Antichain.tile_count")
 {uses "global-antichain-density"}[]
 Set $`p:=4a^4`. For every $`\mfa\in\Mf` and every antichain
 $`\mathfrak{A}` we have
@@ -7061,7 +7061,7 @@ The next lemma prepares an application of
 \Cref{Holder-van-der-Corput}.
 ```
 
-:::theorem "correlation-kernel-bound" (lean := "Tile.correlation, Tile.mem_ball_of_correlation_ne_zero, Tile.correlation_kernel_bound")
+:::lemma_ "correlation-kernel-bound" (lean := "Tile.correlation, Tile.mem_ball_of_correlation_ne_zero, Tile.correlation_kernel_bound")
 Let $`-S\le s_1\le s_2\le S` and let $`x_1,x_2\in X`. Define
 $$`\varphi(y) := \overline{K_{s_1}(x_1, y)}
  K_{s_2}(x_2, y).`$$
@@ -7164,7 +7164,7 @@ The following auxiliary statement about the support of $T_\fp^*g$ will be
 used repeatedly.
 ```
 
-:::theorem "tile-range-support" (lean := "Tile.range_support")
+:::lemma_ "tile-range-support" (lean := "Tile.range_support")
 For each $`\fp\in \fP`, and each $`y\in X`, we have that
 $$`T_{\fp}^* g(y)\neq 0`$$
 implies
@@ -7226,7 +7226,7 @@ The next lemma is a geometric estimate for two tiles.
 The next lemma is a geometric estimate for two tiles.
 ```
 
-:::theorem "tile-uncertainty" (lean := "Tile.uncertainty")
+:::lemma_ "tile-uncertainty" (lean := "Tile.uncertainty")
 {uses "monotone-cube-metrics"}[]
 {uses "tile-range-support"}[]
 Let $`\fp_1, \fp_2\in \fP` with
@@ -7513,7 +7513,7 @@ we conclude
 \label{subsec-geolem}
 ```
 
-:::theorem "tile-reach" (lean := "Antichain.tile_reach")
+:::lemma_ "tile-reach" (lean := "Antichain.tile_reach")
 {uses "monotone-cube-metrics"}[]
 Let $`\mfa\in \Mf` and $`N\ge0` be an integer. Let $`\fp, \fp'\in \fP` with
 $$`d_{\fp}(\fcc(\fp), \mfa)\le 2^N`$$
@@ -7636,7 +7636,7 @@ For $\mfa \in \Mf$ and $N\ge 0$ define
 \end{equation}
 ```
 
-:::theorem "stack-density" (lean := "Antichain.stack_density")
+:::lemma_ "stack-density" (lean := "Antichain.stack_density")
 Let $`\mfa \in \Mf`, $`N\ge 0` and $`L\in \mathcal{D}`. Then
 $$`\sum_{\fp\in\mathfrak{A}_{\mfa,N}:\scI(\fp)=L}\mu(E(\fp)\cap G)\le 2^{a(N+5)}\dens_1(\mathfrak{A})\mu(L).`$$
 :::
@@ -7724,7 +7724,7 @@ $\mathfrak{A}'$. Adding \eqref{eqanti-3} over $\mathfrak{A}'$ proves
 \end{proof}
 ```
 
-:::theorem "local-antichain-density" (lean := "Antichain.local_antichain_density, Antichain.Ep_inter_G_inter_Ip'_subset_E2")
+:::lemma_ "local-antichain-density" (lean := "Antichain.local_antichain_density, Antichain.Ep_inter_G_inter_Ip'_subset_E2")
 {uses "tile-disjointness"}[]
 {uses "tile-reach"}[]
 Let $`\mfa\in\Mf` and $`N` be an integer. Let $`\fp_{\mfa}` be a tile with
@@ -7790,7 +7790,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::theorem "global-antichain-density" (lean := "Antichain.global_antichain_density")
+:::lemma_ "global-antichain-density" (lean := "Antichain.global_antichain_density")
 {uses "stack-density"}[]
 {uses "local-antichain-density"}[]
 Let $`\mfa\in Q(X)` and let $`N\ge 0` be an integer. Then we have
@@ -8258,7 +8258,7 @@ $$
 $$
 ```
 
-:::theorem "convex-scales" (lean := "TileStructure.Forest.convex_scales")
+:::lemma_ "convex-scales" (lean := "TileStructure.Forest.convex_scales")
 For each $`\fu \in \fU`, we have
 $$`\sigma(\fu, x) = \mathbb{Z} \cap [\underline{\sigma} (\fu, x), \overline{\sigma} (\fu, x)].`$$
 :::
@@ -8345,7 +8345,7 @@ $$
 to be the collection of dyadic cubes $L \in \mathcal{D}$ such that $s(L) = -S$, or there exists $\fp \in \mathfrak{S}$ with $L \subset \scI(\fp)$ and there exists no $\fp \in \mathfrak{S}$ with $\scI(\fp) \subset L$. We define $\mathcal{L}(\mathfrak{S})$ to be the collection of inclusion maximal cubes in $\mathcal{L}_0(\mathfrak{S})$.
 ```
 
-:::theorem "dyadic-partitions" (lean := "TileStructure.Forest.biUnion_𝓙, TileStructure.Forest.pairwiseDisjoint_𝓙, TileStructure.Forest.biUnion_𝓛, TileStructure.Forest.pairwiseDisjoint_𝓛")
+:::lemma_ "dyadic-partitions" (lean := "TileStructure.Forest.biUnion_𝓙, TileStructure.Forest.pairwiseDisjoint_𝓙, TileStructure.Forest.biUnion_𝓛, TileStructure.Forest.pairwiseDisjoint_𝓛")
 For each $`\mathfrak{S} \subset \fP`, we have
 $$`\bigcup_{I \in \mathcal{D}} I = \dot{\bigcup_{J \in \mathcal{J}(\mathfrak{S})}} J`$$
 and
@@ -8466,7 +8466,7 @@ is the main result of this subsection.
 The following pointwise estimate for operators associated to sets $\fT(\fu)$ is the main result of this subsection.
 ```
 
-:::theorem "pointwise-tree-estimate" (lean := "TileStructure.Forest.pointwise_tree_estimate")
+:::lemma_ "pointwise-tree-estimate" (lean := "TileStructure.Forest.pointwise_tree_estimate")
 {uses "first-tree-pointwise"}[]
 {uses "second-tree-pointwise"}[]
 {uses "third-tree-pointwise"}[]
@@ -8537,7 +8537,7 @@ respectively in `first-tree-pointwise`, `second-tree-pointwise` and
 \end{proof}
 ```
 
-:::theorem "first-tree-pointwise" (lean := "TileStructure.Forest.first_tree_pointwise")
+:::lemma_ "first-tree-pointwise" (lean := "TileStructure.Forest.first_tree_pointwise")
 {uses "convex-scales"}[]
 {uses "kernel-summand"}[]
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
@@ -8677,7 +8677,7 @@ This completes the estimate for term `eq-term-A`.
 \end{proof}
 ```
 
-:::theorem "second-tree-pointwise" (lean := "TileStructure.Forest.second_tree_pointwise")
+:::lemma_ "second-tree-pointwise" (lean := "TileStructure.Forest.second_tree_pointwise")
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
 $$`\Bigg| \sum_{s \in \sigma(\fu, x)} \int K_s(x,y) P_{\mathcal{J}(\fT(\fu))} f(y) \, \mathrm{d}\mu(y) \Bigg| \le T_{\mathcal{N}}^{\fcc(\fu)} P_{\mathcal{J}(\fT(\fu))} f(x').`$$
@@ -8747,7 +8747,7 @@ the definition of $`T_{\mathcal{N}}`.
 \end{proof}
 ```
 
-:::theorem "third-tree-pointwise" (lean := "TileStructure.Forest.third_tree_pointwise")
+:::lemma_ "third-tree-pointwise" (lean := "TileStructure.Forest.third_tree_pointwise")
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
 $$`\Bigg| \sum_{s \in \sigma(\fu, x)} \int K_s(x,y) (f(y) - P_{\mathcal{J}(\fT(\fu))} f(y)) \, \mathrm{d}\mu(y) \Bigg|`$$
@@ -8867,7 +8867,7 @@ associated to trees.
 In this subsection we prove the following estimate on $L^2$ for operators associated to trees.
 ```
 
-:::theorem "tree-projection-estimate" (lean := "TileStructure.Forest.tree_projection_estimate")
+:::lemma_ "tree-projection-estimate" (lean := "TileStructure.Forest.tree_projection_estimate")
 {uses "dyadic-partitions"}[]
 {uses "pointwise-tree-estimate"}[]
 {uses "nontangential-operator-bound"}[]
@@ -8902,7 +8902,7 @@ the following estimates for the operators in `pointwise-tree-estimate`.
 Below, we deduce \Cref{tree-projection-estimate} from \Cref{pointwise-tree-estimate} and the following estimates for the operators in \Cref{pointwise-tree-estimate}.
 ```
 
-:::theorem "nontangential-operator-bound" (lean := "TileStructure.Forest.nontangential_operator_bound")
+:::lemma_ "nontangential-operator-bound" (lean := "TileStructure.Forest.nontangential_operator_bound")
 {uses "Hardy-Littlewood"}[]
 For all bounded $`f` with bounded support and all $`\mfa \in \Mf`
 $$`\|T_{\mathcal{N}}^{\mfa} f\|_2 \le 2^{102a^3} \|f\|_2.`$$
@@ -8921,7 +8921,7 @@ $$`\|T_{\mathcal{N}}^{\mfa} f\|_2 \le 2^{102a^3} \|f\|_2.`$$
 \end{lemma}
 ```
 
-:::theorem "boundary-operator-bound" (lean := "TileStructure.Forest.boundary_operator_bound")
+:::lemma_ "boundary-operator-bound" (lean := "TileStructure.Forest.boundary_operator_bound")
 {uses "Hardy-Littlewood"}[]
 {uses "boundary-overlap"}[]
 For all $`\fu \in \fU` and all bounded functions $`f` with bounded support
@@ -9233,7 +9233,7 @@ operators $`S_{1, \fu}`.
 We need the following lemma to prepare the $L^2$-estimate for the auxiliary operators $S_{1, \fu}$.
 ```
 
-:::theorem "boundary-overlap" (lean := "TileStructure.Forest.boundary_overlap")
+:::lemma_ "boundary-overlap" (lean := "TileStructure.Forest.boundary_overlap")
 For every cube $`I \in \mathcal{D}`, there exist at most $`2^{9a}` cubes
 $`J \in \mathcal{D}` with $`s(J) = s(I)` and
 $`B(c(I), 16D^{s(I)}) \cap B(c(J), 16 D^{s(J)}) \ne \emptyset`.
@@ -9385,7 +9385,7 @@ $`\dens_2`.
 The main result of this subsection is the following quantitative bound for operators associated to trees, with decay in the densities $\dens_1$ and $\dens_2$.
 ```
 
-:::theorem "densities-tree-bound" (lean := "TileStructure.Forest.density_tree_bound1, TileStructure.Forest.density_tree_bound2")
+:::lemma_ "densities-tree-bound" (lean := "TileStructure.Forest.density_tree_bound1, TileStructure.Forest.density_tree_bound2")
 {uses "tree-projection-estimate"}[]
 {uses "local-dens1-tree-bound"}[]
 {uses "local-dens2-tree-bound"}[]
@@ -9422,7 +9422,7 @@ two estimates controlling the size of support of the operator and its adjoint.
 Below, we deduce this lemma from \Cref{tree-projection-estimate} and the following two estimates controlling the size of support of the operator and its adjoint.
 ```
 
-:::theorem "local-dens1-tree-bound" (lean := "TileStructure.Forest.local_dens1_tree_bound")
+:::lemma_ "local-dens1-tree-bound" (lean := "TileStructure.Forest.local_dens1_tree_bound")
 {uses "monotone-cube-metrics"}[]
 Let $`\fu \in \fU` and $`L \in \mathcal{L}(\fT(\fu))`. Then
 $$`\mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\fT(\fu)) \mu(L).`$$
@@ -9442,7 +9442,7 @@ $$`\mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\
 \end{lemma}
 ```
 
-:::theorem "local-dens2-tree-bound" (lean := "TileStructure.Forest.local_dens2_tree_bound")
+:::lemma_ "local-dens2-tree-bound" (lean := "TileStructure.Forest.local_dens2_tree_bound")
 Let $`\fu \in \fU` and $`J \in \mathcal{J}(\fT(\fu))`. Then
 $$`\mu(F \cap J) \le 2^{201a^3} \dens_2(\fT(\fu)) \mu(J).`$$
 :::
@@ -9916,7 +9916,7 @@ The adjoint of the operator $T_{\fp}$ defined in \eqref{definetp} is given by
 \end{equation}
 ```
 
-:::theorem "adjoint-tile-support" (lean := "TileStructure.Forest.adjoint_tile_support1, TileStructure.Forest.adjoint_tile_support2")
+:::lemma_ "adjoint-tile-support" (lean := "TileStructure.Forest.adjoint_tile_support1, TileStructure.Forest.adjoint_tile_support2")
 {uses "kernel-summand"}[]
 For each $`\fp \in \fP`, we have
 $$`T_{\fp}^* g = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})} T_{\fp}^* \mathbf{1}_{\scI(\fp)} g.`$$
@@ -9977,7 +9977,7 @@ $`B(\pc(\fp), 5D^{\ps(\fp)}) \subset \scI(\fu)`.
 \end{proof}
 ```
 
-:::theorem "adjoint-tree-estimate" (lean := "TileStructure.Forest.adjoint_tree_estimate, TileStructure.Forest.indicator_adjoint_tree_estimate")
+:::lemma_ "adjoint-tree-estimate" (lean := "TileStructure.Forest.adjoint_tree_estimate, TileStructure.Forest.indicator_adjoint_tree_estimate")
 {uses "densities-tree-bound"}[]
 For all bounded $`g` supported on $`G` we have that
 $$`\left\| \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2`$$
@@ -10053,7 +10053,7 @@ $$
 $$
 ```
 
-:::theorem "adjoint-tree-control" (lean := "TileStructure.Forest.adjoint_tree_control")
+:::lemma_ "adjoint-tree-control" (lean := "TileStructure.Forest.adjoint_tree_control")
 {uses "adjoint-tree-estimate"}[]
 We have for all $`\fu \in \fU` and all bounded $`g` supported on $`G`
 $$`\|S_{2, \fu} g\|_2 \le 2^{182a^3} \|g\|_2.`$$
@@ -10088,7 +10088,7 @@ Now we are ready to state the main result of this subsection.
 Now we are ready to state the main result of this subsection.
 ```
 
-:::theorem "correlation-separated-trees" (lean := "TileStructure.Forest.correlation_separated_trees")
+:::lemma_ "correlation-separated-trees" (lean := "TileStructure.Forest.correlation_separated_trees")
 {uses "correlation-distant-tree-parts"}[]
 {uses "correlation-near-tree-parts"}[]
 For any $`\fu_1 \ne \fu_2 \in \fU` and all bounded $`g_1, g_2` with bounded
@@ -10148,7 +10148,7 @@ $`Z` with the following two lemmas.
 \end{proof}
 ```
 
-:::theorem "correlation-distant-tree-parts" (lean := "TileStructure.Forest.correlation_distant_tree_parts")
+:::lemma_ "correlation-distant-tree-parts" (lean := "TileStructure.Forest.correlation_distant_tree_parts")
 {uses "Holder-van-der-Corput"}[]
 {uses "Lipschitz-partition-unity"}[]
 {uses "Holder-correlation-tree"}[]
@@ -10178,7 +10178,7 @@ $$`\le 2^{511a^3} 2^{-Zn/(4a^2 + 2a^3)} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^
     \end{lemma}
 ```
 
-:::theorem "correlation-near-tree-parts" (lean := "TileStructure.Forest.correlation_near_tree_parts")
+:::lemma_ "correlation-near-tree-parts" (lean := "TileStructure.Forest.correlation_near_tree_parts")
 {uses "tree-projection-estimate"}[]
 {uses "dyadic-partition-2"}[]
 {uses "bound-for-tree-projection"}[]
@@ -10213,7 +10213,7 @@ In the proofs of both lemmas, we will need the following observation.
 In the proofs of both lemmas, we will need the following observation.
 ```
 
-:::theorem "overlap-implies-distance" (lean := "TileStructure.Forest.𝔗_subset_𝔖₀, TileStructure.Forest.overlap_implies_distance")
+:::lemma_ "overlap-implies-distance" (lean := "TileStructure.Forest.𝔗_subset_𝔖₀, TileStructure.Forest.overlap_implies_distance")
 Let $`\fu_1 \ne \fu_2 \in \fU` with $`\scI(\fu_1) \subset \scI(\fu_2)`. If
 $`\fp \in \fT(\fu_1) \cup \fT(\fu_2)` with
 $`\scI(\fp) \cap \scI(\fu_1) \ne \emptyset`, then $`\fp \in \mathfrak{S}`. In
