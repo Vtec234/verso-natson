@@ -8,8 +8,9 @@ This repository is the Verso port and integration repo for `Carleson Blueprint`.
 
 ## Pages
 
-- Public site: configure after GitHub Pages is enabled for this repo
+- Public site: `https://ejgallego.github.io/verso-carleson/`
 - Workflow: `.github/workflows/blueprint.yml`
+- Actions page: `https://github.com/ejgallego/verso-carleson/actions/workflows/blueprint.yml`
 - Local build: `bash ./scripts/ci-pages.sh`
 - Local output: `_out/site/html-multi/index.html`
 
