@@ -9,9 +9,11 @@ import Carleson.Discrete.ExceptionalSet
 import Carleson.Discrete.ForestComplement
 import Carleson.Discrete.ForestUnion
 import Carleson.FinitaryCarleson
+import Carleson.ForestOperator.AlmostOrthogonality
 import Carleson.ForestOperator.Forests
 import Carleson.ForestOperator.L2Estimate
 import Carleson.ForestOperator.PointwiseEstimate
+import Carleson.ForestOperator.QuantativeEstimate
 import Carleson.HolderVanDerCorput
 import Carleson.MetricCarleson.Main
 import Carleson.MetricCarleson.Truncation
@@ -9369,4 +9371,922 @@ sides by the finite $`\|S_{1,\fu}f\|_2`.
     $$
     The lemma now follows by choosing $g = S_{1,\fu}f$ and dividing on both sides by the finite $\|S_{1,\fu}f\|_2$.
 \end{proof}
+```
+
+## The quantitative L^2 tree estimate
+
+The main result of this subsection is the following quantitative bound for
+operators associated to trees, with decay in the densities $`\dens_1` and
+$`\dens_2`.
+
+```tex "main.forestop.quant.1"
+\subsection{The quantitative \texorpdfstring{$L^2$}{L2} tree estimate}
+
+The main result of this subsection is the following quantitative bound for operators associated to trees, with decay in the densities $\dens_1$ and $\dens_2$.
+```
+
+:::theorem "densities-tree-bound" (lean := "TileStructure.Forest.density_tree_bound1, TileStructure.Forest.density_tree_bound2")
+{uses "tree-projection-estimate"}[]
+{uses "local-dens1-tree-bound"}[]
+{uses "local-dens2-tree-bound"}[]
+Let $`\fu \in \fU`. Then for all bounded $`f` with bounded support and bounded
+$`g` supported on $`G` we have
+$$`\left|\int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp }f \, \mathrm{d}\mu \right| \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|f\|_2\|g\|_2.`$$
+If additionally $`\text{support}(f) \subseteq F`, then we have
+$$`\left| \int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp }f\, \mathrm{d}\mu \right| \le 2^{282a^3} \dens_1(\fT(\fu))^{1/2} \dens_2(\fT(\fu))^{1/2} \|f\|_2\|g\|_2.`$$
+:::
+
+```tex "densities-tree-bound" (slot := statement)
+\begin{lemma}[densities tree bound]
+    \label{densities-tree-bound}
+    \leanok
+    \lean{TileStructure.Forest.density_tree_bound1, TileStructure.Forest.density_tree_bound2}
+    \uses{tree-projection-estimate,local-dens1-tree-bound,local-dens2-tree-bound}
+    Let $\fu \in \fU$. Then for all bounded $f$ with bounded support and bounded $g$ supported on $G$ we have
+    \begin{equation}
+        \label{eq-cor-tree-est}
+        \left|\int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp }f \, \mathrm{d}\mu \right| \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|f\|_2\|g\|_2\,.
+    \end{equation}
+    If additionally $\text{support}(f) \subseteq F$, then we have
+    \begin{equation}
+        \label{eq-cor-tree-est-F}
+        \left| \int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp }f\, \mathrm{d}\mu \right| \le 2^{282a^3} \dens_1(\fT(\fu))^{1/2} \dens_2(\fT(\fu))^{1/2} \|f\|_2\|g\|_2\,.
+    \end{equation}
+\end{lemma}
+```
+
+Below, we deduce this lemma from `tree-projection-estimate` and the following
+two estimates controlling the size of support of the operator and its adjoint.
+
+```tex "main.forestop.quant.2"
+Below, we deduce this lemma from \Cref{tree-projection-estimate} and the following two estimates controlling the size of support of the operator and its adjoint.
+```
+
+:::theorem "local-dens1-tree-bound" (lean := "TileStructure.Forest.local_dens1_tree_bound")
+{uses "monotone-cube-metrics"}[]
+Let $`\fu \in \fU` and $`L \in \mathcal{L}(\fT(\fu))`. Then
+$$`\mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\fT(\fu)) \mu(L).`$$
+:::
+
+```tex "local-dens1-tree-bound" (slot := statement)
+\begin{lemma}[local dens1 tree bound]
+    \label{local-dens1-tree-bound}
+    \leanok
+    \lean{TileStructure.Forest.local_dens1_tree_bound}
+    \uses{monotone-cube-metrics}
+    Let $\fu \in \fU$ and $L \in \mathcal{L}(\fT(\fu))$. Then
+    \begin{equation}
+    \label{eq-1density-estimate-tree}
+        \mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\fT(\fu)) \mu(L)\,.
+    \end{equation}
+\end{lemma}
+```
+
+:::theorem "local-dens2-tree-bound" (lean := "TileStructure.Forest.local_dens2_tree_bound")
+Let $`\fu \in \fU` and $`J \in \mathcal{J}(\fT(\fu))`. Then
+$$`\mu(F \cap J) \le 2^{201a^3} \dens_2(\fT(\fu)) \mu(J).`$$
+:::
+
+```tex "local-dens2-tree-bound" (slot := statement)
+\begin{lemma}[local dens2 tree bound]
+    \label{local-dens2-tree-bound}
+    \leanok
+    \lean{TileStructure.Forest.local_dens2_tree_bound}
+    Let $\fu \in \fU$ and $J \in \mathcal{J}(\fT(\fu))$. Then
+    $$
+        \mu(F \cap J) \le 2^{201a^3} \dens_2(\fT(\fu)) \mu(J)\,.
+    $$
+\end{lemma}
+```
+
+Proof of `densities-tree-bound`. Denote
+$$`\mathcal{E}(\fu) = \bigcup_{\fp \in \fT(\fu)} E(\fp).`$$
+Then we have
+$$`\left| \int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp} f \, \mathrm{d}\mu \right| = \left| \int_X \overline{ g\mathbf{1}_{\mathcal{E}(\fu)}} \sum_{\fp \in \fT(\fu)} T_{\fp} (\mathbf{1}_{\scI(\fu)}f) \, \mathrm{d}\mu \right|.`$$
+By `tree-projection-estimate`, this is bounded by
+$$`\le 2^{130a^3}\|P_{\mathcal{J}(\fT(\fu))}|f|\|_2 \|P_{\mathcal{L}(\fT(\fu))} |\mathbf{1}_{\mathcal{E}(\fu)}g|\|_2.`$$
+We bound the two factors separately. We have
+$$`\|P_{\mathcal{L}(\fT(\fu))} |\mathbf{1}_{\mathcal{E}(\fu)}g|\|_2 = \left( \sum_{L \in \mathcal{L}(\fT(\fu))} \frac{1}{\mu(L)} \left(\int_{L \cap \mathcal{E}(\fu)} |g(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}.`$$
+By Cauchy-Schwarz and `local-dens1-tree-bound` this is at most
+$$`\le \left( \sum_{L \in \mathcal{L}(\fT(\fu))} 2^{101a^3} \dens_1(\fT(\fu)) \int_{L \cap \mathcal{E}(\fu)} |g(y)|^2 \, \mathrm{d}\mu(y) \right)^{1/2}.`$$
+Since cubes $`L \in \mathcal{L}(\fT(\fu))` are pairwise disjoint by
+`dyadic-partitions`, this is
+$$`\le 2^{51 a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2.`$$
+
+```tex "densities-tree-bound.part1"
+\begin{proof}[Proof of \Cref{densities-tree-bound}]
+    \proves{densities-tree-bound}
+    \leanok
+    Denote
+    $$
+        \mathcal{E}(\fu) = \bigcup_{\fp \in \fT(\fu)} E(\fp)\,.
+    $$
+    Then we have
+    $$
+        \left| \int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp} f \, \mathrm{d}\mu \right| = \left| \int_X \overline{ g\mathbf{1}_{\mathcal{E}(\fu)}} \sum_{\fp \in \fT(\fu)} T_{\fp} (\mathbf{1}_{\scI(\fu)}f) \, \mathrm{d}\mu \right|\,.
+    $$
+    By \Cref{tree-projection-estimate}, this is bounded by
+    \begin{equation}
+        \label{eq-both-factors-tree}
+        \le 2^{130a^3}\|P_{\mathcal{J}(\fT(\fu))}|f|\|_2 \|P_{\mathcal{L}(\fT(\fu))} |\mathbf{1}_{\mathcal{E}(\fu)}g|\|_2\,.
+    \end{equation}
+    We bound the two factors separately.
+    We have
+    $$
+        \|P_{\mathcal{L}(\fT(\fu))} |\mathbf{1}_{\mathcal{E}(\fu)}g|\|_2 = \left( \sum_{L \in \mathcal{L}(\fT(\fu))} \frac{1}{\mu(L)} \left(\int_{L \cap \mathcal{E}(\fu)} |g(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}\,.
+    $$
+    By Cauchy-Schwarz and \Cref{local-dens1-tree-bound} this is at most
+    $$
+        \le \left( \sum_{L \in \mathcal{L}(\fT(\fu))} 2^{101a^3} \dens_1(\fT(\fu)) \int_{L \cap \mathcal{E}(\fu)} |g(y)|^2 \, \mathrm{d}\mu(y) \right)^{1/2}\,.
+    $$
+    Since cubes $L \in \mathcal{L}(\fT(\fu))$ are pairwise disjoint by \Cref{dyadic-partitions}, this is
+    \begin{equation}
+        \label{eq-factor-L-tree}
+         \le 2^{51 a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2\,.
+    \end{equation}
+```
+
+Similarly, we have
+$$`\|P_{\mathcal{J}(\fT(\fu))}|f|\|_2 = \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}.`$$
+By Cauchy-Schwarz, this is
+$$`\le \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \int_J |f(y)|^2 \, \mathrm{d}\mu(y) \right)^{1/2}.`$$
+Since cubes in $`\mathcal{J}(\fT(\fu))` are pairwise disjoint by
+`dyadic-partitions`, this is at most
+$$`\|f\|_2.`$$
+Combining `eq-both-factors-tree`, `eq-factor-L-tree` and `eq-factor-J-tree`
+gives `eq-cor-tree-est`.
+
+```tex "densities-tree-bound.part2"
+    Similarly, we have
+    \begin{equation}
+        \label{eq-cor-tree-proof}
+        \|P_{\mathcal{J}(\fT(\fu))}|f|\|_2 = \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}\,.
+    \end{equation}
+    By Cauchy-Schwarz, this is
+    $$
+        \le \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \int_J |f(y)|^2 \, \mathrm{d}\mu(y) \right)^{1/2}\,.
+    $$
+    Since cubes in $\mathcal{J}(\fT(\fu))$ are pairwise disjoint by \Cref{dyadic-partitions}, this is at most
+    \begin{equation}
+        \label{eq-factor-J-tree}
+        \|f\|_2\,.
+    \end{equation}
+    Combining \eqref{eq-both-factors-tree}, \eqref{eq-factor-L-tree} and \eqref{eq-factor-J-tree} gives \eqref{eq-cor-tree-est}.
+```
+
+If $`f \le \mathbf{1}_F` then $`f = f\mathbf{1}_F`, so
+$$`\left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}`$$
+$$`=\left(\sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_{J \cap F} |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}.`$$
+We estimate as before, using now `local-dens2-tree-bound` and Cauchy-Schwarz,
+and obtain that this is
+$$`\le 2^{101a^3} \dens_2(\fT(\fu))^{1/2} \|f\|_2.`$$
+Combining this with `eq-both-factors-tree` and `eq-factor-L-tree` gives
+`eq-cor-tree-est-F`.
+
+```tex "densities-tree-bound" (slot := proof)
+    Similarly, we have
+    \begin{equation}
+        \label{eq-cor-tree-proof}
+        \|P_{\mathcal{J}(\fT(\fu))}|f|\|_2 = \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}\,.
+    \end{equation}
+    By Cauchy-Schwarz, this is
+    $$
+        \le \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \int_J |f(y)|^2 \, \mathrm{d}\mu(y) \right)^{1/2}\,.
+    $$
+    Since cubes in $\mathcal{J}(\fT(\fu))$ are pairwise disjoint by \Cref{dyadic-partitions}, this is at most
+    \begin{equation}
+        \label{eq-factor-J-tree}
+        \|f\|_2\,.
+    \end{equation}
+    Combining \eqref{eq-both-factors-tree}, \eqref{eq-factor-L-tree} and \eqref{eq-factor-J-tree} gives \eqref{eq-cor-tree-est}.
+
+    If $f \le \mathbf{1}_F$ then $f = f\mathbf{1}_F$, so
+    $$
+        \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}
+    $$
+    $$
+        =\left(\sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_{J \cap F} |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}\,.
+    $$
+    We estimate as before, using now \Cref{local-dens2-tree-bound} and Cauchy-Schwarz, and obtain that this is
+    $$
+        \le 2^{101a^3} \dens_2(\fT(\fu))^{1/2} \|f\|_2\,.
+    $$
+    Combining this with \eqref{eq-both-factors-tree} and \eqref{eq-factor-L-tree} gives \eqref{eq-cor-tree-est-F}.
+\end{proof}
+```
+
+Now we prove the two auxiliary estimates.
+
+```tex "main.forestop.quant.3"
+Now we prove the two auxiliary estimates.
+```
+
+Proof of `local-dens1-tree-bound`. If the set on the right hand side is empty,
+then `eq-1density-estimate-tree` holds. If not, then there exists
+$`\fp \in \fT(\fu)` with $`L \cap \scI(\fp) \ne \emptyset`.
+
+```tex "local-dens1-tree-bound.open"
+\begin{proof}[Proof of \Cref{local-dens1-tree-bound}]
+    \leanok
+    \proves{local-dens1-tree-bound}
+    If the set on the right hand side is empty, then \eqref{eq-1density-estimate-tree} holds. If not, then there exists $\fp \in \fT(\fu)$ with $L \cap \scI(\fp) \ne \emptyset$.
+```
+
+Suppose first that there exists such $`\fp` with $`\ps(\fp) \le s(L)`. Then by
+`dyadicproperty` $`\scI(\fp) \subset L`, which gives by the definition of
+$`\mathcal{L}(\fT(\fu))` that $`s(L) = -S` and hence $`L = \scI(\fp)`. Let
+$`\fq \in \fT(\fu)` with $`E(\fq) \cap L \ne \emptyset`. Since
+$`s(L) = -S \le \ps(\fq)` it follows from `dyadicproperty` that
+$`\scI(\fp) = L \subset \scI(\fq)`. We have then by
+`monotone-cube-metrics`
+$$`d_{\fp}(\fcc(\fp), \fcc(\fq)) \le d_{\fp}(\fcc(\fp), \fcc(\fu)) + d_{\fp}(\fcc(\fq), \fcc(\fu))`$$
+$$`\le d_{\fp}(\fcc(\fp), \fcc(\fu)) + d_{\fq}(\fcc(\fq), \fcc(\fu)).`$$
+Using that $`\fp, \fq \in \fT(\fu)` and `forest1`, this is at most $`8`.
+Using again the triangle inequality and `monotone-cube-metrics`, we obtain
+that for each $`q \in B_{\fq}(\fcc(\fq), 1)`
+$$`d_{\fp}(\fcc(\fp), q) \le d_{\fp}(\fcc(\fp), \fcc(\fq)) + d_{\fq}(\fcc(\fq), q) \le 9.`$$
+Thus $`L \cap G \cap E(\fq) \subset E_2(9, \fp)`. We obtain
+$$`\mu(L \cap G \cap \bigcup_{\fq \in \fT(\fu)} E(\fq)) \le \mu(E_2(9, \fp)).`$$
+By the definition of $`\dens_1`, this is bounded by
+$$`9^a \dens_1(\fT(\fu)) \mu(\scI(\fp)) =9^a \dens_1(\fT(\fu)) \mu(L).`$$
+Since $`a \ge 4`, `eq-1density-estimate-tree` follows in this case.
+
+```tex "local-dens1-tree-bound.part1"
+\begin{proof}[Proof of \Cref{local-dens1-tree-bound}]
+    \leanok
+    \proves{local-dens1-tree-bound}
+    If the set on the right hand side is empty, then \eqref{eq-1density-estimate-tree} holds. If not, then there exists $\fp \in \fT(\fu)$ with $L \cap \scI(\fp) \ne \emptyset$.
+
+    Suppose first that there exists such $\fp$ with $\ps(\fp) \le s(L)$. Then by \eqref{dyadicproperty} $\scI(\fp) \subset L$, which gives by the definition of $\mathcal{L}(\fT(\fu))$ that $s(L) = -S$ and hence $L = \scI(\fp)$. Let $\fq \in \fT(\fu)$ with $E(\fq) \cap L \ne \emptyset$. Since $s(L) = -S \le \ps(\fq)$ it follows from \eqref{dyadicproperty} that $\scI(\fp) = L \subset \scI(\fq)$. We have then by \Cref{monotone-cube-metrics}
+    \begin{align*}
+        d_{\fp}(\fcc(\fp), \fcc(\fq)) &\le d_{\fp}(\fcc(\fp), \fcc(\fu)) + d_{\fp}(\fcc(\fq), \fcc(\fu))\\
+        &\le d_{\fp}(\fcc(\fp), \fcc(\fu)) + d_{\fq}(\fcc(\fq), \fcc(\fu))\,.
+    \end{align*}
+    Using that $\fp, \fq \in \fT(\fu)$ and \eqref{forest1}, this is at most $8$. Using again the triangle inequality and \Cref{monotone-cube-metrics}, we obtain that for each $q \in B_{\fq}(\fcc(\fq), 1)$
+    $$
+        d_{\fp}(\fcc(\fp), q) \le d_{\fp}(\fcc(\fp), \fcc(\fq)) + d_{\fq}(\fcc(\fq), q) \le 9\,.
+    $$
+    Thus $L \cap G \cap E(\fq) \subset E_2(9, \fp)$. We obtain
+    $$
+        \mu(L \cap G \cap \bigcup_{\fq \in \fT(\fu)} E(\fq)) \le \mu(E_2(9, \fp))\,.
+    $$
+    By the definition of $\dens_1$, this is bounded by
+    $$
+        9^a \dens_1(\fT(\fu)) \mu(\scI(\fp)) =9^a \dens_1(\fT(\fu)) \mu(L)\,.
+    $$
+    Since $a \ge 4$, \eqref{eq-1density-estimate-tree} follows in this case.
+```
+
+Now suppose that for each $`\fp \in \fT(\fu)` with
+$`L \cap E(\fp) \ne \emptyset`, we have $`\ps(\fp) > s(L)`. Since there exists
+at least one such $`\fp`, there exists in particular at least one cube
+$`L'' \in \mathcal{D}` with $`L \subset L''` and $`s(L'') > s(L)`. By
+`coverdyadic`, there exists $`L' \in \mathcal{D}` with $`L \subset L'` and
+$`s(L') = s(L) + 1`. By the definition of $`\mathcal{L}(\fT(\fu))` there
+exists a tile $`\fp'' \in \fT(\fu)` with $`\scI(\fp'') \subset L'`.
+
+```tex "local-dens1-tree-bound.part2a"
+    Now suppose that for each $\fp \in \fT(\fu)$ with $L \cap E(\fp) \ne \emptyset$, we have $\ps(\fp) > s(L)$.
+    Since there exists at least one such $\fp$, there exists in particular at least one cube $L'' \in \mathcal{D}$ with $L \subset L''$ and $s(L'') > s(L)$.
+    By \eqref{coverdyadic}, there exists $L' \in \mathcal{D}$ with $L \subset L'$ and $s(L') = s(L) + 1$.
+    By the definition of $\mathcal{L}(\fT(\fu))$ there exists a tile $\fp'' \in \fT(\fu)$ with $\scI(\fp'') \subset L'$.
+```
+
+It suffices to show that there exists a tile $`\fp' \in \fP(\fT(\fu))` with
+$`\scI(\fp') = L'`, $`d_{\fp'}(\fcc(\fp'), \fcc(\fu)) < 4` and
+$`9\fp'' \lesssim 9\fp'`. For then, let $`\fq \in \fT(\fu)` with
+$`L \cap E(\fq) \ne \emptyset`. As shown above, this implies
+$`\ps(\fq) \ge s(L')`, so by `dyadicproperty` $`L' \subset \scI(\fq)`. If
+$`q \in B_{\fq}(\fcc(\fq), 1)`, then by a similar calculation as above, using
+the triangle inequality, `monotone-cube-metrics` and `forest1`, we obtain
+$$`d_{\fp'}(\fcc(\fp'), q) \le d_{\fp'}(\fcc(\fp'), \fcc(\fq)) + d_{\fq}(\fcc(\fq), q) \le 9.`$$
+Thus $`L \cap G \cap E(\fq) \subset E_2(9, \fp')`. We deduce using the
+definition `definedens1` of $`\dens_1`
+$$`\mu(L \cap G \cap \bigcup_{\fq \in \fT(\fu)} E(\fq)) \le \mu(E_2(9, \fp')) \le 9^a \dens_1(\fT(\fu)) \mu(L').`$$
+Using the doubling property `doublingx`, `eq-vol-sp-cube`, and $`a \ge 4`
+this is estimated by
+$$`9^a 2^{100a^3 + 5a}\dens_1(\fT(\fu)) \mu(L) \le 2^{101 a^3} \dens_1(\fT(\fu))\mu(L).`$$
+
+```tex "local-dens1-tree-bound.part2"
+    Now suppose that for each $\fp \in \fT(\fu)$ with $L \cap E(\fp) \ne \emptyset$, we have $\ps(\fp) > s(L)$.
+    Since there exists at least one such $\fp$, there exists in particular at least one cube $L'' \in \mathcal{D}$ with $L \subset L''$ and $s(L'') > s(L)$.
+    By \eqref{coverdyadic}, there exists $L' \in \mathcal{D}$ with $L \subset L'$ and $s(L') = s(L) + 1$.
+    By the definition of $\mathcal{L}(\fT(\fu))$ there exists a tile $\fp'' \in \fT(\fu)$ with $\scI(\fp'') \subset L'$.
+
+    It suffices to show that there exists a tile $\fp' \in \fP(\fT(\fu))$ with $\scI(\fp') = L'$, $d_{\fp'}(\fcc(\fp'), \fcc(\fu)) < 4$ and $9\fp'' \lesssim 9\fp'$.
+    For then, let $\fq \in \fT(\fu)$ with $L \cap E(\fq) \ne \emptyset$. As shown above, this implies $\ps(\fq) \ge s(L')$, so by \eqref{dyadicproperty} $L' \subset \scI(\fq)$.
+    If $q \in B_{\fq}(\fcc(\fq), 1)$, then by a similar calculation as above, using the triangle inequality, \Cref{monotone-cube-metrics} and \eqref{forest1}, we obtain
+    $$
+        d_{\fp'}(\fcc(\fp'), q) \le d_{\fp'}(\fcc(\fp'), \fcc(\fq)) + d_{\fq}(\fcc(\fq), q) \le 9\,.
+    $$
+    Thus $L \cap G \cap E(\fq) \subset E_2(9, \fp')$. We deduce using the definition \eqref{definedens1} of $\dens_1$
+    $$
+        \mu(L \cap G \cap \bigcup_{\fq \in \fT(\fu)} E(\fq)) \le \mu(E_2(9, \fp')) \le 9^a \dens_1(\fT(\fu)) \mu(L')\,.
+    $$
+    Using the doubling property \eqref{doublingx}, \eqref{eq-vol-sp-cube}, and $a \ge 4$ this is estimated by
+    $$
+        9^a 2^{100a^3 + 5a}\dens_1(\fT(\fu)) \mu(L) \le 2^{101 a^3} \dens_1(\fT(\fu))\mu(L)\,.
+    $$
+```
+
+To show existence of $`\fp'` with the given properties, if
+$`\scI(\fp'') = L'` we can take $`\fp' = \fp''`, which satisfies the distance
+property by `forest1` and the other properties trivially. Otherwise, let
+$`\fp'` be the unique tile such that $`\scI(\fp') = L'` and such that
+$`\Omega(\fu) \cap \Omega(\fp') \ne \emptyset`. Since
+$`\scI(\fp') \subset \scI(\fp)` and $`\fp \in \fT(\fu)`, we have
+$`\fp' \in \fP(\fT(\fu))`. Since by `forest1`
+$`\ps(\fp') = s(L') \le \ps(\fp) < \ps(\fu)`, we have by `dyadicproperty` and
+`eq-freq-dyadic` that $`\Omega(\fu) \subset \Omega(\fp')`, and hence the
+distance property. $`9\fp'' \lesssim 9\fp'` follows by the triangle
+inequality, `forest1`, `monotone-cube-metrics` and `eq-freq-comp-ball`. This
+completes the proof.
+
+```tex "local-dens1-tree-bound" (slot := proof)
+    To show existence of $\fp'$ with the given properties, if $\scI(\fp'') = L'$ we can take $\fp' = \fp''$, which satisfies the distance property by \eqref{forest1} and the other properties trivially.
+    Otherwise, let $\fp'$ be the unique tile such that $\scI(\fp') = L'$ and such that $\Omega(\fu) \cap \Omega(\fp') \ne \emptyset$.
+    Since $\scI(\fp') \subset \scI(\fp)$ and $\fp \in \fT(\fu)$, we have $\fp' \in \fP(\fT(\fu))$.
+    Since by \eqref{forest1} $\ps(\fp') = s(L') \le \ps(\fp) < \ps(\fu)$, we have by \eqref{dyadicproperty} and \eqref{eq-freq-dyadic} that $\Omega(\fu) \subset \Omega(\fp')$, and hence the distance property.
+    $9\fp'' \lesssim 9\fp'$ follows by the triangle inequality, \eqref{forest1}, \Cref{monotone-cube-metrics} and \eqref{eq-freq-comp-ball}.
+    This completes the proof.
+\end{proof}
+```
+
+Proof of `local-dens2-tree-bound`. We prove the inequality with the constant
+$`2^{201a^3}` replaced by $`2 ^ {200a^3 + 14a}`; this is stronger because
+$`a \geq 4`. It suffices to show the existence of a tile $`\fp \in \fT(\fu)`
+and an $`r \geq 4 D ^ {\ps(\fp)}` such that
+$`J \subset B(\pc(\fp), r)` and
+$`\mu(B(\pc(\fp), r)) ≤ 2 ^ {200a^3 + 14a} \mu(J)`, because then it follows
+from the definition `definedens2` of $`\dens_2` that
+$$`\mu(F \cap J) \le \mu(F \cap B(\pc(\fp), r))`$$
+$$`\le \dens_2(\fT(\fu)) \mu(B(\pc(\fp), r)) \le 2^{200a^3 + 14a} \dens_2(\fT(\fu))\mu(J).`$$
+
+```tex "local-dens2-tree-bound.part1"
+\begin{proof}[Proof of \Cref{local-dens2-tree-bound}]
+    \proves{local-dens2-tree-bound}
+    \leanok
+    We prove the inequality with the constant $2^{201a^3}$ replaced by $2 ^ {200a^3 + 14a}$; this
+    is stronger because $a \geq 4$. It suffices to show the existence of a tile $\fp \in \fT(\fu)$
+    and an $r \geq 4 D ^ {\ps(\fp)}$ such that $J \subset B(\pc(\fp), r)$ and
+    $\mu(B(\pc(\fp), r)) ≤ 2 ^ {200a^3 + 14a} \mu(J)$, because then it follows from the definition
+    \eqref{definedens2} of $\dens_2$ that
+    $$
+        \mu(F \cap J) \le \mu(F \cap B(\pc(\fp), r))
+    $$
+    $$
+        \le \dens_2(\fT(\fu)) \mu(B(\pc(\fp), r)) \le 2^{200a^3 + 14a} \dens_2(\fT(\fu))\mu(J)\,.
+    $$
+```
+
+In particular, these criteria are satisfied, with $`r = 4 D ^ {\ps(\fp)}`,
+by any $`\fp \in \fT(\fu)` such that
+$`J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))` and
+$`\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)`, because then by the doubling
+property `doublingx`
+$$`\mu(B(\pc(\fp), 4 D ^ {\ps(\fp)})) \le 2^{4a} \mu(B(\pc(\fp), D ^ {\ps(\fp)} / 4))`$$
+$$`\le 2^{4a} \mu(\scI(\fp)) \le 2^{100a^3 + 14a} \mu(J).`$$
+
+```tex "local-dens2-tree-bound.part2a"
+    In particular, these criteria are satisfied, with $r = 4 D ^ {\ps(\fp)}$, by any
+    $\fp \in \fT(\fu)$ such that $J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))$ and
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$, because then by the doubling property
+    \eqref{doublingx},
+    $$
+        \mu(B(\pc(\fp), 4 D ^ {\ps(\fp)})) \le 2^{4a} \mu(B(\pc(\fp), D ^ {\ps(\fp)} / 4))
+    $$
+    $$
+        \le 2^{4a} \mu(\scI(\fp)) \le 2^{100a^3 + 14a} \mu(J)\,.
+    $$
+```
+
+Suppose first that $`s(J) = S`. Then $`J = I_0`, so `subsetmaxcube` and the
+fact that $`J \in \mathcal{J}(\fT(\fu)) \subseteq \mathcal{J}_0(\fT(\fu))`
+imply that $`s(J) = -S`. Thus $`S = 0`. It follows that $`J` is the only
+dyadic cube, so any $`\fp \in \fT(\fu)` has $`\scI(\fp) = J`, and therefore
+satisfies $`J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))` and
+$`\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)`.
+
+```tex "local-dens2-tree-bound.part2"
+    In particular, these criteria are satisfied, with $r = 4 D ^ {\ps(\fp)}$, by any
+    $\fp \in \fT(\fu)$ such that $J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))$ and
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$, because then by the doubling property
+    \eqref{doublingx},
+    $$
+        \mu(B(\pc(\fp), 4 D ^ {\ps(\fp)})) \le 2^{4a} \mu(B(\pc(\fp), D ^ {\ps(\fp)} / 4))
+    $$
+    $$
+        \le 2^{4a} \mu(\scI(\fp)) \le 2^{100a^3 + 14a} \mu(J)\,.
+    $$
+
+    Suppose first that $s(J) = S$. Then $J = I_0$, so \eqref{subsetmaxcube} and the fact that
+    $J \in \mathcal{J}(\fT(\fu)) \subseteq \mathcal{J}_0(\fT(\fu))$ imply that $s(J) = -S$. Thus
+    $S = 0$. It follows that $J$ is the only dyadic cube, so any $\fp \in \fT(\fu)$ has
+    $\scI(\fp) = J$, and therefore satisfies $J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))$ and
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$.
+```
+
+It remains to consider the case $`s(J) < S`. Then, by `coverdyadic` and
+`dyadicproperty`, there exists some cube $`J' \in \mathcal{D}` with
+$`s(J') = s(J) + 1` and $`J \subset J'`. By definition of
+$`\mathcal{J}(\fT(\fu))` there exists some $`\fp \in \fT(\fu)` such that
+$`\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})`.
+
+```tex "local-dens2-tree-bound.part3a"
+    It remains to consider the case $s(J) < S$. Then, by \eqref{coverdyadic} and
+    \eqref{dyadicproperty}, there exists some cube $J' \in \mathcal{D}$ with $s(J') = s(J) + 1$ and
+    $J \subset J'$. By definition of $\mathcal{J}(\fT(\fu))$ there exists some $\fp \in \fT(\fu)$
+    such that $\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})$.
+```
+
+Since $`c(J) \in J \subset J' \subset B(c(J'), 4D^{s(J')})`, the triangle
+inequality, $`s(J') = s(J) + 1` and $`D=2^{100a^2}` imply
+$$`B(c(J'), 204D^{s(J')+1}) \subset B(c(J), 204D^{s(J') + 1} + 4D^{s(J')})
+                                 \subset B(c(J), 2^8 D^{s(J) + 2}).`$$
+From the doubling property `doublingx`, $`D=2^{100a^2}` and
+`eq-vol-sp-cube`, we obtain
+$$`\mu(B(c(J'), 204D^{s(J') + 1})) \leq 2 ^ {200a^3 + 10a} \mu(J).`$$
+
+```tex "local-dens2-tree-bound.part3b"
+    Since $c(J) \in J \subset J' \subset B(c(J'), 4D^{s(J')})$, the triangle inequality,
+    $s(J') = s(J) + 1$ and $D=2^{100a^2}$ imply
+    $$
+        B(c(J'), 204D^{s(J')+1}) \subset B(c(J), 204D^{s(J') + 1} + 4D^{s(J')})
+                                 \subset B(c(J), 2^8 D^{s(J) + 2})\,.
+    $$
+    From the doubling property \eqref{doublingx}, $D=2^{100a^2}$ and \eqref{eq-vol-sp-cube}, we
+    obtain
+    \begin{equation}
+        \label{measure-comparison}
+        \mu(B(c(J'), 204D^{s(J') + 1})) \leq 2 ^ {200a^3 + 10a} \mu(J)\,.
+    \end{equation}
+```
+
+If $`J \subset B(\pc(\fp), 4 D^{\ps(\fp)})`, then we need only check that
+$`\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)`. This follows immediately from
+$`\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})` and
+`measure-comparison`.
+
+```tex "local-dens2-tree-bound.part3c"
+    If $J \subset B(\pc(\fp), 4 D^{\ps(\fp)})$, then we need only check that
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$. This follows immediately from
+    $\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})$ and \eqref{measure-comparison}.
+```
+
+From now on we assume $`J \not \subset B(\pc(\fp), 4 D^{\ps(\fp)})`. Since
+$$`\pc(\fp) \in \scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1}),`$$
+we have by `eq-vol-sp-cube` and the triangle inequality
+$$`J \subset J' \subset B(c(J'), 4D^{s(J')}) \subset B(\pc(\fp), 104 D^{s(J') + 1}).`$$
+In particular this implies $`104 D^{s(J') + 1} > 4D^{\ps(\fp)}`. By the
+triangle inequality we also have
+$$`B(\pc(\fp), 104 D^{s(J') + 1}) \subset B(c(J), 204 D^{s(J') + 1}),`$$
+so from `measure-comparison`,
+$$`\mu( B(\pc(\fp), 104 D^{s(J') + 1})) \le 2^{200a^3 + 10a} \mu(J),`$$
+which proves $`\fp` satisfies the needed criteria with
+$`r=104 D^{s(J') + 1}`.
+
+```tex "local-dens2-tree-bound" (slot := proof)
+    It remains to consider the case $s(J) < S$. Then, by \eqref{coverdyadic} and
+    \eqref{dyadicproperty}, there exists some cube $J' \in \mathcal{D}$ with $s(J') = s(J) + 1$ and
+    $J \subset J'$. By definition of $\mathcal{J}(\fT(\fu))$ there exists some $\fp \in \fT(\fu)$
+    such that $\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})$.
+
+    Since $c(J) \in J \subset J' \subset B(c(J'), 4D^{s(J')})$, the triangle inequality,
+    $s(J') = s(J) + 1$ and $D=2^{100a^2}$ imply
+    $$
+        B(c(J'), 204D^{s(J')+1}) \subset B(c(J), 204D^{s(J') + 1} + 4D^{s(J')})
+                                 \subset B(c(J), 2^8 D^{s(J) + 2})\,.
+    $$
+    From the doubling property \eqref{doublingx}, $D=2^{100a^2}$ and \eqref{eq-vol-sp-cube}, we
+    obtain
+    \begin{equation}
+        \label{measure-comparison}
+        \mu(B(c(J'), 204D^{s(J') + 1})) \leq 2 ^ {200a^3 + 10a} \mu(J)\,.
+    \end{equation}
+
+    If $J \subset B(\pc(\fp), 4 D^{\ps(\fp)})$, then we need only check that
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$. This follows immediately from
+    $\scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})$ and \eqref{measure-comparison}.
+
+    From now on we assume $J \not \subset B(\pc(\fp), 4 D^{\ps(\fp)})$. Since
+    \begin{equation*}
+        \pc(\fp) \in \scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})\, ,
+    \end{equation*}
+    we have by \eqref{eq-vol-sp-cube} and the triangle inequality
+    $$
+        J \subset J' \subset B(c(J'), 4D^{s(J')}) \subset B(\pc(\fp), 104 D^{s(J') + 1})\,.
+    $$
+    In particular this implies $104 D^{s(J') + 1} > 4D^{\ps(\fp)}$. By the triangle inequality
+    we also have
+    $$
+        B(\pc(\fp), 104 D^{s(J') + 1}) \subset B(c(J), 204 D^{s(J') + 1})\,,
+    $$
+    so from \eqref{measure-comparison},
+    $$
+        \mu( B(\pc(\fp), 104 D^{s(J') + 1})) \le 2^{200a^3 + 10a} \mu(J)\,,
+    $$
+    which proves $\fp$ satisfies the needed criteria with $r=104 D^{s(J') + 1}$.
+
+\end{proof}
+```
+
+## Almost orthogonality of separated trees
+
+The main result of this subsection is the almost orthogonality estimate for
+operators associated to distinct trees in a forest in
+`correlation-separated-trees` below. We will deduce it from Lemmas
+`correlation-distant-tree-parts` and `correlation-near-tree-parts`, which are
+proven in Subsections `subsec-big-tiles` and `subsec-rest-tiles`,
+respectively. Before stating it, we introduce some relevant notation.
+
+```tex "main.forestop.sep.1"
+\subsection{Almost orthogonality of separated trees}
+
+The main result of this subsection is the almost orthogonality estimate for operators associated to distinct trees in a forest in \Cref{correlation-separated-trees} below. We will deduce it from Lemmas \ref{correlation-distant-tree-parts} and \ref{correlation-near-tree-parts}, which are proven in Subsections \ref{subsec-big-tiles} and \ref{subsec-rest-tiles}, respectively. Before stating it, we introduce some relevant notation.
+```
+
+The adjoint of the operator $`T_{\fp}` defined in `definetp` is given by
+$$`T_{\fp}^* g(x) = \int_{E(\fp)} \overline{K_{\ps(\fp)}(y,x)} e(-\tQ(y)(x)+ \tQ(y)(y)) g(y) \, \mathrm{d}\mu(y).`$$
+
+```tex "main.forestop.sep.2"
+The adjoint of the operator $T_{\fp}$ defined in \eqref{definetp} is given by
+\begin{equation}
+    \label{definetp*}
+    T_{\fp}^* g(x) = \int_{E(\fp)} \overline{K_{\ps(\fp)}(y,x)} e(-\tQ(y)(x)+ \tQ(y)(y)) g(y) \, \mathrm{d}\mu(y)\,.
+\end{equation}
+```
+
+:::theorem "adjoint-tile-support" (lean := "TileStructure.Forest.adjoint_tile_support1, TileStructure.Forest.adjoint_tile_support2")
+{uses "kernel-summand"}[]
+For each $`\fp \in \fP`, we have
+$$`T_{\fp}^* g = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})} T_{\fp}^* \mathbf{1}_{\scI(\fp)} g.`$$
+For each $`\fu \in \fU` and each $`\fp \in \fT(\fu)`, we have
+$$`T_{\fp}^* g = \mathbf{1}_{\scI(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g.`$$
+:::
+
+```tex "adjoint-tile-support" (slot := statement)
+\begin{lemma}[adjoint tile support]
+    \label{adjoint-tile-support}
+    \uses{kernel-summand}
+    \leanok
+    \lean{TileStructure.Forest.adjoint_tile_support1, TileStructure.Forest.adjoint_tile_support2}
+    For each $\fp \in \fP$, we have
+    $$
+        T_{\fp}^* g = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})} T_{\fp}^* \mathbf{1}_{\scI(\fp)} g\,.
+    $$
+    For each $\fu \in \fU$ and each $\fp \in \fT(\fu)$, we have
+    $$
+        T_{\fp}^* g = \mathbf{1}_{\scI(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g\,.
+    $$
+\end{lemma}
+```
+
+Proof. By `forest1`, $`E(\fp) \subset \scI(\fp) \subset \scI(\fu)`. Thus by
+`definetp*`
+$$`T_{\fp}^* g(x) = T_{\fp}^* (\mathbf{1}_{\scI(\fp)} g)(x)`$$
+$$`= \int_{E(\fp)} \overline{K_{\ps(\fp)}(y,x)} e(-\tQ(y)(x) + \tQ(y)(y)) \mathbf{1}_{\scI(\fp)}(y) g(y) \, \mathrm{d}\mu(y).`$$
+If this integral is not $`0`, then there exists $`y \in \scI(\fp)` such that
+$`K_{\ps(\fp)}(y,x) \ne 0`. By `supp-Ks`, `eq-vol-sp-cube` and the triangle
+inequality, it follows that
+$$`x \in B(\pc(\fp), 5 D^{\ps(\fp)}).`$$
+Thus
+$$`T_{\fp}^* g(x) = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})}(x) T_{\fp}^* (\mathbf{1}_{\scI(\fp)} g)(x).`$$
+The second claimed equation follows now since
+$`\scI(\fp) \subset \scI(\fu)` and by `forest6` we have
+$`B(\pc(\fp), 5D^{\ps(\fp)}) \subset \scI(\fu)`.
+
+```tex "adjoint-tile-support" (slot := proof)
+\begin{proof}
+    \leanok
+    By \eqref{forest1}, $E(\fp) \subset \scI(\fp) \subset \scI(\fu)$. Thus by \eqref{definetp*}
+    $$
+         T_{\fp}^* g(x) = T_{\fp}^* (\mathbf{1}_{\scI(\fp)} g)(x)
+    $$
+    $$
+        = \int_{E(\fp)} \overline{K_{\ps(\fp)}(y,x)} e(-\tQ(y)(x) + \tQ(y)(y)) \mathbf{1}_{\scI(\fp)}(y) g(y) \, \mathrm{d}\mu(y)\,.
+    $$
+    If this integral is not $0$, then there exists $y \in \scI(\fp)$ such that $K_{\ps(\fp)}(y,x) \ne 0$. By \eqref{supp-Ks}, \eqref{eq-vol-sp-cube} and the triangle inequality, it follows that
+    \begin{equation*}
+        x \in B(\pc(\fp), 5 D^{\ps(\fp)})\, .
+    \end{equation*}
+    Thus
+    $$
+        T_{\fp}^* g(x) = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})}(x) T_{\fp}^* (\mathbf{1}_{\scI(\fp)} g)(x)\,.
+    $$
+    The second claimed equation follows now since $\scI(\fp) \subset \scI(\fu)$ and by \eqref{forest6} we have $B(\pc(\fp), 5D^{\ps(\fp)}) \subset \scI(\fu)$.
+\end{proof}
+```
+
+:::theorem "adjoint-tree-estimate" (lean := "TileStructure.Forest.adjoint_tree_estimate, TileStructure.Forest.indicator_adjoint_tree_estimate")
+{uses "densities-tree-bound"}[]
+For all bounded $`g` supported on $`G` we have that
+$$`\left\| \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2`$$
+$$`\left\| \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{282a^3} \dens_1(\fT(\fu))^{1/2} \dens_2(\fT(\fu))^{1/2} \|g\|_2.`$$
+:::
+
+```tex "adjoint-tree-estimate" (slot := statement)
+\begin{lemma}[adjoint tree estimate]
+    \label{adjoint-tree-estimate}
+    \leanok
+    \lean{TileStructure.Forest.adjoint_tree_estimate, TileStructure.Forest.indicator_adjoint_tree_estimate}
+    \uses{densities-tree-bound}
+    For all bounded $g$ supported on $G$ we have that
+    $$
+        \left\| \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2\,,
+    $$
+    $$
+        \left\| \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{282a^3} \dens_1(\fT(\fu))^{1/2} \dens_2(\fT(\fu))^{1/2} \|g\|_2\,.
+    $$
+\end{lemma}
+```
+
+Proof. By `densities-tree-bound`, we have for all bounded $`f` and $`g` with
+$`|g| \le \mathbf{1}_G` that
+$$`\left| \int_X \overline{\sum_{\fp\in \fT(\fu)} T_{\fp}^* g} f \,\mathrm{d}\mu \right| = \left| \int_X \overline{g} \sum_{\fp \in \fT(\fu)} T_{\fp} f \,\mathrm{d}\mu \right|`$$
+$$`\le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2 \|f\|_2.`$$
+Let $`f = \sum_{\fp \in \fT(\fu)} T_{\fp}^* g`. Since
+$`|g| \le \mathbf{1}_G`, $`f` is bounded and has bounded support. In
+particular $`\|f\|_2 < \infty`. Dividing `eq-adjoint-bound` by $`\|f\|_2`
+completes the proof.
+
+```tex "adjoint-tree-estimate.part1"
+\begin{proof}
+    \leanok
+    By \Cref{densities-tree-bound}, we have for all bounded $f$ and $g$ with $|g| \le \mathbf{1}_G$ that
+    $$
+        \left| \int_X \overline{\sum_{\fp\in \fT(\fu)} T_{\fp}^* g} f \,\mathrm{d}\mu \right| = \left| \int_X \overline{g} \sum_{\fp \in \fT(\fu)} T_{\fp} f \,\mathrm{d}\mu \right|
+    $$
+    \begin{equation}
+        \label{eq-adjoint-bound}
+        \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2 \|f\|_2\,.
+    \end{equation}
+    Let $f = \sum_{\fp \in \fT(\fu)} T_{\fp}^* g$. Since $|g| \le \mathbf{1}_G$, $f$ is bounded and has bounded support. In particular $\|f\|_2 < \infty$. Dividing \eqref{eq-adjoint-bound} by $\|f\|_2$ completes the proof.
+```
+
+The proof of the second part is similar with
+$`f = \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g`.
+
+```tex "adjoint-tree-estimate" (slot := proof)
+\begin{proof}
+    \leanok
+    By \Cref{densities-tree-bound}, we have for all bounded $f$ and $g$ with $|g| \le \mathbf{1}_G$ that
+    $$
+        \left| \int_X \overline{\sum_{\fp\in \fT(\fu)} T_{\fp}^* g} f \,\mathrm{d}\mu \right| = \left| \int_X \overline{g} \sum_{\fp \in \fT(\fu)} T_{\fp} f \,\mathrm{d}\mu \right|
+    $$
+    \begin{equation}
+        \label{eq-adjoint-bound}
+        \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2 \|f\|_2\,.
+    \end{equation}
+    Let $f = \sum_{\fp \in \fT(\fu)} T_{\fp}^* g$. Since $|g| \le \mathbf{1}_G$, $f$ is bounded and has bounded support. In particular $\|f\|_2 < \infty$. Dividing \eqref{eq-adjoint-bound} by $\|f\|_2$ completes the proof.
+
+    The proof of the second part is similar with $f = \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g$.
+\end{proof}
+```
+
+We define
+$$`S_{2,\fu}g := \left|\sum_{\fp \in \fT(\fu)} T_{\fp}^*g \right| + M_{\mathcal{B},1}g + |g|.`$$
+
+```tex "main.forestop.sep.3"
+We define
+$$
+    S_{2,\fu}g := \left|\sum_{\fp \in \fT(\fu)} T_{\fp}^*g \right| + M_{\mathcal{B},1}g + |g|\,.
+$$
+```
+
+:::theorem "adjoint-tree-control" (lean := "TileStructure.Forest.adjoint_tree_control")
+{uses "adjoint-tree-estimate"}[]
+We have for all $`\fu \in \fU` and all bounded $`g` supported on $`G`
+$$`\|S_{2, \fu} g\|_2 \le 2^{182a^3} \|g\|_2.`$$
+:::
+
+```tex "adjoint-tree-control" (slot := statement)
+\begin{lemma}[adjoint tree control]
+    \label{adjoint-tree-control}
+    \leanok
+    \lean{TileStructure.Forest.adjoint_tree_control}
+    \uses{adjoint-tree-estimate}
+    We have for all $\fu \in \fU$ and all bounded $g$ supported on $G$
+    $$
+        \|S_{2, \fu} g\|_2 \le 2^{182a^3} \|g\|_2\,.
+    $$
+\end{lemma}
+```
+
+Proof. This follows immediately from Minkowski's inequality,
+`Hardy-Littlewood` and `adjoint-tree-estimate`, using that $`a \ge 4`.
+
+```tex "adjoint-tree-control" (slot := proof)
+\begin{proof}
+    \leanok
+    This follows immediately from Minkowski's inequality, \Cref{Hardy-Littlewood} and \Cref{adjoint-tree-estimate}, using that $a \ge 4$.
+\end{proof}
+```
+
+Now we are ready to state the main result of this subsection.
+
+```tex "main.forestop.sep.4"
+Now we are ready to state the main result of this subsection.
+```
+
+:::theorem "correlation-separated-trees" (lean := "TileStructure.Forest.correlation_separated_trees")
+{uses "correlation-distant-tree-parts"}[]
+{uses "correlation-near-tree-parts"}[]
+For any $`\fu_1 \ne \fu_2 \in \fU` and all bounded $`g_1, g_2` with bounded
+support, we have
+$$`\left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2)} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|`$$
+$$`\le 2^{512a^3-4n} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1) \cap \scI(\fu_2))}.`$$
+:::
+
+```tex "correlation-separated-trees" (slot := statement)
+\begin{lemma}[correlation separated trees]
+    \label{correlation-separated-trees}
+    \leanok
+    \lean{TileStructure.Forest.correlation_separated_trees}
+    \uses{correlation-distant-tree-parts,correlation-near-tree-parts}
+    For any $\fu_1 \ne \fu_2 \in \fU$ and all bounded $g_1, g_2$ with bounded support, we have
+    \begin{equation}
+        \label{eq-lhs-sep-tree}
+        \left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2)} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|
+    \end{equation}
+    \begin{equation}
+        \label{eq-rhs-sep-tree}
+        \le 2^{512a^3-4n} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1) \cap \scI(\fu_2))}\,.
+    \end{equation}
+\end{lemma}
+```
+
+Proof of `correlation-separated-trees`. By `adjoint-tile-support` and
+`dyadicproperty`, the left hand side `eq-lhs-sep-tree` is $`0` unless
+$`\scI(\fu_1) \subset \scI(\fu_2)` or
+$`\scI(\fu_2) \subset \scI(\fu_1)`. Without loss of generality we assume that
+$`\scI(\fu_1) \subset \scI(\fu_2)`.
+
+```tex "correlation-separated-trees.open"
+\begin{proof}[Proof of \Cref{correlation-separated-trees}]
+    \leanok
+    \proves{correlation-separated-trees}
+    By \Cref{adjoint-tile-support} and \eqref{dyadicproperty}, the left hand side \eqref{eq-lhs-sep-tree} is $0$ unless $\scI(\fu_1) \subset \scI(\fu_2)$ or $\scI(\fu_2) \subset \scI(\fu_1)$. Without loss of generality we assume that $\scI(\fu_1) \subset \scI(\fu_2)$.
+```
+
+Define
+$$`\mathfrak{S} := \{\fp \in \fT(\fu_1) \cup \fT(\fu_2) \ : \ d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn/2}\}.`$$
+`correlation-separated-trees` follows by combining the definition `defineZ` of
+$`Z` with the following two lemmas.
+
+```tex "correlation-separated-trees" (slot := proof)
+\begin{proof}[Proof of \Cref{correlation-separated-trees}]
+    \leanok
+    \proves{correlation-separated-trees}
+    By \Cref{adjoint-tile-support} and \eqref{dyadicproperty}, the left hand side \eqref{eq-lhs-sep-tree} is $0$ unless $\scI(\fu_1) \subset \scI(\fu_2)$ or $\scI(\fu_2) \subset \scI(\fu_1)$. Without loss of generality we assume that $\scI(\fu_1) \subset \scI(\fu_2)$.
+
+    Define
+    \begin{equation}
+        \label{def-Tree-S-set}
+         \mathfrak{S} := \{\fp \in \fT(\fu_1) \cup \fT(\fu_2) \ : \ d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn/2}\,\}.
+    \end{equation}
+    \Cref{correlation-separated-trees} follows by combining the definition \eqref{defineZ} of $Z$ with the following two lemmas.
+\end{proof}
+```
+
+:::theorem "correlation-distant-tree-parts" (lean := "TileStructure.Forest.correlation_distant_tree_parts")
+{uses "Holder-van-der-Corput"}[]
+{uses "Lipschitz-partition-unity"}[]
+{uses "Holder-correlation-tree"}[]
+{uses "lower-oscillation-bound"}[]
+We have for all $`\fu_1 \ne \fu_2 \in \fU` with
+$`\scI(\fu_1) \subset \scI(\fu_2)` and all bounded $`g_1, g_2` with bounded
+support
+$$`\left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2) \cap \mathfrak{S}} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|`$$
+$$`\le 2^{511a^3} 2^{-Zn/(4a^2 + 2a^3)} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1))}.`$$
+:::
+
+```tex "correlation-distant-tree-parts" (slot := statement)
+\begin{lemma}[correlation distant tree parts]
+        \label{correlation-distant-tree-parts}
+        \leanok
+        \lean{TileStructure.Forest.correlation_distant_tree_parts}
+        \uses{Holder-van-der-Corput,Lipschitz-partition-unity,Holder-correlation-tree,lower-oscillation-bound}
+        We have for all $\fu_1 \ne \fu_2 \in \fU$ with $\scI(\fu_1) \subset \scI(\fu_2)$ and all bounded $g_1, g_2$ with bounded support
+      \begin{equation}
+            \label{eq-lhs-big-sep-tree}
+            \left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2) \cap \mathfrak{S}} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|
+        \end{equation}
+      \begin{equation}
+            \label{eq-rhs-big-sep-tree}
+            \le 2^{511a^3} 2^{-Zn/(4a^2 + 2a^3)} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1))}\,.
+        \end{equation}
+    \end{lemma}
+```
+
+:::theorem "correlation-near-tree-parts" (lean := "TileStructure.Forest.correlation_near_tree_parts")
+{uses "tree-projection-estimate"}[]
+{uses "dyadic-partition-2"}[]
+{uses "bound-for-tree-projection"}[]
+We have for all $`\fu_1 \ne \fu_2 \in \fU` with
+$`\scI(\fu_1) \subset \scI(\fu_2)` and all bounded $`g_1, g_2` with bounded
+support
+$$`\left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2) \setminus \mathfrak{S}} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|`$$
+$$`\le 2^{232a^3+21a+5} 2^{-\frac{25}{101a}Zn\kappa} \prod_{j=1}^2 \|S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1))}.`$$
+:::
+
+```tex "correlation-near-tree-parts" (slot := statement)
+\begin{lemma}[correlation near tree parts]
+        \label{correlation-near-tree-parts}
+        \leanok
+        \lean{TileStructure.Forest.correlation_near_tree_parts}
+        \uses{tree-projection-estimate,dyadic-partition-2,bound-for-tree-projection}
+        We have for all $\fu_1 \ne \fu_2 \in \fU$ with $\scI(\fu_1) \subset \scI(\fu_2)$ and all bounded $g_1, g_2$ with bounded support
+      \begin{equation}
+            \label{eq-lhs-small-sep-tree}
+            \left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2) \setminus \mathfrak{S}} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|
+        \end{equation}
+      \begin{equation}
+            \label{eq-rhs-small-sep-tree}
+            \le 2^{232a^3+21a+5} 2^{-\frac{25}{101a}Zn\kappa} \prod_{j=1}^2 \|S_{2, \fu_j} g_j\|_{L^2(\scI(\fu_1))}\,.
+        \end{equation}
+    \end{lemma}
+```
+
+In the proofs of both lemmas, we will need the following observation.
+
+```tex "main.forestop.sep.5"
+In the proofs of both lemmas, we will need the following observation.
+```
+
+:::theorem "overlap-implies-distance" (lean := "TileStructure.Forest.𝔗_subset_𝔖₀, TileStructure.Forest.overlap_implies_distance")
+Let $`\fu_1 \ne \fu_2 \in \fU` with $`\scI(\fu_1) \subset \scI(\fu_2)`. If
+$`\fp \in \fT(\fu_1) \cup \fT(\fu_2)` with
+$`\scI(\fp) \cap \scI(\fu_1) \ne \emptyset`, then $`\fp \in \mathfrak{S}`. In
+particular, we have $`\fT(\fu_1) \subset \mathfrak{S}`.
+:::
+
+```tex "overlap-implies-distance" (slot := statement)
+\begin{lemma}[overlap implies distance]
+    \label{overlap-implies-distance}
+    \leanok
+    \lean{TileStructure.Forest.𝔗_subset_𝔖₀, TileStructure.Forest.overlap_implies_distance}
+    Let $\fu_1 \ne \fu_2 \in \fU$ with $\scI(\fu_1) \subset \scI(\fu_2)$. If $\fp \in \fT(\fu_1) \cup \fT(\fu_2)$ with $\scI(\fp) \cap \scI(\fu_1) \ne \emptyset$, then $\fp \in \mathfrak{S}$. In particular, we have $\fT(\fu_1) \subset \mathfrak{S}$.
+\end{lemma}
+```
+
+Proof. Suppose first that $`\fp \in \fT(\fu_1)`. Then
+$`\scI(\fp) \subset \scI(\fu_1) \subset \scI(\fu_2)`, by `forest1`. Thus we
+have by the separation condition `forest5`, `eq-freq-comp-ball`, `forest1`
+and the triangle inequality
+$$`d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge d_{\fp}(\fcc(\fp), \fcc(\fu_2)) - d_{\fp}(\fcc(\fp), \fcc(\fu_1))`$$
+$$`\ge 2^{Z(n+1)} - 4`$$
+$$`\ge 2^{Zn/2},`$$
+using that $`Z= 2^{12a}\ge 4`. Hence $`\fp \in \mathfrak{S}`.
+
+```tex "overlap-implies-distance.part1"
+\begin{proof}
+    \leanok
+    Suppose first that $\fp \in \fT(\fu_1)$. Then $\scI(\fp) \subset \scI(\fu_1) \subset \scI(\fu_2)$, by \eqref{forest1}. Thus we have by the separation condition \eqref{forest5}, \eqref{eq-freq-comp-ball}, \eqref{forest1} and the triangle inequality
+    \begin{align*}
+        d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) &\ge d_{\fp}(\fcc(\fp), \fcc(\fu_2)) - d_{\fp}(\fcc(\fp), \fcc(\fu_1))\\
+        &\ge 2^{Z(n+1)} - 4\\
+        &\ge 2^{Zn/2}\,,
+    \end{align*}
+    using that $Z= 2^{12a}\ge 4$. Hence $\fp \in \mathfrak{S}$.
+```
+
+Suppose now that $`\fp \in \fT(\fu_2)`. If
+$`\scI(\fp) \subset \scI(\fu_1)`, then the same argument as above with
+$`\fu_1` and $`\fu_2` swapped shows $`\fp \in \mathfrak{S}`. If
+$`\scI(\fp) \not \subset \scI(\fu_1)` then, by `dyadicproperty`,
+$`\scI(\fu_1) \subset \scI(\fp)`. Pick $`\fp' \in \fT(\fu_1)`, we have
+$`\scI(\fp') \subset \scI(\fu_1) \subset \scI(\fp)`. Hence, by
+`monotone-cube-metrics` and the first paragraph
+$$`d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge d_{\fp'}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn},`$$
+so $`\fp \in \mathfrak{S}`.
+
+```tex "overlap-implies-distance" (slot := proof)
+\begin{proof}
+    \leanok
+    Suppose first that $\fp \in \fT(\fu_1)$. Then $\scI(\fp) \subset \scI(\fu_1) \subset \scI(\fu_2)$, by \eqref{forest1}. Thus we have by the separation condition \eqref{forest5}, \eqref{eq-freq-comp-ball}, \eqref{forest1} and the triangle inequality
+    \begin{align*}
+        d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) &\ge d_{\fp}(\fcc(\fp), \fcc(\fu_2)) - d_{\fp}(\fcc(\fp), \fcc(\fu_1))\\
+        &\ge 2^{Z(n+1)} - 4\\
+        &\ge 2^{Zn/2}\,,
+    \end{align*}
+    using that $Z= 2^{12a}\ge 4$. Hence $\fp \in \mathfrak{S}$.
+
+    Suppose now that $\fp \in \fT(\fu_2)$. If $\scI(\fp) \subset \scI(\fu_1)$, then the same argument as above with $\fu_1$ and $\fu_2$ swapped shows $\fp \in \mathfrak{S}$. If $\scI(\fp) \not \subset \scI(\fu_1)$ then, by \eqref{dyadicproperty}, $\scI(\fu_1) \subset \scI(\fp)$. Pick $\fp' \in \fT(\fu_1)$, we have $\scI(\fp') \subset \scI(\fu_1) \subset \scI(\fp)$. Hence, by \Cref{monotone-cube-metrics} and the first paragraph
+    $$
+        d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge d_{\fp'}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn}\,,
+    $$
+    so $\fp \in \mathfrak{S}$.
+\end{proof}
+```
+
+To simplify the notation, we will write at various places throughout the proof
+of Lemmas `correlation-distant-tree-parts` and
+`correlation-near-tree-parts` for a subset $`\fC \subset \fP`
+$$`T_{\fC} f := \sum_{\fp \in \fC} T_{\fp} f\,, \quad\quad T_{\fC}^* g := \sum_{\fp\in\fC} T_{\fp}^* g\,.`$$
+
+```tex "main.forestop.sep.6"
+To simplify the notation, we will write at various places throughout the proof of Lemmas \ref{correlation-distant-tree-parts} and \ref{correlation-near-tree-parts} for a subset $\fC \subset \fP$
+$$
+    T_{\fC} f := \sum_{\fp \in \fC} T_{\fp} f\,, \quad\quad T_{\fC}^* g := \sum_{\fp\in\fC} T_{\fp}^* g\,.
+$$
 ```
