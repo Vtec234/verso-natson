@@ -12878,3 +12878,119 @@ adding \eqref{eql42} proves \eqref{eq-secondt} and completes the proof
 of \Cref{Lipschitz-Holder-approximation}.
 \end{proof}
 ```
+
+We turn to the proof of `Holder-van-der-Corput`.
+
+```tex
+% witness-label: main.liphoel.2
+We turn to the proof of \Cref{Holder-van-der-Corput}.
+```
+
+Proof of `Holder-van-der-Corput`. Let $`z\in X` and $`R>0` and set
+$`B=B(z,R)`. Let $`\varphi` be given as in `Holder-van-der-Corput`. Set
+$$`t:=(1+d_B(\mfa,\mfb))^{-\frac{\tau}{2+a}}`
+and define $`\tilde{\varphi}` as in `Lipschitz-Holder-approximation`. Let
+$`\mfa` and $`\mfb` be in $`\Mf`. Then
+$$`\left|\int e(\mfa(x)-{\mfb(x)}) \varphi (x)\, \mathrm{d}\mu(x)\right|`
+$$`\le \left|\int e(\mfa(x)-{\mfb(x)}) \tilde{\varphi} (x)\, \mathrm{d}\mu(x)\right|`
+$$`+ \left|\int e(\mfa(x)-{\mfb(x)}) (\varphi (x)-\tilde{\varphi}(x))\, \mathrm{d}\mu(x)\right|.`
+
+```tex
+% witness-label: Holder-van-der-Corput.part1
+\begin{proof}[Proof of \Cref{Holder-van-der-Corput}]
+    \proves{Holder-van-der-Corput}\leanok
+Let $z\in X$ and $R>0$ and set $B=B(z,R)$. Let $\varphi$
+be given as in \Cref{Holder-van-der-Corput}.
+Set
+\begin{equation}\label{eql69}
+    t:=(1+d_B(\mfa,\mfb))^{-\frac{\tau}{2+a}}
+\end{equation}
+and define $\tilde{\varphi}$ as in \Cref{Lipschitz-Holder-approximation}. Let $\mfa$ and $\mfb$ be in $\Mf$.
+Then
+   \begin{equation}\label{eql60}
+       \left|\int e(\mfa(x)-{\mfb(x)}) \varphi (x)\, \mathrm{d}\mu(x)\right|
+   \end{equation}
+    \begin{equation}\label{eql61}
+   \le \left|\int e(\mfa(x)-{\mfb(x)}) \tilde{\varphi} (x)\, \mathrm{d}\mu(x)\right|
+   \end{equation}
+         \begin{equation}\label{eql62}
+     + \left|\int e(\mfa(x)-{\mfb(x)}) (\varphi (x)-\tilde{\varphi}(x))\, \mathrm{d}\mu(x)\right|
+   \end{equation}
+```
+
+Using the cancellative condition `eq-vdc-cond` of $`\Mf` on the ball
+$`B(z,2R)`, the term `eql61` is bounded above by
+$$`2^a \mu(B(z,2R)) \|\tilde{\varphi}\|_{\Lip(B(z,2R))} (1 + d_{B(z,2R)}(\mfa,\mfb))^{-\tau}.`
+Using the doubling condition `doublingx`, the inequality `eq-secondt`, and the
+estimate $`d_B\le d_{B(z,2R)}` from the definition, we estimate `eql63` from
+above by
+$$`2^{6a}t^{-1-a} \mu(B) \|{\varphi}\|_{C^\tau(B)} (1 + d_{B}(\mfa,\mfb))^{-\tau}.`
+
+```tex
+% witness-label: Holder-van-der-Corput.part2a
+Using the cancellative condition \eqref{eq-vdc-cond} of $\Mf$ on the ball $B(z,2R)$, the term \eqref{eql61} is bounded above by
+ \begin{equation}\label{eql63}
+       2^a \mu(B(z,2R)) \|\tilde{\varphi}\|_{\Lip(B(z,2R))} (1 + d_{B(z,2R)}(\mfa,\mfb))^{-\tau} \, .
+ \end{equation}
+
+
+
+Using the doubling condition \eqref{doublingx},
+the inequality \eqref{eq-secondt}, and the estimate
+$d_B\le d_{B(z,2R)}$ from the definition,
+we estimate \eqref{eql63} from above by
+\begin{equation}\label{eql64}
+       2^{6a}t^{-1-a} \mu(B) \|{\varphi}\|_{C^\tau(B)}
+       (1 + d_{B}(\mfa,\mfb))^{-\tau} \, .
+ \end{equation}
+```
+
+The term `eql62` we estimate using `eq-firstt` and that $`\mfa` and $`\mfb`
+are real and thus $`e(\mfa)` and $`e(\mfb)` bounded in absolute value by $`1`.
+We obtain for `eql62` with `doublingx` the upper bound
+$$`2^a \mu(B) t^{\tau} \|\varphi\|_{C^\tau(B)}.`
+
+```tex
+% witness-label: Holder-van-der-Corput.part2b
+The term \eqref{eql62} we estimate using
+\eqref{eq-firstt} and that
+$\mfa$ and $\mfb$ are real and thus $e(\mfa)$ and
+$e(\mfb)$ bounded in absolute value by $1$.
+We obtain for \eqref{eql62} with \eqref{doublingx}
+the upper bound
+  \begin{equation}\label{eql65}
+      \mu(B(z,2R)) (t/2)^{\tau} \|\varphi\|_{C^\tau(B)}
+      \le 2^a \mu(B) t^{\tau} \|\varphi\|_{C^\tau(B)}
+      \,.
+ \end{equation}
+```
+
+Using the definition `eql69` of $`t` and adding `eql64` and `eql65` estimates
+`eql60` from above by
+$$`2^{6a} \mu(B) \|{\varphi}\|_{C^\tau(B)} (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau}{2+a}}`
+$$`+ 2^a \mu(B) \|{\varphi}\|_{C^\tau(B)} (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau^2}{2+a}}.`
+This is
+$$`\le 2^{1+6a} \mu(B) \|{\varphi}\|_{C^\tau(B)} (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau^2}{2+a}},`
+where we used $`\tau\le 1`. This completes the proof of
+`Holder-van-der-Corput`.
+
+```tex "Holder-van-der-Corput" (slot := proof)
+Using the definition \eqref{eql69} of $t$ and adding
+\eqref{eql64} and \eqref{eql65} estimates
+\eqref{eql60} from above by
+\begin{equation}
+       2^{6a} \mu(B) \|{\varphi}\|_{C^\tau(B)}
+       (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau}{2+a}}
+       \end{equation}
+\begin{equation} +
+        2^a \mu(B) \|{\varphi}\|_{C^\tau(B)}
+       (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau^2}{2+a}}\, .
+ \end{equation}
+\begin{equation}\label{eql66}
+      \le 2^{1+6a} \mu(B) \|{\varphi}\|_{C^\tau(B)}
+       (1 + d_{B}(\mfa,\mfb))^{-\frac{\tau^2}{2+a}} \, ,
+ \end{equation}
+where we used $\tau\le 1$.
+This completes the proof of \Cref{Holder-van-der-Corput}.
+\end{proof}
+```
