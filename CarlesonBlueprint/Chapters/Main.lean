@@ -12325,3 +12325,158 @@ Thus `eq-row-bound-2` follows, since $`a \ge 4`. The proof of
     Thus \eqref{eq-row-bound-2} follows, since $a \ge 4$. The proof of \eqref{eq-row-bound-1} is the same up to replacing $F$ by $X$.
 \end{proof}
 ```
+
+:::lemma_ "row-correlation" (lean := "TileStructure.Forest.row_correlation")
+{uses "adjoint-tree-control"}[]
+{uses "correlation-separated-trees"}[]
+For all $`1 \le j,j' \le 2^n` with $`j\ne j'` and for all bounded
+$`g_1, g_2` supported on $`G`, it holds that
+$$`\left| \int T_{\mathfrak{R}_j}^*g_1 \overline{T_{\mathfrak{R}_{j'}}^*g_2} \, \mathrm{d}\mu \right| \le 2^{876a^3-4n}\|g_1\|_2 \|g_2\|_2.`
+:::
+
+```tex "row-correlation" (slot := statement)
+\begin{lemma}[row correlation]
+    \label{row-correlation}
+    \leanok
+    \lean{TileStructure.Forest.row_correlation}
+    \uses{adjoint-tree-control,correlation-separated-trees}
+    For all $1 \le j,j' \le 2^n$ with $j\ne j'$ and for all bounded $g_1, g_2$ supported on $G$, it holds that
+    $$
+        \left| \int T_{\mathfrak{R}_j}^*g_1 \overline{T_{\mathfrak{R}_{j'}}^*g_2} \, \mathrm{d}\mu \right| \le
+        2^{876a^3-4n}\|g_1\|_2 \|g_2\|_2\,.
+    $$
+\end{lemma}
+```
+
+Proof. We have by `adjoint-tile-support` and the triangle inequality that
+$$`\left| \int T_{\mathfrak{R}_j}^*g_1 \overline{T_{\mathfrak{R}_{j'}}^*g_2} \, \mathrm{d}\mu \right|`
+$$`\le \sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \left| \int T^*_{\fT_j(\fu)} (\mathbf{1}_{\scI(\fu)} g_1) \overline{T^*_{\fT_{j'}(\fu')} (\mathbf{1}_{\scI(\fu')} g_2)} \, \mathrm{d}\mu \right|.`
+By `correlation-separated-trees`, this is bounded by
+$$`2^{512a^3-4n} \sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu)} \|S_{2, \fu'} (\mathbf{1}_{\scI(\fu')}g_2)\|_{L^2(\scI(\fu')\cap\scI(\fu))}.`
+We apply the Cauchy-Schwarz inequality in the form
+$$`\sum_{i \in M} a_i b_i \le (\sum_{i \in M} a_i^2 )^{1/2}(\sum_{i \in M} b_i^2 )^{1/2}`
+to the outer two sums:
+$$`\le 2^{512a^3-4n} \left(\sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu))}^2 \right)^{1/2}`
+$$`\left(\sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu'} (\mathbf{1}_{\scI(\fu')}g_2)\|_{L^2(\scI(\fu')\cap\scI(\fu))}^2 \right)^{1/2}.`
+We can now estimate the factor involving $`g_1` as follows:
+$$`\sum_{\fu \in \fU_j}\sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu))}^2`
+$$`= \sum_{\fu \in \fU_j}\sum_{\fu' \in \fU_{j'}} \int_{\scI(\fu) \cap \scI(\fu')} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y).`
+By pairwise disjointedness of the sets $`\scI(\fu')` for $`\fu' \in \fU_{j'}`,
+we have
+$$`\le \sum_{\fu \in \fU_j}\int_{\scI(\fu)} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y) \le \sum_{\fu \in \fU_j}\int_{X} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y)`
+$$`= \sum_{\fu \in \fU_j}\|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_2^2.`
+By `adjoint-tree-control` we now estimate:
+$$`\le \sum_{\fu \in \fU_j}(2^{182a^3})^2 \|\mathbf{1}_{\scI(\fu)}g_1\|_2^2.`
+By pairwise disjointedness of the sets $`\scI(\fu)` for $`\fu \in \fU_j`
+(and writing out the definition of $`L^2`-norms), we have
+$$`\le (2^{182a^3})^2 \|g_1\|_2^2.`
+Arguing similarly for $`g_2`, we obtain the desired inequality.
+
+```tex "row-correlation" (slot := proof)
+\begin{proof}
+    \leanok
+    We have by \Cref{adjoint-tile-support} and the triangle inequality that
+    $$
+        \left| \int T_{\mathfrak{R}_j}^*g_1 \overline{T_{\mathfrak{R}_{j'}}^*g_2} \, \mathrm{d}\mu \right|
+    $$
+    $$
+        \le \sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \left| \int T^*_{\fT_j(\fu)} (\mathbf{1}_{\scI(\fu)} g_1) \overline{T^*_{\fT_{j'}(\fu')} (\mathbf{1}_{\scI(\fu')} g_2)} \, \mathrm{d}\mu \right|\,.
+    $$
+    By \Cref{correlation-separated-trees}, this is bounded by
+    \begin{equation}
+        \label{eq-S2uu'}
+         2^{512a^3-4n} \sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu)} \|S_{2, \fu'} (\mathbf{1}_{\scI(\fu')}g_2)\|_{L^2(\scI(\fu')\cap\scI(\fu))}\,.
+    \end{equation}
+    We apply the Cauchy-Schwarz inequality in the form
+    \begin{equation*}
+        \sum_{i \in M} a_i b_i \le (\sum_{i \in M} a_i^2 )^{1/2}(\sum_{i \in M} b_i^2 )^{1/2}
+    \end{equation*} to the outer two sums:
+    $$
+        \le 2^{512a^3-4n} \left(\sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu))}^2 \right)^{1/2}
+    $$
+    $$
+        \left(\sum_{\fu \in \fU_j} \sum_{\fu' \in \fU_{j'}} \|S_{2,\fu'} (\mathbf{1}_{\scI(\fu')}g_2)\|_{L^2(\scI(\fu')\cap\scI(\fu))}^2 \right)^{1/2}\,.
+    $$
+    We can now estimate the factor involving $g_1$ as follows:
+    \begin{multline*}
+        \sum_{\fu \in \fU_j}\sum_{\fu' \in \fU_{j'}} \|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_{L^2(\scI(\fu')\cap \scI(\fu))}^2
+        \\ = \sum_{\fu \in \fU_j}\sum_{\fu' \in \fU_{j'}} \int_{\scI(\fu) \cap \scI(\fu')} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y)
+    \end{multline*}
+    By pairwise disjointedness of the sets $\scI(\fu')$ for $\fu' \in \fU_{j'}$, we have
+    $$
+        \le \sum_{\fu \in \fU_j}\int_{\scI(\fu)} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y)
+        \le \sum_{\fu \in \fU_j}\int_{X} |S_{2,\fu} (\mathbf{1}_{\scI(\fu)}(y)g_1(y))|^2 \, \mathrm{d}\mu(y)
+    $$
+    $$
+       = \sum_{\fu \in \fU_j}\|S_{2,\fu} (\mathbf{1}_{\scI(\fu)}g_1)\|_2^2
+    $$
+    By \Cref{adjoint-tree-control} we now estimate:
+    $$
+        \le \sum_{\fu \in \fU_j}(2^{182a^3})^2 \|\mathbf{1}_{\scI(\fu)}g_1\|_2^2
+    $$
+    By pairwise disjointedness of the sets $\scI(\fu)$ for $\fu \in \fU_j$ (and writing out the definition of $L^2$-norms), we have
+    $$
+        \le (2^{182a^3})^2 \|g_1\|_2^2
+    $$
+    Arguing similarly for $g_2$, we obtain the desired inequality.
+\end{proof}
+```
+
+Define for $`1 \le j \le 2^n`
+$$`E_j := \bigcup_{\fu \in \fU_j} \bigcup_{\fp \in \fT(\fu)} E(\fp).`
+
+```tex
+% witness-label: main.forests.4
+Define for $1 \le j \le 2^n$
+$$
+    E_j := \bigcup_{\fu \in \fU_j} \bigcup_{\fp \in \fT(\fu)} E(\fp)\,.
+$$
+```
+
+:::lemma_ "disjoint-row-support" (lean := "TileStructure.Forest.pairwiseDisjoint_rowSupport")
+The sets $`E_j`, $`1 \le j \le 2^n` are pairwise disjoint.
+:::
+
+```tex "disjoint-row-support" (slot := statement)
+\begin{lemma}[disjoint row support]
+    \label{disjoint-row-support}
+    \leanok
+    \lean{TileStructure.Forest.pairwiseDisjoint_rowSupport}
+    The sets $E_j$, $1 \le j \le 2^n$ are pairwise disjoint.
+\end{lemma}
+```
+
+Proof. Suppose that $`\fp \in \fT(\fu)` and $`\fp' \in \fT(\fu')` with
+$`\fu \ne \fu'` and $`x \in E(\fp) \cap E(\fp')`. Suppose without loss of
+generality that $`\ps(\fp) \le \ps(\fp')`. Then
+$`x \in \scI(\fp) \cap \scI(\fp') \subset \scI(\fu')`. By `dyadicproperty` it
+follows that $`\scI(\fp) \subset \scI(\fu')`. By `forest5`, it follows that
+$$`d_{\fp}(\fcc(\fp), \fcc(\fu')) > 2^{Z(n+1)}.`
+By the triangle inequality. `monotone-cube-metrics` and `forest1` it follows
+that
+$$`d_{\fp}(\fcc(\fp), \fcc(\fp')) \ge d_{\fp}(\fcc(\fp), \fcc(\fu')) - d_{\fp}(\fcc(\fp'), \fcc(\fu'))`
+$$`> 2^{Z(n+1)} - d_{\fp'}(\fcc(\fp'), \fcc(\fu'))`
+$$`\ge 2^{Z(n+1)} - 4.`
+Since $`Z \ge 3` by `defineZ`, it follows that
+$`\fcc(\fp') \notin B_{\fp}(\fcc(\fp), 1)`, so $`\Omega(\fp') \not\subset \Omega(\fp)`
+by `eq-freq-comp-ball`. Hence, by `eq-freq-dyadic`,
+$`\Omega(\fp) \cap \Omega(\fp') = \emptyset`. But if
+$`x \in E(\fp) \cap E(\fp')` then $`Q(x) \in \Omega(\fp) \cap \Omega(\fp')`.
+This is a contradiction, and the lemma follows.
+
+```tex "disjoint-row-support" (slot := proof)
+\begin{proof}
+    \leanok
+    Suppose that $\fp \in \fT(\fu)$ and $\fp' \in \fT(\fu')$ with $\fu \ne \fu'$ and $x \in E(\fp) \cap E(\fp')$. Suppose without loss of generality that $\ps(\fp) \le \ps(\fp')$. Then $x \in \scI(\fp) \cap \scI(\fp') \subset \scI(\fu')$. By \eqref{dyadicproperty} it follows that $\scI(\fp) \subset \scI(\fu')$. By \eqref{forest5}, it follows that
+    $$
+        d_{\fp}(\fcc(\fp), \fcc(\fu')) > 2^{Z(n+1)}\,.
+    $$
+    By the triangle inequality. \Cref{monotone-cube-metrics} and \eqref{forest1} it follows that
+    \begin{align*}
+        d_{\fp}(\fcc(\fp), \fcc(\fp')) &\ge d_{\fp}(\fcc(\fp), \fcc(\fu')) - d_{\fp}(\fcc(\fp'), \fcc(\fu'))\\
+        &> 2^{Z(n+1)} - d_{\fp'}(\fcc(\fp'), \fcc(\fu'))\\
+        &\ge 2^{Z(n+1)} - 4\,.
+    \end{align*}
+    Since $Z \ge 3$ by \eqref{defineZ}, it follows that $\fcc(\fp') \notin B_{\fp}(\fcc(\fp), 1)$, so $\Omega(\fp') \not\subset \Omega(\fp)$ by \eqref{eq-freq-comp-ball}. Hence, by \eqref{eq-freq-dyadic}, $\Omega(\fp) \cap \Omega(\fp') = \emptyset$. But if $x \in E(\fp) \cap E(\fp')$ then $Q(x) \in \Omega(\fp) \cap \Omega(\fp')$. This is a contradiction, and the lemma follows.
+\end{proof}
+```
