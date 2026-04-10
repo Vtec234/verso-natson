@@ -12994,3 +12994,157 @@ where we used $\tau\le 1$.
 This completes the proof of \Cref{Holder-van-der-Corput}.
 \end{proof}
 ```
+
+## Proof of Vitali covering and Hardy--Littlewood
+
+We begin with a classical representation of the Lebesgue norm.
+
+```tex
+% witness-label: main.hlm.1
+\section{Proof of Vitali covering and Hardy--Littlewood}
+\label{sec-hlm}
+
+
+We begin with a classical representation of the Lebesgue norm.
+```
+
+:::lemma_ "layer-cake-representation" (lean := "MeasureTheory.eLpNorm_pow_eq_distribution")
+Let $`1\le p< \infty`. Then for any measurable function
+$`u:X\to [0,\infty)` on the measure space $`X` relative to the measure $`\mu`
+we have
+$$`\|u\|_p^p=p\int_0^\infty \lambda^{p-1}\mu(\{x: u(x)\ge \lambda\})\, d\lambda.`
+:::
+
+```tex "layer-cake-representation" (slot := statement)
+\begin{lemma}[layer cake representation]\label{layer-cake-representation}
+\leanok
+\lean{MeasureTheory.eLpNorm_pow_eq_distribution}
+Let $1\le p< \infty$. Then for any measurable function $u:X\to [0,\infty)$ on the measure space $X$
+relative to the measure $\mu$
+we have
+\begin{equation}\label{eq-layercake}
+    \|u\|_p^p=p\int_0^\infty \lambda^{p-1}\mu(\{x: u(x)\ge \lambda\})\, d\lambda\, .
+\end{equation}
+\end{lemma}
+```
+
+Proof. The left-hand side of `eq-layercake` is by definition
+$$`\int_X u(x)^p \, d\mu(x).`
+Writing $`u(x)` as an elementary integral in $`\lambda` and then using
+Fubini, we write for the last display
+$$`=\int_X \int _0^{u(x)} p \lambda^{p-1} d\lambda\, d\mu(x)`
+$$`=p\int _0^{\infty} \lambda^{p-1} \mu(\{x: u(x)\ge \lambda\}) d\lambda.`
+This proves the lemma.
+
+```tex "layer-cake-representation" (slot := proof)
+\begin{proof}
+    \leanok
+    The left-hand side of \eqref{eq-layercake} is by definition
+\begin{equation}
+    \int_X u(x)^p \, d\mu(x)\, .\end{equation}
+    Writing $u(x)$ as an elementary integral in $\lambda$ and then using Fubini, we write for the last display
+    \begin{equation}
+    =\int_X \int _0^{u(x)}
+    p \lambda^{p-1} d\lambda\, d\mu(x)
+\end{equation}
+\begin{equation}
+ =p\int _0^{\infty}
+    \lambda^{p-1} \mu(\{x: u(x)\ge \lambda\}) d\lambda\, .
+\end{equation}
+This proves the lemma.
+\end{proof}
+```
+
+The following lemma will be used to define $`M` in the proof of
+`Hardy-Littlewood`.
+
+```tex
+% witness-label: main.hlm.2
+The following lemma will be used to define $M$ in the proof of \Cref{Hardy-Littlewood}.
+```
+
+:::lemma_ "covering-separable-space" (lean := "covering_separable_space")
+For each $`r > 0`, there exists a countable collection $`C(r) \subset X` of
+points such that
+$$`X \subset \bigcup_{c \in C(r)} B(c, r).`
+:::
+
+```tex "covering-separable-space" (slot := statement)
+\begin{lemma}[covering separable space]
+    \label{covering-separable-space}
+    \leanok
+    \lean{covering_separable_space}
+    % Since X is separable, we can even choose `C` independent of `r`.
+    For each $r > 0$, there exists a countable collection $C(r) \subset X$ of points such that
+    $$
+        X \subset \bigcup_{c \in C(r)} B(c, r)\,.
+    $$
+\end{lemma}
+```
+
+Proof. It clearly suffices to construct finite collections $`C(r,k)` such
+that
+$$`B(o, r2^k) \subset \bigcup_{c \in C(r,k)} B(c,r),`
+since then the collection $`C(r) = \bigcup_{k \in \mathbb{N}} C(r,k)` has the
+desired property.
+
+```tex
+% witness-label: covering-separable-space.part1
+    It clearly suffices to construct finite collections $C(r,k)$ such that
+    $$
+        B(o, r2^k) \subset \bigcup_{c \in C(r,k)} B(c,r)\,,
+    $$
+    since then the collection $C(r) = \bigcup_{k \in \mathbb{N}} C(r,k)$ has the desired property.
+```
+
+Suppose that $`Y \subset B(o, r2^k)` is a collection of points such that for
+all $`y, y' \in Y` with $`y \ne y'`, we have $`\rho(y,y') \ge r`. Then the
+balls $`B(y, r/2)` are pairwise disjoint and contained in
+$`B(o, r2^{k+1})`. If $`y \in B(o, r)`, then
+$`B(o, r2^{k+1}) \subset B(y, r2^{k+2})`. Thus, by the doubling property
+`doublingx`,
+$$`\mu(B(y, \frac{r}{2})) \ge 2^{-(k+2)a} \mu(B(o, r2^{k+1})).`
+Thus, we have
+$$`\mu(B(o, r2^{k+1})) \ge \sum_{y \in Y} \mu(B(y, \frac{r}{2})) \ge |Y| 2^{-(k+2)a} \mu(B(o, r2^{k+1})).`
+We conclude that $`|Y| \le 2^{(k+2)a}`. In particular, there exists a set
+$`Y` of maximal cardinality. Define $`C(r,k)` to be such a set.
+
+```tex
+% witness-label: covering-separable-space.part2
+    Suppose that $Y \subset B(o, r2^k)$ is a collection of points such that for all $y, y' \in Y$ with $y \ne y'$, we have $\rho(y,y') \ge r$. Then the balls $B(y, r/2)$ are pairwise disjoint and contained in $B(o, r2^{k+1})$. If $y \in B(o, r)$, then $B(o, r2^{k+1}) \subset B(y, r2^{k+2})$. Thus, by the doubling property \eqref{doublingx},
+    $$
+        \mu(B(y, \frac{r}{2})) \ge 2^{-(k+2)a} \mu(B(o, r2^{k+1}))\,.
+    $$
+    Thus, we have
+    $$
+        \mu(B(o, r2^{k+1})) \ge \sum_{y \in Y} \mu(B(y, \frac{r}{2})) \ge |Y| 2^{-(k+2)a} \mu(B(o, r2^{k+1}))\,.
+    $$
+    We conclude that $|Y| \le 2^{(k+2)a}$. In particular, there exists a set $Y$ of maximal cardinality. Define $C(r,k)$ to be such a set.
+```
+
+If $`x \in B(o, r2^k)` and $`x \notin C(r,k)`, then there must exist
+$`y \in C(r,k)` with $`\rho(x,y) < r`. Thus $`C(r,k)` has the desired
+property.
+
+```tex "covering-separable-space" (slot := proof)
+\begin{proof}
+    \leanok
+    It clearly suffices to construct finite collections $C(r,k)$ such that
+    $$
+        B(o, r2^k) \subset \bigcup_{c \in C(r,k)} B(c,r)\,,
+    $$
+    since then the collection $C(r) = \bigcup_{k \in \mathbb{N}} C(r,k)$ has the desired property.
+
+    Suppose that $Y \subset B(o, r2^k)$ is a collection of points such that for all $y, y' \in Y$ with $y \ne y'$, we have $\rho(y,y') \ge r$. Then the balls $B(y, r/2)$ are pairwise disjoint and contained in $B(o, r2^{k+1})$. If $y \in B(o, r)$, then $B(o, r2^{k+1}) \subset B(y, r2^{k+2})$. Thus, by the doubling property \eqref{doublingx},
+    $$
+        \mu(B(y, \frac{r}{2})) \ge 2^{-(k+2)a} \mu(B(o, r2^{k+1}))\,.
+    $$
+    Thus, we have
+    $$
+        \mu(B(o, r2^{k+1})) \ge \sum_{y \in Y} \mu(B(y, \frac{r}{2})) \ge |Y| 2^{-(k+2)a} \mu(B(o, r2^{k+1}))\,.
+    $$
+    We conclude that $|Y| \le 2^{(k+2)a}$. In particular, there exists a set $Y$ of maximal cardinality. Define $C(r,k)$ to be such a set.
+
+    If $x \in B(o, r2^k)$ and $x \notin C(r,k)$, then there must exist $y \in C(r,k)$ with $\rho(x,y) < r$. Thus $C(r,k)$ has the desired property.
+\end{proof}
+```
