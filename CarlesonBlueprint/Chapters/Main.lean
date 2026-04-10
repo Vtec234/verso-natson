@@ -12149,3 +12149,179 @@ follows.
     Using the definition \eqref{definekappa} of $\kappa$ and $a \ge 4$, the lemma follows.
 \end{proof}
 ```
+
+## Forests
+
+In this subsection, we complete the proof of `forest-operator` from the
+results of the previous subsections.
+
+```tex
+% witness-label: main.forests.1
+\subsection{Forests}
+In this subsection, we complete the proof of \Cref{forest-operator} from the results of the previous subsections.
+```
+
+Define an $`n`-row to be an $`n`-forest $`(\fU, \fT)`, i.e. satisfying
+conditions `forest1` - `forest6`, such that in addition the sets
+$`\scI(\fu)`, $`\fu \in \fU` are pairwise disjoint.
+
+```tex
+% witness-label: main.forests.2
+Define an $n$-row to be an $n$-forest $(\fU, \fT)$, i.e. satisfying conditions \eqref{forest1} - \eqref{forest6}, such that in addition the sets $\scI(\fu), \fu \in \fU$ are pairwise disjoint.
+```
+
+:::lemma_ "forest-row-decomposition" (lean := "TileStructure.Forest.rowDecomp, TileStructure.Forest.biUnion_rowDecomp, TileStructure.Forest.pairwiseDisjoint_rowDecomp")
+Let $`(\fU, \fT)` be an $`n`-forest. Then there exists a decomposition
+$$`\fU = \dot{\bigcup_{1 \le j \le 2^n}} \fU_j`
+such that for all $`j = 1, \dotsc, 2^n` the pair
+$`(\fU_j, \fT|_{\fU_j})` is an $`n`-row.
+:::
+
+```tex "forest-row-decomposition" (slot := statement)
+\begin{lemma}[forest row decomposition]
+    \label{forest-row-decomposition}
+    \leanok
+    \lean{TileStructure.Forest.rowDecomp, TileStructure.Forest.biUnion_rowDecomp,
+    TileStructure.Forest.pairwiseDisjoint_rowDecomp}
+    Let $(\fU, \fT)$ be an $n$-forest. Then there exists a decomposition
+    $$
+        \fU = \dot{\bigcup_{1 \le j \le 2^n}} \fU_j
+    $$
+    such that for all $j = 1, \dotsc, 2^n$ the pair $(\fU_j, \fT|_{\fU_j})$ is an $n$-row.
+\end{lemma}
+```
+
+Proof. Define recursively $`\fU_j` to be a maximal disjoint set of tiles
+$`\fu` in
+$$`\fU \setminus \bigcup_{j' < j} \fU_{j'}`
+with inclusion maximal $`\scI(\fu)`. Properties `forest1`, -`forest6` for
+$`(\fU_j, \fT|_{\fU_k})` follow immediately from the corresponding properties
+for $`(\fU, \fT)`, and the cubes $`\scI(\fu)`, $`\fu \in \fU_j` are disjoint
+by definition. The collections $`\fU_j` are also disjoint by definition.
+
+```tex
+% witness-label: forest-row-decomposition.part1
+    Define recursively $\fU_j$ to be a maximal disjoint set of tiles $\fu$ in
+    $$
+        \fU \setminus \bigcup_{j' < j} \fU_{j'}
+    $$
+    with inclusion maximal $\scI(\fu)$. Properties \eqref{forest1}, -\eqref{forest6} for $(\fU_j, \fT|_{\fU_k})$ follow immediately from the corresponding properties for $(\fU, \fT)$, and the cubes $\scI(\fu), \fu \in \fU_j$ are disjoint by definition. The collections $\fU_j$ are also disjoint by definition.
+```
+
+Now we show by induction on $`j` that each point is contained in at most
+$`2^n - j` cubes $`\scI(\fu)` with
+$`\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}`. This implies that
+$`\bigcup_{j = 1}^{2^n} \fU_j = \fU`, which completes the proof of the Lemma.
+For $`j = 0` each point is contained in at most $`2^n` cubes by `forest3`. For
+larger $`j`, if $`x` is contained in any cube $`\scI(\fu)` with
+$`\fu \in \fU \setminus \bigcup_{j' < j} \fU_{j'}`, then it is contained in a
+maximal such cube. Thus it is contained in a cube in $`\scI(\fu)` with
+$`\fu \in \fU_j`. Thus the number
+$`\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}` with
+$`x\in \scI(\fu)` is zero, or is less than the number of
+$`\fu \in \fU \setminus \bigcup_{j' \le j-1} \fU_{j'}` with
+$`x \in \scI(\fu)` by at least one.
+
+```tex
+% witness-label: forest-row-decomposition.part2
+    Now we show by induction on $j$ that each point is contained in at most $2^n - j$ cubes $\scI(\fu)$ with $\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}$. This implies that $\bigcup_{j = 1}^{2^n} \fU_j = \fU$, which completes the proof of the Lemma. For $j = 0$ each point is contained in at most $2^n$ cubes by \eqref{forest3}. For larger $j$, if $x$ is contained in any cube $\scI(\fu)$ with $\fu \in \fU \setminus \bigcup_{j' < j} \fU_{j'}$, then it is contained in a maximal such cube. Thus it is contained in a cube in $\scI(\fu)$ with $\fu \in \fU_j$. Thus the number $\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}$ with $x\in \scI(\fu)$ is zero, or is less than the number of $\fu \in \fU \setminus \bigcup_{j' \le j-1} \fU_{j'}$ with $x \in \scI(\fu)$ by at least one.
+```
+
+```tex "forest-row-decomposition" (slot := proof)
+\begin{proof}
+    \leanok
+    Define recursively $\fU_j$ to be a maximal disjoint set of tiles $\fu$ in
+    $$
+        \fU \setminus \bigcup_{j' < j} \fU_{j'}
+    $$
+    with inclusion maximal $\scI(\fu)$. Properties \eqref{forest1}, -\eqref{forest6} for $(\fU_j, \fT|_{\fU_k})$ follow immediately from the corresponding properties for $(\fU, \fT)$, and the cubes $\scI(\fu), \fu \in \fU_j$ are disjoint by definition. The collections $\fU_j$ are also disjoint by definition.
+
+    Now we show by induction on $j$ that each point is contained in at most $2^n - j$ cubes $\scI(\fu)$ with $\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}$. This implies that $\bigcup_{j = 1}^{2^n} \fU_j = \fU$, which completes the proof of the Lemma. For $j = 0$ each point is contained in at most $2^n$ cubes by \eqref{forest3}. For larger $j$, if $x$ is contained in any cube $\scI(\fu)$ with $\fu \in \fU \setminus \bigcup_{j' < j} \fU_{j'}$, then it is contained in a maximal such cube. Thus it is contained in a cube in $\scI(\fu)$ with $\fu \in \fU_j$. Thus the number $\fu \in \fU \setminus \bigcup_{j' \le j} \fU_{j'}$ with $x\in \scI(\fu)$ is zero, or is less than the number of $\fu \in \fU \setminus \bigcup_{j' \le j-1} \fU_{j'}$ with $x \in \scI(\fu)$ by at least one.
+\end{proof}
+```
+
+We pick a decomposition of the forest $`(\fU, \fT)` into $`2^n` $`n`-rows
+$$`(\fU_j, \fT_j) := (\fU_j, \fT|_{\fU_j})`
+as in `forest-row-decomposition`. To save some space in the proofs of the
+remaining lemmas in this section we will write
+$$`T_{\fC} = \sum_{\fp \in \fC} T_{\fp},\qquad T_{\fC}^* = \sum_{\fp \in \fC} T_{\fp}^*,`
+$$`T_{\mathfrak{R}_j} = \sum_{\fu \in \fU_j} T_{\fT(\fu)},\qquad T_{\mathfrak{R}_j}^* = \sum_{\fu \in \fU_j} T_{\fT(\fu)}^*.`
+
+```tex
+% witness-label: main.forests.3
+We pick a decomposition of the forest $(\fU, \fT)$ into $2^n$ $n$-rows
+\begin{equation*}
+(\fU_j, \fT_j) := (\fU_j, \fT|_{\fU_j})
+\end{equation*}
+as in \Cref{forest-row-decomposition}. To save some space in the proofs of the remaining lemmas in this section we will write
+    $$
+        T_{\fC} = \sum_{\fp \in \fC} T_{\fp},\qquad T_{\fC}^* = \sum_{\fp \in \fC} T_{\fp}^*,
+    $$
+    $$
+        T_{\mathfrak{R}_j} = \sum_{\fu \in \fU_j} T_{\fT(\fu)},\qquad T_{\mathfrak{R}_j}^* = \sum_{\fu \in \fU_j} T_{\fT(\fu)}^*.
+    $$
+```
+
+:::lemma_ "row-bound" (lean := "TileStructure.Forest.row_bound, TileStructure.Forest.indicator_row_bound")
+{uses "adjoint-tile-support"}[]
+{uses "adjoint-tree-estimate"}[]
+For each $`1 \le j \le 2^n` and each bounded $`g` supported on $`G` we have
+$$`\left\| T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{182a^3} 2^{-n/2} \|g\|_2`
+and
+$$`\left\| \mathbf{1}_F T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{283a^3} 2^{-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \|g\|_2.`
+:::
+
+```tex "row-bound" (slot := statement)
+\begin{lemma}[row bound]
+    \label{row-bound}
+    \leanok
+    \lean{TileStructure.Forest.row_bound, TileStructure.Forest.indicator_row_bound}
+    \uses{adjoint-tile-support,adjoint-tree-estimate}
+    For each $1 \le j \le 2^n$ and each bounded $g$ supported on $G$ we have
+    \begin{equation}
+        \label{eq-row-bound-1}
+        \left\| T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{182a^3} 2^{-n/2} \|g\|_2
+    \end{equation}
+    and
+    \begin{equation}
+        \label{eq-row-bound-2}
+        \left\| \mathbf{1}_F T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{283a^3} 2^{-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \|g\|_2\,.
+    \end{equation}
+\end{lemma}
+```
+
+Proof. Since for each $`j` the top cubes $`\scI(\fu)`, $`\fu \in \fU_j` are
+disjoint, we have for all bounded $`g` supported on $`G` by
+`adjoint-tile-support`
+$$`\left\|\mathbf{1}_F \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2^2 = \left\|\mathbf{1}_F \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} \mathbf{1}_{\scI(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g\right\|_2^2`
+$$`= \sum_{\fu \in \fU_j} \int_{\scI(\fu)} \left| \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g\right|^2 \, \mathrm{d}\mu \le \sum_{\fu \in \fU_j} \left\|\mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_G \mathbf{1}_{\scI(\fu)}  g\right\|_2^2.`
+Applying `adjoint-tree-estimate` and the density assumption `forest4`, then
+taking square roots, we obtain
+$$`\left\| \mathbf{1}_F T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{282a^3} 2^{(4a+1-n)/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \left( \sum_{\fu \in \fU_j} \left\| \mathbf{1}_{\scI(\fu)} g\right\|_2^2 \right)^{1/2}.`
+Again by disjointedness of the cubes $`\scI(\fu)`, this is estimated by
+$$`2^{282a^3} 2^{(4a+1-n)/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \|g\|_2.`
+Thus `eq-row-bound-2` follows, since $`a \ge 4`. The proof of
+`eq-row-bound-1` is the same up to replacing $`F` by $`X`.
+
+```tex "row-bound" (slot := proof)
+\begin{proof}
+    \leanok
+    Since for each $j$ the top cubes $\scI(\fu)$, $\fu \in \fU_j$ are disjoint, we have for all bounded $g$ supported on $G$ by \Cref{adjoint-tile-support}
+    $$
+        \left\|\mathbf{1}_F \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2^2 = \left\|\mathbf{1}_F \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} \mathbf{1}_{\scI(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g\right\|_2^2
+    $$
+    $$
+        = \sum_{\fu \in \fU_j} \int_{\scI(\fu)} \left| \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_{\scI(\fu)} g\right|^2 \, \mathrm{d}\mu
+        \le \sum_{\fu \in \fU_j} \left\|\mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_G \mathbf{1}_{\scI(\fu)}  g\right\|_2^2\,.
+    $$
+    Applying \Cref{adjoint-tree-estimate} and the density assumption \eqref{forest4}, then taking square roots, we obtain
+    $$
+        \left\| \mathbf{1}_F T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{282a^3} 2^{(4a+1-n)/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \left( \sum_{\fu \in \fU_j} \left\| \mathbf{1}_{\scI(\fu)} g\right\|_2^2 \right)^{1/2}\,.
+    $$
+    Again by disjointedness of the cubes $\scI(\fu)$, this is estimated by
+    $$
+        2^{282a^3} 2^{(4a+1-n)/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \|g\|_2\,.
+    $$
+    Thus \eqref{eq-row-bound-2} follows, since $a \ge 4$. The proof of \eqref{eq-row-bound-1} is the same up to replacing $F$ by $X$.
+\end{proof}
+```
