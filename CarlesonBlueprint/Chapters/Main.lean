@@ -12480,3 +12480,98 @@ This is a contradiction, and the lemma follows.
     Since $Z \ge 3$ by \eqref{defineZ}, it follows that $\fcc(\fp') \notin B_{\fp}(\fcc(\fp), 1)$, so $\Omega(\fp') \not\subset \Omega(\fp)$ by \eqref{eq-freq-comp-ball}. Hence, by \eqref{eq-freq-dyadic}, $\Omega(\fp) \cap \Omega(\fp') = \emptyset$. But if $x \in E(\fp) \cap E(\fp')$ then $Q(x) \in \Omega(\fp) \cap \Omega(\fp')$. This is a contradiction, and the lemma follows.
 \end{proof}
 ```
+
+Now we prove `forest-operator`.
+
+```tex
+% witness-label: main.forests.5
+Now we prove \Cref{forest-operator}.
+```
+
+Proof of `forest-operator`. By `definetp*`, we have for each $`j`
+$$`T_{\mathfrak{R}_j}^*g = \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g = \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_{E_j} g = T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g.`
+Hence, by `forest-row-decomposition` and the triangle inequality,
+$$`\left\|\sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T^*_{\fp} g\right\|_2^2 = \left\|\sum_{j = 1}^{2^n} T^*_{\mathfrak{R}_{j}} g\right\|_2^2 = \left\|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right\|_2^2`
+$$`= \int_X \left|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right|^2 \, \mathrm{d}\mu`
+$$`\le \sum_{j=1}^{2^n} \|T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g\|_2^2 + \sum_{j =1}^{2^n} \sum_{\substack{j' = 1\\j' \ne j}}^{2^n} \left| \int_X \overline{ T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g} T_{\mathfrak{R}_{j'}}^* \mathbf{1}_{E_{j'}} g \right| \, \mathrm{d}\mu\,.
+We use `row-bound` to estimate each term in the first sum, and
+`row-correlation` to bound each term in the second sum:
+$$`\le 2^{566a^3-n} \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2^2 + 2^{876a^3-4n}\sum_{j=1}^{2^n}\sum_{j' = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2 \|\mathbf{1}_{E_{j'}}g\|_2.`
+By Cauchy-Schwarz in the second two sums, this is at most
+$$`2^{876a^3} (2^{-n} + 2^{n}2^{-4n}) \sum_{j = 1}^n \|\mathbf{1}_{E_j} g\|_2^2,`
+and by disjointedness of the sets $`E_j`, this is at most
+$$`2^{877a^3 - n} \|g\|_2^2.`
+Taking square roots, it follows that for all $`g`
+$$`\left\|\sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{439a^3-\frac{n}{2}} \|g\|_2.`
+On the other hand, we have by disjointedness of the sets $`E_j` from
+`disjoint-row-support` and the triangle inequality
+$$`\left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2^2 = \left\|\sum_{j=1}^{2^n} \mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\right\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2.`
+Now with $`|f| \le \mathbf{1}_F` and `row-bound` we obtain
+$$`\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2^2 = \left| \int_X \overline{\mathbf{1}_G T_{\mathfrak{R}_j} f} T_{\mathfrak{R}_j} f \right| = \left| \int_X \overline{T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f} \mathbf{1}_F f \right|`
+$$`\le \|f\|_2 \| \mathbf{1}_F T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \le 2^{283a^3-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \|f\|_2.`
+Dividing this last inequality by the finite
+$`\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2`, substituting back and taking
+square roots we get
+$$`\left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2 \le 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} 2^{-\frac{n}{2}} (\sum_{j = 1}^{2^n} \|f\|_2^2)^{\frac{1}{2}}`
+$$`= 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} \|f\|_2.`
+`forest-operator` follows by taking the product of the
+$`(2 - \frac{2}{q})`-th power of `eq-forest-bound-1` and the
+$`(\frac{2}{q} - 1)`-st power of `eq-forest-bound-2`.
+
+```tex "forest-operator" (slot := proof)
+\begin{proof}[Proof of \Cref{forest-operator}]
+    \leanok
+    \proves{forest-operator}
+    By \eqref{definetp*}, we have for each $j$
+    $$
+        T_{\mathfrak{R}_j}^*g = \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g = \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^* \mathbf{1}_{E_j} g = T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g\,.
+    $$
+    Hence, by \Cref{forest-row-decomposition} and the triangle inequality,
+    $$
+        \left\|\sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T^*_{\fp} g\right\|_2^2 = \left\|\sum_{j = 1}^{2^n} T^*_{\mathfrak{R}_{j}} g\right\|_2^2 = \left\|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right\|_2^2
+    $$
+    $$
+        = \int_X \left|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right|^2 \, \mathrm{d}\mu
+    $$
+    $$
+        \le \sum_{j=1}^{2^n} \|T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g\|_2^2 + \sum_{j =1}^{2^n} \sum_{\substack{j' = 1\\j' \ne j}}^{2^n} \left| \int_X \overline{ T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g} T_{\mathfrak{R}_{j'}}^* \mathbf{1}_{E_{j'}} g \right| \, \mathrm{d}\mu\,.
+    $$
+    We use \Cref{row-bound} to estimate each term in the first sum, and \Cref{row-correlation} to bound each term in the second sum:
+    $$
+        \le 2^{566a^3-n} \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2^2 + 2^{876a^3-4n}\sum_{j=1}^{2^n}\sum_{j' = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2 \|\mathbf{1}_{E_{j'}}g\|_2\,.
+    $$
+    By Cauchy-Schwarz in the second two sums, this is at most
+    $$
+        2^{876a^3} (2^{-n} + 2^{n}2^{-4n}) \sum_{j = 1}^n \|\mathbf{1}_{E_j} g\|_2^2\,,
+    $$
+    and by disjointedness of the sets $E_j$, this is at most
+    $$
+        2^{877a^3 - n} \|g\|_2^2\,.
+    $$
+    Taking square roots, it follows that for all $g$
+    \begin{equation}
+        \label{eq-forest-bound-1}
+        \left\|\sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{439a^3-\frac{n}{2}} \|g\|_2\,.
+    \end{equation}
+    On the other hand, we have by disjointedness of the sets $E_j$ from \Cref{disjoint-row-support} and the triangle inequality
+    $$
+        \left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2^2 = \left\|\sum_{j=1}^{2^n} \mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\right\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2\,.
+    $$
+    Now with $|f| \le \mathbf{1}_F$ and \Cref{row-bound} we obtain
+    $$
+        \| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2^2 = \left| \int_X \overline{\mathbf{1}_G T_{\mathfrak{R}_j} f} T_{\mathfrak{R}_j} f \right| = \left| \int_X \overline{T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f} \mathbf{1}_F f \right|
+    $$
+    $$
+        \le \|f\|_2 \| \mathbf{1}_F T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \le 2^{283a^3-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \|f\|_2.
+    $$
+    Dividing this last inequality by the finite $\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2$, substituting back and taking square roots we get
+    $$
+        \left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2 \le 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} 2^{-\frac{n}{2}} (\sum_{j = 1}^{2^n} \|f\|_2^2)^{\frac{1}{2}}
+    $$
+    \begin{equation}
+        \label{eq-forest-bound-2}
+        = 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} \|f\|_2\,.
+    \end{equation}
+    \Cref{forest-operator} follows by taking the product of the $(2 - \frac{2}{q})$-th power of \eqref{eq-forest-bound-1} and the $(\frac{2}{q} - 1)$-st power of \eqref{eq-forest-bound-2}.
+\end{proof}
+```
