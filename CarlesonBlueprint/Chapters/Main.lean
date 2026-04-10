@@ -2985,7 +2985,7 @@ where we have used $`D>5` and $`k''<k'`. We conclude $`(y',k'|y,k)`.
 \end{proof}
 ```
 
-:::lemma_ "small-boundary" (lean := "small_boundary")
+:::lemma_ "small-boundary" (lean := "_root_.small_boundary")
 {uses "transitive-boundary"}[]
 Let $`K = 2^{4a+1}`. For each $`-S+K\le k\le S` and $`y\in Y_k` we have
 $$`\sum_{z\in Y_{k-K}: (z,k-K|y,k)}\mu(I_3(z,k-K)) \le \frac 12 \mu(I_3(y,k)).`
@@ -8694,7 +8694,8 @@ respectively in `first-tree-pointwise`, `second-tree-pointwise` and
 {uses "kernel-summand"}[]
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
-$$`\eqref{eq-term-A} \le 10 \cdot 2^{104a^3} M_{\mathcal{B}, 1}P_{\mathcal{J}(\fT(\fu))}|f|(x').`
+the estimate `eq-term-A`:
+$$`10 \cdot 2^{104a^3} M_{\mathcal{B}, 1}P_{\mathcal{J}(\fT(\fu))}|f|(x').`
 :::
 
 ```tex "first-tree-pointwise" (slot := statement)
@@ -8750,8 +8751,8 @@ $$`\le 5 \cdot 2^{4a} 2^{s - \overline{\sigma}(\fu, x)}.`
     $$
 ```
 
-Using `eq-Ks-size`, it follows that
-$$`\eqref{eq-term-A} \le 5\cdot 2^{103a^3} \sum_{s\in\sigma(x)}2^{s - \overline{\sigma}(\fu, x)} \frac{1}{\mu(B(x,D^s))}\int_{B(x,0.5D^{s})}|f(y)|\,\mathrm{d}\mu(y).`
+Using `eq-Ks-size`, it follows that `eq-term-A` is bounded by
+$$`5\cdot 2^{103a^3} \sum_{s\in\sigma(x)}2^{s - \overline{\sigma}(\fu, x)} \frac{1}{\mu(B(x,D^s))}\int_{B(x,0.5D^{s})}|f(y)|\,\mathrm{d}\mu(y).`
 By `eq-J-partition`, the collection $`\mathcal{J}` is a partition of
 $`\bigcup_{I \in \mathcal{D}} I`, so this is estimated by
 $$`5\cdot 2^{103a^3} \sum_{s\in\sigma(x)}2^{s - \overline{\sigma}(\fu, x)} \frac{1}{\mu(B(x,D^s))}\sum_{\substack{J \in \mathcal{J}(\fT(\fu))\\J \cap B(x, 0.5D^s) \ne \emptyset} }\int_{J}|f(y)|\,\mathrm{d}\mu(y).`
@@ -10917,10 +10918,12 @@ For all $`x \in \scI(\fp)`, we have by `doublingx` that
 $$`\mu(B(x, D^{\ps(\fp)})) \ge 2^{-3a} \mu(B(\pc(\fp), 4D^{\ps(\fp)})).`
 Combining the above with `eq-Ks-size`, `eq-Ks-smooth` and
 `eq-lem-Tile-holder-im1`, we obtain
-$$`\eqref{T*Holder1b}+\eqref{T*Holder1} \le \frac{2^{3a}}{\mu(B(\pc(\fp), 4D^{\ps(\fp)}))} \int_{E(\fp)}|g(x)| \, \mathrm{d}\mu(x) \times
+that the sum of the terms in `T*Holder1b` and `T*Holder1` is bounded by
+$$`\frac{2^{3a}}{\mu(B(\pc(\fp), 4D^{\ps(\fp)}))} \int_{E(\fp)}|g(x)| \, \mathrm{d}\mu(x) \times
             (2^{102a^3} \cdot 10 \cdot 2^{6a} \left(\frac{\rho(y,y')}{ D^{\ps(\fp)}}\right)^{1/a} + 2^{127a^3} \left(\frac{\rho(y,y')}{D^{\ps(\fp)}}\right)^{1/a})`$$
 Since $`\rho(y,y') \le 10 D^{\ps(\fp)}`, we conclude
-$$`\eqref{T*Holder1b}+\eqref{T*Holder1} \le \frac{2^{128a^3}}{\mu(B(\pc(\fp), 4D^{\ps(\fp)}))} \left(\frac{\rho(y,y')}{D^{\ps(\fp)}}\right)^{1/a} \int_{E(\fp)}|g(x)| \, \mathrm{d}\mu(x).`
+that the sum of the terms in `T*Holder1b` and `T*Holder1` is bounded by
+$$`\frac{2^{128a^3}}{\mu(B(\pc(\fp), 4D^{\ps(\fp)}))} \left(\frac{\rho(y,y')}{D^{\ps(\fp)}}\right)^{1/a} \int_{E(\fp)}|g(x)| \, \mathrm{d}\mu(x).`
 
 ```tex
 % witness-label: Holder-correlation-tile.part2
@@ -11541,7 +11544,8 @@ As $`h_J` is supported in $`\scI(\fu_1)`, we can assume without loss of
 generality that $`y' \in \scI(\fu_1)`. If $`y \notin \scI(\fu_1)`, then
 `eq-h-Lip-1` vanishes. If $`y \in \scI(\fu_1)` then we have by `eq-pao-3`,
 `global-tree-control-1` and `global-tree-control-2`
-$$`\eqref{eq-h-Lip-1} \le 2^{484a^3+4a+3} \frac{\rho(y,y')}{D^{s(J)}} P,`
+that `eq-h-Lip-1` is bounded by
+$$`2^{484a^3+4a+3} \frac{\rho(y,y')}{D^{s(J)}} P,`
 where $`P` denotes the product on the right hand side of `hHolder`.
 
 ```tex
@@ -11555,7 +11559,8 @@ where $`P` denotes the product on the right hand side of `hHolder`.
 ```
 
 By `eq-pao-2`, `global-tree-control-1` and `global-tree-control-2`, we have
-$$`\eqref{eq-h-Lip-2} \le 2^{257a^3+4a+1} \left(\frac{\rho(y,y')}{D^{s(J)}}\right)^{1/a} P.`
+the bound
+$$`2^{257a^3+4a+1} \left(\frac{\rho(y,y')}{D^{s(J)}}\right)^{1/a} P.`
 
 ```tex
 % witness-label: Holder-correlation-tree.part3
@@ -11566,7 +11571,8 @@ $$`\eqref{eq-h-Lip-2} \le 2^{257a^3+4a+1} \left(\frac{\rho(y,y')}{D^{s(J)}}\righ
 ```
 
 By `eq-pao-2`, and twice `global-tree-control-1`, we have
-$$`\eqref{eq-h-Lip-3} \le 2^{256a^3+8a+5} \left(\frac{\rho(y,y')}{D^{s(J)}}\right)^{1/a} P.`
+the bound
+$$`2^{256a^3+8a+5} \left(\frac{\rho(y,y')}{D^{s(J)}}\right)^{1/a} P.`
 Using that $`\rho(y,y') \le 32D^{s(J)}` and $`a \ge 4`, the lemma follows.
 
 ```tex
@@ -11684,8 +11690,9 @@ Now we are ready to prove `correlation-distant-tree-parts`.
     Now we are ready to prove \Cref{correlation-distant-tree-parts}.
 ```
 
-Proof of `correlation-distant-tree-parts`. We have
-$$`\eqref{eq-lhs-big-sep-tree} = \left| \int_{X} T_{\fT(\fu_1)}^* g_1 \overline{T_{\fT(\fu_2) \cap \mathfrak{S}}^* g_2 }\right|.`
+Proof of `correlation-distant-tree-parts`. The left-hand side of
+`eq-lhs-big-sep-tree` equals
+$$`\left| \int_{X} T_{\fT(\fu_1)}^* g_1 \overline{T_{\fT(\fu_2) \cap \mathfrak{S}}^* g_2 }\right|.`
 By `adjoint-tile-support`, the right hand side is supported in
 $`\scI(\fu_1)`. Using `eq-pao-1` of `Lipschitz-partition-unity` and the
 definition `def-hj` of $`h_J`, we thus have
@@ -11703,7 +11710,8 @@ $$`\mu(B(J)) \prod_{j=1}^2 (\inf_{B^\circ{}(J)} |T_{\fT(\fu_j)}^* g_j| + \inf_J 
 $$`\le 2^{6a} \int_{B^\circ{}(J)} \prod_{j=1}^2 ( |T_{\fT(\fu_j)}^* g_j|(x) + M_{\mathcal{B},1} g_j(x)) \, \mathrm{d}\mu(x)`
 $$`\le 2^{6a} \int_J \prod_{j=1}^2 ( |T_{\fT(\fu_j)}^* g_j|(x) + M_{\mathcal{B},1} g_j(x)) \, \mathrm{d}\mu(x).`
 Summing over $`J \in \mathcal{J}'`, we obtain
-$$`\eqref{eq-big-sep-1} \le 2^{499a^3} 2^{-Zn/(4a^2 + 2a^3)} \int_X \prod_{j=1}^2 ( |T_{\fT(\fu_j)}^* g_j|(x) + M_{\mathcal{B},1} g_j(x)) \, \mathrm{d}\mu(x).`
+the estimate `eq-big-sep-1`:
+$$`2^{499a^3} 2^{-Zn/(4a^2 + 2a^3)} \int_X \prod_{j=1}^2 ( |T_{\fT(\fu_j)}^* g_j|(x) + M_{\mathcal{B},1} g_j(x)) \, \mathrm{d}\mu(x).`
 Applying the Cauchy-Schwarz inequality, `correlation-distant-tree-parts`
 follows.
 
@@ -11825,7 +11833,8 @@ We prove this lemma below. First, we deduce `correlation-near-tree-parts`.
 
 Proof of `correlation-near-tree-parts`. By `tree-projection-estimate` and
 `adjoint-tile-support`, we have
-$$`\eqref{eq-lhs-small-sep-tree} \le 2^{130a^3} \|P_{\mathcal{L}(\fT(\fu_1))} |\mathbf{1}_{\scI(\fu_1)}g_1| \|_2 \|P_{\mathcal{J}(\fT(\fu_1) )}|\mathbf{1}_{\scI(\fu_1)} T_{\fT(\fu_2) \setminus \mathfrak{S}}^* g_2|\|_2.`
+that the left-hand side of `eq-lhs-small-sep-tree` is bounded by
+$$`2^{130a^3} \|P_{\mathcal{L}(\fT(\fu_1))} |\mathbf{1}_{\scI(\fu_1)}g_1| \|_2 \|P_{\mathcal{J}(\fT(\fu_1) )}|\mathbf{1}_{\scI(\fu_1)} T_{\fT(\fu_2) \setminus \mathfrak{S}}^* g_2|\|_2.`
 It follows from the definition of the projection operator $`P` and Jensen's
 inequality that
 $$`\|P_{\mathcal{L}(\fT(\fu_1))} |g_1\mathbf{1}_{\scI(\fu_1)}| \|_2 \le \|g_1 \mathbf{1}_{\scI(\fu_1)}\|_2.`
@@ -12493,7 +12502,7 @@ $$`T_{\mathfrak{R}_j}^*g = \sum_{\fu \in \fU_j} \sum_{\fp \in \fT(\fu)} T_{\fp}^
 Hence, by `forest-row-decomposition` and the triangle inequality,
 $$`\left\|\sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T^*_{\fp} g\right\|_2^2 = \left\|\sum_{j = 1}^{2^n} T^*_{\mathfrak{R}_{j}} g\right\|_2^2 = \left\|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right\|_2^2`
 $$`= \int_X \left|\sum_{j=1}^{2^n} T^*_{\mathfrak{R}_{j}} \mathbf{1}_{E_j} g\right|^2 \, \mathrm{d}\mu`
-$$`\le \sum_{j=1}^{2^n} \|T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g\|_2^2 + \sum_{j =1}^{2^n} \sum_{\substack{j' = 1\\j' \ne j}}^{2^n} \left| \int_X \overline{ T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g} T_{\mathfrak{R}_{j'}}^* \mathbf{1}_{E_{j'}} g \right| \, \mathrm{d}\mu\,.
+$$`\le \sum_{j=1}^{2^n} \|T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g\|_2^2 + \sum_{j =1}^{2^n} \sum_{\substack{j' = 1\\j' \ne j}}^{2^n} \left| \int_X \overline{ T_{\mathfrak{R}_j}^* \mathbf{1}_{E_j} g} T_{\mathfrak{R}_{j'}}^* \mathbf{1}_{E_{j'}} g \right| \, \mathrm{d}\mu\, .`
 We use `row-bound` to estimate each term in the first sum, and
 `row-correlation` to bound each term in the second sum:
 $$`\le 2^{566a^3-n} \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2^2 + 2^{876a^3-4n}\sum_{j=1}^{2^n}\sum_{j' = 1}^{2^n} \|\mathbf{1}_{E_j} g\|_2 \|\mathbf{1}_{E_{j'}}g\|_2.`
@@ -12507,17 +12516,14 @@ On the other hand, we have by disjointedness of the sets $`E_j` from
 `disjoint-row-support` and the triangle inequality
 $$`\left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2^2 = \left\|\sum_{j=1}^{2^n} \mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\right\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_{E_j} \mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2 \le \sum_{j = 1}^{2^n} \|\mathbf{1}_G T_{\mathfrak{R}_{j}} f\|_2^2.`
 Now with $`|f| \le \mathbf{1}_F` and `row-bound` we obtain
-$$`\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2^2 = \left| \int_X \overline{\mathbf{1}_G T_{\mathfrak{R}_j} f} T_{\mathfrak{R}_j} f \right| = \left| \int_X \overline{T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f} \mathbf{1}_F f \right|`
-$$`\le \|f\|_2 \| \mathbf{1}_F T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \le 2^{283a^3-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \|f\|_2.`
+$`\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2^2 = \left| \int_X \overline{\mathbf{1}_G T_{\mathfrak{R}_j} f} T_{\mathfrak{R}_j} f \right| = \left| \int_X \overline{T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f} \mathbf{1}_F f \right| \le \|f\|_2 \| \mathbf{1}_F T_{\mathfrak{R}_j}^* \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \le 2^{283a^3-n/2} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{1/2} \| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2 \|f\|_2.`
 Dividing this last inequality by the finite
 $`\| \mathbf{1}_G T_{\mathfrak{R}_j} f \|_2`, substituting back and taking
 square roots we get
-$$`\left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2 \le 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} 2^{-\frac{n}{2}} (\sum_{j = 1}^{2^n} \|f\|_2^2)^{\frac{1}{2}}`
-$$`= 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} \|f\|_2.`
+$`\left\|\mathbf{1}_G \sum_{\fu \in \fU} \sum_{\fp \in \fT(\fu)} T_{\fp} f\right\|_2 \le 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} 2^{-\frac{n}{2}} (\sum_{j = 1}^{2^n} \|f\|_2^2)^{\frac{1}{2}} = 2^{283a^3} \dens_2(\bigcup_{\fu\in \fU}\fT(\fu))^{\frac{1}{2}} \|f\|_2.`
 `forest-operator` follows by taking the product of the
 $`(2 - \frac{2}{q})`-th power of `eq-forest-bound-1` and the
 $`(\frac{2}{q} - 1)`-st power of `eq-forest-bound-2`.
-
 ```tex "forest-operator" (slot := proof)
 \begin{proof}[Proof of \Cref{forest-operator}]
     \leanok

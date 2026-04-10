@@ -18,6 +18,8 @@ proof = "proof"
 proposition = "theorem"
 
 [harness]
+native_warnings = true
+strict_external_code = true
 non_port_chapters = [
   "CarlesonBlueprint/Chapters/Introduction.lean",
   "CarlesonBlueprint/Chapters/PortingStatus.lean",
