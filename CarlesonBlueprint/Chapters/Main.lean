@@ -13148,3 +13148,501 @@ property.
     If $x \in B(o, r2^k)$ and $x \notin C(r,k)$, then there must exist $y \in C(r,k)$ with $\rho(x,y) < r$. Thus $C(r,k)$ has the desired property.
 \end{proof}
 ```
+
+We turn to the proof of `Hardy-Littlewood`.
+
+```tex
+% witness-label: main.hlm.3
+We turn to the proof of \Cref{Hardy-Littlewood}.
+```
+
+Proof of `Hardy-Littlewood`. Let the collection $`\mathcal{B}` be given. We
+first show `eq-besico`.
+
+```tex
+% witness-label: Hardy-Littlewood.part0a
+Let the collection $\mathcal{B}$ be given.
+We first show \eqref{eq-besico}.
+```
+
+We recursively choose a finite sequence $`B_i\in \mathcal{B}` for $`i\ge 0` as
+follows. Assume $`B_{i'}` is already chosen for $`0\le i'<i`. If there exists
+a ball $`B_{i}\in \mathcal{B}` so that $`B_{i}` is disjoint from all
+$`B_{i'}` with $`0\le i'<i`, then choose such a ball
+$`B_i=B(x_i,r_i)` with maximal $`r_i`.
+
+```tex
+% witness-label: Hardy-Littlewood.part0b
+We recursively choose a finite sequence $B_i\in \mathcal{B}$
+for $i\ge 0$ as follows. Assume $B_{i'}$
+is already chosen for $0\le i'<i$.
+If there exists a ball $B_{i}\in \mathcal{B}$ so that $B_{i}$
+is disjoint from all $B_{i'}$
+with $0\le i'<i$, then choose
+such a ball $B_i=B(x_i,r_i)$ with maximal $r_i$.
+```
+
+If there is no such ball, stop the selection and set $`i'':=i`.
+
+```tex
+% witness-label: Hardy-Littlewood.part0c
+If there is no such ball, stop the selection and set
+$i'':=i$.
+```
+
+By disjointedness of the chosen balls and since $`0 \le u`, we have
+$$`\sum_{0\le i<i''}\int_{B_i} u(x)\, d\mu(x) \le \int_X u(x)\, d\mu(x).`
+By `eq-ball-assumption`, we conclude
+$$`\lambda \sum_{0\le i<i''}\mu(B_i) \le \int_X u(x)\, d\mu(x).`
+
+```tex
+% witness-label: Hardy-Littlewood.part1
+\begin{proof}[Proof of \Cref{Hardy-Littlewood}]
+\leanok
+\proves{Hardy-Littlewood}
+Let the collection $\mathcal{B}$ be given.
+We first show \eqref{eq-besico}.
+
+We recursively choose a finite sequence $B_i\in \mathcal{B}$
+for $i\ge 0$ as follows. Assume $B_{i'}$
+is already chosen for $0\le i'<i$.
+If there exists a ball $B_{i}\in \mathcal{B}$ so that $B_{i}$
+is disjoint from all $B_{i'}$
+with $0\le i'<i$, then choose
+such a ball $B_i=B(x_i,r_i)$ with maximal $r_i$.
+
+If there is no such ball, stop the selection and set
+$i'':=i$.
+
+By disjointedness of the chosen balls and since $0 \le u$, we have
+\begin{equation}
+\sum_{0\le i<i''}\int_{B_i} u(x)\, d\mu(x) \le \int_X u(x)\, d\mu(x)\, .
+\end{equation}
+By \eqref{eq-ball-assumption}, we conclude
+\begin{equation}\label{eqbes1}
+\lambda \sum_{0\le i<i''}\mu(B_i)
+\le \int_X u(x)\, d\mu(x)\, .
+\end{equation}
+```
+
+Let $`x\in \bigcup \mathcal{B}`. Choose a ball $`B'=B(x',r')\in \mathcal{B}`
+such that $`x\in B'`. If $`B'` is one of the selected balls, then
+$$`x\in \bigcup _{0\le i< i''}B_i\subset \bigcup _{0\le i< i''}B(x_i,3r_i).`
+If $`B'` is not one of the selected balls, then as it is not selected at time
+$`i''`, there is a selected ball $`B_i` with $`B'\cap B_i\neq \emptyset`.
+Choose such $`B_i` with minimal index $`i`. As $`B'` is therefore disjoint
+from all balls $`B_{i'}` with $`i'<i` and as it was not selected in place of
+$`B_i`, we have $`r_i\ge r'`.
+
+```tex
+% witness-label: Hardy-Littlewood.part1b
+Let $x\in \bigcup \mathcal{B}$.
+Choose a ball $B'=B(x',r')\in \mathcal{B}$
+such that $x\in B'$.
+If $B'$ is one of the selected balls, then
+\begin{equation}\label{3rone}
+    x\in \bigcup _{0\le i< i''}B_i\subset \bigcup _{0\le i< i''}B(x_i,3r_i)\, .
+\end{equation}
+If $B'$ is not one of the selected balls, then as it is not selected at time $i''$, there is a selected ball $B_i$ with
+$B'\cap B_i\neq \emptyset$.
+Choose such $B_i$ with minimal index $i$. As $B'$ is therefore disjoint from all
+balls $B_{i'}$ with $i'<i$ and
+as it was not selected in place of $B_i$, we have $r_i\ge r'$.
+```
+
+Using a point $`y` in the intersection of $`B_i` and $`B'`, we conclude by the
+triangle inequality
+$$`\rho(x_i,x')\le \rho(x_i,y)+\rho(x',y)\le r_i+r'\le 2r_i.`
+By the triangle inequality again, we further conclude
+$$`\rho(x_i,x)\le \rho(x_i,x')+\rho(x',x)\le 2r_i+r'\le 3r_i.`
+It follows that
+$$`x\in \bigcup _{0\le i< i''}B(x_i,3r_i).`
+With `3rone` and `3rtwo`, we conclude
+$$`\bigcup \mathcal{B}\subset \bigcup _{0\le i< i''}B(x_i,3r_i).`
+With the doubling property `doublingx` applied twice, we conclude
+$$`\mu(\bigcup{\mathcal{B}}) \le \sum _{0\le i< i''}\mu (B(x_i,3r_i)) \le 2^{2a}\sum _{0\le i< i''}\mu (B_i).`
+With `eqbes1` and `eqbes2` we conclude `eq-besico`.
+
+```tex
+% witness-label: Hardy-Littlewood.part2
+Let $x\in \bigcup \mathcal{B}$.
+Choose a ball $B'=B(x',r')\in \mathcal{B}$
+such that $x\in B'$.
+If $B'$ is one of the selected balls, then
+\begin{equation}\label{3rone}
+    x\in \bigcup _{0\le i< i''}B_i\subset \bigcup _{0\le i< i''}B(x_i,3r_i)\, .
+\end{equation}
+If $B'$ is not one of the selected balls, then as it is not selected at time $i''$, there is a selected ball $B_i$ with
+$B'\cap B_i\neq \emptyset$.
+Choose such $B_i$ with minimal index $i$. As $B'$ is therefore disjoint from all
+balls $B_{i'}$ with $i'<i$ and
+as it was not selected in place of $B_i$, we have $r_i\ge r'$.
+
+Using a point $y$ in the intersection of $B_i$ and $B'$,
+we conclude by the triangle inequality
+\begin{equation}
+   \rho(x_i,x')\le \rho(x_i,y)+\rho(x',y)\le r_i+r'\le 2r_i \, .
+\end{equation}
+By the triangle inequality again, we further conclude
+\begin{equation}
+   \rho(x_i,x)\le \rho(x_i,x')+\rho(x',x)\le 2r_i+r'\le 3r_i \, .
+\end{equation}
+It follows that
+\begin{equation}\label{3rtwo}
+    x\in \bigcup _{0\le i< i''}B(x_i,3r_i)\, .
+\end{equation}
+With \eqref{3rone} and \eqref{3rtwo}, we conclude
+\begin{equation}
+\bigcup \mathcal{B}\subset
+\bigcup _{0\le i< i''}B(x_i,3r_i)\, .
+\end{equation}
+With the doubling property
+\eqref{doublingx} applied twice, we conclude
+\begin{equation}\label{eqbes2}
+    \mu(\bigcup{\mathcal{B}})
+    \le \sum _{0\le i< i''}\mu (B(x_i,3r_i))
+    \le 2^{2a}\sum _{0\le i< i''}\mu (B_i)\, .
+\end{equation}
+With \eqref{eqbes1} and \eqref{eqbes2} we conclude
+\eqref{eq-besico}.
+```
+
+We turn to the proof of `eq-hlm`. We first consider the case $`p_1=1` and
+recall $`M_{\mathcal{B}}=M_{\mathcal{B},1}`. We write for the $`p_2`-th power
+of left-hand side of `eq-hlm` with `layer-cake-representation` and a change of
+variables
+$$`\|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2} =p_2\int _0^{\infty} \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge \lambda\}) d\lambda`
+$$`=2^{p_2} p_2\int _0^{\infty} \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\}) d\lambda.`
+
+```tex
+% witness-label: Hardy-Littlewood.part3a
+We turn to the proof of \eqref{eq-hlm}. We first consider the case $p_1=1$ and recall $M_{\mathcal{B}}=M_{\mathcal{B},1}$.
+We write for the $p_2$-th power of left-hand side of \eqref{eq-hlm}
+with \Cref{layer-cake-representation}
+and a change of variables
+\begin{equation}
+    \|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}
+   =p_2\int _0^{\infty}
+    \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge \lambda\}) d\lambda\,
+\end{equation}
+\begin{equation} \label{eqbesi11}
+   =2^{p_2} p_2\int _0^{\infty}
+    \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\}) d\lambda\, .
+\end{equation}
+```
+
+Fix $`\lambda\ge 0` and let $`x\in X` satisfy
+$`M_{\mathcal{B}}u(x)\ge 2\lambda`. By definition of $`M_{\mathcal{B}}`, there
+is a ball $`B'\in \mathcal{B}` such that $`x\in B'` and
+$$`\int_{B'} u(y)\, d\mu(y)\ge 2\lambda \mu({B'}).`
+Define $`u_\lambda(y):=0` if $`|u(y)|<\lambda` and $`u_\lambda(y):=u(y)` if
+$`|u(y)|\ge \lambda`. Then with `eqbesi10`
+$$`\int_{B'} u_\lambda (y)\, d\mu(y) =\int_{B'} u (y)\, d\mu(y)- \int_{B'} (u-u_\lambda) (y) d\mu(y)`
+$$`\ge 2\lambda \mu({B'})- \int_{B'} (u-u_\lambda) (y) d\mu(y).`
+As $`(u-u_\lambda)(y)\le \lambda` by definition, we can estimate the last
+display by
+$$`\ge 2\lambda \mu({B'})- \int_{B'} \lambda \, d\mu(y) =\lambda \mu({B'}).`
+Hence $`x` is contained in $`\bigcup(\mathcal{B}_\lambda)`, where
+$`\mathcal{B}_\lambda` is the collection of balls $`B''` in $`\mathcal{B}`
+such that
+$$`\int_{B''} u_\lambda (y)\, d\mu(y)\ge \lambda \mu(B'').`
+We have thus seen
+$$`\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\}\subset \bigcup \mathcal{B}_\lambda.`
+Applying `eq-besico` to the collection $`\mathcal{B}_\lambda` gives
+$$`\lambda \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\})\le 2^{2a} \int u_\lambda (x)\, dx.`
+
+```tex
+% witness-label: Hardy-Littlewood.part3
+We turn to the proof of \eqref{eq-hlm}. We first consider the case $p_1=1$ and recall $M_{\mathcal{B}}=M_{\mathcal{B},1}$.
+We write for the $p_2$-th power of left-hand side of \eqref{eq-hlm}
+with \Cref{layer-cake-representation}
+and a change of variables
+\begin{equation}
+    \|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}
+   =p_2\int _0^{\infty}
+    \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge \lambda\}) d\lambda\,
+\end{equation}
+\begin{equation} \label{eqbesi11}
+   =2^{p_2} p_2\int _0^{\infty}
+    \lambda^{p_2-1} \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\}) d\lambda\, .
+\end{equation}
+Fix $\lambda\ge 0$ and let $x\in X$ satisfy $M_{\mathcal{B}}u(x)\ge 2\lambda$. By definition of $M_{\mathcal{B}}$, there is a ball
+$B'\in \mathcal{B}$ such that
+$x\in B'$ and
+\begin{equation}\label{eqbesi10}
+\int_{B'} u(y)\, d\mu(y)\ge 2\lambda \mu({B'}) \, .
+\end{equation}
+Define
+$u_\lambda(y):=0$ if $|u(y)|<\lambda$ and $u_\lambda(y):=u(y)$ if $|u(y)|\ge \lambda$.
+Then with \eqref{eqbesi10}
+\begin{equation}
+\int_{B'} u_\lambda (y)\, d\mu(y)
+=\int_{B'} u (y)\, d\mu(y)-
+\int_{B'} (u-u_\lambda) (y) d\mu(y)\,
+\end{equation}
+\begin{equation}
+\ge 2\lambda \mu({B'})-
+\int_{B'} (u-u_\lambda) (y) d\mu(y)\, .
+\end{equation}
+As $(u-u_\lambda)(y)\le \lambda$
+by definition, we can estimate the last display by
+\begin{equation}
+\ge 2\lambda \mu({B'})-
+\int_{B'} \lambda \, d\mu(y)
+=\lambda \mu({B'})\, .
+\end{equation}
+Hence $x$ is contained in
+$\bigcup(\mathcal{B}_\lambda)$,
+where $\mathcal{B}_\lambda$
+is the collection of balls $B''$ in $\mathcal{B}$ such that
+\begin{equation}
+    \int_{B''} u_\lambda (y)\, d\mu(y)\ge \lambda \mu(B'')\, .
+\end{equation}
+We have thus seen
+\begin{equation}
+    \{x: M_{\mathcal{B}}u(x)\ge 2\lambda\}\subset
+    \bigcup \mathcal{B}_\lambda
+\, .
+\end{equation}
+Applying \eqref{eq-besico} to the collection $\mathcal{B}_\lambda$
+gives
+\begin{equation}
+    \lambda \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\})\le
+   2^{2a}
+    \int u_\lambda (x)\, dx\, .
+\end{equation}
+```
+
+With `layer-cake-representation`,
+$$`\lambda \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\})\le 2^{2a} \int_0^\infty \mu (\{x: |u_\lambda (x)|\ge \lambda'\})\, d\lambda'.`
+By definition of $`u_\lambda`, making a case distinction between
+$`\lambda\ge \lambda'` and $`\lambda <\lambda'`, we see that
+$$`\mu (\{x: |u_\lambda (x)|\ge \lambda'\}) \le \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\}).`
+We obtain with `eqbesi11`, `eqbesi12`, and `eqbesi13`
+$$`\|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}`
+$$`\le 2^{p_2+2a} p_2 \int_0^\infty \lambda^{p_2-2} \int_0^\infty \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\}) \, d\lambda'd\lambda.`
+We split the integral into $`\lambda\ge \lambda'` and
+$`\lambda<\lambda'` and resolve the maximum correspondingly.
+
+```tex
+% witness-label: Hardy-Littlewood.part4a
+With \Cref{layer-cake-representation},
+\begin{equation}\label{eqbesi12}
+    \lambda \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\})\le
+   2^{2a}
+    \int_0^\infty \mu (\{x: |u_\lambda (x)|\ge \lambda'\})\, d\lambda'\, .
+\end{equation}
+By definition of $u_\lambda$, making a case distinction between $\lambda\ge \lambda'$ and $\lambda <\lambda'$, we see that
+\begin{equation}\label{eqbesi13}
+   \mu (\{x: |u_\lambda (x)|\ge \lambda'\})
+   \le
+   \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\})\, .
+\end{equation}
+We obtain with \eqref{eqbesi11},
+\eqref{eqbesi12}, and \eqref{eqbesi13}
+\begin{equation}
+    \|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}
+ \end{equation}
+ \begin{equation}
+   \le 2^{p_2+2a} p_2
+   \int_0^\infty \lambda^{p_2-2}
+   \int_0^\infty
+   \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\})
+   \, d\lambda'd\lambda\, .
+\end{equation}
+We split the integral into $\lambda\ge \lambda'$ and $\lambda<\lambda'$ and resolve the
+maximum correspondingly.
+```
+
+We have for $`\lambda\ge \lambda'` with `layer-cake-representation`
+$$`\int_0^\infty \lambda^{p_2-2} \int_0^\lambda \mu (\{x: |u (x)|\ge \lambda\}) \, d\lambda'd\lambda`
+$$`=\int_0^\infty \lambda^{p_2-1} \mu (\{x: |u (x)|\ge \lambda\}) d\lambda`
+$$`=p_2^{-1} \|u\|_{p_2}^{p_2}.`
+
+```tex
+% witness-label: Hardy-Littlewood.part4
+With \Cref{layer-cake-representation},
+\begin{equation}\label{eqbesi12}
+    \lambda \mu(\{x: M_{\mathcal{B}}u(x)\ge 2\lambda\})\le
+   2^{2a}
+    \int_0^\infty \mu (\{x: |u_\lambda (x)|\ge \lambda'\})\, d\lambda'\, .
+\end{equation}
+By definition of $u_\lambda$, making a case distinction between $\lambda\ge \lambda'$ and $\lambda <\lambda'$, we see that
+\begin{equation}\label{eqbesi13}
+   \mu (\{x: |u_\lambda (x)|\ge \lambda'\})
+   \le
+   \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\})\, .
+\end{equation}
+We obtain with \eqref{eqbesi11},
+\eqref{eqbesi12}, and \eqref{eqbesi13}
+\begin{equation}
+    \|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}
+ \end{equation}
+ \begin{equation}
+   \le 2^{p_2+2a} p_2
+   \int_0^\infty \lambda^{p_2-2}
+   \int_0^\infty
+   \mu (\{x: |u (x)|\ge \max(\lambda,\lambda')\})
+   \, d\lambda'd\lambda\, .
+\end{equation}
+We split the integral into $\lambda\ge \lambda'$ and $\lambda<\lambda'$ and resolve the
+maximum correspondingly.
+We have for $\lambda\ge \lambda'$
+with \Cref{layer-cake-representation}
+\begin{equation}
+    \int_0^\infty \lambda^{p_2-2}
+   \int_0^\lambda
+   \mu (\{x: |u (x)|\ge \lambda\})
+   \, d\lambda'd\lambda
+\end{equation}
+\begin{equation}
+   =\int_0^\infty \lambda^{p_2-1}
+     \mu (\{x: |u (x)|\ge \lambda\})
+d\lambda.
+\end{equation}
+\begin{equation}\label{eqbesi14}
+   =p_2^{-1} \|u\|_{p_2}^{p_2}\, .
+\end{equation}
+```
+
+We have for $`\lambda< \lambda'` with Fubini and
+`layer-cake-representation`
+$$`\int_0^\infty \lambda^{p_2-2} \int_\lambda^\infty \mu (\{x: |u(x)|\ge \lambda'\}) \, d\lambda'd\lambda`
+$$`=\int_0^\infty \int_0^{\lambda'}\lambda^{p_2-2} \mu (\{x: |u (x)|\ge \lambda'\}) d\lambda d\lambda'`
+$$`=(p_2-1)^{-1}\int_0^\infty (\lambda')^{p_2-1} \mu (\{x: |u(x)|\ge \lambda'\}) d\lambda'`
+$$`=(p_2-1)^{-1} p_2^{-1}\|u\|_{p_2}^{p_2}.`
+Adding the two estimates `eqbesi14` and `eqbesi15` gives
+$$`\|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2} \le 2^{p_2+2a} (1+(p_2-1)^{-1})\|u\|_{p_2}^{p_2} = 2^{p_2+2a} p_2(p_2-1)^{-1}\|u\|_{p_2}^{p_2}.`
+With $`a\ge 1` and $`p_2>1`, taking the $`p_2`-th root, we obtain `eq-hlm`.
+We turn to the case of general $`1\le p_1<p_2`. We have
+$$`M_{\mathcal{B},p_1}u=(M_{\mathcal{B}} (|u|^{p_1}))^{\frac 1{p_1}}.`
+Applying the special case of `eq-hlm` for $`M_{\mathcal{B}}` gives
+$$`\|M_{\mathcal{B},p_1}u\|_{p_2}= \|M_{\mathcal{B}} (|u|^{p_1})\|_{p_2/p_1}^{\frac 1{p_1}}`
+$$`\le 2^{2a} (p_2/p_1) (p_2/p_1-1)^{-1} \|(|u|^{p_1})\|_{p_2/p_1}^{\frac 1{p_1}} =2^{2a} p_2(p_2-p_1)^{-1}\|u\|_{p_2}.`
+This proves `eq-hlm` in general.
+
+```tex
+% witness-label: Hardy-Littlewood.part5
+We have for $\lambda< \lambda'$
+with Fubini and \Cref{layer-cake-representation}
+\begin{equation}
+    \int_0^\infty \lambda^{p_2-2}
+   \int_\lambda^\infty
+   \mu (\{x: |u(x)|\ge \lambda'\})
+   \, d\lambda'd\lambda.
+\end{equation}
+\begin{equation}
+   =\int_0^\infty \int_0^{\lambda'}\lambda^{p_2-2}
+     \mu (\{x: |u (x)|\ge \lambda'\})
+d\lambda d\lambda'.
+\end{equation}
+\begin{equation}
+   =(p_2-1)^{-1}\int_0^\infty (\lambda')^{p_2-1}
+     \mu (\{x: |u(x)|\ge \lambda'\})
+d\lambda'.
+\end{equation}
+\begin{equation}\label{eqbesi15}
+   =(p_2-1)^{-1} p_2^{-1}\|u\|_{p_2}^{p_2}\, .
+\end{equation}
+Adding the two estimates
+\eqref{eqbesi14} and \eqref{eqbesi15} gives
+\begin{equation}
+    \|M_{\mathcal{B}}u(x)\|_{p_2}^{p_2}
+   \le 2^{p_2+2a} (1+(p_2-1)^{-1})\|u\|_{p_2}^{p_2}
+   = 2^{p_2+2a} p_2(p_2-1)^{-1}\|u\|_{p_2}^{p_2}
+   \, .
+   \end{equation}
+With $a\ge 1$ and $p_2>1$, taking the $p_2$-th root, we obtain \eqref{eq-hlm}.
+We turn to the case of general
+$1\le p_1<p_2$.
+We have
+\begin{equation}
+    M_{\mathcal{B},p_1}u=(M_{\mathcal{B}} (|u|^{p_1}))^{\frac 1{p_1}}\, .
+\end{equation}
+Applying the special case of \eqref{eq-hlm} for $M_{\mathcal{B}}$ gives
+\begin{equation}
+    \|M_{\mathcal{B},p_1}u\|_{p_2}=
+    \|M_{\mathcal{B}} (|u|^{p_1})\|_{p_2/p_1}^{\frac 1{p_1}}
+\end{equation}
+\begin{equation}
+    \le 2^{2a} (p_2/p_1) (p_2/p_1-1)^{-1}
+    \|(|u|^{p_1})\|_{p_2/p_1}^{\frac 1{p_1}}
+    =2^{2a} p_2(p_2-p_1)^{-1}\|u\|_{p_2}\, .
+\end{equation}
+This proves \eqref{eq-hlm} in general.
+```
+
+Now we construct the operator $`M` satisfying `eq-ball-av` and `eq-hlm-2`.
+For each $`k \in \mathbb{Z}` we choose a countable set $`C(2^k)` as in
+`covering-separable-space`. Define
+$$`\mathcal{B}_\infty = \{B(c, 2^k) \ : \ c \in C(2^k), k \in \mathbb{Z}\}.`
+By `covering-separable-space`, this is a countable collection of balls. We
+choose an enumeration $`\mathcal{B}_\infty = \{B_1, \dotsc\}` and define
+$$`\mathcal{B}_n = \{B_1, \dotsc, B_n\}.`
+We define
+$$`Mw := 2^{2a}\sup_{n \in \mathbb{N}} M_{\mathcal{B}_n}w.`
+This function is measurable for each measurable $`w`, since it is a countable
+supremum of measurable functions. Estimate `eq-hlm-2` follows immediately from
+`eq-hlm` and the monotone convergence theorem.
+
+```tex
+% witness-label: Hardy-Littlewood.part6a
+Now we construct the operator $M$ satisfying \eqref{eq-ball-av} and \eqref{eq-hlm-2}.
+For each $k \in \mathbb{Z}$ we choose a countable set $C(2^k)$ as in \Cref{covering-separable-space}.
+% Note: S\'ebastien Gou\"ezel commented that $k$ should live in $\mathbb{Z}$ instead of $\mathbb{N}$
+Define
+$$
+    \mathcal{B}_\infty = \{B(c, 2^k) \ : \ c \in C(2^k), k \in \mathbb{Z}\}\,.
+$$
+By \Cref{covering-separable-space}, this is a countable collection of balls. We choose an enumeration $\mathcal{B}_\infty = \{B_1, \dotsc\}$ and define
+$$
+    \mathcal{B}_n = \{B_1, \dotsc, B_n\}\,.
+$$
+We define
+$$
+    Mw := 2^{2a}\sup_{n \in \mathbb{N}} M_{\mathcal{B}_n}w\,.
+$$
+This function is measurable for each measurable $w$, since it is a countable supremum of measurable functions. Estimate \eqref{eq-hlm-2} follows immediately from \eqref{eq-hlm} and the monotone convergence theorem.
+```
+
+It remains to show `eq-ball-av`. Let $`B = B(x, r) \subset X`. Let $`k` be the
+smallest integer such that $`2^k \ge r`, in particular we have
+$`2^k < 2r`. By definition of $`C(2^k)`, there exists
+$`c \in C(2^k)` with $`x \in B(c, 2^k)`. By the triangle inequality, we have
+$`B(c, 2^k) \subset B(x, 4r)`, and hence by the doubling property `doublingx`
+$$`\mu(B(c, 2^k)) \le 2^{2a} \mu(B(x,r)).`
+It follows that for each $`z \in B(x,r)`
+$$`\frac{1}{\mu(B(x,r))}\int_{B(x,r)} |w(y)| \, \mathrm{d}\mu(y) \le \frac{2^{2a}}{\mu(B(c,2^k))}\int_{B(c,2^k)} |w(y)| \, \mathrm{d}\mu(y)`
+$$`\le Mw(z).`
+This completes the proof.
+
+```tex "Hardy-Littlewood" (slot := proof)
+Now we construct the operator $M$ satisfying \eqref{eq-ball-av} and \eqref{eq-hlm-2}.
+For each $k \in \mathbb{Z}$ we choose a countable set $C(2^k)$ as in \Cref{covering-separable-space}.
+% Note: S\'ebastien Gou\"ezel commented that $k$ should live in $\mathbb{Z}$ instead of $\mathbb{N}$
+Define
+$$
+    \mathcal{B}_\infty = \{B(c, 2^k) \ : \ c \in C(2^k), k \in \mathbb{Z}\}\,.
+$$
+By \Cref{covering-separable-space}, this is a countable collection of balls. We choose an enumeration $\mathcal{B}_\infty = \{B_1, \dotsc\}$ and define
+$$
+    \mathcal{B}_n = \{B_1, \dotsc, B_n\}\,.
+$$
+We define
+$$
+    Mw := 2^{2a}\sup_{n \in \mathbb{N}} M_{\mathcal{B}_n}w\,.
+$$
+This function is measurable for each measurable $w$, since it is a countable supremum of measurable functions. Estimate \eqref{eq-hlm-2} follows immediately from \eqref{eq-hlm} and the monotone convergence theorem.
+
+It remains to show \eqref{eq-ball-av}. Let $B = B(x, r) \subset X$. Let $k$ be the smallest integer such that $2^k \ge r$, in particular we have $2^k < 2r$. By definition of $C(2^k)$, there exists $c \in C(2^k)$ with $x \in B(c, 2^k)$. By the triangle inequality, we have $B(c, 2^k) \subset B(x, 4r)$, and hence by the doubling property \eqref{doublingx}
+$$
+    \mu(B(c, 2^k)) \le 2^{2a} \mu(B(x,r))\,.
+$$
+It follows that for each $z \in B(x,r)$
+\begin{align*}
+    \frac{1}{\mu(B(x,r))}\int_{B(x,r)} |w(y)| \, \mathrm{d}\mu(y) &\le \frac{2^{2a}}{\mu(B(c,2^k))}\int_{B(c,2^k)} |w(y)| \, \mathrm{d}\mu(y) \\
+    &\le Mw(z)\,.
+\end{align*}
+This completes the proof.
+\end{proof}
+```
