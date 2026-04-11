@@ -10050,6 +10050,28 @@ $$`\mu( B(\pc(\fp), 104 D^{s(J') + 1})) \le 2^{200a^3 + 10a} \mu(J),`
 which proves $`\fp` satisfies the needed criteria with
 $`r=104 D^{s(J') + 1}`.
 
+```tex
+% witness-label: local-dens2-tree-bound.part3d
+    From now on we assume $J \not \subset B(\pc(\fp), 4 D^{\ps(\fp)})$. Since
+    \begin{equation*}
+        \pc(\fp) \in \scI(\fp) \subset B(c(J'), 100 D^{s(J') + 1})\, ,
+    \end{equation*}
+    we have by \eqref{eq-vol-sp-cube} and the triangle inequality
+    $$
+        J \subset J' \subset B(c(J'), 4D^{s(J')}) \subset B(\pc(\fp), 104 D^{s(J') + 1})\,.
+    $$
+    In particular this implies $104 D^{s(J') + 1} > 4D^{\ps(\fp)}$. By the triangle inequality
+    we also have
+    $$
+        B(\pc(\fp), 104 D^{s(J') + 1}) \subset B(c(J), 204 D^{s(J') + 1})\,,
+    $$
+    so from \eqref{measure-comparison},
+    $$
+        \mu( B(\pc(\fp), 104 D^{s(J') + 1})) \le 2^{200a^3 + 10a} \mu(J)\,,
+    $$
+    which proves $\fp$ satisfies the needed criteria with $r=104 D^{s(J') + 1}$.
+```
+
 ```tex "local-dens2-tree-bound" (slot := proof)
     It remains to consider the case $s(J) < S$. Then, by \eqref{coverdyadic} and
     \eqref{dyadicproperty}, there exists some cube $J' \in \mathcal{D}$ with $s(J') = s(J) + 1$ and
@@ -10846,8 +10868,6 @@ operators associated to tiles.
 
 ```tex
 % witness-label: main.forestop.large.6
-    We will prove this lemma at the end of this section, after establishing several auxiliary results.
-
     We begin with the following H\"older continuity estimate for adjoints of operators associated to tiles.
 ```
 
@@ -12739,6 +12759,24 @@ estimate this further by
 $$`\le \left(\int L(x,y) \, \mathrm{d}\mu(y)\right) \|\varphi\|_{C^\tau(B(z, 2R))} (t/2)^{\tau}.`
 Dividing the string of inequalities from `eql1` to `eql5` by the positive
 integral of $`L` proves `eq-firstt`.
+
+```tex
+% witness-label: Lipschitz-Holder-approximation.part2b
+Therefore, we can estimate the last display further by
+       \begin{equation}\label{eql4}
+         \le \left(\int_{B(x, tR)} L(x,y)
+          \rho(x,y)^\tau \, \mathrm{d}\mu(y) \right)\|\varphi\|_{C^\tau(B(z, 2R))}(2R)^{-\tau}\, .
+    \end{equation}
+
+  Using the condition on the domain of integration to estimate $\rho(x,y)$ by $tR$ and then expanding the domain by positivity of the integrand, we estimate this further by
+
+   \begin{equation}\label{eql5}
+         \le \left(\int L(x,y) \, \mathrm{d}\mu(y)\right)
+         \|\varphi\|_{C^\tau(B(z, 2R))} (t/2)^{\tau} \, .
+    \end{equation}
+ Dividing the string of inequalities from \eqref{eql1} to
+\eqref{eql5} by the positive integral of $L$ proves \eqref{eq-firstt}.
+```
 
 ```tex
 % witness-label: Lipschitz-Holder-approximation.part2
