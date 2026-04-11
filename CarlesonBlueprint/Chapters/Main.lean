@@ -6405,6 +6405,28 @@ The last sum equals, by changing the order of summation,
 $$`\sum_{n \ge 0} n^2(n+1) 2^{-n\frac{q-1}{8a^4}} \le \frac{2^{2a^3}}{(q-1)^4}.`
 This completes the proof.
 
+```tex
+% witness-label: forest-complement.part2b
+Applying now the triangle inequality according to the decomposition coming from
+\Cref{antichain-decomposition}, and then applying \Cref{antichain-operator} to each
+term, we obtain the estimate
+\begin{equation}
+    \sum_{k \ge 0} \sum_{n \ge k} (n + (2n+4) + 2(2n+4) (1+Z(n+1))) 2^{117a^3}(q-1)^{-1} (2^{4a+1-n})^{\frac{q-1}{8a^4}} (2^{2a+5} \frac{\mu(F)}{\mu(G)})^{\frac{1}{q} - \frac{1}{2}} \|f\|_2\|\mathbf{1}_{G\setminus G'}\|_2
+\end{equation}
+for the left hand side of \eqref{forestcompleft}. Because $|f| \le \mathbf{1}_F$,
+we have $\|f\|_2 \le \mu(F)^{1/2}$, and we have
+$\|\mathbf{1}_{G\setminus G'}\|_2 \le \mu(G)^{1/2}$. Using this and
+\eqref{defineZ}, we bound
+\begin{equation}
+    2^{118a^3} (q - 1)^{-1} \mu(F)^{\frac{1}{q}} \mu(G)^{\frac{1}{q'}} \sum_{k \ge 0} \sum_{n \ge k} n^2 2^{-n\frac{q-1}{8a^4}}.
+\end{equation}
+The last sum equals, by changing the order of summation,
+\begin{equation}
+    \sum_{n \ge 0} n^2(n+1) 2^{-n\frac{q-1}{8a^4}} \le \frac{2^{2a^3}}{(q-1)^4}.
+\end{equation}
+This completes the proof.
+```
+
 ```tex "forest-complement" (slot := proof)
 \begin{proof}[Proof of \Cref{forest-complement}]
     \proves{forest-complement}\leanok
@@ -6793,6 +6815,37 @@ With `eqttt1` and `eqttt2` we can estimate the last display by
 $$`\le 2^{102a^3+2a+2}(\tilde{q}-1)^{-1} \|g\|_2 \|f\|_2\dens_2(\mathfrak{A})^{\frac 1{\tilde{q}}-\frac 12}`
 Using $`a\ge 4` and
 $`(\tilde q - 1)^{-1} = (q+1)/(q-1) \le 3(q-1)^{-1}` proves the lemma.
+
+```tex
+% witness-label: dens2-antichain.part2b
+We have with \Cref{Hardy-Littlewood}
+\begin{equation}
+\left\|M_{\mathcal{B}, \frac {2{\tilde{q}}}{3{\tilde{q}}-2}} f\right\|_2\le 2^{2a}(3\tilde{q}-2)(2\tilde{q}-2)^{-1}\|f\|_2\, .
+\end{equation}
+Using $1<\tilde{q}\le 2$ estimates the last display by
+\begin{equation}\label{eqttt2}
+ 2^{2a+2} (\tilde{q}-1)^{-1} \|f\|_2\, .
+\end{equation}
+We obtain with Cauchy-Schwarz
+and then \Cref{maximal-bound-antichain}
+ \begin{equation}
+     |\int \overline{g(x)} \sum_{\fp \in \mathfrak{A}} T_{\fp} f(x)\, d\mu(x)|
+\end{equation}
+ \begin{equation}
+     \le \|g\|_2 \Big\| \sum_{\fp \in \mathfrak{A}} T_{\fp} f \Big\|_2
+\end{equation}
+ \begin{equation}
+     \le 2^{102a^3}\|g\|_2 \| M_{\mathcal{B}}f \|_2
+\end{equation}
+With \eqref{eqttt1} and
+\eqref{eqttt2} we can estimate the last display by
+\begin{equation}
+    \le 2^{102a^3+2a+2}(\tilde{q}-1)^{-1} \|g\|_2 \|f\|_2\dens_2(\mathfrak{A})^{\frac 1{\tilde{q}}-\frac 12}
+\end{equation}
+Using $a\ge 4$ and
+$(\tilde q - 1)^{-1} = (q+1)/(q-1) \le 3(q-1)^{-1}$
+proves the lemma.
+```
 
 ```tex "dens2-antichain" (slot := proof)
 \begin{proof}
@@ -8157,6 +8210,29 @@ $`\fp'' = \fp_\mfa`. Furthermore, in both cases it also holds that
 $$`\mfa\in B_{\fp_{\mfa}}(\fcc(\fp_{\mfa}), 2^{N+1}).`
 
 ```tex
+% witness-label: global-antichain-density.part6c
+If $\scI(\fp'') \ne L'$, then it follows that $s(\fp'') < s(L')$.
+By the covering property \eqref{eq-dis-freq-cover}, there exists a unique $\fp_{\mfa}$ with
+\begin{equation*}
+    \scI(\fp_{\mfa})=L'
+\end{equation*}
+such that $\mfa\in \fc(\fp_{\mfa})$. We take this as the definition of $\fp_\mfa$ in this case.
+Note that
+\begin{equation}
+    \mfa\in B(\fcc(\fp_{\mfa}), 1)
+\end{equation}
+so by \Cref{tile-reach}, we conclude
+\begin{equation}
+    2^{N+3}\fp'' \lesssim 2^{N+3}\fp_{\mfa} \, .
+\end{equation}
+This clearly also holds in the case $\scI(\fp'') = L'$, since then $\fp'' = \fp_\mfa$. Furthermore,
+in both cases it also holds that
+\begin{equation}
+    \mfa\in B_{\fp_{\mfa}}(\fcc(\fp_{\mfa}), 2^{N+1}).
+\end{equation}
+```
+
+```tex
 % witness-label: global-antichain-density.part6
 We turn to \eqref{eqanti2}.
 Consider the element $\fp'\in \mathfrak{A}'$ as above
@@ -8474,6 +8550,15 @@ $`s(L) = -S`, or there exists $`\fp \in \mathfrak{S}` with
 $`L \subset \scI(\fp)` and there exists no $`\fp \in \mathfrak{S}` with
 $`\scI(\fp) \subset L`. We define $`\mathcal{L}(\mathfrak{S})` to be the
 collection of inclusion maximal cubes in $`\mathcal{L}_0(\mathfrak{S})`.
+
+```tex
+% witness-label: main.forestop.4b
+We further define
+$$
+    \mathcal{L}_0(\mathfrak{S})
+$$
+to be the collection of dyadic cubes $L \in \mathcal{D}$ such that $s(L) = -S$, or there exists $\fp \in \mathfrak{S}$ with $L \subset \scI(\fp)$ and there exists no $\fp \in \mathfrak{S}$ with $\scI(\fp) \subset L$. We define $\mathcal{L}(\mathfrak{S})$ to be the collection of inclusion maximal cubes in $\mathcal{L}_0(\mathfrak{S})$.
+```
 
 ```tex
 % witness-label: main.forestop.4
@@ -9969,6 +10054,15 @@ satisfies $`J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))` and
 $`\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)`.
 
 ```tex
+% witness-label: local-dens2-tree-bound.part2b
+    Suppose first that $s(J) = S$. Then $J = I_0$, so \eqref{subsetmaxcube} and the fact that
+    $J \in \mathcal{J}(\fT(\fu)) \subseteq \mathcal{J}_0(\fT(\fu))$ imply that $s(J) = -S$. Thus
+    $S = 0$. It follows that $J$ is the only dyadic cube, so any $\fp \in \fT(\fu)$ has
+    $\scI(\fp) = J$, and therefore satisfies $J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))$ and
+    $\mu(\scI(\fp)) \le 2^{100a^3 + 10a} \mu(J)$.
+```
+
+```tex
 % witness-label: local-dens2-tree-bound.part2
     In particular, these criteria are satisfied, with $r = 4 D ^ {\ps(\fp)}$, by any
     $\fp \in \fT(\fu)$ such that $J \subseteq B(\pc(\fp, 4 D ^ {\ps(\fp)}))$ and
@@ -10370,6 +10464,16 @@ Define
 $$`\mathfrak{S} := \{\fp \in \fT(\fu_1) \cup \fT(\fu_2) \ : \ d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn/2}\}.`
 `correlation-separated-trees` follows by combining the definition `defineZ` of
 $`Z` with the following two lemmas.
+
+```tex
+% witness-label: correlation-separated-trees.mid
+    Define
+    \begin{equation}
+        \label{def-Tree-S-set}
+         \mathfrak{S} := \{\fp \in \fT(\fu_1) \cup \fT(\fu_2) \ : \ d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn/2}\,\}.
+    \end{equation}
+    \Cref{correlation-separated-trees} follows by combining the definition \eqref{defineZ} of $Z$ with the following two lemmas.
+```
 
 ```tex "correlation-separated-trees" (slot := proof)
 \begin{proof}[Proof of \Cref{correlation-separated-trees}]
