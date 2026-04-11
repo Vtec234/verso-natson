@@ -4908,6 +4908,13 @@ Proof of `exceptional-set`. Adding up the bounds in Lemmas
 `first-exception`, `second-exception`, and `third-exception` proves
 `exceptional-set`.
 
+```tex
+% witness-label: exceptional-set.proof
+\begin{proof}[Proof of \Cref{exceptional-set}]
+Adding up the bounds in Lemmas \ref{first-exception}, \ref{second-exception}, and \ref{third-exception} proves \Cref{exceptional-set}.
+\end{proof}
+```
+
 ```tex "exceptional-set" (slot := proof)
 \begin{proof}[Proof of \Cref{exceptional-set}]
     \leanok
@@ -9821,6 +9828,22 @@ and obtain that this is
 $$`\le 2^{101a^3} \dens_2(\fT(\fu))^{1/2} \|f\|_2.`
 Combining this with `eq-both-factors-tree` and `eq-factor-L-tree` gives
 `eq-cor-tree-est-F`.
+
+```tex
+% witness-label: densities-tree-bound.part2b
+    If $f \le \mathbf{1}_F$ then $f = f\mathbf{1}_F$, so
+    $$
+        \left( \sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_J |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}
+    $$
+    $$
+        =\left(\sum_{J \in \mathcal{J}(\fT(\fu))} \frac{1}{\mu(J)} \left(\int_{J \cap F} |f(y)| \, \mathrm{d}\mu(y)\right)^2 \right)^{1/2}\,.
+    $$
+    We estimate as before, using now \Cref{local-dens2-tree-bound} and Cauchy-Schwarz, and obtain that this is
+    $$
+        \le 2^{101a^3} \dens_2(\fT(\fu))^{1/2} \|f\|_2\,.
+    $$
+    Combining this with \eqref{eq-both-factors-tree} and \eqref{eq-factor-L-tree} gives \eqref{eq-cor-tree-est-F}.
+```
 
 ```tex "densities-tree-bound" (slot := proof)
     Similarly, we have
