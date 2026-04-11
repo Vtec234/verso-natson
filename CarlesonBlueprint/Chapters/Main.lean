@@ -2997,7 +2997,7 @@ $$`\sum_{z\in Y_{k-K}: (z,k-K|y,k)}\mu(I_3(z,k-K)) \le \frac 12 \mu(I_3(y,k)).`
     \label{small-boundary}
     \uses{transitive-boundary}
     \leanok
-    \lean{small_boundary}
+    \lean{_root_.small_boundary}
     Let $K = 2^{4a+1}$. For each $-S+K\le k\le S$ and $y\in Y_k$ we have
       \begin{equation}
             \label{new-small-boundary}

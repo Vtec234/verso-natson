@@ -12,7 +12,7 @@ open Informal
 
 #doc (Manual) "Carleson Blueprint" =>
 
-This repository contains the Verso blueprint harness for `Carleson Blueprint`.
+This repository contains the completed Verso port of `Carleson Blueprint`.
 
 {include 0 CarlesonBlueprint.Chapters.Main}
 {blueprint_graph}

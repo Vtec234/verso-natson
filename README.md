@@ -1,6 +1,6 @@
 # Carleson Blueprint
 
-This repository is the Verso port and integration repo for `Carleson Blueprint`.
+This repository is the completed Verso port and integration repo for `Carleson Blueprint`.
 
 - Upstream formalization: `Carleson/`
 - Shared harness: `tools/verso-harness/`
@@ -36,5 +36,6 @@ and maintenance rules, use the harness docs:
 ## Notes
 
 - Root `lean-toolchain` follows the upstream formalization toolchain.
-- `lakefile.lean` pins the matching `VersoBlueprint` branch for that toolchain.
+- `lakefile.lean` pins the matching `VersoBlueprint` ref for that toolchain.
+- The port is consolidated into `CarlesonBlueprint/Chapters/Main.lean`.
 - Generic LT commands should be run via `tools/verso-harness/scripts/...`.
