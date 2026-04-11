@@ -8543,6 +8543,11 @@ $`\mathcal{J}(\mathfrak{S}) \subset \mathcal{D}`.
 
 The proof of the two inclusions in `eq-L-partition` is similar.
 
+```tex
+% witness-label: dyadic-partitions.part3
+    The proof of the two inclusions in \eqref{eq-L-partition} is similar.
+```
+
 ```tex "dyadic-partitions" (slot := proof)
 \begin{proof}
     \leanok
@@ -10215,6 +10220,11 @@ completes the proof.
 
 The proof of the second part is similar with
 $`f = \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g`.
+
+```tex
+% witness-label: adjoint-tree-estimate.part2
+    The proof of the second part is similar with $f = \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g$.
+```
 
 ```tex "adjoint-tree-estimate" (slot := proof)
 \begin{proof}
@@ -13131,6 +13141,11 @@ $`Y` of maximal cardinality. Define $`C(r,k)` to be such a set.
 If $`x \in B(o, r2^k)` and $`x \notin C(r,k)`, then there must exist
 $`y \in C(r,k)` with $`\rho(x,y) < r`. Thus $`C(r,k)` has the desired
 property.
+
+```tex
+% witness-label: covering-separable-space.part2
+    If $x \in B(o, r2^k)$ and $x \notin C(r,k)$, then there must exist $y \in C(r,k)$ with $\rho(x,y) < r$. Thus $C(r,k)$ has the desired property.
+```
 
 ```tex "covering-separable-space" (slot := proof)
 \begin{proof}
