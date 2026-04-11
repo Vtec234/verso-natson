@@ -28,6 +28,8 @@ open Verso.Genre
 open Verso.Genre.Manual
 open Informal
 
+set_option maxRecDepth 8192
+
 #doc (Manual) "Formalization of Carleson's theorem" =>
 
 This paper is the blueprint underlying the Lean formalization of the proof of
@@ -6647,6 +6649,17 @@ $$`| T_{\fp} f(x)|
     \le \frac{2^{6a+101 a^3}}{\mu(B(\pc(\fp), 8D^{\ps(\fp)}))} \int _{\mu(B(\pc(\fp), 8D^{\ps(\fp)}))} |f(y)|\, dy`$$
 This together with $`a\ge 4` proves the lemma.
 
+```tex
+% witness-label: maximal-bound-antichain.part5
+ Using that {$|e(\mfa)|$} is bounded by $1$
+for every $\mfa\in \Mf$, we estimate with the triangle inequality and the above information
+ \begin{equation}
+  | T_{\fp} f(x)|
+    \le \frac{2^{6a+101 a^3}}{\mu(B(\pc(\fp), 8D^{\ps(\fp)}))} \int _{\mu(B(\pc(\fp), 8D^{\ps(\fp)}))} |f(y)|\, dy
+  \end{equation}
+This together with $a\ge 4$ proves the Lemma.
+```
+
 ```tex "maximal-bound-antichain" (slot := proof)
 \begin{proof}
 \leanok
@@ -8072,16 +8085,7 @@ $$`+
      \sum_{\fp\in\mathfrak{A}':\scI(\fp)\neq L'}\mu(E(\fp)\cap G\cap L).`$$
 
 ```tex
-% witness-label: global-antichain-density.part4
-Fix $L\in \mathcal{L}^*$. By definition of $\mathcal{L}^*$, there exists an element $\fp'\in \mathfrak{A}'$
-such that $L\subset \scI(\fp')$. Pick such an element $\fp'$ in $\mathfrak{A}$ with
-minimal $\ps(\fp')$. As $\scI(\fp')\not \subset L$ by definition of $L$,
-we have with \eqref{dyadicproperty} that $s(L)< \ps(\fp')$.
-In particular $s(L)<S$, thus $L \ne I_0$ and hence by \eqref{subsetmaxcube}
-there exists a cube $J \in \mathcal{D}$ with $L \subsetneq J$.
-By \eqref{coverdyadic}, there is an $L'\in \mathcal{D}$ with $s(L')=s(L)+1$ and $L \le L'$.
-By \eqref{dyadicproperty}, we have $L\subset L'$.
-
+% witness-label: global-antichain-density.part4b
 We split the left-hand side of \eqref{eqanti0} as
 \begin{equation}\label{eqanti1}
     \sum_{\fp\in\mathfrak{A}':\scI(\fp)=L'}\mu(E(\fp)\cap G\cap L)
@@ -9371,6 +9375,15 @@ supremum over all $`-S \le s_1 < s_2 \le S`, we obtain
 $$`T_{\mathcal{N}} f(x) \le 2T_{\tQ}^\mfa f(x) + 2^{102a^3} M_{\mathcal{B},1} f(x).`
 The lemma now follows from assumption `linnontanbound`,
 `Hardy-Littlewood` and $`a \ge 4`.
+
+```tex
+% witness-label: nontangential-operator-bound.part5b
+    Using $a \ge 4$, taking a supremum over all $x' \in I_{s_1}(x)$ and then a supremum over all $-S \le s_1 < s_2 \le S$, we obtain
+    $$
+        T_{\mathcal{N}} f(x) \le 2T_{\tQ}^\mfa f(x) + 2^{102a^3} M_{\mathcal{B},1} f(x)\,.
+    $$
+    The lemma now follows from assumption \eqref{linnontanbound}, \Cref{Hardy-Littlewood} and $a \ge 4$.
+```
 
 ```tex "nontangential-operator-bound" (slot := proof)
     For \eqref{eq-upper-bound-term} we argue similarly. We have for all $y$ with $\rho(x', y) \ge \frac{1}{4}D^{s_2-1}$
@@ -11348,7 +11361,7 @@ that $`s(J) = -S`, which contradicts $`\ps(\fp) < s(J)`.
     \end{proof}
 ```
 
-:::lemma_ "global-tree-control-1"
+:::lemma_ "global-tree-control-1" (lean := "TileStructure.Forest.global_tree_control1_edist_left, TileStructure.Forest.global_tree_control1_edist_right, TileStructure.Forest.global_tree_control1_supbound")
 {uses "Holder-correlation-tile"}[]
 {uses "scales-impacting-interval"}[]
 Let $`\fC_1 = \fT(\fu_1)` and
@@ -12676,33 +12689,7 @@ Using that $`\varphi` is supported in $`B(z,R)` and `eql01`, we have that
 $`\tilde{\varphi}` is supported in $`B(z,2R)`.
 
 ```tex
-% witness-label: Lipschitz-Holder-approximation.part1
-\begin{proof}\leanok
-    Define for $x,y\in X$ the Lipschitz and thus measurable function
-    \begin{equation}
-        L(x,y) := \max\{0, 1 - \frac{\rho(x,y)}{tR}\}\, .
-    \end{equation}
-We have that $L(x,y)\neq 0$ implies
-\begin{equation}\label{eql01}
-    y\in B(x, tR)\, .
-\end{equation}
-We have for $y\in B(x, 2^{-1}tR)$ that
-\begin{equation}\label{eql30}
-    |L(x,y)|\ge 2^{-1} \ .
-\end{equation}
-Hence
-\begin{equation}
-    \int L(x,y) \, \mathrm{d}\mu(y)\ge 2^{-1}\mu(B(x, 2^{-1}tR))\, .
-\end{equation}
- Let $n$ be the smallest integer so that
- \begin{equation}\label{2nt1}
-    2^n t\ge 1\, .
- \end{equation}
- Iterating $n+2$ times the doubling condition \eqref{doublingx}, we obtain
- \begin{equation}\label{eql32}
-    \int L(x,y) \, \mathrm{d}\mu(y)\ge 2^{-1-a(n+2)}\mu(B(x, 2R))\, .
- \end{equation}
-
+% witness-label: Lipschitz-Holder-approximation.part1b
 Now define
     $$
         \tilde \varphi(x) := \left(\int L(x,y) \, \mathrm{d}\mu(y)\right)^{-1}\int L(x,y) \varphi(y) \, \mathrm{d}\mu(y)\, .
@@ -13217,6 +13204,19 @@ By `eq-ball-assumption`, we conclude
 $$`\lambda \sum_{0\le i<i''}\mu(B_i) \le \int_X u(x)\, d\mu(x).`
 
 ```tex
+% witness-label: Hardy-Littlewood.part1c
+By disjointedness of the chosen balls and since $0 \le u$, we have
+\begin{equation}
+\sum_{0\le i<i''}\int_{B_i} u(x)\, d\mu(x) \le \int_X u(x)\, d\mu(x)\, .
+\end{equation}
+By \eqref{eq-ball-assumption}, we conclude
+\begin{equation}\label{eqbes1}
+\lambda \sum_{0\le i<i''}\mu(B_i)
+\le \int_X u(x)\, d\mu(x)\, .
+\end{equation}
+```
+
+```tex
 % witness-label: Hardy-Littlewood.part1
 \begin{proof}[Proof of \Cref{Hardy-Littlewood}]
 \leanok
@@ -13479,6 +13479,23 @@ We have for $`\lambda\ge \lambda'` with `layer-cake-representation`
 $$`\int_0^\infty \lambda^{p_2-2} \int_0^\lambda \mu (\{x: |u (x)|\ge \lambda\}) \, d\lambda'd\lambda`
 $$`=\int_0^\infty \lambda^{p_2-1} \mu (\{x: |u (x)|\ge \lambda\}) d\lambda`
 $$`=p_2^{-1} \|u\|_{p_2}^{p_2}.`
+
+```tex
+% witness-label: Hardy-Littlewood.part4b
+We have for $\lambda\ge \lambda'$
+with \Cref{layer-cake-representation}
+\begin{equation}
+    \int_0^\infty \lambda^{p_2-2}
+   \int_0^\lambda
+   \mu (\{x: |u (x)|\ge \lambda\})
+   \, d\lambda'd\lambda
+\end{equation}
+\begin{equation}
+   =\int_0^\infty \lambda^{p_2-1}
+     \mu (\{x: |u (x)|\ge \lambda\})
+d\lambda.
+\end{equation}
+```
 
 ```tex
 % witness-label: Hardy-Littlewood.part4
