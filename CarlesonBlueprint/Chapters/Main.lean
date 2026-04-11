@@ -13819,6 +13819,20 @@ $$`\frac{1}{\mu(B(x,r))}\int_{B(x,r)} |w(y)| \, \mathrm{d}\mu(y) \le \frac{2^{2a
 $$`\le Mw(z).`
 This completes the proof.
 
+```tex
+% witness-label: Hardy-Littlewood.part5
+It remains to show \eqref{eq-ball-av}. Let $B = B(x, r) \subset X$. Let $k$ be the smallest integer such that $2^k \ge r$, in particular we have $2^k < 2r$. By definition of $C(2^k)$, there exists $c \in C(2^k)$ with $x \in B(c, 2^k)$. By the triangle inequality, we have $B(c, 2^k) \subset B(x, 4r)$, and hence by the doubling property \eqref{doublingx}
+$$
+    \mu(B(c, 2^k)) \le 2^{2a} \mu(B(x,r))\,.
+$$
+It follows that for each $z \in B(x,r)$
+\begin{align*}
+    \frac{1}{\mu(B(x,r))}\int_{B(x,r)} |w(y)| \, \mathrm{d}\mu(y) &\le \frac{2^{2a}}{\mu(B(c,2^k))}\int_{B(c,2^k)} |w(y)| \, \mathrm{d}\mu(y) \\
+    &\le Mw(z)\,.
+\end{align*}
+This completes the proof.
+```
+
 ```tex "Hardy-Littlewood" (slot := proof)
 Now we construct the operator $M$ satisfying \eqref{eq-ball-av} and \eqref{eq-hlm-2}.
 For each $k \in \mathbb{Z}$ we choose a countable set $C(2^k)$ as in \Cref{covering-separable-space}.
