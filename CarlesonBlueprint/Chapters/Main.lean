@@ -1919,8 +1919,7 @@ $$`|G(x, \mfa, R_1, R_2)| \le 2^{a^3} \Big(\frac{2R_2}{R_1}\Big)^a.`
 \end{proof}
 ```
 
-We now prove Theorem `metric-space-Carleson` using Theorem
-`linearised-metric-Carleson`.
+We now prove Theorem `metric-space-Carleson` using Theorem `linearised-metric-Carleson`.
 
 ```tex
 % witness-label: main.metric-proof.4
@@ -4904,9 +4903,8 @@ Using $D = 2^{100a^2}$ and $a \ge 4$ and $\kappa Z \ge 2$ by \eqref{defineD} and
 \end{proof}
 ```
 
-Proof of `exceptional-set`. Adding up the bounds in Lemmas
-`first-exception`, `second-exception`, and `third-exception` proves
-`exceptional-set`.
+Adding up the bounds in Lemmas `first-exception`, `second-exception`, and
+`third-exception` proves `exceptional-set`.
 
 ```tex
 % witness-label: exceptional-set.proof
@@ -7595,6 +7593,45 @@ $$`\scI(\fp)\subset B(x_2,8D^{\ps(\fp)}).`
 Using three iterations of the doubling property `doublingx` give
 $$`\mu(\scI(\fp))\le 2^{3a}\mu(B(x_2,D^{\ps(\fp)})).`
 With $`a\ge 4` and `eqa2` we conclude `eq-basic-TT*-est`.
+
+```tex
+% witness-label: tile-correlation.part1a
+We estimate for fixed $x_1\in E(\fp')$ and
+$x_2\in E(\fp)$ the inner integral of \eqref{eqa1} with
+\Cref{Holder-van-der-Corput}. The function
+$\varphi:=\varphi_{x_1,x_2}$ satisfies the assumptions of
+\Cref{Holder-van-der-Corput} with $z = x_1$ and $R = D^{s_1}$ by \Cref{correlation-kernel-bound}.
+We obtain with $B':= B(x_1, D^{\ps(\fp')})$,
+\begin{equation*}
+ {\bf I}(x_1, x_2) \le 2^{8a} \mu(B') \|{\varphi}\|_{C^\tau(B')}
+       (1 + d_{B'}(\tQ(x_1),\tQ(x_2)))^{-1/(2a^2+a^3)}|g(x_1)g(x_2)|
+\end{equation*}
+\begin{equation}
+\label{eqa1.5}
+ \le \frac{2^{231a^3+8a}}
+ {\mu(B(x_2, D^{\ps(\fp)}))}
+       (1 + d_{B'}(\tQ(x_1),\tQ(x_2)))^{-1/(2a^2+a^3)}\,.
+\end{equation}
+Using \eqref{intersec5B}, \Cref{tile-uncertainty} and $a\ge 1$ estimates \eqref{eqa1.5} by
+\begin{equation}\label{eqa2}
+ \le \frac{2^{231a^3 + 8a + 1}}
+ {\mu(B(x_2, D^{\ps(\fp)}))}
+       (1+d_{\fp'}(\fcc(\fp'), \fcc(\fp)))^{-1/(2a^2+a^3)}|g(x_1)g(x_2)|\,.
+\end{equation}
+As $x_2\in \scI(\fp)$ by Definition \eqref{defineep} of $E$, we have by \eqref{eq-vol-sp-cube}
+\begin{equation}
+    \rho(x_2,\pc(\fp)) < 4D^{\ps(\fp)}
+\end{equation}
+and thus by \eqref{eq-vol-sp-cube} again and the triangle inequality
+\begin{equation}
+    \scI(\fp)\subset B(x_2,8D^{\ps(\fp)})\,.
+\end{equation}
+Using three iterations of the doubling property \eqref{doublingx} give
+\begin{equation}
+    \mu(\scI(\fp))\le 2^{3a}\mu(B(x_2,D^{\ps(\fp)}))\,.
+\end{equation}
+With $a\ge 4$ and \eqref{eqa2} we conclude \eqref{eq-basic-TT*-est}.
+```
 
 ```tex
 % witness-label: tile-correlation.part1
