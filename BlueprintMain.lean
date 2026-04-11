@@ -10,3 +10,4 @@ def main (args : List String) : IO UInt32 :=
     (%doc CarlesonBlueprint)
     args
     (extensionImpls := by exact extension_impls%)
+    (config := { rootTocDepth := none })
