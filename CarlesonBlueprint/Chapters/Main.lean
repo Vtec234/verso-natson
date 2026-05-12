@@ -10605,23 +10605,13 @@ $`\scI(\fp') \subset \scI(\fu_1) \subset \scI(\fp)`. Hence, by
 $$`d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge d_{\fp'}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn},`
 so $`\fp \in \mathfrak{S}`.
 
-```tex "overlap-implies-distance" (slot := proof)
-\begin{proof}
-    \leanok
-    Suppose first that $\fp \in \fT(\fu_1)$. Then $\scI(\fp) \subset \scI(\fu_1) \subset \scI(\fu_2)$, by \eqref{forest1}. Thus we have by the separation condition \eqref{forest5}, \eqref{eq-freq-comp-ball}, \eqref{forest1} and the triangle inequality
-    \begin{align*}
-        d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) &\ge d_{\fp}(\fcc(\fp), \fcc(\fu_2)) - d_{\fp}(\fcc(\fp), \fcc(\fu_1))\\
-        &\ge 2^{Z(n+1)} - 4\\
-        &\ge 2^{Zn/2}\,,
-    \end{align*}
-    using that $Z= 2^{12a}\ge 4$. Hence $\fp \in \mathfrak{S}$.
-
+```tex
+% witness-label: overlap-implies-distance.part2
     Suppose now that $\fp \in \fT(\fu_2)$. If $\scI(\fp) \subset \scI(\fu_1)$, then the same argument as above with $\fu_1$ and $\fu_2$ swapped shows $\fp \in \mathfrak{S}$. If $\scI(\fp) \not \subset \scI(\fu_1)$ then, by \eqref{dyadicproperty}, $\scI(\fu_1) \subset \scI(\fp)$. Pick $\fp' \in \fT(\fu_1)$, we have $\scI(\fp') \subset \scI(\fu_1) \subset \scI(\fp)$. Hence, by \Cref{monotone-cube-metrics} and the first paragraph
     $$
         d_{\fp}(\fcc(\fu_1), \fcc(\fu_2)) \ge d_{\fp'}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{Zn}\,,
     $$
     so $\fp \in \mathfrak{S}$.
-\end{proof}
 ```
 
 To simplify the notation, we will write at various places throughout the proof
