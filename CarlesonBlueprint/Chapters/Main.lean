@@ -15426,6 +15426,461 @@ series converges outside a set of measure zero.
 \end{proof}
 ```
 
+Let $`\kappa:\mathbb{R}\to\mathbb{C}` be defined by $`\kappa(0)=0`,
+by
+$$`\kappa(x)=\frac{1-|x|}{1-e^{ix}}`
+for $`0<|x|<1`, and by $`\kappa(x)=0` for $`|x|\ge 1`.
+This function is continuous at every point $`x` with $`|x|>0`.
+
+```tex
+% witness-label: main.10classical.kappa-intro
+Let $\kappa:\R\to \C$ be the function defined by
+$\kappa(0)=0$ and for $0<|x|<1$
+\begin{equation}\label{eq-hilker}
+\kappa(x)=\frac { 1-|x|}{1-e^{ix}}\,
+\end{equation}
+and for $|x|\ge 1$,
+\begin{equation}\label{eq-hilker1}
+\kappa(x)=0\, .
+\end{equation}
+Note that this function is continuous at every point $x$ with $|x|>0$.
+```
+
+The proof of {bpref "control-approximation-effect"}[] will use
+{bpref "real-Carleson"}[], which is proved in the real-line subsection as an
+application of {bpref "metric-space-Carleson"}[].
+
+```tex
+% witness-label: main.10classical.real-carleson-reference
+The proof of \Cref{control-approximation-effect} will
+use the following \Cref{real-Carleson}, which itself is proven
+ in \Cref{10carleson} as an application of
+ \Cref{metric-space-Carleson}.
+```
+
+:::lemma_ "real-Carleson" (lean := "rcarleson")
+Uses {uses "two-sided-metric-space-Carleson"}[],
+{uses "real-line-doubling"}[], {uses "real-line-metric"}[],
+{uses "real-line-measure"}[], {uses "oscillation-control"}[],
+{uses "frequency-monotone"}[], {uses "frequency-ball-doubling"}[],
+{uses "frequency-ball-growth"}[], {uses "integer-ball-cover"}[],
+{uses "real-van-der-Corput"}[], {uses "Hilbert-strong-2-2"}[],
+{uses "Hilbert-kernel-regularity"}[], and {uses "Hilbert-kernel-bound"}[].
+Let $`F,G` be Borel subsets of $`\mathbb{R}` with finite measure. Let $`f`
+be a bounded measurable function on $`\mathbb{R}` with
+$`|f|\le \mathbf{1}_F`. Then
+$$`\left|\int_G Tf(x)\,dx\right| \le C_{4,2}|F|^{\frac12}|G|^{\frac12},`
+where
+$$`Tf(x)=\sup_{n\in\mathbb{Z}}\sup_{r>0}
+\left|\int_{r<|x-y|<1} f(y)\kappa(x-y)e^{iny}\,dy\right|.`
+:::
+
+```tex "real-Carleson" (slot := statement)
+\begin{lemma}[real Carleson]\label{real-Carleson}
+\uses{two-sided-metric-space-Carleson,real-line-doubling,real-line-metric,real-line-measure,oscillation-control,frequency-monotone,frequency-ball-doubling,frequency-ball-growth,integer-ball-cover,real-van-der-Corput,Hilbert-strong-2-2,Hilbert-kernel-regularity,Hilbert-kernel-bound}
+\leanok
+\lean{rcarleson}
+    Let $F,G$ be Borel subsets of $\R$ with finite measure. Let $f$ be a bounded measurable function on $\R$ with $|f|\le \mathbf{1}_F$. Then
+\begin{equation}
+    \left|\int _G Tf(x) \, dx\right| \le C_{4,2} |F|^{\frac 12} |G|^{\frac 12} \, ,
+\end{equation}
+where
+\begin{equation}
+    \label{define-T-carleson}
+    T f(x)=\sup_{n\in \mathbb{Z}}
+    \sup_{r>0}\left|\int_{r<|x-y|<1} f(y)\kappa(x-y) e^{iny}\, dy\right|\, .
+\end{equation}
+\end{lemma}
+```
+
+One of the main assumptions of {bpref "two-sided-metric-space-Carleson"}[],
+concerning the operator $`T_r` defined earlier, is verified by the following
+lemma, which is proved in the Hilbert subsection.
+
+```tex
+% witness-label: main.10classical.hilbert-strong-reference
+One of the main assumptions of \Cref{two-sided-metric-space-Carleson}, concerning the operator $T_r$ defined in \eqref{def-T-r}, is verified by the following lemma, which is proved in \Cref{10hilbert}.
+```
+
+:::lemma_ "Hilbert-strong-2-2" (lean := "Hilbert_strong_2_2")
+Uses {uses "modulated-averaged-projection"}[],
+{uses "integrable-bump-convolution"}[], and
+{uses "Dirichlet-approximation"}[].
+Let $`0<r`. Let $`f` be a bounded measurable function on $`\mathbb{R}`.
+Then
+$$`\|H_rf\|_2\le 2^9\|f\|_2,`
+where
+$$`H_rf(x):=T_rf(x)=\int_{r\le |x-y|}\kappa(x-y)f(y)\,dy.`
+:::
+
+```tex "Hilbert-strong-2-2" (slot := statement)
+\begin{lemma}[Hilbert strong 2 2]
+    \label{Hilbert-strong-2-2}
+    \uses{modulated-averaged-projection,integrable-bump-convolution,Dirichlet-approximation}
+    \leanok
+    \lean{Hilbert_strong_2_2}
+    Let $0<r$. Let $f$ be a bounded, measurable function on $\mathbb{R}$. Then
+    \begin{equation}
+        \label{eq-Hr-L2-bound}
+        \|H_rf\|_{2}\leq 2^{9} \|f\|_2,
+    \end{equation}
+    where
+    \begin{equation}
+        \label{def-H-r}
+        H_r f(x) := T_r f(x) = \int_{r\le |x-y|} \kappa(x-y) f(y) \, dy
+    \end{equation}
+\end{lemma}
+```
+
+The next lemma verifies that the collection $`\mathfrak{A}` of modulation
+functions in our application of {bpref "metric-space-Carleson"}[] satisfies
+the van der Corput condition. It is proved in the van der Corput subsection.
+
+```tex
+% witness-label: main.10classical.vdc-reference
+The next lemma will be used to verify that the collection $\Mf$ of modulation functions in our application of \Cref{metric-space-Carleson} satisfies the condition \eqref{eq-vdc-cond}.
+It is proved in \Cref{10vandercorput}.
+```
+
+:::lemma_ "van-der-Corput" (lean := "van_der_Corput")
+Let $`\alpha\le\beta` be real numbers. Let
+$`g:\mathbb{R}\to\mathbb{C}` be a measurable function and assume
+$$`\|g\|_{\operatorname{Lip}(\alpha,\beta)}
+:=\sup_{\alpha\le x\le\beta}|g(x)|
++\frac{|\beta-\alpha|}{2}
+\sup_{\alpha\le x<y\le\beta}\frac{|g(y)-g(x)|}{|y-x|}<\infty.`
+Then, for every $`n\in\mathbb{Z}`,
+$$`\int_\alpha^\beta g(x)e^{inx}\,dx
+\le 2\pi|\beta-\alpha|\|g\|_{\operatorname{Lip}(\alpha,\beta)}
+(1+|n||\beta-\alpha|)^{-1}.`
+:::
+
+```tex "van-der-Corput" (slot := statement)
+\begin{lemma}[van der Corput]
+\label{van-der-Corput}
+\leanok
+\lean{van_der_Corput}
+    Let $\alpha\le\beta$ be real numbers. Let $g:\R\to \C$ be a measurable function and assume
+    \begin{equation}
+        \|g\|_{Lip(\alpha,\beta)}:=\sup_{\alpha\le x\le \beta}|g(x)|+\frac{|\beta-\alpha|}{2}
+        \sup_{\alpha\le x<y\le \beta} \frac {|g(y)-g(x)|}{|y-x|}<\infty\, .
+    \end{equation}
+    Then for any $\alpha \le \beta$ and $n\in\Z$ we have
+    \begin{equation}
+        \int _{\alpha}^{\beta} g(x) e^{inx}\, dx\le 2\pi |\beta-\alpha|\|g\|_{Lip(\alpha,\beta)}(1+|n||\beta-\alpha|)^{-1}\, .
+    \end{equation}
+
+\end{lemma}
+```
+
+We close this section with five lemmas that are used across the following
+subsections.
+
+```tex
+% witness-label: main.10classical.shared-lemmas-intro
+We close this section with five lemmas that are used
+across the following subsections.
+```
+
+:::lemma_ "Dirichlet-kernel" (lean := "dirichletKernel_eq, partialFourierSum_eq_conv_dirichletKernel")
+For every $`2\pi`-periodic bounded measurable $`f` and every $`N\ge 0`,
+$$`S_Nf(x)=\frac{1}{2\pi}\int_0^{2\pi} f(y)K_N(x-y)\,dy,`
+where $`K_N` is the $`2\pi`-periodic continuous function on
+$`\mathbb{R}` given by
+$$`\sum_{n=-N}^N e^{inx'}.`
+If $`e^{ix'}\ne 1`, then
+$$`K_N(x')=\frac{e^{iNx'}}{1-e^{-ix'}}
++\frac{e^{-iNx'}}{1-e^{ix'}}.`
+:::
+
+```tex "Dirichlet-kernel" (slot := statement)
+\begin{lemma}[Dirichlet kernel]
+\label{Dirichlet-kernel}
+\leanok
+\lean{dirichletKernel_eq, partialFourierSum_eq_conv_dirichletKernel}
+We have for every $2\pi$-periodic bounded measurable $f$ and every $N\ge 0$
+\begin{equation}
+    S_Nf(x)=\frac 1{2\pi}\int_{0}^{2\pi}f(y) K_N(x-y)\, dy
+\end{equation}
+where $K_N$ is the $2\pi$-periodic continuous function of
+$\R$ given by
+\begin{equation}\label{eqksumexp}
+\sum_{n=-N}^N e^{in x'}\, .
+\end{equation}
+We have for $e^{ix'}\neq 1$ that
+\begin{equation}\label{eqksumhil}
+    K_N(x')=\frac{e^{iNx'}}{1-e^{-ix'}}
+      +\frac {e^{-iNx'}}{1-e^{ix'}} \, .
+\end{equation}
+
+
+\end{lemma}
+```
+
+:::proof "Dirichlet-kernel"
+By definitions and interchange of sum and integral,
+$$`S_Nf(x)=\sum_{n=-N}^N \widehat f_n e^{inx}
+=\sum_{n=-N}^N\frac{1}{2\pi}\int_0^{2\pi}
+f(y)e^{in(x-y)}\,dy
+=\frac{1}{2\pi}\int_0^{2\pi} f(y)\sum_{n=-N}^Ne^{in(x-y)}\,dy.`
+This proves the first statement. For the second, a telescoping sum gives
+$$`\left(e^{\frac12 ix'}-e^{-\frac12 ix'}\right)
+\sum_{n=-N}^Ne^{inx'}
+= e^{(N+\frac12)ix'}-e^{-(N+\frac12)ix'}.`
+If $`e^{ix'}\ne 1`, the first factor is nonzero, so division gives the
+displayed formula for $`K_N(x')`.
+:::
+
+```tex "Dirichlet-kernel" (slot := proof)
+\begin{proof}
+\leanok
+We have by definitions and interchanging sum and integral
+   \begin{equation*}
+        S_Nf(x)=\sum_{n=-N}^N \widehat{f}_n e^{inx}
+    \end{equation*}
+       \begin{equation*}
+    =\sum_{n=-N}^N \frac 1{2\pi}\int_{0}^{2\pi}
+    f(x) e^{in(x-y)}\, dy
+    \end{equation*}
+ \begin{equation}\label{eq-expsum}
+     =\frac 1{2\pi}\int_{0}^{2\pi}
+    f(y) \sum_{n=-N}^N e^{in(x-y)}\, dy\, .
+ \end{equation}
+This proves the first statement of the lemma.
+By a telescoping sum, we have for every $x'\in \R$
+\begin{equation}
+    \left( e^{\frac 12 ix'}-e^{-\frac 12 ix'}\right) \sum_{n=-N}^N e^{inx'}= e^{(N+\frac 12) ix'}-e^{-(N+\frac 12) ix'}\, .
+\end{equation}
+If $e^{ix'}\neq 1$, the first factor on the left-hand side is not $0$ and we may divide by this factor to obtain
+\begin{equation}
+      \sum_{n=-N}^N e^{inx'}= \frac{e^{i(N+\frac 1 2)x'}}{e^{\frac 12 ix'}-e^{-\frac 12ix'}}
+      -\frac{e^{-i(N+\frac 1 2)x'}}{e^{\frac 12 ix'}-e^{-\frac 12ix'}}
+       =\frac{e^{iNx'}}{1-e^{-ix'}}
+      +\frac {e^{-iNx'}}{1-e^{ix'}}\, .
+\end{equation}
+This proves the second part of the lemma.
+\end{proof}
+```
+
+:::lemma_ "lower-secant-bound" (lean := "lower_secant_bound'")
+Let $`\eta>0` and
+$`-2\pi+\eta\le x\le 2\pi-\eta` with $`|x|\ge\eta`. Then
+$$`|1-e^{ix}|\ge \frac{2}{\pi}\eta.`
+:::
+
+```tex "lower-secant-bound" (slot := statement)
+\begin{lemma}[lower secant bound]
+    \label{lower-secant-bound}
+    \leanok
+    \lean{lower_secant_bound'}
+    Let $\eta>0$ and $-2\pi +\eta \le x\le 2\pi-\eta$ with $|x|\ge \eta$. Then
+    \begin{equation}
+        |1-e^{ix}|\ge \frac{2}{\pi} \eta
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "lower-secant-bound"
+We have
+$$`|1-e^{ix}|=\sqrt{(1-\cos x)^2+\sin^2x}\ge |\sin x|.`
+For $`0\le x\le \pi/2`, concavity of $`\sin` on $`[0,\pi]`,
+together with $`\sin(0)=0` and $`\sin(\pi/2)=1`, gives
+$$`|\sin x|\ge \frac{2}{\pi}x\ge \frac{2}{\pi}\eta.`
+The remaining intervals
+$`x\in \frac{m\pi}{2}+[0,\frac{\pi}{2}]` for
+$`m\in\{-4,-3,-2,-1,1,2,3\}` are handled similarly.
+:::
+
+```tex "lower-secant-bound" (slot := proof)
+\begin{proof}
+    \leanok
+    We have
+    $$
+        |1 - e^{ix}| = \sqrt{(1 - \cos(x))^2 + \sin^2(x)} \ge |\sin(x)|\,.
+    $$
+    If $0 \le x \le \frac{\pi}{2}$, then we have from concavity of $\sin$ on $[0, \pi]$ and $\sin(0) = 0$ and $\sin(\frac{\pi}{2}) = 1$
+    $$
+        |\sin(x)| \ge \frac{2}{\pi} x \ge \frac{2}{\pi} \eta\,.
+    $$
+    When $x\in \frac{m\pi}{2} + [0, \frac{\pi}{2}]$ for $m \in \{-4, -3, -2, -1, 1, 2, 3\}$ one can argue similarly.
+\end{proof}
+```
+
+The following lemma will be proved in the spectral-projection subsection.
+
+```tex
+% witness-label: main.10classical.spectral-projection-reference
+The following lemma will be proved in \Cref{10projection}.
+```
+
+:::lemma_ "spectral-projection-bound" (lean := "spectral_projection_bound")
+Let $`f` be a bounded $`2\pi`-periodic measurable function. Then, for all
+$`N\ge 0`,
+$$`\|S_Nf\|_{L^2[0,2\pi]}\le \|f\|_{L^2[0,2\pi]}.`
+:::
+
+```tex "spectral-projection-bound" (slot := statement)
+\begin{lemma}[spectral projection bound]
+\label{spectral-projection-bound}
+\leanok
+\lean{spectral_projection_bound}
+    Let $f$ be a bounded $2\pi$-periodic measurable function. Then, for all $N\ge 0$
+   \begin{equation}\label{snbound}
+   \|S_Nf\|_{L^2[0, 2\pi]} \le \|f\|_{L^2[0, 2\pi]}.
+   \end{equation}
+\end{lemma}
+```
+
+:::lemma_ "Hilbert-kernel-bound" (lean := "Hilbert_kernel_bound")
+Uses {uses "lower-secant-bound"}[].
+For $`x,y\in\mathbb{R}` with $`x\ne y`,
+$$`|\kappa(x-y)|\le 2^2(2|x-y|)^{-1}.`
+:::
+
+```tex "Hilbert-kernel-bound" (slot := statement)
+\begin{lemma}[Hilbert kernel bound]
+\label{Hilbert-kernel-bound}
+\leanok
+\lean{Hilbert_kernel_bound}
+\uses{lower-secant-bound}
+    For $x,y\in \R$ with $x\neq y$ we have
+    \begin{equation}\label{eqcarl30}
+        |\kappa(x-y)|\le 2^2(2|x-y|)^{-1}\, .
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "Hilbert-kernel-bound"
+Fix $`x\ne y`. If $`\kappa(x-y)=0`, the estimate is immediate. Otherwise
+$`0<|x-y|<1`, and
+$$`|\kappa(x-y)|=
+\left|\frac{1-|x-y|}{1-e^{i(x-y)}}\right|.`
+Using {bpref "lower-secant-bound"}[],
+$$`|\kappa(x-y)|\le \frac{1}{|1-e^{i(x-y)}|}
+\le \frac{2}{|x-y|},`
+which proves the stated bound.
+:::
+
+```tex "Hilbert-kernel-bound" (slot := proof)
+\begin{proof}
+\leanok
+    Fix $x\neq y$. If $\kappa(x-y)$ is zero, then \eqref{eqcarl30} is evident. Assume $\kappa(x-y)$ is not zero, then $0<|x-y|<1$.
+    We have
+\begin{equation}\label{eqcarl31}
+|\kappa(x-y)|=\left|\frac {1-|x-y|}{1-e^{i(x-y)}}\right|\, .
+\end{equation}
+We estimate
+with \Cref{lower-secant-bound}
+\begin{equation}\label{eqcarl311}
+|\kappa(x-y)|\le \frac {1}{|1-e^{i(x-y)}|}\le \frac 2{|x-y|}\, .
+\end{equation}
+This proves \eqref{eqcarl30} in the given case and completes the proof of the lemma.
+\end{proof}
+```
+
+:::lemma_ "Hilbert-kernel-regularity" (lean := "Hilbert_kernel_regularity")
+Uses {uses "lower-secant-bound"}[].
+For $`x,y,y'\in\mathbb{R}` with $`x\ne y,y'` and
+$$`2|y-y'|\le |x-y|,`
+we have
+$$`|\kappa(x-y)-\kappa(x-y')|
+\le 2^8\frac{1}{|x-y|}\frac{|y-y'|}{|x-y|}.`
+:::
+
+```tex "Hilbert-kernel-regularity" (slot := statement)
+\begin{lemma}[Hilbert kernel regularity]
+\label{Hilbert-kernel-regularity}
+\leanok
+\lean{Hilbert_kernel_regularity}
+\uses{lower-secant-bound}
+    For $x,y,y'\in \R$ with $x\neq y,y'$ and
+    \begin{equation}
+        \label{eq-close-hoelder}
+        2|y-y'|\le |x-y|\, ,
+    \end{equation}
+    we have
+    \begin{equation}\label{eqcarl301}
+        |\kappa(x-y) - \kappa(x-y')|\le 2^{8}\frac{1}{|x-y|} \frac{|y-y'|}{|x-y|}\, .
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "Hilbert-kernel-regularity"
+Upon replacing $`y` by $`y-x` and $`y'` by $`y'-x` in the left-hand side of
+the closeness assumption, we can assume that $`x=0`. Then the assumption
+implies that $`y` and $`y'` have the same sign. Since
+$`\kappa(y)=\bar\kappa(-y)`, we can assume that they are both positive, and
+then it follows that
+$$`\frac{y}{2}\le y'.`
+We distinguish four cases.
+
+If $`y,y'\le 1`, then
+$$`|\kappa(-y)-\kappa(-y')|
+=\left|\frac{1-y}{1-e^{-iy}}-\frac{1-y'}{1-e^{-iy'}}\right|`
+and by the fundamental theorem of calculus this equals
+$$`\left|\int_{y'}^y
+\frac{-1+e^{-it}+i(1-t)e^{it}}{(1-e^{-it})^2}\,dt\right|.`
+Using $`y'\ge y/2` and {bpref "lower-secant-bound"}[], we bound this by
+$$`\le |y-y'|\sup_{\frac{y}{2}\le t\le 1}\frac{3}{|1-e^{-it}|^2}
+\le 3|y-y'|\left(2\frac{2}{y}\right)^2
+\le 2^6\frac{|y-y'|}{|y|^2}.`
+If $`y\le 1` and $`y'>1`, then $`\kappa(-y')=0` and the first case gives
+$$`|\kappa(-y)-\kappa(-y')|
+=|\kappa(-y)-\kappa(-1)|
+\le 2^6\frac{|y-1|}{|y|^2}
+\le 2^6\frac{|y-y'|}{|y|^2}.`
+Similarly, if $`y>1` and $`y'\le 1`, then $`\kappa(-y)=0` and the first
+case gives
+$$`|\kappa(-y)-\kappa(-y')|
+=|\kappa(-y')-\kappa(-1)|
+\le 2^6\frac{|y'-1|}{|y'|^2}
+\le 2^6\frac{|y-y'|}{|y'|^2}.`
+Using again $`y'\ge y/2`, this is bounded by
+$$`\le 2^6\frac{|y-y'|}{|y/2|^2}
+=2^8\frac{|y-y'|}{|y|^2}.`
+Finally, if $`y,y'>1`, then
+$$`|\kappa(-y)-\kappa(-y')|=0
+\le 2^8\frac{|y-y'|}{|y|^2}.`
+:::
+
+```tex "Hilbert-kernel-regularity" (slot := proof)
+\begin{proof}
+\leanok
+    Upon replacing $y$ by $y-x$ and $y'$ by $y'-x$ on the left-hand side of \eqref{eq-close-hoelder}, we can assume that $x = 0$. Then the assumption \eqref{eq-close-hoelder} implies that $y$ and $y'$ have the same sign. Since $\kappa(y) = \bar \kappa(-y)$ we can assume that they are both positive. Then it follows from \eqref{eq-close-hoelder} that
+    $$
+        \frac{y}{2} \le y' \,.
+    $$
+    We distinguish four cases. If $y, y' \le 1$, then we have
+    $$
+        |\kappa(-y) - \kappa(-y')| = \left| \frac{1 - y}{1- e^{-iy}} - \frac{1 - y'}{1- e^{-iy'}}\right|
+    $$
+    and by the fundamental theorem of calculus
+    $$
+        = \left| \int_{y'}^{y} \frac{-1 + e^{-it} + i(1-t)e^{it}}{(1 - e^{-it})^2} \,dt \right|\,.
+    $$
+    Using $y' \ge \frac{y}{2}$ and \Cref{lower-secant-bound}, we bound this by
+    $$
+        \le |y - y'| \sup_{\frac{y}{2} \le t \le 1} \frac{3}{|1 - e^{-it}|^2} \le 3 |y-y'| (2 \frac{2}{y})^2 \le 2^{6} \frac{|y-y'|}{|y|^2}\,.
+    $$
+    If $y \le 1$ and $y' > 1$, then $\kappa(-y') = 0$ and we have from the first case
+    $$
+        |\kappa(-y) - \kappa(-y')| = |\kappa(-y) - \kappa(-1)| \le 2^{6} \frac{|y-1|}{|y|^2} \le 2^{6} \frac{|y-y'|}{|y|^2}\,.
+    $$
+    Similarly, if $y > 1$ and $y' \le 1$, then $\kappa(-y) = 0$ and we have from the first case
+    $$
+        |\kappa(-y) - \kappa(-y')| = |\kappa(-y') - \kappa(-1)| \le 2^{6} \frac{|y'-1|}{|y'|^2} \le 2^{6} \frac{|y-y'|}{|y'|^2}\,.
+    $$
+    Using again $y' \ge \frac{y}{2}$, we bound this by
+    $$
+        \le 2^{6} \frac{|y-y'|}{|y / 2|^2} = 2^{8} \frac{|y-y'|}{|y|^2}
+    $$
+    Finally, if $y, y' > 1$ then
+    $$
+        |\kappa(-y) - \kappa(-y')| = 0 \le 2^{8} \frac{|y-y'|}{|y|^2}\,.
+    $$
+\end{proof}
+```
+
 ## Smooth functions
 
 :::lemma_ "fourier-coeff-derivative" (lean := "fourierCoeffOn_of_hasDerivAt")
@@ -15905,5 +16360,584 @@ Analogously, we get the same estimate for $|E_2|$. This completes the proof usin
 \proves{control-approximation-effect}
 \leanok
     \Cref{control-approximation-effect} follows directly from \Cref{partial-Fourier-sums-of-small} with $\delta:=\epsilon'$.
+\end{proof}
+```
+
+## Carleson on the real line
+
+We prove {bpref "real-Carleson"}[].
+
+```tex
+% witness-label: main.10carleson.intro
+We prove \Cref{real-Carleson}.
+```
+
+Consider the standard distance function $`\rho(x,y)=|x-y|` on the real
+line $`\mathbb{R}`.
+
+```tex
+% witness-label: main.10carleson.standard-distance
+Consider the standard distance function
+\begin{equation}
+    \rho(x,y)=|x-y|
+\end{equation}
+on the real line $\R$.
+```
+
+:::lemma_ "real-line-metric" (lean := "instProperSpaceReal, locallyCompact_of_proper, Real.instCompleteSpace")
+The space $`(\mathbb{R},\rho)` is a complete locally compact metric space.
+:::
+
+```tex "real-line-metric" (slot := statement)
+\begin{lemma}[real line metric]
+\label{real-line-metric}
+\leanok
+\lean{instProperSpaceReal, locallyCompact_of_proper, Real.instCompleteSpace}
+The space $(\R,\rho)$ is a complete locally compact metric space.
+\end{lemma}
+```
+
+:::proof "real-line-metric"
+This is part of the Lean library.
+:::
+
+```tex "real-line-metric" (slot := proof)
+\begin{proof}
+    \leanok
+    This is part of the Lean library.
+\end{proof}
+```
+
+:::lemma_ "real-line-ball" (lean := "Real.ball_eq_Ioo")
+For $`x\in\mathbb{R}` and $`R>0`, the ball $`B(x,R)` is the interval
+$`(x-R,x+R)`.
+:::
+
+```tex "real-line-ball" (slot := statement)
+\begin{lemma}[real line ball]
+\label{real-line-ball}
+    \leanok
+    \lean{Real.ball_eq_Ioo}
+    For $x\in R$ and $R>0$, the ball $B(x,R)$ is the interval $(x-R,x+R)$
+\end{lemma}
+```
+
+:::proof "real-line-ball"
+Let $`x'\in B(x,R)`. By definition, $`|x'-x|<R`, hence
+$`x'<x+R` and $`x'>x-R`. Thus $`x'\in (x-R,x+R)`. Conversely, if
+$`x'\in(x-R,x+R)`, then $`x'-x<R` and $`x-x'<R`, so $`|x'-x|<R` and
+$`x'\in B(x,R)`.
+:::
+
+```tex "real-line-ball" (slot := proof)
+\begin{proof}
+\leanok
+Let $x'\in B(x,R)$. By definition of the ball,
+$|x'-x|<R$. It follows that $x'-x<R$ and $x-x'<R$.
+It follows $x'<x+R$ and $x'>x-R$. This implies
+$x'\in (x-R,x+R)$.
+Conversely, let $x'\in (x-R,x+R)$. Then
+$x'<x+R$ and $x'>x-R$. It follows that
+$x'-x<R$ and $x-x'<R$. It follows that $|x'-x|<R$,
+hence $x'\in B(x,R)$.
+This proves the lemma.
+\end{proof}
+```
+
+We consider the Lebesgue measure $`\mu` on $`\mathbb{R}`.
+
+```tex
+% witness-label: main.10carleson.lebesgue-measure
+We consider the Lebesgue measure $\mu$ on $\R$.
+```
+
+:::lemma_ "real-line-measure" (lean := "instIsAddHaarMeasureVolume")
+The measure $`\mu` is a sigma-finite nonzero Radon-Borel measure on
+$`\mathbb{R}`.
+:::
+
+```tex "real-line-measure" (slot := statement)
+\begin{lemma}[real line measure]
+\label{real-line-measure}
+\leanok
+\lean{instIsAddHaarMeasureVolume}
+    The measure $\mu$ is a sigma-finite non-zero
+    Radon-Borel measure on $\R$.
+\end{lemma}
+```
+
+:::proof "real-line-measure"
+This is part of the Lean library.
+:::
+
+```tex "real-line-measure" (slot := proof)
+\begin{proof}
+    \leanok
+    This is part of the Lean library.
+\end{proof}
+```
+
+:::lemma_ "real-line-ball-measure" (lean := "Real.volume_ball")
+Uses {uses "real-line-ball"}[].
+For every $`x\in\mathbb{R}` and $`R>0`,
+$$`\mu(B(x,R))=2R.`
+:::
+
+```tex "real-line-ball-measure" (slot := statement)
+\begin{lemma}[real line ball measure]
+\label{real-line-ball-measure}
+\uses{real-line-ball}
+    \leanok
+    \lean{Real.volume_ball}
+    We have for every $x\in \R$ and $R>0$
+    \begin{equation}
+        \mu(B(x,R))=2R\, .
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "real-line-ball-measure"
+By {bpref "real-line-ball"}[],
+$$`\mu(B(x,R))=\mu((x-R,x+R))=2R.`
+:::
+
+```tex "real-line-ball-measure" (slot := proof)
+\begin{proof}
+\leanok
+We have with \Cref{real-line-ball}
+\begin{equation}
+    \mu(B(x,R))=\mu((x-R,x+R))=2R\, .
+\end{equation}
+\end{proof}
+```
+
+:::lemma_ "real-line-doubling" (lean := "MeasureTheory.InnerProductSpace.IsDoubling")
+Uses {uses "real-line-ball-measure"}[].
+For every $`x\in\mathbb{R}` and $`R>0`,
+$$`\mu(B(x,2R))=2\mu(B(x,R)).`
+:::
+
+```tex "real-line-doubling" (slot := statement)
+\begin{lemma}[real line doubling]
+\label{real-line-doubling}
+\leanok
+\lean{MeasureTheory.InnerProductSpace.IsDoubling}
+\uses{real-line-ball-measure}
+    We have for every $x\in \R$ and $R>0$
+    \begin{equation}
+        \mu(B(x,2R))=2\mu(B(x,R))\, .
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "real-line-doubling"
+By {bpref "real-line-ball-measure"}[],
+$$`\mu(B(x,2R))=4R=2\mu(B(x,R)).`
+:::
+
+```tex "real-line-doubling" (slot := proof)
+\begin{proof}
+    \leanok
+    We have with \Cref{real-line-ball-measure}
+\begin{equation}
+    \mu(B(x,2R)=4R=2\mu(B(x,R))\, .
+\end{equation}
+This proves the lemma.
+\end{proof}
+```
+
+The preceding four lemmas show that $`(\mathbb{R},\rho,\mu,4)` is a doubling
+metric measure space. Indeed, we even show that
+$`(\mathbb{R},\rho,\mu,1)` is a doubling metric measure space, but we may
+relax the estimate in {bpref "real-line-doubling"}[] to conclude that
+$`(\mathbb{R},\rho,\mu,4)` is a doubling metric measure space.
+
+```tex
+% witness-label: main.10carleson.doubling-summary
+The preceding four lemmas show that $(\R, \rho, \mu, 4)$ is a doubling metric measure space. Indeed, we even show
+that $(\R, \rho, \mu, 1)$ is a doubling metric measure space, but we may relax the estimate in \Cref{real-line-doubling} to conclude that $(\R, \rho, \mu, 4)$
+is a doubling metric measure space.
+```
+
+For each $`n\in\mathbb{Z}` define
+$`\mathfrak{a}_n:\mathbb{R}\to\mathbb{R}` by
+$`\mathfrak{a}_n(x)=nx`. Let $`\mathfrak{A}` be the collection
+$`\{\mathfrak{a}_n:n\in\mathbb{Z}\}`. For every $`n\in\mathbb{Z}` we have
+$`\mathfrak{a}_n(0)=0`. Define
+$$`d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m):=2R|n-m|.`
+
+```tex
+% witness-label: main.10carleson.frequency-setup
+For each $n\in \mathbb{Z}$ define
+$\mfa_n:\R\to \R$ by
+\begin{equation}
+    \mfa_n(x)=nx\, .
+\end{equation}
+
+
+Let $\Mf$ be the collection $\{\mfa_n, n\in \mathbb{Z}\}$.
+Note that for every $n\in \mathbb{Z}$ we have $\mfa_n(0)=0$.
+Define
+\begin{equation}
+    \label{eqcarl4}
+    d_{B(x,R)}(\mfa_n, \mfa_m) := 2R|n-m|\,.
+\end{equation}
+```
+
+:::lemma_ "frequency-metric" (lean := "instFunctionDistancesReal")
+For every $`R>0` and $`x\in\mathbb{R}`, the function
+$`d_{B(x,R)}` is a metric on $`\mathfrak{A}`.
+:::
+
+```tex "frequency-metric" (slot := statement)
+\begin{lemma}[frequency metric]
+    \label{frequency-metric}
+    \leanok
+    \lean{instFunctionDistancesReal}
+    For every $R > 0$ and $x \in X$, the function $d_{B(x,R)}$ is a metric on $\Mf$.
+\end{lemma}
+```
+
+:::proof "frequency-metric"
+This follows immediately from the fact that the standard metric on
+$`\mathbb{Z}` is a metric.
+:::
+
+```tex "frequency-metric" (slot := proof)
+\begin{proof}
+    \leanok
+    This follows immediately from the fact that the standard metric on $\mathbb{Z}$ is a metric.
+\end{proof}
+```
+
+:::lemma_ "oscillation-control" (lean := "oscillation_control")
+For every $`R>0` and $`x\in\mathbb{R}`, and for all
+$`n,m\in\mathbb{Z}`,
+$$`\sup_{y,y'\in B(x,R)} |ny-ny'-my+my'|\le 2|n-m|R.`
+:::
+
+```tex "oscillation-control" (slot := statement)
+\begin{lemma}[oscillation control]
+\label{oscillation-control}
+\leanok
+\lean{oscillation_control}
+    For every $R > 0$ and $x \in X$, and for all $n, m \in \mathbb{Z}$, we have
+    \begin{equation}\label{eqcarl2}
+       \sup_{y,y'\in B(x,R)}|ny-ny'-my+my'|\le 2|n-m|R\, .
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "oscillation-control"
+The right-hand side is the supremum of
+$$`|(n-m)(y-x)-(n-m)(y'-x)|`
+over $`y,y'\in B(x,R)`. The estimate follows from the triangle inequality.
+:::
+
+```tex "oscillation-control" (slot := proof)
+\begin{proof}
+\leanok
+    The right hand side of \eqref{eqcarl2} equals
+    $$
+        \sup_{y,y'\in B(x,R)}|(n-m)(y-x)-(n-m)(y'-x)|\,.
+    $$
+    The lemma then follows from the triangle inequality.
+\end{proof}
+```
+
+:::lemma_ "frequency-monotone" (lean := "frequency_monotone")
+For any $`x,x'\in\mathbb{R}` and $`R,R'>0` with
+$`B(x,R)\subset B(x',R')`, and for any $`n,m\in\mathbb{Z}`,
+$$`d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m)
+\le d_{B(x',R')}(\mathfrak{a}_n,\mathfrak{a}_m).`
+:::
+
+```tex "frequency-monotone" (slot := statement)
+\begin{lemma}[frequency monotone]
+\label{frequency-monotone}
+\leanok
+\lean{frequency_monotone}
+
+    For any $x, x' \in X$ and $R, R' > 0$ with $B(x,R) \subset B(x, R')$, and for any $n, m \in \mathbb{Z}$
+    $$
+        d_{B(x,R)}(\mfa_n, \mfa_m) \le d_{B(x',R')}(\mfa_n, \mfa_m)\,.
+    $$
+\end{lemma}
+```
+
+:::proof "frequency-monotone"
+This follows immediately from the definition of $`d_{B(x,R)}` and
+$`R\le R'`.
+:::
+
+```tex "frequency-monotone" (slot := proof)
+\begin{proof}
+\leanok
+    This follows immediately from the definition \eqref{eqcarl4} and $R \le R'$.
+\end{proof}
+```
+
+:::lemma_ "frequency-ball-doubling" (lean := "frequency_ball_doubling")
+Uses {uses "frequency-metric"}[].
+For any $`x,x'\in\mathbb{R}` and $`R>0` with
+$`x\in B(x',2R)`, and any $`n,m\in\mathbb{Z}`,
+$$`d_{B(x',2R)}(\mathfrak{a}_n,\mathfrak{a}_m)
+\le 2d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m).`
+:::
+
+```tex "frequency-ball-doubling" (slot := statement)
+\begin{lemma}[frequency ball doubling]
+\label{frequency-ball-doubling}
+\leanok
+\lean{frequency_ball_doubling}
+\uses{frequency-metric}
+  For any $x,x'\in \R$ and $R>0$ with
+   $x\in B(x',2R)$ and any $n,m\in \mathbb{Z}$, we have
+\begin{equation}\label{firstdb1}
+    d_{B(x',2R)}(\mfa_n,\mfa_m)\le 2 d_{B(x,R)}(\mfa_n,\mfa_m) \, .
+\end{equation}
+\end{lemma}
+```
+
+:::proof "frequency-ball-doubling"
+With the definition of $`d_{B(x,R)}`, both sides are equal to
+$`4R|n-m|`.
+:::
+
+```tex "frequency-ball-doubling" (slot := proof)
+\begin{proof}
+\leanok
+With \eqref{eqcarl4}, both sides of \eqref{firstdb1} are equal to $4R|n-m|$. This proves the lemma.
+\end{proof}
+```
+
+:::lemma_ "frequency-ball-growth" (lean := "frequency_ball_growth")
+For any $`x,x'\in\mathbb{R}` and $`R>0` with
+$`B(x,R)\subset B(x',2R)`, and any $`n,m\in\mathbb{Z}`,
+$$`2d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m)
+\le d_{B(x',2R)}(\mathfrak{a}_n,\mathfrak{a}_m).`
+:::
+
+```tex "frequency-ball-growth" (slot := statement)
+\begin{lemma}[frequency ball growth]
+\label{frequency-ball-growth}
+\leanok
+\lean{frequency_ball_growth}
+    For any $x,x'\in \R$ and $R>0$ with
+   $B(x,R)\subset B(x',2R)$ and any $n,m\in \mathbb{Z}$, we have
+\begin{equation}\label{seconddb1}
+    2d_{B(x,R)}(\mfa_n,\mfa_m)\le d_{B(x',2R)}(\mfa_n,\mfa_m) \, .
+\end{equation}
+\end{lemma}
+```
+
+:::proof "frequency-ball-growth"
+With the definition of $`d_{B(x,R)}`, both sides are equal to
+$`4R|n-m|`.
+:::
+
+```tex "frequency-ball-growth" (slot := proof)
+\begin{proof}
+\leanok
+    With \eqref{eqcarl4}, both sides of \eqref{firstdb1} are equal to $4R|n-m|$. This proves the lemma.
+\end{proof}
+```
+
+:::lemma_ "integer-ball-cover" (lean := "integer_ball_cover")
+For every $`x\in\mathbb{R}`, $`R>0`, $`n\in\mathbb{Z}`, and $`R'>0`,
+there exist $`m_1,m_2,m_3\in\mathbb{Z}` such that
+$$`B'\subset B_1\cup B_2\cup B_3,`
+where
+$$`B'=\{\mathfrak{a}\in\mathfrak{A}:d_{B(x,R)}(\mathfrak{a},\mathfrak{a}_n)<2R'\}`
+and, for $`j=1,2,3`,
+$$`B_j=\{\mathfrak{a}\in\mathfrak{A}:d_{B(x,R)}(\mathfrak{a},\mathfrak{a}_{m_j})<R'\}.`
+:::
+
+```tex "integer-ball-cover" (slot := statement)
+\begin{lemma}[integer ball cover]
+    \label{integer-ball-cover}
+    \leanok
+    \lean{integer_ball_cover}
+    For every $x\in \R$ and $R>0$ and every
+    $n\in \mathbb{Z}$ and $R'>0$,
+    there exist $m_1, m_2, m_3\in \mathbb{Z}$
+    such that
+    \begin{equation}\label{eqcarl5}
+        B'\subset B_1\cup B_2\cup B_3\, ,
+    \end{equation}
+where
+\begin{equation}
+B'= \{ \mfa \in \Mf: d_{B(x,R)}(\mfa, \mfa_n)<2R'\}
+\end{equation}
+and for $j=1,2,3$
+\begin{equation}
+  B_j=
+     \{ \mfa \in \Mf: d_{B(x,R)}(\mfa, \mfa_{m_j})<R'\}
+     \, .
+\end{equation}
+\end{lemma}
+```
+
+:::proof "integer-ball-cover"
+Let $`m_1` be the largest integer smaller than or equal to
+$`n-\frac{R'}{2R}`. Let $`m_2=n`. Let $`m_3` be the smallest integer larger
+than or equal to $`n+\frac{R'}{2R}`.
+
+Let $`\mathfrak{a}_{n'}\in B'`. Then, with the definition of
+$`d_{B(x,R)}`, we have
+$$`2R|n-n'|<2R'.`
+Assume first $`n'\le m_1`. Then
+$$`R|m_1-n'|=R(m_1-n')=R(m_1-n)+R(n-n')
+<-\frac{R'}{2}+R'=\frac{R'}{2},`
+so $`\mathfrak{a}_{n'}\in B_1`.
+
+Assume next $`m_1<n'<m_3`. Then $`\mathfrak{a}_{n'}\in B_2`.
+
+Assume finally that $`m_3\le n'`. Then
+$$`R|m_3-n'|=R(n'-m_3)=R(n'-n)+R(n-m_3)
+<R'-\frac{R'}{2}=\frac{R'}{2},`
+so $`\mathfrak{a}_{n'}\in B_3`. This completes the proof.
+:::
+
+```tex "integer-ball-cover" (slot := proof)
+\begin{proof}
+\leanok
+Let $m_1$ be the largest integer smaller than
+or equal to
+$n- \frac {R'} {2R}$.
+Let $m_2=n$.
+Let $m_3$ be the smallest integer larger than
+or equal to $n+ \frac {R'} {2R}$.
+
+Let $\mfa_{n'}\in B'$, then with \eqref{eqcarl4},
+we have
+\begin{equation}\label{eqcarl6}
+    2R|n-n'|< 2R'\, .
+\end{equation}
+
+Assume first $n'\le m_1$. With \eqref{eqcarl6}
+we have
+\begin{equation*}
+    R|m_1-n'|=R(m_1-n')=R(m_1-n)+R(n-n')
+\end{equation*}
+\begin{equation}
+    < -\frac{R'}2+R'=-\frac{R'}2\, .
+\end{equation}
+We conclude $\mfa_{n'}\in B_1$.
+
+Assume next $m_1<n'<m_3$. Then
+$\mfa_{n'}\in B_2$.
+
+Assume finally that $m_3\le n'$. With \eqref{eqcarl6}
+we have
+\begin{equation*}
+    R|m_3-n'|=R(n'-m_3)=R(n'-n)+R(n-m_3)
+\end{equation*}
+\begin{equation}
+    < R' -\frac{R'}2=-\frac{R'}2\, .
+\end{equation}
+We conclude $\mfa_{n'}\in B_1$.
+This completes the proof of the lemma.
+\end{proof}
+```
+
+:::lemma_ "real-van-der-Corput" (lean := "real_van_der_Corput")
+Uses {uses "van-der-Corput"}[].
+For any $`x\in\mathbb{R}` and $`R>0`, and any function
+$`\varphi:X\to\mathbb{C}` supported on $`B'=B(x,R)` such that
+$$`\|\varphi\|_{\operatorname{Lip}(B')}
+=\sup_{x\in B'}|\varphi(x)|
++R\sup_{x,y\in B',x\ne y}\frac{|\varphi(x)-\varphi(y)|}{\rho(x,y)}`
+is finite, and for any $`n,m\in\mathbb{Z}`,
+$$`\left|\int_{B'}e(\mathfrak{a}_n(x)-\mathfrak{a}_m(x))
+\varphi(x)\,d\mu(x)\right|
+\le 2\pi\mu(B')\frac{\|\varphi\|_{\operatorname{Lip}(B')}}
+{1+d_{B'}(\mathfrak{a}_n,\mathfrak{a}_m)}.`
+:::
+
+```tex "real-van-der-Corput" (slot := statement)
+\begin{lemma}[real van der Corput]
+\label{real-van-der-Corput}
+\leanok
+\lean{real_van_der_Corput}
+\uses{van-der-Corput}
+    For any $x\in \R$ and $R>0$ and any
+    function $\varphi: X\to \C$ supported on $B'=B(x,R)$
+    such that
+\begin{equation}
+    \|\varphi\|_{\Lip(B')} = \sup_{x \in B'} |\varphi(x)| + R \sup_{x,y \in B', x \neq y} \frac{|\varphi(x) - \varphi(y)|}{\rho(x,y)}
+\end{equation}
+is finite and for any $n,m\in \mathbb{Z}$, we have
+\begin{equation}
+    \label{eq-vdc-cond1}
+    \left|\int_{B'} e(\mfa_n(x)-{\mfa_m(x)}) \varphi(x) d\mu(x)\right|\le 2\pi \mu(B')\frac{\|\varphi\|_{\Lip(B')}}{1+d_{B'}(\mfa_n,\mfa_m)}
+\, .
+\end{equation}
+\end{lemma}
+```
+
+:::proof "real-van-der-Corput"
+Set $`n'=n-m`. We need to prove
+$$`\left|\int_{x-R}^{x+R} e^{in'y}\varphi(y)\,dy\right|
+\le 4\pi R\|\varphi\|_{\operatorname{Lip}(B')}
+(1+2R|n'|)^{-1}.`
+This follows from {bpref "van-der-Corput"}[] with
+$`\alpha=x-R` and $`\beta=x+R`.
+:::
+
+```tex "real-van-der-Corput" (slot := proof)
+\begin{proof}
+    \leanok
+Set $n'=n-m$. Then we have to prove
+\begin{equation}
+    \label{eq-vdc-cond2}
+    \left|\int_{x-R}^{x+R} e^{in'y}\varphi(y) dy\right|\le 4\pi R\|\varphi\|_{\Lip(B')}
+(1+2R|n'|)^{-1}\, .
+\end{equation}
+This follows from \Cref{van-der-Corput} with $\alpha = x - R$ and $\beta = x + R$.
+\end{proof}
+```
+
+:::proof "real-Carleson"
+The preceding chain of lemmas establishes that $`\mathfrak{A}` is a
+cancellative compatible collection of functions on
+$`(\mathbb{R},\rho,\mu,4)`. Some statements are stronger than needed for
+$`a=4`, but can be relaxed to the desired conclusion.
+
+With $`\kappa` as above, define $`K:\mathbb{R}\times\mathbb{R}\to\mathbb{C}`
+by
+$$`K(x,y):=\kappa(x-y).`
+The function $`K` is continuous outside the diagonal $`x=y` and vanishes on
+the diagonal, hence it is measurable.
+
+By {bpref "Hilbert-kernel-bound"}[] and
+{bpref "Hilbert-kernel-regularity"}[], $`K` is a two-sided
+Calderon--Zygmund kernel on $`(\mathbb{R},\rho,\mu,4)`.
+{bpref "Hilbert-strong-2-2"}[] verifies the required truncated-operator
+bound. Thus all assumptions of {bpref "two-sided-metric-space-Carleson"}[]
+are satisfied, and applying that theorem proves {bpref "real-Carleson"}[].
+:::
+
+```tex "real-Carleson" (slot := proof)
+\begin{proof}[Proof of \Cref{real-Carleson}]
+\proves{real-Carleson}
+\leanok
+
+The preceding chain of lemmas establishes that $\Mf$ is a cancellative, compatible collection of functions on $(\R, \rho, \mu, 4)$. Again, some of the statements in these lemmas are stronger than what is needed for $a=4$, but can be relaxed to give the desired conclusion for $a=4$.
+
+With $\kappa$ as near \eqref{eq-hilker}, define
+the function $K:\R\times \R\to \mathbb{C}$ as in Theorem
+\ref{metric-space-Carleson} by
+\begin{equation}
+    K(x,y):=\kappa(x-y)\, .
+\end{equation}
+The function $K$ is continuous outside the diagonal
+$x=y$ and vanishes on the diagonal. Hence it is measurable.
+
+
+By \Cref{Hilbert-kernel-bound,Hilbert-kernel-regularity}, it follows that $K$ is a two-sided Calder\'on--Zygmund kernel on $(\R,\rho,\mu,4)$.
+\Cref{Hilbert-strong-2-2} verifies \eqref{two-sided-Hr-bound-assumption}.
+Thus the assumptions of \Cref{two-sided-metric-space-Carleson} are all satisfied. Applying the Theorem, \Cref{real-Carleson} follows.
+
 \end{proof}
 ```
