@@ -15145,6 +15145,263 @@ This completes the proof.
 
 # Proof of The Classical Carleson Theorem
 
+The convergence of partial Fourier sums is proved in two steps. In the first
+step, we establish convergence on a suitable dense subclass of functions. In
+the second step, one controls the relevant error of approximating a general
+function by a function in the subclass.
+
+```tex
+% witness-label: main.classical-overview.1
+The convergence of partial Fourier sums is proved in
+\Cref{10classical} in two steps. In the first step,
+we establish convergence on a suitable dense subclass of functions. We choose smooth functions as subclass, the convergence is stated in \Cref{convergence-for-smooth} and proved in \Cref{10smooth}.
+In the second step, one controls the relevant error of approximating a general function by a function in
+the subclass. This is stated in \Cref{control-approximation-effect} and proved
+in \Cref{10difference}.
+```
+
+The proof relies on a bound on the real Carleson maximal operator stated in
+{bpref "real-Carleson"}[] and proved in the later real-line subsection, which
+involves showing that the real line fits into the metric-space setting. This
+latter proof refers to the two-sided variant {bpref "two-sided-metric-space-Carleson"}[].
+Two assumptions in {bpref "metric-space-Carleson"}[] require more work. The
+boundedness of the operator $`T_r` defined earlier is established in
+{bpref "Hilbert-strong-2-2"}[], and the cancellative property is verified by
+{bpref "van-der-Corput"}[]. Several further auxiliary lemmas are stated and
+proved in the classical subsection.
+
+```tex
+% witness-label: main.classical-overview.2
+The proof relies on a bound on the real Carleson maximal operator stated in \Cref{real-Carleson} and proved in \Cref{10carleson}, which involves showing that the real line fits into the setting of \Cref{overviewsection}.
+This latter proof refers to the two-sided variant of the Carleson \Cref{two-sided-metric-space-Carleson}. Two assumptions in \Cref{metric-space-Carleson} require more work. The boundedness of the operator $T_r$ defined in \eqref{def-T-r} is established in \ref{Hilbert-strong-2-2}. This lemma is proved in \Cref{10hilbert}.
+The cancellative property is verified by \Cref{van-der-Corput}, which is proved in \Cref{10vandercorput}.
+Several further auxiliary lemmas are stated and proved in \Cref{10classical}, the proof of one of these auxiliary lemmas, \Cref{spectral-projection-bound}, is done in \Cref{10projection}.
+
+All subsections past \Cref{10classical} are mutually independent.
+```
+
+## The classical Carleson theorem
+
+Let a uniformly continuous $`2\pi`-periodic function
+$`f:\mathbb{R}\to \mathbb{C}` and $`\epsilon>0` be given. Let
+$$`C_{a,q} := \frac{2^{474a^3}}{(q-1)^6}`
+denote the constant from {bpref "two-sided-metric-space-Carleson"}[]. Define
+$$`\epsilon' := \frac {\epsilon} {4 C_\epsilon},`
+where
+$$`C_\epsilon = \left(\frac{8}{\pi\epsilon}\right)^\frac{1}{2} C_{4,2} + \pi.`
+Since $`f` is continuous and periodic, $`f` is uniformly continuous. Thus,
+there is a $`0<\delta<\pi` such that for all $`x,x' \in \mathbb{R}` with
+$`|x-x'|\le \delta` we have
+$$`|f(x)-f(x')|\le \epsilon'.`
+Define
+$$`f_0:=f \ast \phi_\delta,`
+where $`\phi_\delta` is a nonnegative smooth bump function with
+$`\supp(\phi_\delta) \subset (-\delta,\delta)` and
+$`\int_\mathbb{R} \phi_\delta(x)\,dx = 1`.
+
+```tex
+% witness-label: main.10classical.setup
+Let a uniformly continuous $2\pi$-periodic function $f:\R\to \mathbb{C}$ and $\epsilon>0$ be given.
+Let
+\begin{equation}
+    C_{a,q} := \frac{2^{474a^3}}{(q-1)^6}
+\end{equation}
+denote the constant from \Cref{two-sided-metric-space-Carleson}.
+Define
+\begin{equation}
+    \epsilon' := \frac {\epsilon} {4 C_\epsilon} \,,
+\end{equation}
+where
+%fixme: replace by C(\epsilon) ?
+\begin{equation*}
+    C_\epsilon = \left(\frac{8}{\pi\epsilon}\right)^\frac{1}{2} C_{4,2} + \pi \,.
+\end{equation*}
+Since $f$ is continuous and periodic, $f$ is uniformly continuous.
+Thus, there is a $0<\delta<\pi$
+such that for all $x,x' \in \R$ with $|x-x'|\le \delta$
+we have
+\begin{equation}\label{uniconbound}
+|f(x)-f(x')|\le \epsilon' \, .
+\end{equation}
+Define
+\begin{equation}\label{def-fzero}
+f_0:=f \ast \phi_\delta,
+\end{equation}
+where $\phi_\delta$ is a nonnegative smooth bump function with $\supp (\phi_\delta) \subset (-\delta, \delta)$ and $\int _\R \phi_\delta (x) \, dx = 1$.
+```
+
+:::lemma_ "smooth-approximation" (lean := "close_smooth_approx_periodic")
+The function $`f_0` is $`2\pi`-periodic. The function $`f_0` is smooth
+and therefore measurable. The function $`f_0` satisfies, for all
+$`x\in \mathbb{R}`,
+$$`|f(x)-f_0(x)|\le \epsilon'.`
+:::
+
+```tex "smooth-approximation" (slot := statement)
+\begin{lemma}[smooth approximation]
+\label{smooth-approximation}
+\leanok
+\lean{close_smooth_approx_periodic}
+    The function $f_0$ is $2\pi$-periodic.
+    The function $f_0$ is smooth (and therefore measurable).
+    The function $f_0$ satisfies for all $x\in \R$:
+    \begin{equation}\label{eq-ffzero}
+    |f(x)-f_0(x)|\le \epsilon' \, ,
+    \end{equation}
+\end{lemma}
+```
+
+:::proof "smooth-approximation"
+Periodicity follows directly from the definitions. The other properties are
+part of the Lean library.
+:::
+
+```tex "smooth-approximation" (slot := proof)
+\begin{proof}
+    \leanok
+    Periodicity follows directly from the definitions. The other properties are part of the Lean library.
+\end{proof}
+```
+
+We prove the smooth convergence statement in the smooth-functions subsection.
+
+```tex
+% witness-label: main.10classical.convergence-reference
+We prove in \Cref{10smooth}:
+```
+
+:::lemma_ "convergence-for-smooth" (lean := "fourierConv_ofTwiceDifferentiable")
+Uses {uses "convergence-for-twice-contdiff"}[].
+There exists some $`N_0 \in \mathbb{N}` such that for all $`N>N_0` and
+$`x\in [0,2\pi]` we have
+$$`|S_N f_0(x)-f_0(x)|\le \frac \epsilon 4.`
+:::
+
+```tex "convergence-for-smooth" (slot := statement)
+\begin{lemma}[convergence for smooth]
+\label{convergence-for-smooth}
+\uses{convergence-for-twice-contdiff}
+\leanok
+\lean{fourierConv_ofTwiceDifferentiable}
+% note: we don't formulate this result in Lean separately from \ref{convergence-for-twice-contdiff}
+    There exists some $N_0 \in \N$ such that for all $N>N_0$ and $x\in [0,2\pi]$ we have
+    \begin{equation}
+        |S_N f_0 (x)- f_0(x)|\le \frac \epsilon 4\, .
+    \end{equation}
+\end{lemma}
+```
+
+We prove the approximation-effect estimate in the difference-control
+subsection.
+
+```tex
+% witness-label: main.10classical.control-reference
+We prove in \Cref{10difference}:
+```
+
+:::lemma_ "control-approximation-effect" (lean := "control_approximation_effect")
+Uses {uses "partial-Fourier-sums-of-small"}[].
+There is a set $`E \subset \mathbb{R}` with Lebesgue measure
+$`|E|\le \epsilon` such that for all
+$`x\in [0,2\pi)\setminus E` we have
+$$`\sup_{N\ge 0} |S_N f(x)-S_N f_0(x)| \le \frac \epsilon 4.`
+:::
+
+```tex "control-approximation-effect" (slot := statement)
+\begin{lemma}[control approximation effect]
+\label{control-approximation-effect}
+\uses{partial-Fourier-sums-of-small}
+\leanok
+\lean{control_approximation_effect}
+    There is a set $E \subset \R$ with Lebesgue measure
+    $|E|\le \epsilon$ such that for all
+    \begin{equation}
+        x\in [0,2\pi)\setminus E
+    \end{equation}
+   we have
+   \begin{equation}
+    \label{eq-max-partial-sum-diff}
+    \sup_{N\ge 0} |S_Nf(x)-S_Nf_0(x)| \le \frac \epsilon 4\,.
+    \end{equation}
+\end{lemma}
+```
+
+We are now ready to prove {bpref "classical-carleson"}[]. We first prove a
+version with explicit exceptional sets.
+
+```tex
+% witness-label: main.10classical.exceptional-intro
+We are now ready to prove \Cref{classical-carleson}. We first prove a version with explicit exceptional sets.
+```
+
+:::theorem "exceptional-set-carleson" (lean := "exceptional_set_carleson")
+Uses {uses "smooth-approximation"}[], {uses "convergence-for-smooth"}[], and
+{uses "control-approximation-effect"}[].
+Let $`f` be a $`2\pi`-periodic complex-valued continuous function on
+$`\mathbb{R}`. For all $`\epsilon>0`, there exists a Borel set
+$`E\subset [0,2\pi]` with Lebesgue measure $`|E|\le \epsilon` and a positive
+integer $`N_0` such that for all $`x\in [0,2\pi]\setminus E` and all integers
+$`N>N_0`, we have
+$$`|f(x)-S_N f(x)|\le \epsilon.`
+:::
+
+```tex "exceptional-set-carleson" (slot := statement)
+\begin{theorem}[classical Carleson with exceptional sets]
+    \label{exceptional-set-carleson}
+    \leanok
+    \lean{exceptional_set_carleson}
+    \uses{smooth-approximation, convergence-for-smooth,
+    control-approximation-effect}
+    Let $f$ be a $2\pi$-periodic complex-valued continuous function on $\mathbb{R}$. For all $\epsilon>0$, there exists a Borel set $E\subset [0,2\pi]$ with Lebesgue measure $|E|\le \epsilon$ and a positive integer $N_0$ such that for all $x\in [0,2\pi]\setminus E$ and all integers $N>N_0$, we have
+    \begin{equation}\label{aeconv}
+    |f(x)-S_N f(x)|\le \epsilon.
+    \end{equation}
+\end{theorem}
+```
+
+:::proof "exceptional-set-carleson"
+Let $`N_0` be as in {bpref "convergence-for-smooth"}[]. For every
+$`x\in [0,2\pi)\setminus E` and every $`N>N_0` we have by the triangle
+inequality
+$$`|f(x)-S_N f(x)| \le |f(x)-f_0(x)|+|f_0(x)-S_N f_0(x)|+|S_N f_0(x)-S_N f(x)|.`
+Using {bpref "smooth-approximation"}[],
+{bpref "convergence-for-smooth"}[], and
+{bpref "control-approximation-effect"}[], the right-hand side is bounded by
+$`\epsilon' + \frac\epsilon4 + \frac\epsilon4 \le \epsilon`. This shows the
+desired estimate for the given $`E` and $`N_0`.
+:::
+
+```tex "exceptional-set-carleson" (slot := proof)
+\begin{proof}
+\leanok
+Let $N_0$ be as in \Cref{convergence-for-smooth}.
+For every
+\begin{equation}
+x\in [0, 2\pi) \setminus E\, ,
+\end{equation}
+and every $N>N_0$ we have by the triangle inequality
+\begin{equation*}
+    |f(x)-S_Nf(x)|
+    \end{equation*}
+    \begin{equation}\label{epsilonthird}
+    \le |f(x)-f_0(x)|+ |f_0(x)-S_Nf_0(x)|+|S_Nf_0(x)-S_N f(x)|\, .
+\end{equation}
+Using \Cref{smooth-approximation,convergence-for-smooth,control-approximation-effect}, we estimate \eqref{epsilonthird} by
+\begin{equation}
+    \le \epsilon' +\frac \epsilon 4 +\frac \epsilon 4\le \epsilon\, .
+\end{equation}
+This shows \eqref{aeconv} for the given $E$ and $N_0$.
+\end{proof}
+```
+
+Now we turn to the proof of the statement of Carleson theorem given in the
+introduction.
+
+```tex
+% witness-label: main.10classical.classical-intro
+Now we turn to the proof of the statement of Carleson theorem given in the introduction.
+```
+
 :::proof "classical-carleson"
 Proof of {bpref "classical-carleson"}[]. By applying
 {bpref "exceptional-set-carleson"}[] with a sequence of
@@ -15166,5 +15423,148 @@ of corresponding exceptional sets $E_n$, we see that outside a set of measure $\
 sums converge pointwise for $N\to \infty$. Applying this with a sequence of $\delta$ shrinking to zero and
 taking the intersection of the corresponding exceptional sets, which has measure zero, we see that the Fourier
 series converges outside a set of measure zero.
+\end{proof}
+```
+
+## Smooth functions
+
+:::lemma_ "fourier-coeff-derivative" (lean := "fourierCoeffOn_of_hasDerivAt")
+Let $`f:\mathbb{R} \to \mathbb{C}` be $`2\pi`-periodic and continuously
+differentiable, and let $`n \in \mathbb{Z}\setminus \{0\}`. Then
+$$`\widehat{f}_n = \frac{1}{i n} \widehat{f'}_n.`
+:::
+
+```tex "fourier-coeff-derivative" (slot := statement)
+\begin{lemma}
+\label{fourier-coeff-derivative}
+\leanok
+\lean{fourierCoeffOn_of_hasDerivAt}
+Let $f:\R \to \C$ be $2\pi$-periodic and continuously differentiable, and let $n \in \Z \setminus \{0\}$. Then
+\begin{equation}
+    \widehat{f}_n = \frac{1}{i n} \widehat{f'}_n.
+\end{equation}
+\end{lemma}
+```
+
+:::proof "fourier-coeff-derivative"
+This is part of the Lean library.
+:::
+
+```tex "fourier-coeff-derivative" (slot := proof)
+\begin{proof}
+\leanok
+This is part of the Lean library.
+\end{proof}
+```
+
+:::lemma_ "convergence-of-coeffs-summable" (lean := "hasSum_fourier_series_of_summable")
+Let $`f:\mathbb{R}\to \mathbb{C}` satisfy
+$$`\sum_{n\in \mathbb{Z}} |\widehat{f}_n| < \infty.`
+Then
+$$`\sup_{x\in [0,2\pi]} |f(x) - S_N f(x)| \rightarrow 0`
+as $`N \rightarrow \infty`.
+:::
+
+```tex "convergence-of-coeffs-summable" (slot := statement)
+\begin{lemma}
+\label{convergence-of-coeffs-summable}
+\leanok
+\lean{hasSum_fourier_series_of_summable}
+Let $f:\R \to \C$ such that
+\begin{equation}
+    \sum_{n\in \Z} |\widehat{f}_n| < \infty.
+\end{equation}
+Then
+\begin{equation}
+    \sup_{x\in [0,2\pi]} |f(x) - S_Nf(x)| \rightarrow 0
+\end{equation}
+as $N \rightarrow \infty$.
+\end{lemma}
+```
+
+:::proof "convergence-of-coeffs-summable"
+This is part of the Lean library.
+:::
+
+```tex "convergence-of-coeffs-summable" (slot := proof)
+\begin{proof}
+\leanok
+    This is part of the Lean library.
+\end{proof}
+```
+
+:::lemma_ "convergence-for-twice-contdiff" (lean := "fourierConv_ofTwiceDifferentiable")
+Uses {uses "fourier-coeff-derivative"}[] and
+{uses "convergence-of-coeffs-summable"}[].
+Let $`f:\mathbb{R}\to \mathbb{C}` be $`2\pi`-periodic and twice continuously
+differentiable. Then
+$$`\sup_{x\in [0,2\pi]} |f(x) - S_N f(x)| \rightarrow 0`
+as $`N \rightarrow \infty`.
+:::
+
+```tex "convergence-for-twice-contdiff" (slot := statement)
+\begin{lemma}
+\label{convergence-for-twice-contdiff}
+\uses{fourier-coeff-derivative,convergence-of-coeffs-summable}
+\leanok
+\lean{fourierConv_ofTwiceDifferentiable}
+    Let $f:\R \to \C$ be $2\pi$-periodic and twice continuously differentiable. Then
+    \begin{equation}
+        \sup_{x\in [0,2\pi]} |f(x) - S_Nf(x)| \rightarrow 0
+    \end{equation}
+    as $N \rightarrow \infty$.
+\end{lemma}
+```
+
+:::proof "convergence-for-twice-contdiff"
+By {bpref "convergence-of-coeffs-summable"}[], it suffices to show that the
+Fourier coefficients $`\widehat{f}_n` are summable. Applying
+{bpref "fourier-coeff-derivative"}[] twice and using the fact that $`f''` is
+continuous and therefore bounded on $`[0,2\pi]`, we compute
+$$`\sum_{n\in \mathbb{Z}} |\widehat{f}_n|
+= |\widehat{f}_0| + \sum_{n\in \mathbb{Z}\setminus \{0\}} \frac {1}{n^2} |\widehat{f''}_n|`
+$$`\le |\widehat{f}_0| + \left(\sup_{x\in [0,2\pi]} |f(x)| \right) \cdot
+\sum_{n\in \mathbb{Z}\setminus \{0\}} \frac {1}{n^2}<\infty.`
+:::
+
+```tex "convergence-for-twice-contdiff" (slot := proof)
+\begin{proof}
+\leanok
+By \Cref{convergence-of-coeffs-summable}, it suffices to show that the Fourier coefficients $\widehat{f}_n$ are summable.
+Applying \Cref{fourier-coeff-derivative} twice and using the fact that $f''$ is continuous and thus bounded on $[0,2\pi]$ , we compute
+\begin{equation*}
+    \sum_{n\in \Z} |\widehat{f}_n| = |\widehat{f}_0| + \sum_{n\in \Z \setminus \{0\}} \frac {1}{n^2} |\widehat{f''}_n|
+    \le |\widehat{f}_0| + \left(\sup_{x\in [0,2\pi]} |f(x)| \right) \cdot \sum_{n\in \Z \setminus \{0\}} \frac {1}{n^2}
+    < \infty.
+\end{equation*}
+\end{proof}
+```
+
+:::proof "convergence-for-smooth"
+{bpref "convergence-for-smooth"}[] now follows directly from
+{bpref "convergence-for-twice-contdiff"}[].
+:::
+
+```tex "convergence-for-smooth" (slot := proof)
+\begin{proof}[Proof of \Cref{convergence-for-smooth}]
+\leanok
+\proves{convergence-for-smooth}
+    \Cref{convergence-for-smooth} now follows directly from the previous \Cref{convergence-for-twice-contdiff}.
+\end{proof}
+```
+
+## Difference control
+
+:::proof "control-approximation-effect"
+{bpref "control-approximation-effect"}[] follows directly from
+{bpref "partial-Fourier-sums-of-small"}[] with $`\delta:=\epsilon'`.
+:::
+
+```tex "control-approximation-effect" (slot := proof)
+%fixme: It seems unnecessary to have the extra lemma with this proof that is really only application.
+\begin{proof}[Proof of \Cref{control-approximation-effect}]
+\proves{control-approximation-effect}
+\leanok
+    \Cref{control-approximation-effect} follows directly from \Cref{partial-Fourier-sums-of-small} with $\delta:=\epsilon'$.
 \end{proof}
 ```
