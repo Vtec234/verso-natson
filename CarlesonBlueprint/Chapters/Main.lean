@@ -16008,6 +16008,716 @@ Applying \Cref{fourier-coeff-derivative} twice and using the fact that $f''$ is 
 \end{proof}
 ```
 
+## The truncated Hilbert transform
+
+Let $`M_n` be the modulation operator on measurable $`2\pi`-periodic
+functions defined by
+$$`M_ng(x)=g(x)e^{inx}.`
+Define the approximate Hilbert transform by
+$$`L_Ng=\frac1N\sum_{n=0}^{N-1}M_{n+N}S_{N+n}M_{-N-n}g.`
+
+```tex
+% witness-label: main.10hilbert.setup
+Let $M_n$ be the modulation operator
+acting on measurable $2\pi$-periodic functions
+defined by
+\begin{equation}
+    M_ng(x)=g(x) e^{inx}\, .
+\end{equation}
+Define the approximate Hilbert transform by
+\begin{equation}
+    L_N g=\frac 1N\sum_{n=0}^{N-1}
+       M_{n+N} S_{N+n}M_{-N-n}g\, .
+\end{equation}
+```
+
+:::lemma_ "modulated-averaged-projection" (lean := "modulated_averaged_projection")
+Uses {uses "spectral-projection-bound"}[].
+For every bounded measurable $`2\pi`-periodic function $`g`,
+$$`\|L_Ng\|_{L^2[0,2\pi]}\le \|g\|_{L^2[0,2\pi]}.`
+:::
+
+```tex "modulated-averaged-projection" (slot := statement)
+\begin{lemma}[modulated averaged projection]
+\label{modulated-averaged-projection}
+\leanok
+\lean{modulated_averaged_projection}
+\uses{spectral-projection-bound}
+We have for every bounded measurable $2\pi$-periodic function $g$
+\begin{equation}\label{lnbound}
+    \|L_Ng\|_{L^2[0, 2\pi]}\le \|g\|_{L^2[0, 2\pi]}\,.
+\end{equation}
+\end{lemma}
+```
+
+:::proof "modulated-averaged-projection"
+We have
+$$`\|M_ng\|_{L^2[0,2\pi]}^2
+=\int_0^{2\pi}|e^{inx}g(x)|^2\,dx
+=\int_0^{2\pi}|g(x)|^2\,dx
+=\|g\|_{L^2[0,2\pi]}^2.`
+By the triangle inequality, the square root of this identity, and
+{bpref "spectral-projection-bound"}[],
+$$`\|L_Ng\|_{L^2[0,2\pi]}
+=\left\|\frac1N\sum_{n=0}^{N-1}
+M_{n+N}S_{N+n}M_{-N-n}g\right\|_{L^2[0,2\pi]}`
+$$`\le \frac1N\sum_{n=0}^{N-1}
+\|M_{n+N}S_{N+n}M_{-N-n}g\|_{L^2[0,2\pi]}`
+$$`= \frac1N\sum_{n=0}^{N-1}
+\|S_{N+n}M_{-N-n}g\|_{L^2[0,2\pi]}
+\le \frac1N\sum_{n=0}^{N-1}\|M_{-N-n}g\|_{L^2[0,2\pi]}
+=\|g\|_{L^2[0,2\pi]}.`
+:::
+
+```tex "modulated-averaged-projection" (slot := proof)
+\begin{proof}
+    \leanok
+    We have
+    \begin{equation}\label{mnbound}
+        \|M_ng\|_{L^2[0, 2\pi]}^2=\int_{0}^{2\pi} |e^{inx}g(x)|^2\, dx
+        =\int_{0}^{2\pi} |g(x)|^2\, dx=\|g\|_{L^2[0, 2\pi]}^2\, .
+    \end{equation}
+     We have by the triangle inequality, the square root of the identity in \eqref{mnbound}, and \Cref{spectral-projection-bound}
+    \begin{equation*}
+        \|L_ng\|_{L^2[0, 2\pi]}=\|\frac 1N\sum_{n=0}^{N-1}
+       M_{n+N} S_{N+n}M_{-N-n}g\|_{L^2[0, 2\pi]}
+    \end{equation*}
+    \begin{equation*}
+        \le \frac 1N\sum_{n=0}^{N-1} \|
+       M_{n+N} S_{N+n}M_{-N-n}g\|_{L^2[0, 2\pi]}
+         = \frac 1N\sum_{n=0}^{N-1} \|
+    S_{N+n}M_{-N-n}g\|_{L^2[0, 2\pi]}
+    \end{equation*}
+     \begin{equation}
+     \le \frac 1N\sum_{n=0}^{N-1} \|
+ M_{-N-n}g\|_{L^2[0, 2\pi]} = \frac 1N\sum_{n=0}^{N-1} \|
+g\|_{L^2[0, 2\pi]} =\|g\|_{L^2[0, 2\pi]}\, .
+    \end{equation}
+This proves \eqref{lnbound} and completes the proof of the lemma.
+\end{proof}
+```
+
+:::lemma_ "periodic-domain-shift" (lean := "Function.Periodic.intervalIntegral_add_eq, intervalIntegral.integral_comp_sub_right")
+Let $`f` be a bounded $`2\pi`-periodic function. For any
+$`0\le x\le 2\pi`,
+$$`\int_0^{2\pi}f(y)\,dy
+=\int_{-x}^{2\pi-x}f(y)\,dy
+=\int_{-\pi}^{\pi}f(y-x)\,dy.`
+:::
+
+```tex "periodic-domain-shift" (slot := statement)
+\begin{lemma}[periodic domain shift]\label{periodic-domain-shift}
+\leanok
+\lean{Function.Periodic.intervalIntegral_add_eq, intervalIntegral.integral_comp_sub_right}
+Let $f$ be a bounded $2\pi$-periodic function. We have for any
+$0 \le x\le 2\pi$ that
+\begin{equation}
+ \int_0^{2\pi} f(y)\, dy= \int_{-x}^{2\pi -x} f(y)\, dy
+ =\int_{-\pi}^{\pi} f(y-x)\, dy\,.
+\end{equation}
+\end{lemma}
+```
+
+:::proof "periodic-domain-shift"
+By periodicity and change of variables,
+$$`\int_{-x}^0 f(y)\,dy
+=\int_{-x}^0 f(y+2\pi)\,dy
+=\int_{2\pi-x}^{2\pi} f(y)\,dy.`
+Breaking up the domain of integration and using this identity gives
+$$`\int_0^{2\pi}f(y)\,dy
+=\int_0^{2\pi-x}f(y)\,dy+\int_{2\pi-x}^{2\pi}f(y)\,dy`
+$$`=\int_0^{2\pi-x}f(y)\,dy+\int_{-x}^0f(y)\,dy
+=\int_{-x}^{2\pi-x}f(y)\,dy.`
+The second identity follows by substituting $`y` by $`y-x`.
+:::
+
+```tex "periodic-domain-shift" (slot := proof)
+\begin{proof}
+\leanok
+    We have by periodicity and change of variables
+    \begin{equation}\label{eqhil9}
+ \int_{-x}^{0} f(y)\, dy=\int_{-x}^{0} f(y+2\pi)\, dy= \int_{2\pi -x}^{2\pi} f(y)\, dy\, .
+\end{equation}
+We then have by breaking up the domain of integration
+and using \eqref{eqhil9}
+\begin{equation*}
+ \int_0^{2\pi} f(y)\, dy= \int_0^{2\pi -x} f(y)\, dy+
+ \int_{2\pi -x}^{2\pi} f(y)\, dy
+ \end{equation*}
+\begin{equation}
+= \int_0^{2\pi -x} f(y)\, dy+
+ \int_{ -x}^{0} f(y)\, dy
+ = \int_{-x}^{2\pi-x} f(y)\, dy\, .
+ \end{equation}
+This proves the first identity of the lemma. The second identity follows by substitution of $y$ by $y-x$.
+\end{proof}
+```
+
+:::lemma_ "Young-convolution" (lean := "young_convolution")
+Uses {uses "periodic-domain-shift"}[].
+Let $`f` and $`g` be bounded nonnegative measurable $`2\pi`-periodic
+functions on $`\mathbb{R}`. Then
+$$`\left(\int_0^{2\pi}\left(\int_0^{2\pi}
+f(y)g(x-y)\,dy\right)^2\,dx\right)^{\frac12}
+\le \|f\|_{L^2[0,2\pi]}\|g\|_{L^1[0,2\pi]}.`
+:::
+
+```tex "Young-convolution" (slot := statement)
+\begin{lemma}[Young convolution]\label{Young-convolution}
+\leanok
+\lean{young_convolution}
+\uses{periodic-domain-shift}
+    Let $f$ and $g$ be two bounded non-negative measurable $2\pi$-periodic functions on $\R$. Then
+    \begin{equation}\label{eqyoung}
+        \left(\int_0^{2\pi} \left(\int_0^{2\pi}
+        f(y)g(x-y)\, dy\right)^2\, dx\right)^{\frac 12}\le \|f\|_{L^2[0, 2\pi]} \|g\|_{L^1[0, 2\pi]}\, .
+    \end{equation}
+    \end{lemma}
+```
+
+:::proof "Young-convolution"
+Using Fubini and {bpref "periodic-domain-shift"}[], we have
+$$`\int_0^{2\pi}\int_0^{2\pi}f(y)^2g(x-y)\,dy\,dx
+=\int_0^{2\pi}f(y)^2\int_0^{2\pi}g(x-y)\,dx\,dy`
+$$`=\int_0^{2\pi}f(y)^2\int_0^{2\pi}g(x)\,dx\,dy
+=\|f\|_{L^2[0,2\pi]}^2\|g\|_{L^1[0,2\pi]}.`
+Let $`h` be the nonnegative square root of $`g`; then $`h` is bounded and
+$`2\pi`-periodic with $`h^2=g`. By Cauchy--Schwarz and the preceding
+identity, the square of the left-hand side is at most
+$$`\int_0^{2\pi}\left(\int_0^{2\pi}f(y)^2g(x-y)\,dy\right)
+\left(\int_0^{2\pi}g(x-y)\,dy\right)\,dx`
+$$`=\|f\|_{L^2[0,2\pi]}^2\|g\|_{L^1[0,2\pi]}^2.`
+Taking square roots proves the lemma.
+:::
+
+```tex "Young-convolution" (slot := proof)
+\begin{proof}
+\leanok
+    Using Fubini and \Cref{periodic-domain-shift}, we observe
+\begin{equation*}
+  \int_0^{2\pi}\int_0^{2\pi}f(y)^2g(x-y)\, dy
+    \, dx=\int_0^{2\pi}f(y)^2\int_0^{2\pi}g(x-y)\, dx
+    \, dy
+\end{equation*}
+\begin{equation}\label{eqhil4}
+=\int_0^{2\pi}f(y)^2\int_0^{2\pi}g(x) \, dx
+     dy
+=\|f\|_{L^2[0, 2\pi]}^2\|g\|_{L^1[0, 2\pi]}\, .
+\end{equation}
+   Let $h$ be the nonnegative square root of $g$, then
+   $h$ is bounded and $2\pi$-periodic with $h^2=g$.
+   We estimate the square of the left-hand side of
+   \eqref{eqyoung} with Cauchy-Schwarz and then with
+   \eqref{eqhil4} by
+       \begin{equation*}
+         \int_0^{2\pi} (\int_0^{2\pi}f(y)h(x-y)h(x-y)\, dy)^2\, dx
+   \end{equation*}
+\begin{equation*}
+    \le \int_0^{2\pi}\left(\int_0^{2\pi}f(y)^2g(x-y)\, dy\right)
+    \left(\int_0^{2\pi}g(x-y)\, dy\right)\, dx
+\end{equation*}
+\begin{equation*}
+    = \|f\|_{L^2[0, 2\pi]}^2\|g\|_{L^1[0, 2\pi]}^2\, .
+\end{equation*}
+Taking square roots, this proves the lemma.
+\end{proof}
+```
+
+For $`0<r<1`, define the kernel $`k_r` to be the $`2\pi`-periodic
+function
+$$`k_r(x):=\min\left(r^{-1},1+\frac{r}{|1-e^{ix}|^2}\right),`
+where the minimum is understood to be $`r^{-1}` when $`1=e^{ix}`.
+
+```tex
+% witness-label: main.10hilbert.bump-kernel
+For $0<r<1$, Define the kernel $k_r$ to be the $2\pi$-periodic function
+\begin{equation}
+    k_r(x):=\min \left(r^{-1}, 1+\frac r{|1-e^{ix}|^2}\right)\, ,
+\end{equation}
+where the minimum is understood to be $r^{-1}$ in case $1=e^{ix}$.
+```
+
+:::lemma_ "integrable-bump-convolution" (lean := "integrable_bump_convolution")
+Uses {uses "Young-convolution"}[].
+Let $`g,f` be bounded measurable $`2\pi`-periodic functions. Let
+$`0<r<\pi`. Assume $`|g(x)|\le k_r(x)` for all $`x`. Let
+$$`h(x)=\int_0^{2\pi}f(y)g(x-y)\,dy.`
+Then
+$$`\|h\|_{L^2[0,2\pi]}\le 17\|f\|_{L^2[-\pi,\pi]}.`
+:::
+
+```tex "integrable-bump-convolution" (slot := statement)
+\begin{lemma}[integrable bump convolution]
+\label{integrable-bump-convolution}
+\leanok
+\lean{integrable_bump_convolution}
+\uses{Young-convolution}
+Let $g,f$ be bounded measurable $2\pi$-periodic functions. Let $0<r<\pi$.
+Assume we have for all $x$
+\begin{equation}\label{ebump1}
+    |g(x)|\le k_r(x)\, .
+\end{equation}
+Let
+\begin{equation}
+   h(x)= \int_0^{2\pi} f(y)g(x-y)\, dy \, .
+\end{equation}
+Then
+\begin{equation}
+   \|h\|_{L^2[0, 2\pi]}\le 17\|f\|_{L^2[-\pi, \pi]} \, .
+\end{equation}
+
+\end{lemma}
+```
+
+:::proof "integrable-bump-convolution"
+By monotonicity of the integral and the pointwise bound on $`g`,
+$$`\|g\|_{L^1[0,2\pi]}\le \int_0^{2\pi}k_r(x)\,dx.`
+Using the symmetry $`k_r(x)=k_r(-x)`, the assumption, and
+{bpref "lower-secant-bound"}[], the last display is
+$$`2\int_0^\pi \min\left(\frac1r,1+\frac{r}{|1-e^{ix}|^2}\right)\,dx`
+$$`\le 2\int_0^r\frac1r\,dx
++2\int_r^\pi\left(1+\frac{64r}{x^2}\right)\,dx`
+$$`\le 2+2\pi+2\left(\frac{4r}{r}-\frac{4r}{\pi}\right)\le 17.`
+Together with {bpref "Young-convolution"}[], this proves the lemma.
+:::
+
+```tex "integrable-bump-convolution" (slot := proof)
+\begin{proof}
+\leanok
+From monotonicity of the integral and \eqref{ebump1},
+\begin{equation}
+    \|g\|_{L^1[0, 2\pi]} \le \int_0^{2\pi}k_r(x)\, dx\,.
+\end{equation}
+Using the symmetry
+$k_r(x)=k_r(-x)$, the assumption, and \Cref{lower-secant-bound}, the last display
+is equal to
+\begin{equation*}
+    = 2 \int_0^\pi \min\left(\frac 1r, 1+\frac r{|1-e^{ix}|^2}\right)\, dx
+\end{equation*}
+\begin{equation*}
+    \le 2\int_0^{r} \frac 1r \, dx+2\int_r^{\pi}1+\frac {64r}{x^2}\, dx
+\end{equation*}
+\begin{equation}
+    \le 2+2\pi + 2\left(\frac {4r}r-\frac {4r}{\pi}\right)
+    \le 17\, .
+\end{equation}
+    Together with \Cref{Young-convolution}, this proves the lemma.
+\end{proof}
+```
+
+:::lemma_ "Dirichlet-approximation" (lean := "continuous_dirichletApprox, periodic_dirichletApprox, approxHilbertTransform_eq_dirichletApprox, dist_dirichletApprox_le")
+Uses {uses "Dirichlet-kernel"}[] and {uses "lower-secant-bound"}[].
+Let $`0<r<1`, and let $`N` be the smallest integer larger than
+$`1/r`. There is a $`2\pi`-periodic continuous function $`L'` on
+$`\mathbb{R}` such that, for all $`0\le x\le 2\pi` and all
+$`2\pi`-periodic bounded measurable functions $`f`,
+$$`L_Nf(x)=\frac1{2\pi}\int_0^{2\pi}f(y)L'(x-y)\,dy.`
+Moreover, for all $`-\pi\le x\le \pi`,
+$$`\left|L'(x)-\mathbf{1}_{\{y:\,r<|y|<1\}}\kappa(x)\right|
+\le 12k_r(x).`
+:::
+
+```tex "Dirichlet-approximation" (slot := statement)
+\begin{lemma}[Dirichlet approximation]\label{Dirichlet-approximation}
+\uses{Dirichlet-kernel,lower-secant-bound}
+\leanok
+\lean{continuous_dirichletApprox, periodic_dirichletApprox, approxHilbertTransform_eq_dirichletApprox, dist_dirichletApprox_le}
+Let $0<r<1$. Let $N$ be the smallest
+integer larger than $\frac 1r$.
+There is a $2\pi$-periodic continuous function
+ ${L'}$ on $\R$ that satisfies for all $0\le x\le 2\pi$
+and all $2\pi$-periodic bounded measurable functions $f$ on $\R$
+\begin{equation}\label{lthroughlprime}
+    L_Nf(x)=\frac 1{2\pi}\int_{0}^{2\pi}f(y) {L'}(x-y)\, dy\,.
+\end{equation}
+Moreover, for all $-\pi \le x \le \pi$,
+\begin{equation}\label{eqdifflhil}
+    \left|L'(x)-\mathbf{1}_{\{y:\, r<|y|<1\}} \kappa(x)\right|\le 12 k_r(x)\, .
+\end{equation}
+\end{lemma}
+```
+
+:::proof "Dirichlet-approximation"
+By definition and {bpref "Dirichlet-kernel"}[],
+$$`L_Ng(x)=\frac1N\sum_{n=0}^{N-1}
+\int_0^{2\pi}e^{-i(N+n)x}K_{N+n}(x-y)e^{i(N+n)y}g(y)\,dy.`
+This has the required convolution form with
+$$`L'(x)=\frac1N\sum_{n=0}^{N-1}K_{N+n}(x)e^{-i(N+n)x}.`
+From the exponential-sum formula for $`K_N`, $`|K_N(x)|\le 2N+1`, and hence
+$$`|L'(x)|\le \frac1N\sum_{n=0}^{N-1}(2N+2n+1)\le 4N\le 2^3r^{-1}.`
+Thus the desired difference bound holds for $`|x|\in [0,r)` because
+$`k_r(x)=r^{-1}` there.
+
+For $`e^{ix}\ne 1`, the Hilbert-form expression for $`K_N` gives
+$$`L'(x)=\frac{1}{1-e^{ix}}
++\frac1N\frac{e^{i2Nx}}{1-e^{-ix}}\sum_{n=0}^{N-1}e^{i2nx}.`
+Therefore
+$$`L'(x)-\mathbf{1}_{\{y:\,r<|y|<1\}}\kappa(x)
+=L''(x)+
+\frac{1-\mathbf{1}_{\{y:\,r<|y|<1\}}(x)(1-|x|)}{1-e^{ix}},`
+where
+$$`L''(x):=\frac1N\frac{e^{i2Nx}}{1-e^{-ix}}\sum_{n=0}^{N-1}e^{i2nx}.`
+Using {bpref "lower-secant-bound"}[], the second term is bounded by
+$`2k_r(x)` for $`|x|\in [r,\pi]`.
+
+It remains to estimate $`L''`. If the real part of $`e^{ix}` is negative,
+then $`1\le |1-e^{-ix}|\le 2`, so $`|L''(x)|\le 1`. If the real part is
+positive and $`e^{ix}\ne\pm1`, telescoping the geometric sum gives
+$$`L''(x)=\frac1N\frac{e^{i2Nx}}{1-e^{-ix}}
+\frac{1-e^{i2Nx}}{1-e^{2ix}},`
+and therefore
+$$`|L''(x)|\le \frac{2r}{|1-e^{ix}|^2}
+\le 2\left(1+\frac{r}{|1-e^{ix}|^2}\right).`
+For $`|x|\in [r,\pi]`, one checks
+$`1+\frac{r}{|1-e^{ix}|^2}\le 5k_r(x)`, so $`|L''(x)|\le 10k_r(x)`.
+Together with the $`2k_r(x)` bound above, this proves the claim on
+$`|x|\in [r,\pi]`; the range $`|x|\in [0,r)` was already covered.
+:::
+
+```tex "Dirichlet-approximation" (slot := proof)
+\begin{proof}
+\leanok
+We have by definition and \Cref{Dirichlet-kernel}
+\begin{equation}
+    L_Ng(x)=
+    \frac 1N\sum_{n=0}^{N-1}
+       \int_0^{2\pi} e^{-i(N+n)x} K_{N+n}(x-y) e^{i(N+n)y}g(y)
+\, dy \, .\end{equation}
+This is of the form \eqref{lthroughlprime} with
+the continuous function
+\begin{equation}
+    {L'}(x)= \frac 1N\sum_{n=0}^{N-1}
+      K_{N+n}(x) e^{-i(N+n)x}\, .
+\end{equation}
+With \eqref{eqksumexp} of \Cref{Dirichlet-kernel}
+we have $|K_N(x)|\le 2N+1$ for every $x$ and thus
+\begin{equation}\label{eqhil13}
+    |{L'}(x)|\le \frac 1N\sum_{n=0}^{N-1}
+      (2N+2n+1) \le 4N\le 2^3 r^{-1}\, .
+\end{equation}
+Therefore, for $|x|\in [0, r)\cup (1, \pi]$, we have
+\begin{equation}
+    \label{eqdiffzero}
+    \left|L'(x)-\mathbf{1}_{\{y:\, r<|y|<1\}}(x)\kappa(x)\right|=|L'(x)|\leq 2^{3} r^{-1}.
+\end{equation}
+This proves \eqref{eqdifflhil} for $|x|\in [0, r)$ since $k_r(x)=r^{-1}$ in this case.
+
+For $e^{ix}\neq 1$
+one may use the expression
+\eqref{eqksumhil} for $K_N$
+in \Cref{Dirichlet-kernel} to obtain
+\begin{equation*}
+    {L'}(x)= \frac 1N\sum_{n=0}^{N-1}
+     \left(\frac{e^{i(N+n)x}}{1-e^{-ix}}
+      +\frac {e^{-i(N+n)x}}{1-e^{ix}}\right) e^{i(N+n)x}
+\end{equation*}
+\begin{equation*}
+    = \frac 1N\sum_{n=0}^{N-1}
+    \left(\frac{e^{i2(N+n)x}}{1-e^{-ix}}
+      +\frac {1}{1-e^{ix}}\right)
+\end{equation*}
+\begin{equation}\label{eqhil3}
+    = \frac{1}{1-e^{ix}} +
+     \frac 1N \frac {e^{i2Nx}}{1-e^{-ix}}
+     \sum_{n=0}^{N-1}
+    {e^{i2nx}}
+\end{equation}
+and thus
+\begin{equation}
+\label{eq-L'L''}
+  {L'}(x) -\mathbf{1}_{\{y:\, r<|y|<1\}}\kappa(x)=L''(x)+ \frac{1-\mathbf{1}_{{\{y:\, r<|y|<1\}}}(x)(1-|x|)}{1-e^{ix}},
+\end{equation}
+where
+$$L''(x):=\frac 1N \frac {e^{i2Nx}}{1-e^{-ix}}
+     \sum_{n=0}^{N-1}
+    {e^{i2nx}}.$$
+For $x\in [-\pi, r]\cup [r, \pi]$, we have using \Cref{lower-secant-bound} that
+\begin{equation*}
+   \left|\frac{1-\mathbf{1}_{{\{y:\, r<|y|<1\}}}(x)(1-|x|)}{1-e^{ix}} \right|=\left|\frac{\min(|x|, 1)}{1-e^{ix}} \right|\leq \frac{2\min(|x|, 1)}{|x|}
+\end{equation*}
+\begin{equation}
+ \label{eq-diffzero2}
+    \leq 2\cdot 1\leq 2 k_r(x).
+\end{equation}
+Next, we need to estimate $L''(x)$. If the real part of
+$e^{ix}$ is negative, we have
+\begin{equation}
+  1\le |1-e^{-ix}|\le 2\, .
+\end{equation}
+and hence
+\begin{equation}\label{eqhil12}
+    |L''(x)|\le
+     \frac 1N
+     \sum_{n=0}^{N-1}
+    1=1\le 1+\frac r{|1-e^{ix}|^2}\, .
+\end{equation}
+If the real part of $e^{ix}$ is positive and in particular while still $e^{ix}\neq \pm 1$, then we have by telescoping
+\begin{equation}
+ (1-e^{2ix})
+     \sum_{n=0}^{N-1}
+    {e^{i2nx}}=1-e^{i2Nx}\, .
+\end{equation}
+As $e^{2ix}\neq 1$, we may divide by $1-e^{2ix}$ and insert this into
+\eqref{eqhil3} to obtain
+\begin{equation}
+ L''(x)=
+           \frac 1N \frac {e^{i2Nx}}{1-e^{-ix}}
+     \frac{1-e^{i2Nx}}{1-e^{2ix}}\, .
+\end{equation}
+Hence, using the nonnegativity of the real part of $e^{ix}$
+\begin{equation*}
+    |L''(x)|
+ \le \frac 2 N \frac {1}{|1-e^{ix}|}
+     \frac{1}{|1-e^{2ix}|}
+ \end{equation*}
+\begin{equation}\label{eqhil11}
+    = \frac 2 N \frac {1}{|1-e^{ix}|^2}
+     \frac{1}{|1+e^{ix}|}\le
+ \frac {2r}{|1-e^{ix}|^2}\le 2 \left(1+\frac {r}{|1-e^{ix}|^2}\right)
+\end{equation}
+Moreover, for $|x| \in [r, \pi]$, one checks easily that
+\begin{equation*}
+  1+\frac {r}{|1-e^{ix}|^2} \leq 5 k_r(x).
+\end{equation*}
+Therefore,~\eqref{eqhil12} and~\eqref{eqhil11} show that, in this range of $x$,
+\begin{equation*}
+  |L''(x)| \le 10 k_r(x).
+\end{equation*}
+Together with~\eqref{eq-diffzero2}, this prove \eqref{eqdifflhil} for $|x| \in [r, \pi]$.
+As the range $|x| \in [0,r)$ is covered by~\eqref{eqdiffzero}, this completes the proof of the lemma.
+\end{proof}
+```
+
+We now prove {bpref "Hilbert-strong-2-2"}[].
+
+```tex
+% witness-label: main.10hilbert.proof-intro
+We now prove \Cref{Hilbert-strong-2-2}.
+```
+
+:::proof "Hilbert-strong-2-2"
+First suppose that $`f` is supported in $`[1,4]`. We prove
+$$`\|H_rf\|_{L^2[2,3]}\le 2^8\|f\|_{L^2(\mathbb{R})}.`
+Let $`\tilde f` be the $`2\pi`-periodic extension of $`f`, and let $`N` be
+the smallest integer larger than $`1/r`. The Dirichlet approximation bound
+shows that the kernels of $`H_r` and $`2\pi L_N` differ by at most
+$`12k_r` on $`[-\pi,\pi]`. For $`x\in[2,3]` and $`f(y)\ne0`, we have
+$`y\in[1,4]`, so $`x-y\in[-\pi,\pi]`.
+
+Thus for $`x\in[2,3]`,
+$$`|H_r\tilde f(x)|\le 2\pi |L_N\tilde f(x)|
++12\left|\int_0^{2\pi}k_r(x-y)\tilde f(y)\,dy\right|.`
+Taking $`L^2` norms and using subadditivity, then
+{bpref "modulated-averaged-projection"}[] and
+{bpref "integrable-bump-convolution"}[], gives
+$$`\|H_rf\|_{L^2[2,3]}
+\le 2\pi\|f\|_{L^2[0,2\pi]}+12\cdot 17\|f\|_{L^2[0,2\pi]},`
+which gives the short-support estimate.
+
+If $`f` is supported in $`[c,c+3]`, apply the previous estimate to
+$`g(x)=f(x-c+1)` and change variables to obtain
+$$`\|H_rf\|_{L^2[c+1,c+2]}\le 2^8\|f\|_2.`
+For arbitrary $`f`, since $`\kappa(x)=0` for $`|x|>1`, on
+$`[c+1,c+2]` we have
+$`H_rf=H_r(f\mathbf{1}_{[c,c+3]})`. Therefore
+$$`\int_{c+1}^{c+2}|H_rf(x)|^2\,dx
+\le 2^{16}\int_c^{c+3}|f(x)|^2\,dx.`
+Summing over all $`c\in\mathbb{Z}` gives
+$$`\int_{\mathbb{R}}|H_rf(x)|^2\,dx
+\le 3\cdot 2^{16}\int_{\mathbb{R}}|f(x)|^2\,dx,`
+which completes the proof.
+:::
+
+```tex "Hilbert-strong-2-2" (slot := proof)
+\begin{proof}[Proof of \Cref{Hilbert-strong-2-2}]
+    \proves{Hilbert-strong-2-2}
+    \leanok
+    We first show that if $f$ is supported in $[1, 4]$, then
+    \begin{equation}
+        \label{eq-Hr-short-support}
+        \|H_r f\|_{L^2[2, 3]} \le 2^{8} \|f\|_{L^2(\R)}\,.
+    \end{equation}
+    Let $\tilde{f}$ be the $2\pi$-periodic extension of $f$ to $\mathbb{R}$. Let $N$ be the smallest
+    integer larger than $\frac 1r$. Then, \Cref{eqdifflhil} shows that the kernels of $H_r$ and $2\pi L_N$ differ by at
+    most $12k_r$ on $[-\pi, \pi]$. Consider $x \in [2,3]$. When computing $H_r f(x)$ and $2\pi L_N f(x)$, the kernels are
+    computed at points of the form $x-y$ with $f(y) \ne 0$, i.e., $y \in [1,4]$. As $x\in [2,3]$, the difference
+    $x-y$ is bounded in absolute value by $2$, and therefore belongs to $[-\pi, \pi]$, where the above bound holds.
+
+    It follows that, for $x \in [2,3]$,
+    \begin{equation*}
+        |H_r \tilde{f}(x)|\leq 2\pi |L_N \tilde{f}(x)|+12\left|\int_{0}^{2\pi}k_r(x-y)\tilde{f}(y)\, dy\right|.
+    \end{equation*}
+    Taking $L^2$ norm and using its sub-additivity, we get
+    \begin{equation*}
+       \|H_r \tilde{f}\|_{L^2[2, 3]}\leq 2\pi \|L_N \tilde{f}\|_{L^2[0, 2\pi]}\, + 12\left(\int_{0}^{2\pi} \left|\int_{0}^{2\pi}k_r(x-y)\tilde{f}(y)\, dy\right|^2\, dx\right)^{\frac{1}{2}}.
+    \end{equation*}
+    Since $\kappa$ is supported in $[-1,1]$, we have that $H_r\tilde{f}$ agrees with $H_r f$ on $[2,3]$.
+    Using \Cref{modulated-averaged-projection} and \Cref{integrable-bump-convolution}, we conclude
+    \begin{equation}
+        \|H_r f\|_{L^2[2, 3]} \le 2\pi \|f\|_{L^2[0, 2\pi]} + 12 \cdot 17 \|f\|_{L^2[0, 2\pi]}\,,
+    \end{equation}
+    which gives \eqref{eq-Hr-short-support}.
+
+    Suppose now that $f$ is supported in $[c, c+3]$ for some $c \in \R$. Then the function $g(x) = f(x-c+1)$ is supported in $[1, 4]$.
+    By a change of variables in \eqref{def-H-r}, we have $H_r g(x ) = H_r f(x - c + 1)$. Thus, by \eqref{eq-Hr-short-support}
+    \begin{equation}
+        \label{eq-Hr-short-support-2}
+        \|H_rf\|_{L^2[c+1, c+2]} = \|H_r g\|_{L^2[2,3]} \le 2^{8} \|g\|_2 = 2^8 \|f\|_2\,.
+    \end{equation}
+
+    Let now $f$ be arbitrary.
+    Since $\kappa(x) = 0$ for $|x| > 1$, we have for all $x \in [c+1, c+2]$
+    $$
+        H_rf(x) = H_r(f \mathbf{1}_{[c, c+3]})(x)\,.
+    $$
+    Thus
+    $$
+        \int_{c+1}^{c+2} |H_r f(x)|^2 \, \mathrm{d}x = \int_{c+1}^{c+2}|H_r(f \mathbf{1}_{[c, c+3]})(x)|^2 \, \mathrm{d}x\,.
+    $$
+    Applying the bound \eqref{eq-Hr-short-support-2}, this is
+    $$
+        \le 2^{16} \int_{c}^{c+3} |f(x)|^2 \, \mathrm{d}x\,.
+    $$
+    Summing over all $c \in \mathbb{Z}$, we obtain
+    $$
+        \int_{\R} |H_rf(x)|^2 \, \mathrm{d}x \le 3 \cdot 2^{16} \int_{\R} |f(x)|^2 \, \mathrm{d}x\,.
+    $$
+    This completes the proof.
+\end{proof}
+```
+
+## The proof of the van der Corput Lemma
+
+:::proof "van-der-Corput"
+Let $`g` be Lipschitz continuous as in the lemma. If $`n=0`, then
+$$`\int_\alpha^\beta g(x)\,dx
+\le |\beta-\alpha|\sup_{\alpha\le x\le\beta}|g(x)|
+\le |\beta-\alpha|\|g\|_{\operatorname{Lip}(\alpha,\beta)}
+(1+|n||\beta-\alpha|)^{-1}.`
+Assume now $`n\ne 0`; by symmetry we may suppose $`n>0`.
+
+If $`\beta-\alpha<\pi/n`, the triangle inequality gives
+$$`\left|\int_\alpha^\beta g(x)e^{inx}\,dx\right|
+\le |\beta-\alpha|\sup_{x\in[\alpha,\beta]}|g(x)|
+\le 2\pi|\beta-\alpha|\|g\|_{\operatorname{Lip}(\alpha,\beta)}
+(1+|n||\beta-\alpha|)^{-1}.`
+Now suppose $`\pi/n\le \beta-\alpha`. Since
+$`e^{in(x+\pi/n)}=-e^{inx}`, we write the integral as half the difference
+of itself and the shifted integral. Splitting at
+$`\alpha+\pi/n` and $`\beta-\pi/n`, and changing variables, gives boundary
+terms plus
+$$`\frac12\int_{\alpha+\pi/n}^{\beta}
+\left(g(x)-g\left(x-\frac{\pi}{n}\right)\right)e^{inx}\,dx.`
+The boundary terms are bounded by
+$`\frac{\pi}{n}\sup_{\alpha\le x\le\beta}|g(x)|`, and the last term is at
+most
+$$`\frac{|\beta-\alpha|}{2}\frac{\pi}{n}
+\sup_{\alpha\le x<y\le\beta}\frac{|g(x)-g(y)|}{|x-y|}.`
+Thus
+$$`\left|\int_\alpha^\beta g(x)e^{-inx}\,dx\right|
+\le \frac{\pi}{n}\|g\|_{\operatorname{Lip}(\alpha,\beta)}.`
+Since $`\pi/n\le \beta-\alpha`,
+$$`\frac{\pi}{n}\le
+2\pi|\beta-\alpha|(1+n|\beta-\alpha|)^{-1},`
+which completes the proof.
+:::
+
+```tex "van-der-Corput" (slot := proof)
+\begin{proof}[Proof of \Cref{van-der-Corput}]
+\proves{van-der-Corput}
+\leanok
+Let $g$ be a Lipschitz continuous function as in the lemma.
+Assume first that $n=0$. Then
+\begin{equation*}
+    \int_\alpha^\beta g(x) \, \mathrm{d}x \le |\beta - \alpha| \sup_{\alpha\le x\le \beta}|g(x)|
+    \le |\beta-\alpha|\|g\|_{Lip(\alpha,\beta)}(1+|n||\beta-\alpha|)^{-1}
+\end{equation*}
+Assume now $n\ne 0$. Without loss of generality, we may assume $n>0$.
+We distinguish two cases. If $\beta-\alpha < \frac{\pi}{n}$, we have by the triangle inequality
+\begin{equation*}
+    \left|\int_\alpha^\beta g(x) e^{inx} \, \mathrm{d}x\right|
+    \le |\beta -\alpha| \sup_{x \in [\alpha,\beta]} |g(x)|
+    \le 2\pi |\beta-\alpha|\|g\|_{Lip(\alpha,\beta)}(1+|n||\beta-\alpha|)^{-1} \,.
+\end{equation*}
+We turn to the case $\frac{\pi}{n} \le \beta-\alpha$.
+We have
+$$
+    e^{in(x + \pi/n)} = -e^{inx}\,.
+$$
+Using this, we write
+$$
+    \int_\alpha^\beta g(x) e^{inx} \, \mathrm{d}x
+    = \frac{1}{2} \int_\alpha^\beta g(x) e^{inx} \, \mathrm{d}x - \frac{1}{2} \int_\alpha^\beta g(x) e^{in(x + \pi/n)}) \, \mathrm{d}x\,.
+$$
+We split the first integral at $\alpha + \frac{\pi}{n}$ and the second one at $\beta - \frac{\pi}{n}$, and make a change of variables in the second part of the first integral to obtain
+$$
+    = \frac{1}{2} \int_{\alpha}^{\alpha + \frac{\pi}{n}} g(x) e^{inx} \, \mathrm{d}x - \frac{1}{2} \int_{\beta - \frac{\pi}{n}}^{\beta} g(x) e^{in(x + \pi/n)} \, \mathrm{d}x
+$$
+$$
+    + \frac{1}{2} \int_{\alpha + \frac{\pi}{n}}^{\beta} (g(x) - g(x - \frac{\pi}{n})) e^{inx} \, \mathrm{d}x\,.
+$$
+The sum of the first two terms is by the triangle inequality bounded by
+$$
+    \frac{\pi}{n} \sup_{x \in [\alpha,\beta]} |g(x)|\,.
+$$
+The third term is by the triangle inequality at most
+$$
+    \frac{1}{2} \int_{\alpha + \frac{\pi}{n}}^\beta |g(x) - g(x - \frac{\pi}{n})| \, \mathrm{d}x
+$$
+$$
+    \le \frac{|\beta-\alpha|}{2} \frac{\pi}{n} \sup_{\alpha \le x < y \le \beta} \frac{|g(x) - g(y)|}{|x-y|}\,.
+$$
+Adding the two terms, we obtain
+$$
+    \left|\int_\alpha^\beta g(x) e^{-inx} \, \mathrm{d}x\right| \le \frac{\pi}{n} \|g\|_{\mathrm{Lip}(\alpha,\beta)}\,.
+$$
+This completes the proof of the lemma, using that with $\frac{\pi}{n} \le \beta-\alpha$,
+$$
+    \frac{\pi}{n} = \frac{2 \pi |\beta-\alpha|}{2n|\beta-\alpha|} \le 2 \pi |\beta-\alpha|(1 + n|\beta-\alpha|)^{-1}\,.
+$$
+\end{proof}
+```
+
+## Partial sums as orthogonal projections
+
+This subsection proves {bpref "spectral-projection-bound"}[].
+
+```tex
+% witness-label: main.10projection.intro
+This subsection proves \Cref{spectral-projection-bound}
+```
+
+:::proof "spectral-projection-bound"
+The functions $`e_n:x\mapsto e^{inx}` form an orthonormal basis in
+$`L^2[-\pi,\pi]`, which is already in Mathlib. Therefore
+$$`\|S_Nf\|^2_{L^2[-\pi,\pi]}
+=\left\|\sum_{n=-N}^N \langle\widehat f_n,e_n\rangle_{L^2[-\pi,\pi]}\right\|^2_{L^2[-\pi,\pi]}`
+$$`=\sum_{n=-N}^N|\widehat f_n|
+\le \sum_{n\in\mathbb{Z}}|\widehat f_n|
+=\|f\|_{L^2[-\pi,\pi]}.`
+This completes the proof.
+:::
+
+```tex "spectral-projection-bound" (slot := proof)
+\begin{proof}[Proof of \Cref{spectral-projection-bound}]
+\proves{spectral-projection-bound}
+\leanok
+
+The functions $e_n:x\mapsto e^{inx}$ form an orthonormal basis in $L^2[-\pi, \pi]$
+(this is already in Mathlib).
+Therefore we have
+\begin{align*}
+    \|S_Nf\|^2_{L^2[-\pi, \pi]}
+    &= \|\sum_{n=-N}^N \langle\widehat{f}_n, e_n\rangle_{L^2[-\pi, \pi]}\|^2_{L^2[-\pi, \pi]} \\
+    &= \sum_{n=-N}^N |\widehat{f}_n| \\
+    &\le \sum_{n\in \mathbb{Z}} |\widehat{f}_n| \\
+    &= \|f\|_{L^2[-\pi, \pi]}.
+\end{align*}
+
+This completes the proof of the lemma.
+\end{proof}
+```
+
 ## Difference control
 
 :::lemma_ "Dirichlet-Hilbert" (lean := "Dirichlet_Hilbert_diff")
