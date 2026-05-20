@@ -6444,7 +6444,7 @@ We now turn to the proof of \Cref{forest-complement}.
 ```
 
 :::proof "forest-complement"
-Proof of `forest-complement`. If $`\fp \not\in \fP_{G \setminus G'}`, then
+Proof of {bpref "forest-complement"}[]. If $`\fp \not\in \fP_{G \setminus G'}`, then
 $`\mu(\scI(\fp) \cap (G \setminus G')) = 0`. By `definetp` and `definee1`, it
 follows that $`\mathbf{1}_{G \setminus G'} T_{\fp}f(x) = 0` for almost every
 $`x`. We thus have, almost everywhere,
@@ -12727,7 +12727,7 @@ We turn to the proof of \Cref{Hardy-Littlewood}.
 ```
 
 :::proof "Hardy-Littlewood"
-Proof of `Hardy-Littlewood`. Let the collection $`\mathcal{B}` be given. We
+Proof of {bpref "Hardy-Littlewood"}[]. Let the collection $`\mathcal{B}` be given. We
 first show `eq-besico`.
 
 
@@ -13115,10 +13115,14 @@ This completes the proof.
 
 # Proof of The Classical Carleson Theorem
 
-The convergence of partial Fourier sums is proved in two steps. In the first
-step, we establish convergence on a suitable dense subclass of functions. In
-the second step, one controls the relevant error of approximating a general
-function by a function in the subclass.
+The convergence of partial Fourier sums is proved in {bpref "10classical"}[]
+in two steps. In the first step, we establish convergence on a suitable dense
+subclass of functions. We choose smooth functions as subclass; the convergence
+is stated in {bpref "convergence-for-smooth"}[] and proved in
+{bpref "10smooth"}[]. In the second step, one controls the relevant error of
+approximating a general function by a function in the subclass. This is stated
+in {bpref "control-approximation-effect"}[] and proved in
+{bpref "10difference"}[].
 
 ```tex
 % witness-label: main.classical-overview.1
@@ -13131,14 +13135,18 @@ in \Cref{10difference}.
 ```
 
 The proof relies on a bound on the real Carleson maximal operator stated in
-{bpref "real-Carleson"}[] and proved in the later real-line subsection, which
-involves showing that the real line fits into the metric-space setting. This
-latter proof refers to the two-sided variant {bpref "two-sided-metric-space-Carleson"}[].
-Two assumptions in {bpref "metric-space-Carleson"}[] require more work. The
-boundedness of the operator $`T_r` defined earlier is established in
-{bpref "Hilbert-strong-2-2"}[], and the cancellative property is verified by
-{bpref "van-der-Corput"}[]. Several further auxiliary lemmas are stated and
-proved in the classical subsection.
+{bpref "real-Carleson"}[] and proved in {bpref "10carleson"}[], which involves
+showing that the real line fits into the setting of {bpref "overviewsection"}[].
+This latter proof refers to the two-sided variant of the Carleson theorem,
+{bpref "two-sided-metric-space-Carleson"}[]. Two assumptions in
+{bpref "metric-space-Carleson"}[] require more work. The boundedness of the
+operator $`T_r` defined earlier is established in {bpref "Hilbert-strong-2-2"}[];
+this lemma is proved in {bpref "10hilbert"}[]. The cancellative property is
+verified by {bpref "van-der-Corput"}[], which is proved in
+{bpref "10vandercorput"}[]. Several further auxiliary lemmas are stated and
+proved in {bpref "10classical"}[]; the proof of one of these auxiliary lemmas,
+{bpref "spectral-projection-bound"}[], is done in {bpref "10projection"}[].
+All subsections past {bpref "10classical"}[] are mutually independent.
 
 ```tex
 % witness-label: main.classical-overview.2
@@ -13416,7 +13424,7 @@ Note that this function is continuous at every point $x$ with $|x|>0$.
 ```
 
 The proof of {bpref "control-approximation-effect"}[] will use
-{bpref "real-Carleson"}[], which is proved in the real-line subsection as an
+{bpref "real-Carleson"}[], which is proved in {bpref "10carleson"}[] as an
 application of {bpref "metric-space-Carleson"}[].
 
 ```tex
@@ -13464,7 +13472,7 @@ where
 
 One of the main assumptions of {bpref "two-sided-metric-space-Carleson"}[],
 concerning the operator $`T_r` defined earlier, is verified by the following
-lemma, which is proved in the Hilbert subsection.
+lemma, which is proved in {bpref "10hilbert"}[].
 
 ```tex
 % witness-label: main.10classical.hilbert-strong-reference
@@ -13683,7 +13691,7 @@ $`m\in\{-4,-3,-2,-1,1,2,3\}` are handled similarly.
 \end{proof}
 ```
 
-The following lemma will be proved in the spectral-projection subsection.
+The following lemma will be proved in {bpref "10projection"}[].
 
 ```tex
 % witness-label: main.10classical.spectral-projection-reference
@@ -14495,12 +14503,13 @@ We now prove \Cref{Hilbert-strong-2-2}.
 ```
 
 :::proof "Hilbert-strong-2-2"
-We first show that if $`f` is supported in $`[1,4]`, then
+Proof of {bpref "Hilbert-strong-2-2"}[]. We first show that if $`f` is
+supported in $`[1,4]`, then
 $$`\|H_rf\|_{L^2[2,3]}\le 2^8\|f\|_{L^2(\mathbb{R})}.`
 Let $`\tilde f` be the $`2\pi`-periodic extension of $`f` to
 $`\mathbb{R}`, and let $`N` be the smallest integer larger than $`1/r`.
-Then `eqdifflhil` shows that the kernels of $`H_r` and $`2\pi L_N` differ by
-at most $`12k_r` on $`[-\pi,\pi]`. Consider $`x\in[2,3]`. When computing
+Then {bpref "eqdifflhil"}[] shows that the kernels of $`H_r` and $`2\pi L_N`
+differ by at most $`12k_r` on $`[-\pi,\pi]`. Consider $`x\in[2,3]`. When computing
 $`H_rf(x)` and $`2\pi L_Nf(x)`, the kernels are computed at points of the
 form $`x-y` with $`f(y)\ne0`, hence $`y\in[1,4]`. Since $`x\in[2,3]`, the
 difference $`x-y` is bounded in absolute value by $`2` and therefore belongs
@@ -14600,7 +14609,8 @@ This completes the proof.
 ## The proof of the van der Corput Lemma
 
 :::proof "van-der-Corput"
-Let $`g` be Lipschitz continuous as in the lemma. If $`n=0`, then
+Proof of {bpref "van-der-Corput"}[]. Let $`g` be Lipschitz continuous as in
+the lemma. If $`n=0`, then
 $$`\int_\alpha^\beta g(x)\,dx
 \le |\beta-\alpha|\sup_{\alpha\le x\le\beta}|g(x)|
 \le |\beta-\alpha|\|g\|_{\operatorname{Lip}(\alpha,\beta)}
@@ -14709,7 +14719,8 @@ This subsection proves \Cref{spectral-projection-bound}
 ```
 
 :::proof "spectral-projection-bound"
-The functions $`e_n:x\mapsto e^{inx}` form an orthonormal basis in
+Proof of {bpref "spectral-projection-bound"}[]. The functions
+$`e_n:x\mapsto e^{inx}` form an orthonormal basis in
 $`L^2[-\pi,\pi]`, which is already in Mathlib. Therefore
 $$`\|S_Nf\|^2_{L^2[-\pi,\pi]}
 =\left\|\sum_{n=-N}^N \langle\widehat f_n,e_n\rangle_{L^2[-\pi,\pi]}\right\|^2_{L^2[-\pi,\pi]}`
@@ -15633,7 +15644,8 @@ This follows from \Cref{van-der-Corput} with $\alpha = x - R$ and $\beta = x + R
 The preceding chain of lemmas establishes that $`\mathfrak{A}` is a
 cancellative compatible collection of functions on
 $`(\mathbb{R},\rho,\mu,4)`. Some statements are stronger than needed for
-$`a=4`, but can be relaxed to the desired conclusion.
+$`a=4`, but can be relaxed to the assumptions of {bpref "metric-space-Carleson"}[]
+and the desired conclusion.
 
 With $`\kappa` as above, define $`K:\mathbb{R}\times\mathbb{R}\to\mathbb{C}`
 by
