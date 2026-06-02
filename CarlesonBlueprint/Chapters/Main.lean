@@ -776,14 +776,27 @@ and the constants in this blueprint are obtained by setting $\mathbb{c} = 100$.
 ```
 
 # Proof of Metric Space Carleson, overview
+%%%
+tag := "overviewsection"
+%%%
 
 This section organizes the proof of {bpref "metric-space-Carleson"}[] into sections
-{bpref "thmfromproplinear"}[], {bpref "christsection"}[], {bpref "proptopropprop"}[],
-{bpref "antichainboundary"}[], {bpref "treesection"}[], {bpref "liphoel"}[], and {bpref "sec-hlm"}[]. These sections
+{ref "thmfromproplinear"}[Proof of Metric Space Carleson],
+{ref "christsection"}[Proof of Finitary Carleson],
+{ref "proptopropprop"}[Proof of discrete Carleson],
+{ref "antichainboundary"}[Proof of the Antichain Operator Proposition],
+{ref "treesection"}[Proof of the Forest Operator Proposition],
+{ref "liphoel"}[Proof of the Holder cancellative condition], and
+{ref "sec-hlm"}[Proof of Vitali covering and Hardy--Littlewood]. These sections
 are mutually independent except for referring to the statements formulated in
-the present section. {bpref "thmfromproplinear"}[] proves the main
-{bpref "metric-space-Carleson"}[], while sections {bpref "christsection"}[], {bpref "proptopropprop"}[],
-{bpref "antichainboundary"}[], {bpref "treesection"}[], {bpref "liphoel"}[], and {bpref "sec-hlm"}[] each prove one
+the present section. {ref "thmfromproplinear"}[Proof of Metric Space Carleson] proves the main
+{bpref "metric-space-Carleson"}[], while sections
+{ref "christsection"}[Proof of Finitary Carleson],
+{ref "proptopropprop"}[Proof of discrete Carleson],
+{ref "antichainboundary"}[Proof of the Antichain Operator Proposition],
+{ref "treesection"}[Proof of the Forest Operator Proposition],
+{ref "liphoel"}[Proof of the Holder cancellative condition], and
+{ref "sec-hlm"}[Proof of Vitali covering and Hardy--Littlewood] each prove one
 proposition that is stated in the present section. The present section also
 introduces all definitions used across these sections.
 
@@ -792,7 +805,7 @@ introduces all definitions used across these sections.
 This section organizes the proof of \Cref{metric-space-Carleson} into sections \ref{thmfromproplinear}, \ref{christsection}, \ref{proptopropprop}, \ref{antichainboundary}, \ref{treesection}, \ref{liphoel}, and \ref{sec-hlm}. These sections are mutually independent except for referring to the statements formulated in the present section. \Cref{thmfromproplinear} proves the main \Cref{metric-space-Carleson}, while sections \ref{christsection}, \ref{proptopropprop}, \ref{antichainboundary}, \ref{treesection}, \ref{liphoel}, and \ref{sec-hlm} each prove one proposition that is stated in the present section. The present section also introduces all definitions used across these sections.
 ```
 
-{bpref "global-auxiliary-lemmas"}[] proves some auxiliary lemmas that are used in more
+{ref "global-auxiliary-lemmas"}[Auxiliary lemmas] proves some auxiliary lemmas that are used in more
 than one of the sections 3-9.
 
 ```tex
@@ -884,7 +897,7 @@ so that for each $x, y \in X$ with $x\neq y$ we have
 $$K(x,y)=\sum_{s\in\mathbb{Z}}K_s(x,y).$$
 ```
 
-In {bpref "thmfromproplinear"}[], we prove {bpref "metric-space-Carleson"}[] and
+In {ref "thmfromproplinear"}[Proof of Metric Space Carleson], we prove {bpref "metric-space-Carleson"}[] and
 {bpref "linearised-metric-Carleson"}[] from the finitary version,
 {bpref "finitary-Carleson"}[] below. Recall that a function from a measure space to a
 finite set is measurable if the pre-image of each of the elements in the range
@@ -939,7 +952,7 @@ $\sigma_1$ and $\sigma_2$ are contained in $[-S,S]$ and $F$ and $G$ are containe
 in the ball $B(o, \frac{1}{4}D^S)$.
 ```
 
-In {bpref "christsection"}[], we prove {bpref "finitary-Carleson"}[] using a bound for a dyadic
+In {ref "christsection"}[Proof of Finitary Carleson], we prove {bpref "finitary-Carleson"}[] using a bound for a dyadic
 model formulated in {bpref "discrete-Carleson"}[] below.
 
 ```tex
@@ -1127,7 +1140,7 @@ we have
 \end{proposition}
 ```
 
-The proof of {bpref "discrete-Carleson"}[] is done in {bpref "proptopropprop"}[] by a reduction to
+The proof of {bpref "discrete-Carleson"}[] is done in {ref "proptopropprop"}[Proof of discrete Carleson] by a reduction to
 two further propositions that we state below.
 
 ```tex
@@ -1224,7 +1237,7 @@ An antichain is a subset $\mathfrak{A}$
 of $\fP$ such that for any distinct $\fp,\fq\in \mathfrak{A}$ we do not have $\fp\le \fq$.
 ```
 
-The following proposition is proved in {bpref "antichainboundary"}[].
+The following proposition is proved in {ref "antichainboundary"}[Proof of the Antichain Operator Proposition].
 
 ```tex
 % witness-label: main.overview.18
@@ -1323,7 +1336,7 @@ We have for every $\fu\in \fU$ and $\fp\in \fT(\fu)$ that
 \end{equation}
 ```
 
-The following proposition is proved in {bpref "treesection"}[].
+The following proposition is proved in {ref "treesection"}[Proof of the Forest Operator Proposition].
 
 ```tex
 % witness-label: main.overview.20
@@ -1362,7 +1375,7 @@ kernels satisfying the mere Holder regularity condition `eqkernel-y-smooth`. On
 the other hand, the cancellative condition `eq-vdc-cond` is a testing
 condition against more regular, namely Lipschitz functions. To bridge the gap,
 we follow the literature to observe a variant of `eq-vdc-cond` that we
-formulate in the following proposition proved in {bpref "liphoel"}[].
+formulate in the following proposition proved in {ref "liphoel"}[Proof of the Holder cancellative condition].
 
 ```tex
 % witness-label: main.overview.21a
@@ -1424,7 +1437,7 @@ $$`|\int e(\mfa(x)-{\mfb(x)})\varphi(x) dx|\le
 We further formulate a classical Vitali covering result and maximal function
 estimate that we need throughout several sections. This following proposition
 will typically be applied to the absolute value of a complex valued function
-and be proved in {bpref "sec-hlm"}[]. By a ball $`B` we mean a set $`B(x,r)` with
+and be proved in {ref "sec-hlm"}[Proof of Vitali covering and Hardy--Littlewood]. By a ball $`B` we mean a set $`B(x,r)` with
 $`x\in X` and $`r>0` as defined in `eq-define-ball`. For a finite collection
 $`\mathcal{B}` of balls in $`X` and $`1\le p< \infty` define the measurable
 function $`M_{\mathcal{B},p}u` on $`X` by
@@ -1505,9 +1518,12 @@ This completes the overview of the proof of \Cref{metric-space-Carleson}.
 ```
 
 ## Auxiliary lemmas
+%%%
+tag := "global-auxiliary-lemmas"
+%%%
 
 We close this section by recording some auxiliary lemmas about the objects
-defined in {bpref "overviewsection"}[], which will be used in multiple sections to
+defined in {ref "overviewsection"}[Proof of Metric Space Carleson, overview], which will be used in multiple sections to
 follow.
 
 ```tex
@@ -1792,6 +1808,9 @@ $`2\rho(y,y') \le \rho(x,y)`.
 ```
 
 # Proof of Metric Space Carleson
+%%%
+tag := "thmfromproplinear"
+%%%
 
 In this section we prove {bpref "metric-space-Carleson"}[] and
 {bpref "linearised-metric-Carleson"}[].
@@ -2320,9 +2339,12 @@ and thus \Cref{metric-space-Carleson}.
 ```
 
 # Proof of Finitary Carleson
+%%%
+tag := "christsection"
+%%%
 
 To prove Proposition {bpref "finitary-Carleson"}[], we already fixed in
-{bpref "overviewsection"}[] measurable functions $`\sigma_1,\sigma_2, \tQ` and Borel
+{ref "overviewsection"}[Proof of Metric Space Carleson, overview] measurable functions $`\sigma_1,\sigma_2, \tQ` and Borel
 sets $`F,G`. We have also defined $`S` to be the smallest integer such that
 the ranges of $`\sigma_1` and $`\sigma_2` are contained in $`[-S,S]` and $`F`
 and $`G` are contained in the ball $`B(o, \frac 14 D^S)`.
@@ -2341,7 +2363,7 @@ $\sigma_1$ and $\sigma_2$ are contained in $[-S,S]$ and $F$ and $G$ are containe
 in the ball $B(o, \frac 14 D^S)$.
 ```
 
-The proof of the next lemma is done in {bpref "subsecdyadic"}[], following the
+The proof of the next lemma is done in {ref "subsecdyadic"}[Proof of Grid Existence Lemma], following the
 construction of dyadic cubes in the literature.
 
 ```tex
@@ -2364,7 +2386,7 @@ There exists a grid structure $`(\mathcal{D}, c,s)`.
 \end{lemma}
 ```
 
-The next lemma, which we prove in {bpref "subsectiles"}[], should be compared with the
+The next lemma, which we prove in {ref "subsectiles"}[Proof of Tile Structure Lemma], should be compared with the
 construction in the literature.
 
 ```tex
@@ -2513,6 +2535,9 @@ This proves \eqref{eq-linearized} for the chosen set $G'$ and arbitrary $f$ and 
 ```
 
 ## Proof of Grid Existence Lemma
+%%%
+tag := "subsecdyadic"
+%%%
 
 We begin with the construction of the centers of the dyadic cubes.
 
@@ -3371,6 +3396,9 @@ Now note that properties \eqref{dyadicproperty}, \eqref{eq-vol-sp-cube} and \eqr
 ```
 
 ## Proof of Tile Structure Lemma
+%%%
+tag := "subsectiles"
+%%%
 
 Choose a grid structure $`(\mathcal{D}, c, s)` with {bpref "grid-existence"}[]. Let
 $`I \in \mathcal{D}`. Suppose that
@@ -3747,19 +3775,23 @@ the proof.
 ```
 
 # Proof of discrete Carleson
+%%%
+tag := "proptopropprop"
+%%%
 
 Let a grid structure $`(\mathcal{D}, c, s)` and a tile structure
 $`(\fP, \scI, \fc, \fcc)` for this grid structure be given. In
-{bpref "subsectilesorg"}[], we decompose the set $`\fP` of tiles into subsets. Each
+{ref "subsectilesorg"}[Organisation of the tiles], we decompose the set $`\fP` of tiles into subsets. Each
 subset will be controlled by one of three methods. The guiding principle of the
 decomposition is to be able to apply the forest estimate of {bpref "forest-operator"}[]
 to the final subsets defined in `defc5`. This application is done in
-{bpref "subsecforest"}[]. The miscellaneous subsets along the construction of the forests
+{ref "subsecforest"}[Proof of the Forest Union Lemma]. The miscellaneous subsets along the construction of the forests
 will either be thrown into exceptional sets, which are defined and controlled
-in {bpref "subsetexcset"}[], or will be controlled by the antichain estimate of
-{bpref "antichain-operator"}[], which is done in {bpref "subsecantichain"}[].
-{bpref "subsec-lessim-aux"}[] contains some auxiliary lemmas needed for the proofs in
-Subsections {bpref "subsecforest"}[]-{bpref "subsecantichain"}[].
+in {ref "subsetexcset"}[Proof of the Exceptional Sets Lemma], or will be controlled by the antichain estimate of
+{bpref "antichain-operator"}[], which is done in
+{ref "subsecantichain"}[Proof of the Forest Complement Lemma].
+{ref "subsec-lessim-aux"}[Auxiliary lemmas] contains some auxiliary lemmas needed for the proofs in
+Subsections {ref "subsecforest"}[Proof of the Forest Union Lemma]-{ref "subsecantichain"}[Proof of the Forest Complement Lemma].
 
 ```tex
 % witness-label: main.discrete.1
@@ -3772,6 +3804,9 @@ Let a grid structure $(\mathcal{D}, c, s)$ and a tile structure $(\fP, \scI, \fc
 ```
 
 ## Organisation of the tiles
+%%%
+tag := "subsectilesorg"
+%%%
 
 In the following definitions, $`k, n`, and $`j` will be nonnegative integers.
 Define $`\mathcal{C}(G,k)` to be the set of $`I\in \mathcal{D}` such that
@@ -4013,7 +4048,7 @@ $$`G_3 :=
         \bigcup_{\fp \in \fL_4 (k,n,j)}
         \scI(\fp).`
 Define $`G'=G_1\cup G_2 \cup G_3`. The following bound of the measure of
-$`G'` will be proven in {bpref "subsetexcset"}[].
+$`G'` will be proven in {ref "subsetexcset"}[Proof of the Exceptional Sets Lemma].
 
 ```tex
 % witness-label: main.discrete.3
@@ -4070,7 +4105,7 @@ $$`\mu(G')\le 2^{-1}\mu(G).`
 \end{lemma}
 ```
 
-In {bpref "subsecforest"}[], we identify each set $`\fC_5(k,n,j)` outside $`G'` as a
+In {ref "subsecforest"}[Proof of the Forest Union Lemma], we identify each set $`\fC_5(k,n,j)` outside $`G'` as a
 forest and use Proposition {bpref "forest-operator"}[] to prove the following lemma.
 
 ```tex
@@ -4107,7 +4142,7 @@ $$`\int_{G \setminus G'} \left|\sum_{\fp \in \fP_1} T_{\fp} f \right|\, \mathrm{
 \end{lemma}
 ```
 
-In {bpref "subsecantichain"}[], we decompose the complement of the set of tiles in Lemma
+In {ref "subsecantichain"}[Proof of the Forest Complement Lemma], we decompose the complement of the set of tiles in Lemma
 {bpref "forest-union"}[] and apply the antichain estimate of {bpref "antichain-operator"}[] to
 prove the following lemma.
 
@@ -4165,6 +4200,9 @@ as the bound on the set $G'$ given by \Cref{exceptional-set}.
 ```
 
 ## Proof of the Exceptional Sets Lemma
+%%%
+tag := "subsetexcset"
+%%%
 
 We prove separate bounds for $`G_1`, $`G_2`, and $`G_3` in Lemmas
 {bpref "first-exception"}[], {bpref "second-exception"}[], and {bpref "third-exception"}[]. Adding up these
@@ -4956,6 +4994,9 @@ Adding up the bounds in Lemmas \ref{first-exception}, \ref{second-exception}, an
 ```
 
 ## Auxiliary lemmas
+%%%
+tag := "subsec-lessim-aux"
+%%%
 
 Before proving {bpref "forest-union"}[] and {bpref "forest-complement"}[], we collect some useful
 properties of $`\lesssim`.
@@ -5524,6 +5565,9 @@ $$`\dens_k'(\fC(k,n)) = \sup_{\fp \in \fC(k,n)} \dens_k'(\{\fp\}) \le 2^{4a}2^{-
 ```
 
 ## Proof of the Forest Union Lemma
+%%%
+tag := "subsecforest"
+%%%
 
 Fix $`k,n,j\ge 0`. Define
 $$`\fC_6(k,n,j)`
@@ -6187,6 +6231,9 @@ bounded by $`2^{a^3}/(q-1)^4`, which completes the proof of the lemma.
 ```
 
 ## Proof of the Forest Complement Lemma
+%%%
+tag := "subsecantichain"
+%%%
 
 Define $`\fP_{G \setminus G'}` to be the set of all $`\fp \in \fP` such that
 $`\mu(\scI(\fp) \cap (G \setminus  G')) > 0`.
@@ -6516,13 +6563,18 @@ This completes the proof.
 ```
 
 # Proof of the Antichain Operator Proposition
+%%%
+tag := "antichainboundary"
+%%%
 
 Let an antichain $`\mathfrak{A}` and functions $`f`, $`g` as in
-{bpref "antichain-operator"}[] be given. We prove `eq-antiprop` in {bpref "sec-TT*-T*T"}[] as the
+{bpref "antichain-operator"}[] be given. We prove `eq-antiprop` in
+{ref "sec-TT-TT"}[The density arguments] as the
 geometric mean of two inequalities, each involving one of the two densities.
 One of these two inequalities will need a careful estimate formulated in
 {bpref "tile-correlation"}[] of the $`TT^*` correlation between two tile operators.
-{bpref "tile-correlation"}[] will be proven in {bpref "sec-tile-operator"}[].
+{bpref "tile-correlation"}[] will be proven in
+{ref "sec-tile-operator"}[Proof of the Tile Correlation Lemma].
 
 ```tex
 % witness-label: main.antichain.1
@@ -6545,7 +6597,8 @@ the $TT^*$ correlation between two tile operators.
 
 The summation of the contributions of these individual correlations will
 require a geometric {bpref "antichain-tile-count"}[] counting the relevant tile pairs.
-{bpref "antichain-tile-count"}[] will be proven in {bpref "subsec-geolem"}[].
+{bpref "antichain-tile-count"}[] will be proven in
+{ref "subsec-geolem"}[Proof of the Antichain Tile Count Lemma].
 
 ```tex
 % witness-label: main.antichain.2
@@ -6556,6 +6609,9 @@ geometric \Cref{antichain-tile-count} counting the relevant tile pairs.
 ```
 
 ## The density arguments
+%%%
+tag := "sec-TT-TT"
+%%%
 
 We begin with the following crucial disjointedness property of the sets
 $`E(\fp)` with $`\fp \in \mathfrak{A}`.
@@ -6610,7 +6666,7 @@ This proves the lemma.
 Let $`\mathcal{B}` be the collection of balls
 $$`B(\pc(\fp), 8D^{\ps(\fp)})`
 with $`\fp\in \mathfrak{A}` and recall the definition of $`M_{\mathcal{B}}`
-from {bpref "def-hlm"}[].
+from the definition of $`M_{\mathcal{B}}`.
 
 ```tex
 % witness-label: main.antichain.4
@@ -7060,7 +7116,8 @@ Now \Cref{dens1-antichain} follows by applying Cauchy-Schwarz on the left-hand s
 \end{proof}
 ```
 
-The following basic $`TT^*` estimate will be proved in {bpref "sec-tile-operator"}[].
+The following basic $`TT^*` estimate will be proved in
+{ref "sec-tile-operator"}[Proof of the Tile Correlation Lemma].
 
 ```tex
 % witness-label: main.antichain.6
@@ -7099,7 +7156,8 @@ $$`\scI(\fp') \subset B(\pc(\fp), 14D^{\ps(\fp)}).`
 \end{lemma}
 ```
 
-The following lemma will be proved in {bpref "subsec-geolem"}[].
+The following lemma will be proved in
+{ref "subsec-geolem"}[Proof of the Antichain Tile Count Lemma].
 
 ```tex
 % witness-label: main.antichain.7
@@ -7172,6 +7230,9 @@ With the definition of $p$, this implies
 ```
 
 ## Proof of the Tile Correlation Lemma
+%%%
+tag := "sec-tile-operator"
+%%%
 
 The next lemma prepares an application of {bpref "Holder-van-der-Corput"}[].
 
@@ -7601,6 +7662,9 @@ we conclude
 ```
 
 ## Proof of the Antichain Tile Count Lemma
+%%%
+tag := "subsec-geolem"
+%%%
 
 ```tex
 % witness-label: main.antichaincount.1
@@ -8269,6 +8333,9 @@ Using that $p = 4a^4$ and $a \ge 4$, this proves the lemma.
 ```
 
 # Proof of the Forest Operator Proposition
+%%%
+tag := "treesection"
+%%%
 
 ```tex
 % witness-label: main.forestop.1
@@ -9881,7 +9948,8 @@ The main result of this subsection is the almost orthogonality estimate for
 operators associated to distinct trees in a forest in
 {bpref "correlation-separated-trees"}[] below. We will deduce it from Lemmas
 {bpref "correlation-distant-tree-parts"}[] and {bpref "correlation-near-tree-parts"}[], which are
-proven in Subsections {bpref "subsec-big-tiles"}[] and {bpref "subsec-rest-tiles"}[],
+proven in Subsections {ref "subsec-big-tiles"}[Proof of the Tiles with large separation Lemma] and
+{ref "subsec-rest-tiles"}[Proof of The Remaining Tiles Lemma],
 respectively. Before stating it, we introduce some relevant notation.
 
 ```tex
@@ -10260,12 +10328,15 @@ $$
 ```
 
 ## Proof of the Tiles with large separation Lemma
+%%%
+tag := "subsec-big-tiles"
+%%%
 
 {bpref "correlation-distant-tree-parts"}[] follows from the van der Corput estimate in
 {bpref "Holder-van-der-Corput"}[]. We apply this proposition in
-{bpref "subsubsec-van-der-corput"}[]. To prepare this application, we first, in
-{bpref "subsubsec-pao"}[], construct a suitable partition of unity, and show then, in
-{bpref "subsubsec-holder-estimates"}[] the Holder estimates needed to apply
+{ref "subsubsec-van-der-corput"}[The van der Corput estimate]. To prepare this application, we first, in
+{ref "subsubsec-pao"}[A partition of unity], construct a suitable partition of unity, and show then, in
+{ref "subsubsec-holder-estimates"}[Holder estimates for adjoint tree operators] the Holder estimates needed to apply
 {bpref "Holder-van-der-Corput"}[].
 
 ```tex
@@ -10277,6 +10348,9 @@ $$
 ```
 
 ### A partition of unity
+%%%
+tag := "subsubsec-pao"
+%%%
 
 Define
 $$`\mathcal{J}' = \{J \in \mathcal{J}(\mathfrak{S}) \ : \ J \subset \scI(\fu_1)\}.`
@@ -10542,6 +10616,9 @@ which contradicts `eq-tile-incl-1` and `tile-incl-2`.
 ```
 
 ### Holder estimates for adjoint tree operators
+%%%
+tag := "subsubsec-holder-estimates"
+%%%
 
 Let $`g_1, g_2:X \to \mathbb{C}` be bounded with bounded support. Define for
 $`J \in \mathcal{J}'`
@@ -11251,6 +11328,9 @@ Using that $`\rho(y,y') \le 32D^{s(J)}` and $`a \ge 4`, the lemma follows.
 ```
 
 ### The van der Corput estimate
+%%%
+tag := "subsubsec-van-der-corput"
+%%%
 
 :::lemma_ "lower-oscillation-bound" (lean := "TileStructure.Forest.lower_oscillation_bound")
 Uses {uses "overlap-implies-distance"}[].
@@ -11389,6 +11469,9 @@ follows.
 ```
 
 ## Proof of The Remaining Tiles Lemma
+%%%
+tag := "subsec-rest-tiles"
+%%%
 
 :::lemma_ "dyadic-partition-2" (lean := "TileStructure.Forest.union_𝓙₆, TileStructure.Forest.pairwiseDisjoint_𝓙₆")
 Uses {uses "dyadic-partitions"}[].
@@ -12215,6 +12298,9 @@ $`(\frac{2}{q} - 1)`-st power of `eq-forest-bound-2`.
 ```
 
 # Proof of the H\"older cancellative condition
+%%%
+tag := "liphoel"
+%%%
 
 We need the following auxiliary lemma. Recall that $`\tau = 1/a`.
 
@@ -12580,6 +12666,9 @@ This completes the proof of \Cref{Holder-van-der-Corput}.
 ```
 
 # Proof of Vitali covering and Hardy--Littlewood
+%%%
+tag := "sec-hlm"
+%%%
 
 We begin with a classical representation of the Lebesgue norm.
 
@@ -13113,16 +13202,92 @@ This completes the proof.
 \end{proof}
 ```
 
+# Two-sided Metric Space Carleson
+
+We prove a variant of {bpref "metric-space-Carleson"}[] for a two-sided
+Calderon--Zygmund kernel on the doubling metric measure space
+$`(X,\rho,\mu,a)`. This means a one-sided Calderon--Zygmund kernel $`K`
+which additionally satisfies, for all $`x,x',y\in X` with $`x\ne y` and
+$`2\rho(x,x')\le \rho(x,y)`,
+$$`|K(x,y)-K(x',y)|
+\le \left(\frac{\rho(x,x')}{\rho(x,y)}\right)^{\frac1a}
+\frac{2^{a^3}}{V(x,y)}.`
+By the additional regularity, we can weaken the assumption `nontanbound` to a
+family of operators that is easier to work with in applications. Namely, for
+$`r>0`, $`x\in X`, and a bounded measurable function $`f:X\to\mathbb{C}`
+supported on a set of finite measure, define
+$$`T_r f(x) := \int_{r\le\rho(x,y)} K(x,y)f(y)\,d\mu(y)
+= \int_{X\setminus B(x,r)} K(x,y)f(y)\,d\mu(y).`
+
+```tex
+% witness-label: main.two-sided.intro
+\section{Two-sided Metric Space Carleson}
+
+We prove a variant of \Cref{metric-space-Carleson} for a two-sided Calder\'on--Zygmund kernel on the doubling metric measure space $(X,\rho,\mu,a)$, i.e. a one-sided Calder\'on--Zygmund kernel $K$ which additionally satisfies for all $x,x',y\in X$ with $x\neq y$ and $2\rho(x,x') \leq \rho(x,y)$,
+\begin{equation}
+    \label{eqkernel-x-smooth}
+    |K(x,y) - K(x',y)| \leq \left(\frac{\rho(x,x')}{\rho(x,y)}\right)^{\frac{1}{a}}\frac{2^{a^3}}{V(x,y)}.
+\end{equation}
+%fixme: Should it be V(y,x) rather?
+By the additional regularity, we can weaken the assumption \eqref{nontanbound} to a family of operators that is easier to work with in applications.
+Namely, for $r > 0$, $x\in X$, and a bounded, measurable function $f:X\to\C$ supported on a set of finite measure, we define
+\begin{equation}
+\label{def-T-r}
+T_r f(x):= \int_{r\le\rho(x,y)} K(x,y) f(y) \, d\mu(y) = \int_{X\setminus B(x,r)} K(x,y) f(y) \, d\mu(y).
+\end{equation}
+```
+
+:::theorem "two-sided-metric-space-Carleson" (lean := "two_sided_metric_carleson")
+Uses {uses "metric-space-Carleson"}[].
+For all integers $`a\ge 4` and real numbers $`1<q\le 2`, the following holds.
+Let $`(X,\rho,\mu,a)` be a doubling metric measure space. Let $`\Mf` be a
+cancellative compatible collection of functions and let $`K` be a two-sided
+Calderon--Zygmund kernel on $`(X,\rho,\mu,a)`. Assume that for every bounded
+measurable function $`g` on $`X` supported on a set of finite measure and all
+$`r>0` we have
+$$`\|T_r g\|_2 \le 2^{a^3}\|g\|_2.`
+Then for all Borel sets $`F` and $`G` in $`X` and all Borel functions
+$`f:X\to\mathbb{C}` with $`|f|\le\mathbf{1}_F`, we have, with $`T` defined in
+`def-main-op`,
+$$`\left|\int_G T f\,d\mu\right|
+\le \frac{2^{474a^3}}{(q-1)^6}
+\mu(G)^{1-\frac1q}\mu(F)^{\frac1q}.`
+:::
+
+```tex "two-sided-metric-space-Carleson" (slot := statement)
+\begin{theorem}[two-sided metric space Carleson]
+    \label{two-sided-metric-space-Carleson}
+    \uses{metric-space-Carleson, nontangential-from-simple}
+    \leanok
+    \lean{two_sided_metric_carleson}
+        For all  integers $a \ge  4$ and real numbers $1<q\le 2$
+        the following holds.
+        Let $(X,\rho,\mu,a)$ be a doubling metric measure space. Let  $\Mf$ be a
+        cancellative compatible  collection of functions and let $K$ be a two-sided Calder\'on--Zygmund kernel on $(X,\rho,\mu,a)$. Assume  that for every bounded measurable function $g$ on $X$ supported on a set of finite measure and all $r>0$ we have
+      \begin{equation}\label{two-sided-Hr-bound-assumption}
+            \|T_r g\|_{2} \leq 2^{a^3} \|g\|_2\,.
+        \end{equation}
+        Then for all Borel sets $F$ and $G$ in $X$ and
+        all Borel functions $f:X\to \C$ with
+        $|f|\le \mathbf{1}_F$, we have, with $T$ defined in \eqref{def-main-op},
+      \begin{equation}
+        \label{two-sided-resweak}
+            \left|\int_{G} T f \, \mathrm{d}\mu\right| \leq \frac{2^{474a^3}}{(q-1)^6} \mu(G)^{1-\frac{1}{q}} \mu(F)^{\frac{1}{q}}\, .
+        \end{equation}
+\end{theorem}
+```
+
 # Proof of The Classical Carleson Theorem
 
-The convergence of partial Fourier sums is proved in {bpref "10classical"}[]
+The convergence of partial Fourier sums is proved in
+{ref "10classical"}[The classical Carleson theorem]
 in two steps. In the first step, we establish convergence on a suitable dense
 subclass of functions. We choose smooth functions as subclass; the convergence
 is stated in {bpref "convergence-for-smooth"}[] and proved in
-{bpref "10smooth"}[]. In the second step, one controls the relevant error of
+{ref "10smooth"}[Smooth functions]. In the second step, one controls the relevant error of
 approximating a general function by a function in the subclass. This is stated
 in {bpref "control-approximation-effect"}[] and proved in
-{bpref "10difference"}[].
+{ref "10difference"}[Difference control].
 
 ```tex
 % witness-label: main.classical-overview.1
@@ -13135,18 +13300,20 @@ in \Cref{10difference}.
 ```
 
 The proof relies on a bound on the real Carleson maximal operator stated in
-{bpref "real-Carleson"}[] and proved in {bpref "10carleson"}[], which involves
-showing that the real line fits into the setting of {bpref "overviewsection"}[].
+{bpref "real-Carleson"}[] and proved in {ref "10carleson"}[Carleson on the real line], which involves
+showing that the real line fits into the setting of
+{ref "overviewsection"}[Proof of Metric Space Carleson, overview].
 This latter proof refers to the two-sided variant of the Carleson theorem,
 {bpref "two-sided-metric-space-Carleson"}[]. Two assumptions in
 {bpref "metric-space-Carleson"}[] require more work. The boundedness of the
 operator $`T_r` defined earlier is established in {bpref "Hilbert-strong-2-2"}[];
-this lemma is proved in {bpref "10hilbert"}[]. The cancellative property is
+this lemma is proved in {ref "10hilbert"}[The truncated Hilbert transform]. The cancellative property is
 verified by {bpref "van-der-Corput"}[], which is proved in
-{bpref "10vandercorput"}[]. Several further auxiliary lemmas are stated and
-proved in {bpref "10classical"}[]; the proof of one of these auxiliary lemmas,
-{bpref "spectral-projection-bound"}[], is done in {bpref "10projection"}[].
-All subsections past {bpref "10classical"}[] are mutually independent.
+{ref "10vandercorput"}[The proof of the van der Corput Lemma]. Several further auxiliary lemmas are stated and
+proved in {ref "10classical"}[The classical Carleson theorem]; the proof of one of these auxiliary lemmas,
+{bpref "spectral-projection-bound"}[], is done in
+{ref "10projection"}[Partial sums as orthogonal projections].
+All subsections past {ref "10classical"}[The classical Carleson theorem] are mutually independent.
 
 ```tex
 % witness-label: main.classical-overview.2
@@ -13159,6 +13326,9 @@ All subsections past \Cref{10classical} are mutually independent.
 ```
 
 ## The classical Carleson theorem
+%%%
+tag := "10classical"
+%%%
 
 Let a uniformly continuous $`2\pi`-periodic function
 $`f:\mathbb{R}\to \mathbb{C}` and $`\epsilon>0` be given. Let
@@ -13241,7 +13411,7 @@ part of the Lean library.
 \end{proof}
 ```
 
-We prove this in {bpref "10smooth"}[]:
+We prove this in {ref "10smooth"}[Smooth functions]:
 
 ```tex
 % witness-label: main.10classical.convergence-reference
@@ -13269,7 +13439,7 @@ $$`|S_N f_0(x)-f_0(x)|\le \frac \epsilon 4.`
 \end{lemma}
 ```
 
-We prove this in {bpref "10difference"}[]:
+We prove this in {ref "10difference"}[Difference control]:
 
 ```tex
 % witness-label: main.10classical.control-reference
@@ -13424,7 +13594,8 @@ Note that this function is continuous at every point $x$ with $|x|>0$.
 ```
 
 The proof of {bpref "control-approximation-effect"}[] will use
-{bpref "real-Carleson"}[], which is proved in {bpref "10carleson"}[] as an
+{bpref "real-Carleson"}[], which is proved in
+{ref "10carleson"}[Carleson on the real line] as an
 application of {bpref "metric-space-Carleson"}[].
 
 ```tex
@@ -13472,7 +13643,7 @@ where
 
 One of the main assumptions of {bpref "two-sided-metric-space-Carleson"}[],
 concerning the operator $`T_r` defined earlier, is verified by the following
-lemma, which is proved in {bpref "10hilbert"}[].
+lemma, which is proved in {ref "10hilbert"}[The truncated Hilbert transform].
 
 ```tex
 % witness-label: main.10classical.hilbert-strong-reference
@@ -13511,7 +13682,8 @@ $$`H_rf(x):=T_rf(x)=\int_{r\le |x-y|}\kappa(x-y)f(y)\,dy.`
 
 The next lemma will be used to verify that the collection $`\mathfrak{A}` of
 modulation functions in our application of {bpref "metric-space-Carleson"}[]
-satisfies the condition `eq-vdc-cond`. It is proved in {bpref "10vandercorput"}[].
+satisfies the condition `eq-vdc-cond`. It is proved in
+{ref "10vandercorput"}[The proof of the van der Corput Lemma].
 
 ```tex
 % witness-label: main.10classical.vdc-reference
@@ -13691,7 +13863,8 @@ $`m\in\{-4,-3,-2,-1,1,2,3\}` are handled similarly.
 \end{proof}
 ```
 
-The following lemma will be proved in {bpref "10projection"}[].
+The following lemma will be proved in
+{ref "10projection"}[Partial sums as orthogonal projections].
 
 ```tex
 % witness-label: main.10classical.spectral-projection-reference
@@ -13867,6 +14040,9 @@ $$`|\kappa(-y)-\kappa(-y')|=0
 ```
 
 ## Smooth functions
+%%%
+tag := "10smooth"
+%%%
 
 :::lemma_ "fourier-coeff-derivative" (lean := "fourierCoeffOn_of_hasDerivAt")
 Let $`f:\mathbb{R} \to \mathbb{C}` be $`2\pi`-periodic and continuously
@@ -13994,6 +14170,9 @@ Applying \Cref{fourier-coeff-derivative} twice and using the fact that $f''$ is 
 ```
 
 ## The truncated Hilbert transform
+%%%
+tag := "10hilbert"
+%%%
 
 Let $`M_n` be the modulation operator on measurable $`2\pi`-periodic
 functions defined by
@@ -14508,7 +14687,7 @@ supported in $`[1,4]`, then
 $$`\|H_rf\|_{L^2[2,3]}\le 2^8\|f\|_{L^2(\mathbb{R})}.`
 Let $`\tilde f` be the $`2\pi`-periodic extension of $`f` to
 $`\mathbb{R}`, and let $`N` be the smallest integer larger than $`1/r`.
-Then {bpref "eqdifflhil"}[] shows that the kernels of $`H_r` and $`2\pi L_N`
+Then the identity `eqdifflhil` shows that the kernels of $`H_r` and $`2\pi L_N`
 differ by at most $`12k_r` on $`[-\pi,\pi]`. Consider $`x\in[2,3]`. When computing
 $`H_rf(x)` and $`2\pi L_Nf(x)`, the kernels are computed at points of the
 form $`x-y` with $`f(y)\ne0`, hence $`y\in[1,4]`. Since $`x\in[2,3]`, the
@@ -14607,6 +14786,9 @@ This completes the proof.
 ```
 
 ## The proof of the van der Corput Lemma
+%%%
+tag := "10vandercorput"
+%%%
 
 :::proof "van-der-Corput"
 Proof of {bpref "van-der-Corput"}[]. Let $`g` be Lipschitz continuous as in
@@ -14710,6 +14892,9 @@ $$
 ```
 
 ## Partial sums as orthogonal projections
+%%%
+tag := "10projection"
+%%%
 
 This subsection proves {bpref "spectral-projection-bound"}[].
 
@@ -14751,6 +14936,9 @@ This completes the proof of the lemma.
 ```
 
 ## Difference control
+%%%
+tag := "10difference"
+%%%
 
 :::lemma_ "Dirichlet-Hilbert" (lean := "Dirichlet_Hilbert_diff")
 Uses {uses "Dirichlet-kernel"}[] and {uses "lower-secant-bound"}[].
@@ -15106,6 +15294,9 @@ Analogously, we get the same estimate for $|E_2|$. This completes the proof usin
 ```
 
 ## Carleson on the real line
+%%%
+tag := "10carleson"
+%%%
 
 We prove {bpref "real-Carleson"}[].
 
