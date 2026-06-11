@@ -1450,7 +1450,7 @@ and $1\le p< \infty$ define the measurable function $M_{\mathcal{B},p}u$ on $X$ 
 Define further $M_{\mathcal{B}}:=M_{\mathcal{B},1}$.
 ```
 
-:::theorem "Hardy-Littlewood" (lean := "Finset.measure_biUnion_le_lintegral, hasStrongType_maximalFunction, MeasureTheory.AEStronglyMeasurable.globalMaximalFunction, laverage_le_globalMaximalFunction, hasStrongType_globalMaximalFunction") (uses := "layer-cake-representation, covering-separable-space")
+:::theorem "Hardy-Littlewood" (lean := "measure_biUnion_le_lintegral, hasStrongType_maximalFunction, measurable_maximalFunction, laverage_le_globalMaximalFunction") (uses := "layer-cake-representation")
 Let $`\mathcal{B}` be a finite collection of balls in $`X`. If for some
 $`\lambda>0` and some measurable function $`u:X\to [0,\infty)` we have
 $$`\int_{B} u(x)\, d\mu(x)\ge \lambda \mu(B)`
@@ -1470,9 +1470,9 @@ $$`\|M(w^{p_1})^{\frac{1}{p_1}}\|_{p_2} \le 2^{4a} \frac{p_2}{p_2-p_1}\|w\|_{p_2
 \begin{proposition}[Hardy--Littlewood]
 \label{Hardy-Littlewood}
 \leanok
-\lean{Finset.measure_biUnion_le_lintegral, hasStrongType_maximalFunction,
-MeasureTheory.AEStronglyMeasurable.globalMaximalFunction, laverage_le_globalMaximalFunction, hasStrongType_globalMaximalFunction}
-\uses{layer-cake-representation,covering-separable-space}
+\lean{measure_biUnion_le_lintegral, hasStrongType_maximalFunction,
+measurable_maximalFunction, laverage_le_globalMaximalFunction}
+\uses{layer-cake-representation}
    Let $\mathcal{B}$ be a finite collection of balls in $X$.
 If for some $\lambda>0$ and some measurable function $u:X\to [0,\infty)$ we have
 \begin{equation}\label{eq-ball-assumption}
@@ -12656,7 +12656,7 @@ The following lemma will be used to define $`M` in the proof of
 The following lemma will be used to define $M$ in the proof of \Cref{Hardy-Littlewood}.
 ```
 
-:::lemma_ "covering-separable-space" (lean := "covering_separable_space")
+:::lemma_ "covering-separable-space" (lean := "Metric.dense_iff_iUnion_ball, TopologicalSpace.exists_countable_dense")
 For each $`r > 0`, there exists a countable collection $`C(r) \subset X` of
 points such that
 $$`X \subset \bigcup_{c \in C(r)} B(c, r).`
@@ -12666,7 +12666,7 @@ $$`X \subset \bigcup_{c \in C(r)} B(c, r).`
 \begin{lemma}[covering separable space]
     \label{covering-separable-space}
     \leanok
-    \lean{covering_separable_space}
+    \lean{Metric.dense_iff_iUnion_ball, TopologicalSpace.exists_countable_dense}
     % Since X is separable, we can even choose `C` independent of `r`.
     For each $r > 0$, there exists a countable collection $C(r) \subset X$ of points such that
     $$
@@ -13155,7 +13155,7 @@ T_r f(x):= \int_{r\le\rho(x,y)} K(x,y) f(y) \, d\mu(y) = \int_{X\setminus B(x,r)
 \end{equation}
 ```
 
-:::theorem "two-sided-metric-space-Carleson" (lean := "two_sided_metric_carleson") (uses := "metric-space-Carleson")
+:::theorem "two-sided-metric-space-Carleson" (lean := "two_sided_metric_carleson") (uses := "metric-space-Carleson, nontangential-from-simple")
 For all integers $`a\ge 4` and real numbers $`1<q\le 2`, the following holds.
 Let $`(X,\rho,\mu,a)` be a doubling metric measure space. Let $`\Mf` be a
 cancellative compatible collection of functions and let $`K` be a two-sided
