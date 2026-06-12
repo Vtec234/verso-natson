@@ -257,7 +257,7 @@ those generalizing to $`L^2`, partially because there is no readily usable
 criterion on the level of Fourier coefficients to distinguish between
 continuous functions and $`L^2` functions.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 125) (start_character := 0) (end_line := 131) (end_character := 0)
 % witness-label: main.introduction.7
 Here, almost every $x$ means in the Lebesgue sense, i.e., for every $\epsilon>0$ the set of $x$ where convergence fails can be covered by a sequence of intervals
 such that the sum of the lengths of these
@@ -272,7 +272,7 @@ $`L^p` functions with $`p > 1` and for functions in $`L^1\log(L)^2`. Billard
 adapted Carleson's arguments to prove almost everywhere convergence of
 Walsh-Fourier series for functions in $`L^2`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 133) (start_character := 0) (end_line := 137) (end_character := 0)
 % witness-label: main.introduction.8
 Shortly after Carleson's breakthrough, Hunt \cite{MR238019} proved the analogous result for $L^p$ functions
 with $p>1$ and for functions in $L^1\log(L)^2$.
@@ -287,7 +287,7 @@ $$`Tf(x):=\sup_{N} \int_{-\pi}^\pi e^{iNy}f(x-y)\frac 1y {dy}.`
 In Lacey-Thiele, a duality between the approaches by Carleson and Fefferman
 was pointed out and a more symmetric and self-dual proof was presented.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 139) (start_character := 0) (end_line := 146) (end_character := 0)
 % witness-label: main.introduction.9
 In \cite{fefferman}, C. Fefferman gave an alternative proof of Carleson's theorem via an a priori
 bound for Carleson's operator, the maximally modulated singular integral
@@ -306,7 +306,7 @@ with applications to return times theorems in ergodic theory. It was
 strengthened to variation norms $`V^r` with $`r > 2` with applications to
 nonlinear analysis.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 148) (start_character := 0) (end_line := 153) (end_character := 0)
 % witness-label: main.introduction.10
 Various strengthenings of Fefferman's estimates for Carleson's operator have appeared since, such as bounds for a higher dimensional Carleson operator in the isotropic
 \cite{MR336222}, \cite{MR2007237} and anisotropic \cite{MR4014801} setting.
@@ -325,7 +325,7 @@ Holder regular kernels. The development of polynomial Carleson operators has
 led to further generalisations, for example to almost everywhere convergence of
 Malmquist-Takenaka series and maximally modulated singular Radon transforms.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 154) (start_character := 0) (end_line := 161) (end_character := 0)
 % witness-label: main.introduction.11
 Stein and Wainger \cite{stein-wainger} proposed to study variants of \eqref{eq:feffermancarleson} replacing the
 linear modulation phase $Ny$ by polynomial phases in $y$ and proved a result for polynomials without a linear term.
@@ -338,7 +338,7 @@ The development of polynomial Carleson operators has led to further generalisati
 
 Surveys to Carleson's theorem can be found in the literature.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 162) (start_character := 0) (end_line := 163) (end_character := 0)
 % witness-label: main.introduction.12
 Surveys to Carleson's theorem can be found in \cite{MR2091007}, \cite{MR3334208}.
 ```
@@ -351,7 +351,7 @@ axiomatic approach to Carleson type theorems on doubling metric measure spaces.
 This axiomatic approach is suitable for formalization and a good route towards
 the classical theorem.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 164) (start_character := 0) (end_line := 170) (end_character := 0)
 % witness-label: main.introduction.13
 In this blueprint, we prove Theorem \ref{classical-carleson} as a corollary to a further generalization of the polynomial Carleson operator towards doubling metric measure spaces,
 Theorem \ref{metric-space-Carleson} below,
@@ -382,7 +382,7 @@ The formalization was completed in July 2025. It is attached to this arXiv
 posting, and the latest version can be found
 [on GitHub](https://github.com/fpvandoorn/carleson).
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 171) (start_character := 0) (end_line := 186) (end_character := 0)
 % witness-label: main.introduction.14
 Early drafts of the sibling communication \cite{becker2024carlesonoperatorsdoublingmetric} existed in summer 2023.
 Based on this, the first draft of the present blueprint was written in the first half of 2024,
@@ -409,7 +409,7 @@ Bolton Bailey, Julian Berman, Joachim Breitner, Martin Dvorak, Georges
 Gonthier, Aaron Hill, Austin Letson, Bhavik Mehta, Eric Paul, Clara Torres,
 Dennis Tsar, Andrew Yang, Ruben van de Velde.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 187) (start_character := 0) (end_line := 205) (end_character := 0)
 % witness-label: main.introduction.15
 Everyone that completed a substantial amount of tasks is included as a coauthor of the blueprint.
 The authors acknowledge contributions in the form of small formalization additions,
@@ -439,7 +439,7 @@ TUBITAK (Scientific and Technological Research Council of Turkiye) under Grant
 Number 123F122. J.R. was supported in part by NSF grant DMS-2154835 and a HIM
 fellowship for the Fall 2024 trimester program in Bonn.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 206) (start_character := 0) (end_line := 211) (end_character := 0)
 % witness-label: main.introduction.16
 \noindent \textit{Acknowledgement.}
 L.B., M.I.d.F.F., L.D., F.v.D., M.R., R.S., and C.T. were funded by the Deutsche For\-schungs\-gemein\-schaft (DFG, German Research Foundation) under Germany's Excellence Strategy -- EXC-2047/1 -- 390685813.
