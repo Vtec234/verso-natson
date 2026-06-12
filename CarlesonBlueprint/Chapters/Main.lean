@@ -456,7 +456,7 @@ be a natural number that as it gets larger will allow for more general
 applications of Theorem {bpref "metric-space-Carleson"}[] but will worsen the constants
 in the estimates.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 214) (start_character := 0) (end_line := 220) (end_character := 0)
 % witness-label: main.metric-space.1
 Let
 \begin{equation}
@@ -477,7 +477,7 @@ $$`B(x,R):=\{y\in X: \rho(x,y)<R\}.`
 In a doubling metric measure space the closed balls are compact and $`\mu` is
 positive on all non-empty open sets.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 222) (start_character := 0) (end_line := 232) (end_character := 0)
 % witness-label: main.metric-space.2
 A doubling metric measure space $(X,\rho,\mu, a)$ is a complete
 and locally compact metric space $(X,\rho)$
@@ -512,7 +512,7 @@ $`2R` in $`\Mf`, there is a collection $`\mathcal{B}` of at most $`2^a` many
 $`d_B`-balls of radius $`R` covering $`\tilde B`, that is,
 $$`\tilde B\subset \bigcup \mathcal{B}.`
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 233) (start_character := 0) (end_line := 261) (end_character := 0)
 % witness-label: main.metric-space.3
 A collection $\Mf$ of real valued continuous functions on the doubling metric measure space $(X,\rho,\mu,a)$ is called compatible,
 if there is a point $o\in X$ where all the functions are equal to $0$,
@@ -551,7 +551,7 @@ $$`|\int_B e(\mfa(x)-\mfb(x)) \varphi(x)\, d\mu(x)| \le 2^a \mu(B)\|\varphi\|_{\
 where $`\|\cdot\|_{\Lip(B)}` denotes the inhomogeneous Lipschitz norm on $`B`:
 $$`\|\varphi\|_{\Lip(B)} = \sup_{x \in B} |\varphi(x)| + R \sup_{x,y \in B, x \neq y} \frac{|\varphi(x) - \varphi(y)|}{\rho(x,y)}.`
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 263) (start_character := 0) (end_line := 275) (end_character := 0)
 % witness-label: main.metric-space.4
 Further, a compatible collection $\Mf$ is called cancellative, if
 for any ball $B$ in $X$ of radius $R$, any Lipschitz function $\varphi: X\to \C$
@@ -581,7 +581,7 @@ We define the generalized Carleson operator $`T` by
 $$`Tf(x):=\sup_{\mfa\in\Mf} \sup_{0 < R_1 < R_2}\left| \int_{R_1 < \rho(x,y) < R_2} K(x,y) f(y) e(\mfa(y)) \, \mathrm{d}\mu(y) \right|,`
 where $`e(r)=e^{ir}`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 276) (start_character := 0) (end_line := 301) (end_character := 0)
 % witness-label: main.metric-space.5
 A one-sided Calder\'on--Zygmund kernel $K$ on the doubling metric measure space $(X, \rho, \mu, a)$ is a measurable function
 \begin{equation}\label{eqkernel0}
@@ -614,7 +614,7 @@ Our first main result is the following restricted weak type estimate for $`T`
 in the range $`1<q\le 2`, which by interpolation techniques recovers $`L^q`
 estimates for the open range $`1<q<2`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 302) (start_character := 0) (end_line := 304) (end_character := 0)
 % witness-label: main.metric-space.6
 Our first main result is the following restricted weak type estimate for $T$ in the range $1<q\le 2$,
 which by interpolation techniques recovers $L^q$ estimates for the open range $1<q<2$.
@@ -633,7 +633,7 @@ have, with $`T` defined above,
 $$`\left|\int_{G} T f \, \mathrm{d}\mu\right| \leq \frac{2^{443a^3}}{(q-1)^6} \mu(G)^{1-\frac{1}{q}} \mu(F)^{\frac{1}{q}}.`
 :::
 
-```tex "metric-space-Carleson" (slot := statement)
+```tex "metric-space-Carleson" (slot := statement) (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 304) (start_character := 0) (end_line := 324) (end_character := 0)
 \begin{theorem}[metric space Carleson]
 \label{metric-space-Carleson}
 \uses{linearised-metric-Carleson,int-continuous}
@@ -661,7 +661,7 @@ $`K` naturally depends also on the modulation functions $`\mfa`. The fact that
 we do not assume Holder-continuity of the kernel $`K` in the first argument
 allows us to also capture this situation.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 325) (start_character := 0) (end_line := 327) (end_character := 0)
 % witness-label: main.metric-space.7
 In some applications, such as the Walsh-case of Carleson's theorem, the kernel $K$ naturally depends also on the modulation functions $\mfa$.
 The fact that we don't assume H\"older-continuity of the kernel $K$ in the first argument allows us to also capture this situation.
@@ -678,7 +678,7 @@ Define further the linearized generalized Carleson operator $`T_\tQ` by
 $$`T_\tQ f(x):= \sup_{0 < R_1 < R_2}\left| \int_{R_1 < \rho(x,y) < R_2} K(x,y) f(y) e(\tQ(x)(y)) \, \mathrm{d}\mu(y) \right|,`
 where again $`e(r)=e^{ir}`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 328) (start_character := 0) (end_line := 346) (end_character := 0)
 % witness-label: main.metric-space.8
 We now state another Theorem with a slightly weaker replacement of the assumption \eqref{nontanbound}.
 It implies the Walsh-case of Carleson's theorem.
@@ -715,7 +715,7 @@ $`|f|\le \mathbf{1}_F`, we have, with $`T_\tQ` defined above,
 $$`\left|\int_{G} T_\tQ f \, \mathrm{d}\mu\right| \le \frac{2^{443a^3}}{(q-1)^6} \mu(G)^{1-\frac{1}{q}} \mu(F)^{\frac{1}{q}}.`
 :::
 
-```tex "linearised-metric-Carleson" (slot := statement)
+```tex "linearised-metric-Carleson" (slot := statement) (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 347) (start_character := 0) (end_line := 368) (end_character := 0)
 \begin{theorem}[linearised metric Carleson]
 \label{linearised-metric-Carleson}
 \uses{R-truncation,int-continuous}
@@ -744,7 +744,7 @@ The value of the constant factor $`2^{443a^3}` in Theorems
 One source of non-sharpness is our choice to write for readability most
 constants in the form $`2^{na^3}` for some explicit constant $`n`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 369) (start_character := 0) (end_line := 373) (end_character := 0)
 % witness-label: main.metric-space.9
 \begin{remark}
 The value of the constant factor $2^{443a^3}$ in Theorems~\ref{metric-space-Carleson}
@@ -761,7 +761,7 @@ getting $`2^{44a^3}` in the end. This value is again by no means sharp. In
 the formalization we define the parameter $`D` as $`2^{\mathbb{c}a^2}` and the
 constants in this blueprint are obtained by setting $`\mathbb{c} = 100`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 374) (start_character := 0) (end_line := 381) (end_character := 0)
 % witness-label: main.metric-space.10
 An a posteriori byproduct of the Lean formalization of this document is that Theorems~\ref{metric-space-Carleson}
 and~\ref{linearised-metric-Carleson} remain true with $2^{44a^3}$ instead of $2^{443a^3}$. This is obtained by
