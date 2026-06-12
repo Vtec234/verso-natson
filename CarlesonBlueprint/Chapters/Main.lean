@@ -43,7 +43,7 @@ elaborated the blueprint with minor corrections, modifications and extensions.
 The final version is presented here as a guide through the accompanying Lean
 code.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 20) (start_character := 0) (end_line := 24) (end_character := 0)
 % witness-label: main.abstract
 \begin{abstract}
 This paper is the blueprint underlying the Lean formalization of the proof of Carleson's classical result \cite{carleson} asserting almost everywhere convergence of Fourier series of continuous functions. We break up the proof into two steps, a reduction of the classical result to a new theorem that appears in the sibling communication \cite{becker2024carlesonoperatorsdoublingmetric} and a proof of this new theorem, which is also detailed as blueprint in this paper. An early version of this blueprint was used to initiate the Lean formalization. During the formalization, many contributors elaborated the blueprint with minor corrections, modifications and extensions.
@@ -65,7 +65,7 @@ Dirichlet also opened a branch of analytic number theory partially inspired by
 the ideas of Fourier. Nowadays, Fourier analysis plays an important role in
 many areas of mathematics.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 34) (start_character := 0) (end_line := 40) (end_character := 0)
 % witness-label: main.introduction.1
 Trigonometric series represent functions as possibly infinite linear combinations of pure frequencies.
 They gained particular prominence through the work of J. Fourier, who used them in his analytical theory of heat \cite{Fourier}, see also \cite{MR3470070}, thereby establishing them as a tool for solving partial differential equations.
@@ -84,7 +84,7 @@ functions raises two fundamental questions. The first question is to identify
 the appropriate choice of coefficients $`c_n` to use to represent a given
 $`f`. The second question addresses the convergence of $`S_N` to $`f`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 42) (start_character := 0) (end_line := 51) (end_character := 0)
 % witness-label: main.introduction.2
 With Euler's formula to represent pure frequencies in mind, a trigonometric polynomial can be expressed as
 \begin{equation}\label{eq:trig-series}
@@ -112,7 +112,7 @@ coefficients given above serve as a universal choice. This choice is unique in
 several respects, in particular if one is to exactly reproduce a trigonometric
 polynomial $`f`.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 52) (start_character := 0) (end_line := 66) (end_character := 0)
 % witness-label: main.introduction.3
 The first question has a fairly canonical and standard answer, provided by the Fourier integral formula:
 \begin{equation}\label{eq:fourier-coefficients}
@@ -146,7 +146,7 @@ decades after Lebesgue integration. For some other natural spaces, such as
 $`L^1(0,2\pi)`, there is no guarantee of convergence in the norm of that space
 even if $`f` is in the space.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 68) (start_character := 0) (end_line := 84) (end_character := 0)
 % witness-label: main.introduction.4
 The second question of convergence bifurcates into the question of pointwise
 convergence of the series \eqref{eq:trig-series} (with coefficients given by
@@ -175,7 +175,7 @@ terms of $`f` itself. Similarly, the space of all functions $`f` such that the
 sequence of coefficients $`\widehat{f}_n` is absolutely summable has also no
 good characterization.
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 86) (start_character := 0) (end_line := 94) (end_character := 0)
 % witness-label: main.introduction.5
 In contrast to these examples of function spaces with a very natural theory
 of convergence of Fourier series in the topology of the function space, there
@@ -203,7 +203,7 @@ started to contradict each other, and Carleson realized that a counterexample
 could not exist. Thus, he had proved Luzin's conjecture. In particular, he had
 proven the more elementary statement
 
-```tex
+```tex (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 95) (start_character := 0) (end_line := 110) (end_character := 0)
 % witness-label: main.introduction.6
 When the Fourier integral is defined in the Lebesgue sense and
 $f\in L^1(0,2\pi)$, then the function
@@ -230,7 +230,7 @@ where $`S_N f` is the $`N`-th partial Fourier sum defined above with Fourier
 coefficients defined above.
 :::
 
-```tex "classical-carleson" (slot := statement)
+```tex "classical-carleson" (slot := statement) (path := "Carleson/blueprint/src/chapter/main.tex") (start_line := 111) (start_character := 0) (end_line := 124) (end_character := 0)
 \begin{theorem}[classical Carleson]
     \label{classical-carleson}
     \leanok
