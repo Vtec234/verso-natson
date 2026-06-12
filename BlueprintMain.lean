@@ -5,9 +5,9 @@ import CarlesonBlueprint
 open Verso Doc
 open Verso.Genre Manual
 
-set_option verso.blueprint.numbering sub
-set_option verso.blueprint.subNumberingPrefix full
-set_option verso.blueprint.subNumberingCounter prefix
+set_option verso.blueprint.numbering "sub"
+set_option verso.blueprint.subNumberingPrefix "full"
+set_option verso.blueprint.subNumberingCounter "prefix"
 
 def main (args : List String) : IO UInt32 :=
   Informal.PreviewManifest.manualMainWithPreviewData
