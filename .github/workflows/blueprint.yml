@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   pages:
-    uses: leanprover/verso-blueprint/.github/workflows/blueprint-pages.yml@v4.30.0
+    uses: leanprover/verso-blueprint/.github/workflows/blueprint-pages.yml@af54e3eedd11e4a7604544712e70d447b6dc55aa
     with:
       checkout_submodules: true
       harness_enabled: true

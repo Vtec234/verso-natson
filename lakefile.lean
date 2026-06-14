@@ -1,7 +1,7 @@
 import Lake
 open Lake DSL
 
-require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.30.0"
+require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "af54e3eedd11e4a7604544712e70d447b6dc55aa"
 require Carleson from "Carleson"
 
 package CarlesonBlueprint where
@@ -12,9 +12,9 @@ package CarlesonBlueprint where
     ⟨`autoImplicit, false⟩,
     ⟨`relaxedAutoImplicit, false⟩,
     ⟨`maxSynthPendingDepth, .ofNat 3⟩,
-    ⟨`weak.verso.blueprint.math.lint, true⟩,
-    ⟨`weak.verso.blueprint.externalCode.strictResolve, true⟩,
-    ⟨`weak.verso.code.warnLineLength, .ofNat 0⟩
+    ⟨`verso.blueprint.math.lint, true⟩,
+    ⟨`verso.blueprint.externalCode.strictResolve, true⟩,
+    ⟨`verso.code.warnLineLength, .ofNat 0⟩
   ]
 
 @[default_target]
