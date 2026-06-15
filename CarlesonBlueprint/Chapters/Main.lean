@@ -6523,7 +6523,7 @@ tag := "antichainboundary"
 
 Let an antichain $`\mathfrak{A}` and functions $`f`, $`g` as in
 {bpref "antichain-operator"}[] be given. We prove `eq-antiprop` in
-{ref "sec-TTstar-TstarT"}[The density arguments] as the
+{bpref "sec-TTstar-TstarT"}[The density arguments] as the
 geometric mean of two inequalities, each involving one of the two densities.
 One of these two inequalities will need a careful estimate formulated in
 {bpref "tile-correlation"}[] of the $`TT^*` correlation between two tile operators.
@@ -6539,7 +6539,7 @@ One of these two inequalities will need a careful estimate formulated in
 Let an antichain $\mathfrak{A}$
 and functions $f$, $g$ as in \Cref{antichain-operator} be given.
 We prove \eqref{eq-antiprop}
-in \Cref{sec-TT*-T*T}
+in \Cref{sec-TTstar-TstarT}
 as the geometric mean of two inequalities,
 each involving one of the two densities.
 One of these two inequalities will need a careful estimate formulated in
@@ -6572,7 +6572,7 @@ $`E(\fp)` with $`\fp \in \mathfrak{A}`.
 
 ```tex
 % witness-label: main.antichain.3
-\subsection{The density arguments}\label{sec-TT*-T*T}
+\subsection{The density arguments}\label{sec-TTstar-TstarT}
 
 We begin with the following crucial disjointedness property of the sets $E(\fp)$ with $\fp \in \mathfrak{A}$.
 ```
