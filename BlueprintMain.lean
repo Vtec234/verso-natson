@@ -10,7 +10,7 @@ set_option verso.blueprint.subNumberingPrefix "full"
 set_option verso.blueprint.subNumberingCounter "prefix"
 
 def main (args : List String) : IO UInt32 :=
-  Informal.PreviewManifest.manualMainWithPreviewData
+  Informal.PreviewManifest.blueprintMainWithPreviewData
     (%doc CarlesonBlueprint)
     args
     (extensionImpls := by exact extension_impls%)
