@@ -13362,7 +13362,7 @@ We prove this in {ref "10difference"}[Difference control]:
 We prove in \Cref{10difference}:
 ```
 
-:::lemma_ "control-approximation-effect" (lean := "control_approximation_effect") (uses := "partial-Fourier-sums-of-small")
+:::lemma_ "control-approximation-effect" (lean := "control_approximation_effect'") (uses := "partial-Fourier-sums-of-small")
 There is a set $`E \subset \mathbb{R}` with Lebesgue measure
 $`|E|\le \epsilon` such that for all
 $`x\in [0,2\pi)\setminus E` we have
@@ -13374,7 +13374,7 @@ $$`\sup_{N\ge 0} |S_N f(x)-S_N f_0(x)| \le \frac \epsilon 4.`
 \label{control-approximation-effect}
 \uses{partial-Fourier-sums-of-small}
 \leanok
-\lean{control_approximation_effect}
+\lean{control_approximation_effect'}
     There is a set $E \subset \R$ with Lebesgue measure
     $|E|\le \epsilon$ such that for all
     \begin{equation}
@@ -13396,7 +13396,7 @@ version with explicit exceptional sets.
 We are now ready to prove \Cref{classical-carleson}. We first prove a version with explicit exceptional sets.
 ```
 
-:::theorem "exceptional-set-carleson" (lean := "exceptional_set_carleson") (uses := "smooth-approximation, convergence-for-smooth, control-approximation-effect")
+:::theorem "exceptional-set-carleson" (lean := "exceptional_set_carleson'") (uses := "smooth-approximation, convergence-for-smooth, control-approximation-effect")
 Let $`f` be a $`2\pi`-periodic complex-valued continuous function on
 $`\mathbb{R}`. For all $`\epsilon>0`, there exists a Borel set
 $`E\subset [0,2\pi]` with Lebesgue measure $`|E|\le \epsilon` and a positive
@@ -13409,7 +13409,7 @@ $$`|f(x)-S_N f(x)|\le \epsilon.`
 \begin{theorem}[classical Carleson with exceptional sets]
     \label{exceptional-set-carleson}
     \leanok
-    \lean{exceptional_set_carleson}
+    \lean{exceptional_set_carleson'}
     \uses{smooth-approximation, convergence-for-smooth,
     control-approximation-effect}
     Let $f$ be a $2\pi$-periodic complex-valued continuous function on $\mathbb{R}$. For all $\epsilon>0$, there exists a Borel set $E\subset [0,2\pi]$ with Lebesgue measure $|E|\le \epsilon$ and a positive integer $N_0$ such that for all $x\in [0,2\pi]\setminus E$ and all integers $N>N_0$, we have
@@ -15067,7 +15067,7 @@ $`(x,y)`.
 \end{proof}
 ```
 
-:::lemma_ "partial-Fourier-sums-of-small" (lean := "control_approximation_effect") (uses := "real-Carleson-operator-measurable, real-Carleson, partial-Fourier-sum-bound")
+:::lemma_ "partial-Fourier-sums-of-small" (lean := "control_approximation_effect'") (uses := "real-Carleson-operator-measurable, real-Carleson, partial-Fourier-sum-bound")
 Let $`g:\mathbb{R}\to\mathbb{C}` be a measurable $`2\pi`-periodic function
 such that, for some $`\delta>0` and every $`x\in\mathbb{R}`,
 $$`|g(x)|\le \delta.`
@@ -15085,7 +15085,7 @@ $$`C_\epsilon =
     \label{partial-Fourier-sums-of-small}
     \uses{real-Carleson-operator-measurable,real-Carleson,partial-Fourier-sum-bound}
     \leanok
-    \lean{control_approximation_effect} % todo: fix. This seems currently inlined in control_approximation_effect ?
+    \lean{control_approximation_effect'} % todo: fix. This seems currently inlined in control_approximation_effect' ?
     %fixme: rename \delta to \epsilon' ?
     Let $g:\R\to\C$ be a measurable $2\pi$-periodic function such that for some $\delta>0$ and every $x\in\R$,
     \begin{equation} \label{g-small}
