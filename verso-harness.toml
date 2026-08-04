@@ -20,3 +20,4 @@ proposition = "theorem"
 [harness]
 native_warnings = true
 strict_external_code = true
+wrapper_toolchain_override = "leanprover/lean4:v4.33.0-rc2"
