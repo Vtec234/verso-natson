@@ -7473,9 +7473,9 @@ $$` \times \left.\int_{E(\fp)} {K_{\ps(\fp)}(x_2,y)}e(\tQ(x_2)(y)
 By Fubini and the triangle inequality and the fact
 $`|e(\tQ(x_i)(x_i))|=1` for $`i=1,2`, we can estimate `tstartstar` and
 `tstartstar'` from above by
-$$`\int_{E(\fp')} \int_{E(\fp)} {\bf I}(x_1, x_2)\, d\mu(x_1)d\mu(x_2),`
+$$`\int_{E(\fp')} \int_{E(\fp)} \mathbf{I}(x_1, x_2)\, d\mu(x_1)d\mu(x_2),`
 with
-$$`{\bf I}(x_1, x_2):=
+$$`\mathbf{I}(x_1, x_2):=
     \left|\int
     e(-\tQ(x_1)(y)+\tQ(x_2)(y))\varphi_{x_1,x_2}(y)
     d\mu(y) \, g(x_1)g(x_2)\right|.`
@@ -7487,7 +7487,7 @@ $`\varphi:=\varphi_{x_1,x_2}` satisfies the assumptions of
 {bpref "Holder-van-der-Corput"}[] with $`z = x_1` and $`R = D^{s_1}` by
 {bpref "correlation-kernel-bound"}[]. We obtain with
 $`B':= B(x_1, D^{\ps(\fp')})`
-$$` {\bf I}(x_1, x_2) \le 2^{8a} \mu(B') \|{\varphi}\|_{C^\tau(B')}
+$$` \mathbf{I}(x_1, x_2) \le 2^{8a} \mu(B') \|{\varphi}\|_{C^\tau(B')}
        (1 + d_{B'}(\tQ(x_1),\tQ(x_2)))^{-1/(2a^2+a^3)}|g(x_1)g(x_2)|`
 $$` \le \frac{2^{231a^3+8a}}
  {\mu(B(x_2, D^{\ps(\fp)}))}
@@ -7545,11 +7545,11 @@ By Fubini and the triangle inequality and
 the fact $|e(\tQ(x_i)(x_i))|=1$ for $i=1,2$, we can estimate
 \eqref{tstartstar} and \eqref{tstartstar'} from above by
 \begin{equation}\label{eqa1}
-    \int_{E(\fp')} \int_{E(\fp)} {\bf I}(x_1, x_2)\, d\mu(x_1)d\mu(x_2)\,.
+    \int_{E(\fp')} \int_{E(\fp)} \mathbf{I}(x_1, x_2)\, d\mu(x_1)d\mu(x_2)\,.
 \end{equation}
 with
 \begin{equation}
-    {\bf I}(x_1, x_2):=
+    \mathbf{I}(x_1, x_2):=
     \left|\int
     e(-\tQ(x_1)(y)+\tQ(x_2)(y))\varphi_{x_1,x_2}(y)
     d\mu(y) \, g(x_1)g(x_2)\right|
@@ -7562,7 +7562,7 @@ $\varphi:=\varphi_{x_1,x_2}$ satisfies the assumptions of
 \Cref{Holder-van-der-Corput} with $z = x_1$ and $R = D^{s_1}$ by \Cref{correlation-kernel-bound}.
 We obtain with $B':= B(x_1, D^{\ps(\fp')})$,
 \begin{equation*}
- {\bf I}(x_1, x_2) \le 2^{8a} \mu(B') \|{\varphi}\|_{C^\tau(B')}
+ \mathbf{I}(x_1, x_2) \le 2^{8a} \mu(B') \|{\varphi}\|_{C^\tau(B')}
        (1 + d_{B'}(\tQ(x_1),\tQ(x_2)))^{-1/(2a^2+a^3)}|g(x_1)g(x_2)|
 \end{equation*}
 \begin{equation}
