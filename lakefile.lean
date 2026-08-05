@@ -1,7 +1,7 @@
 import Lake
 open Lake DSL
 
-require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.32.0"
+require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.33.0"
 require Carleson from "Carleson"
 
 package CarlesonBlueprint where
