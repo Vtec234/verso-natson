@@ -3,4 +3,4 @@
 	url = https://github.com/ejgallego/leanblueprint-to-verso.git
 [submodule "Carleson"]
 	path = Carleson
-	url = https://github.com/fpvandoorn/carleson
+	url = https://github.com/ejgallego/carleson
