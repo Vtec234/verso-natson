@@ -4,12 +4,17 @@ open Lean
 
 /-! Print the 160 theorems in mathlib with minimal hash (see rendezvous hashing). -/
 
+/-- Backported. -/
+def Lean.ConstantInfo.isTheorem_ : ConstantInfo → Bool
+  | .thmInfo .. => true
+  | _ => false
+
 run_cmd do
   let env ← getEnv
   let mut consts := #[]
   for (n, ci) in env.constants do
     -- Exclude non-theorems and internal theorems.
-    if !ci.isTheorem || n.isInternalDetail then continue
+    if !ci.isTheorem_ || n.isInternalDetail then continue
     let some imod := env.getModuleIdxFor? n | continue
     let mod := env.header.moduleNames[imod]!
     -- Exclude theorems not in mathlib.
