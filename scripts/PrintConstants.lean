@@ -2,6 +2,8 @@ import Mathlib
 import Lean.Elab.Command
 open Lean
 
+/-! Print the 160 theorems in mathlib with minimal hash (see rendezvous hashing). -/
+
 run_cmd do
   let env ← getEnv
   let mut consts := #[]
@@ -11,11 +13,11 @@ run_cmd do
     let some imod := env.getModuleIdxFor? n | continue
     let mod := env.header.moduleNames[imod]!
     -- Exclude theorems not in mathlib.
-    -- if mod.getRoot != `Mathlib then continue
+    if mod.getRoot != `Mathlib then continue
     -- Exclude auto-generated theorems by looking for a source range.
     if (← findDeclarationRangesCore? n).isNone then continue
     consts := consts.push (n, mod)
-  -- 160 constants are needed for Main.lean.
+  -- There are 160 constants in Main.lean.
   let chosen := consts.qsort (fun (a, _) (b, _) => a.hash < b.hash) |>.take 160
   for (n, mod) in chosen do
     IO.println s!"{mod} | {n}"

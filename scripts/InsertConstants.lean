@@ -1,8 +1,10 @@
 import Lake.Util.Version
+
 /-!
 Replaces all occurrences of `$MATHLIB_CONSTANT` in `CarlesonBlueprint/Chapters/Main.lean`
-by constants in `constant-list/$TOOLCHAIN.txt`, where `$TOOLCHAIN` is read from `lean-toolchain`,
-or in the semver-latest list in case no list matches the current toolchain version.
+by constants read from `constant-lists/$TOOLCHAIN.txt`,
+where `$TOOLCHAIN` is the latest version less than or equal to that in `lean-toolchain`
+for which such a file exists.
 
 Usage (from the repository root): `lean --run scripts/InsertConstants.lean`
 -/
@@ -13,28 +15,24 @@ def placeholder : String := "$MATHLIB_CONSTANT"
 
 open Lake
 
-/-- Returns `constant-lists/$version.txt` if it exists,
-otherwise the latest constant list in semver order. -/
 def findConstantList (version : ToolchainVer) : IO System.FilePath := do
-  let exact := constantListsDir / s!"{version}.txt"
-  if ← exact.pathExists then
-    return exact
   let mut best : Option (ToolchainVer × System.FilePath) := none
   for entry in ← constantListsDir.readDir do
     unless entry.fileName.endsWith ".txt" do continue
     let ver := ToolchainVer.ofString (entry.fileName.dropSuffix ".txt").toString
-    if (best.map (·.1)).all (· < ver) then
+    if (best.map (·.1)).all (· < ver) && ver ≤ version then
       best := some (ver, entry.path)
   match best with
-  | some (_, path) =>
-    IO.eprintln s!"note: constant list for toolchain '{exact}' not found, falling back to latest constant list '{path}'"
+  | some (ver, path) =>
+    if ver != version then
+      IO.eprintln s!"note: constant list for toolchain '{version}' not found, falling back to latest constant list '{path}'"
     return path
   | none =>
     throw <| IO.userError s!"no constant list for toolchain '{version}' and no fallback found"
 
 /-- Parses a constant-list line `$MOD | $NAME` into `(mod, name)`. -/
 def parseListLine (line : String) : IO (String × String) :=
-  match line.splitOn "|" with
+  match line.splitOn " | " with
   | [mod, name] => pure (mod.trimAscii.toString, name.trimAscii.toString)
   | _ => throw <| IO.userError s!"cannot parse constant-list line '{line}' (expected '$MOD | $NAME')"
 
