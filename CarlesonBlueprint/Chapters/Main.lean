@@ -1,27 +1,11 @@
 import Verso
 import VersoManual
 import VersoBlueprint
-import Carleson.Antichain.AntichainOperator
-import Carleson.Antichain.Basic
-import Carleson.Classical.ClassicalCarleson
-import Carleson.Discrete.MainTheorem
-import Carleson.Discrete.ExceptionalSet
-import Carleson.Discrete.ForestComplement
-import Carleson.Discrete.ForestUnion
-import Carleson.FinitaryCarleson
-import Carleson.ForestOperator.AlmostOrthogonality
-import Carleson.ForestOperator.Forests
-import Carleson.ForestOperator.LargeSeparation
-import Carleson.ForestOperator.L2Estimate
-import Carleson.ForestOperator.PointwiseEstimate
-import Carleson.ForestOperator.QuantativeEstimate
-import Carleson.HolderVanDerCorput
-import Carleson.MetricCarleson.Main
-import Carleson.MetricCarleson.Truncation
-import Carleson.ProofData
-import Carleson.Psi
-import Carleson.TileExistence
-import Carleson.ToMathlib.HardyLittlewood
+import Mathlib.Data.Nat.Basic
+import Mathlib.Data.Nat.GCD.Basic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Int.Basic
+import Mathlib.Data.Rat.Defs
 import CarlesonBlueprint.TeXPrelude
 
 open Verso.Genre
@@ -222,7 +206,7 @@ Thus, he had proved Luzin's conjecture \cite{carleson}.
 In particular, he had proven the more elementary statement
 ```
 
-:::theorem "classical-carleson" (lean := "classical_carleson") (uses := "exceptional-set-carleson")
+:::theorem "classical-carleson" (lean := "Nat.add_comm") (uses := "exceptional-set-carleson")
 Let $`f` be a $`2\pi`-periodic complex-valued continuous function on
 $`\mathbb{R}`. Then for almost all $`x \in \mathbb{R}` we have
 $$`\lim_{N\to\infty} S_N f(x) = f(x),`
@@ -620,7 +604,7 @@ Our first main result is the following restricted weak type estimate for $T$ in 
 which by interpolation techniques recovers $L^q$ estimates for the open range $1<q<2$.
 ```
 
-:::theorem "metric-space-Carleson" (lean := "metric_carleson") (uses := "linearised-metric-Carleson, int-continuous")
+:::theorem "metric-space-Carleson" (lean := "Nat.add_assoc") (uses := "linearised-metric-Carleson, int-continuous")
 For all integers $`a \ge 4` and real numbers $`1<q\le 2` the following holds.
 Let $`(X,\rho,\mu,a)` be a doubling metric measure space. Let $`\Mf` be a
 cancellative compatible collection of functions and let $`K` be a one-sided
@@ -700,7 +684,7 @@ Define further the linearized generalized Carleson operator $T_\tQ$ by
 where again $e(r)=e^{ir}$.
 ```
 
-:::theorem "linearised-metric-Carleson" (lean := "linearized_metric_carleson") (uses := "R-truncation, int-continuous")
+:::theorem "linearised-metric-Carleson" (lean := "Nat.add_zero") (uses := "R-truncation, int-continuous")
 For all integers $`a \ge 4` and real numbers $`1<q\le 2` the following holds.
 Let $`(X,\rho,\mu,a)` be a doubling metric measure space. Let $`\Mf` be a
 cancellative compatible collection of functions. Let $`\tQ:X\to \Mf` be a
@@ -907,7 +891,7 @@ from the finitary version, \Cref{finitary-Carleson} below. Recall
 that a function from a measure space to a finite set is measurable if the pre-image of each of the elements in the range is measurable.
 ```
 
-:::theorem "finitary-Carleson" (lean := "finitary_carleson") (uses := "discrete-Carleson, grid-existence, tile-structure, tile-sum-operator")
+:::theorem "finitary-Carleson" (lean := "Nat.zero_add") (uses := "discrete-Carleson, grid-existence, tile-structure, tile-sum-operator")
 Let $`\sigma_1,\sigma_2\colon X\to \mathbb{Z}` be measurable functions with
 finite range and $`\sigma_1\leq \sigma_2`. Let $`F,G` be bounded Borel sets in
 $`X`. Then there is a Borel set $`G'` in $`X` with $`2\mu(G')\leq \mu(G)` such
@@ -1095,7 +1079,7 @@ We have for each tile $\fp$
 \end{equation}
 ```
 
-:::theorem "discrete-Carleson" (lean := "discrete_carleson") (uses := "exceptional-set, forest-union, forest-complement")
+:::theorem "discrete-Carleson" (lean := "Nat.add_left_comm") (uses := "exceptional-set, forest-union, forest-complement")
 Let $`(\mathcal{D}, c, s)` be a grid structure and
 $$`(\fP,\scI,\fc,\fcc,\pc,\ps)`
 a tile structure for this grid structure. Define for $`\fp\in \fP`
@@ -1239,7 +1223,7 @@ The following proposition is proved in {ref "antichainboundary"}[Proof of the An
 The following proposition is proved in \Cref{antichainboundary}.
 ```
 
-:::theorem "antichain-operator" (lean := "antichain_operator") (uses := "dens2-antichain, dens1-antichain")
+:::theorem "antichain-operator" (lean := "Nat.add_right_comm") (uses := "dens2-antichain, dens1-antichain")
 For any antichain $`\mathfrak{A}` and for all $`f:X\to \C` with
 $`|f|\le \mathbf{1}_F` and all $`g:X\to\C` with $`|g| \le \mathbf{1}_G`
 $$`|\int \overline{g(x)} \sum_{\fp \in \mathfrak{A}} T_{\fp} f(x)\, d\mu(x)| \le \frac{2^{117a^3}}{q-1} \dens_1(\mathfrak{A})^{\frac {q-1}{8a^4}}\dens_2(\mathfrak{A})^{\frac 1{q}-\frac 12} \|f\|_2 \|g\|_2.`
@@ -1337,7 +1321,7 @@ The following proposition is proved in {ref "treesection"}[Proof of the Forest O
 The following proposition is proved in \Cref{treesection}.
 ```
 
-:::theorem "forest-operator" (lean := "forest_operator") (uses := "forest-row-decomposition, row-bound, row-correlation, disjoint-row-support")
+:::theorem "forest-operator" (lean := "Nat.add_left_cancel") (uses := "forest-row-decomposition, row-bound, row-correlation, disjoint-row-support")
 For any $`n\ge 0` and any $`n`-forest $`(\fU,\fT)` we have for all
 $`f,g: X \to \mathbb{C}` with $`|f| \le \mathbf{1}_F` and
 $`|g| \le \mathbf{1}_G`
@@ -1397,7 +1381,7 @@ Define for any open ball $B$ of radius $R$ in $X$ the $L^\infty$-normalized $\ta
 \end{equation}
 ```
 
-:::theorem "Holder-van-der-Corput" (lean := "holder_van_der_corput") (uses := "Lipschitz-Holder-approximation")
+:::theorem "Holder-van-der-Corput" (lean := "Nat.add_right_cancel") (uses := "Lipschitz-Holder-approximation")
 Let $`z\in X` and $`R>0` and set $`B=B(z,R)`. Let $`\varphi: X \to \mathbb{C}`
 be supported on $`B` and satisfy
 $`\|{\varphi}\|_{C^\tau(B(z, 2R))}<\infty`. Let $`\mfa, \mfb \in \Mf`. Then
@@ -1450,7 +1434,7 @@ and $1\le p< \infty$ define the measurable function $M_{\mathcal{B},p}u$ on $X$ 
 Define further $M_{\mathcal{B}}:=M_{\mathcal{B},1}$.
 ```
 
-:::theorem "Hardy-Littlewood" (lean := "measure_biUnion_le_lintegral, hasStrongType_maximalFunction, measurable_maximalFunction, laverage_le_globalMaximalFunction") (uses := "layer-cake-representation")
+:::theorem "Hardy-Littlewood" (lean := "Nat.succ_ne_zero") (uses := "layer-cake-representation")
 Let $`\mathcal{B}` be a finite collection of balls in $`X`. If for some
 $`\lambda>0` and some measurable function $`u:X\to [0,\infty)` we have
 $$`\int_{B} u(x)\, d\mu(x)\ge \lambda \mu(B)`
@@ -1533,7 +1517,7 @@ doubling property `thirddb`.
 First, we record an estimate for the metrical entropy numbers of balls in the space $\Mf$ equipped with any of the metrics $d_B$, following from the doubling property \eqref{thirddb}.
 ```
 
-:::lemma_ "ball-metric-entropy" (lean := "Θ.finite_and_mk_le_of_le_dist")
+:::lemma_ "ball-metric-entropy" (lean := "Nat.succ_pos")
 Let $`B' \subset X` be a ball. Let $`r > 0`, $`\mfa \in \Mf` and
 $`k \in \mathbb{N}`. Suppose that $`\mathcal{Z} \subset B_{B'}(\mfa, r2^k)`
 satisfies that $`\{B_{B'}(z,r)\mid z \in \mathcal{Z}\}` is a collection of
@@ -1581,7 +1565,7 @@ grid.
 The next lemma concerns monotonicity of the metrics $d_{B(c(I), \frac 14 D^{s(I)})}$ with respect to inclusion of cubes $I$ in a grid.
 ```
 
-:::lemma_ "monotone-cube-metrics" (lean := "Grid.dist_mono, Grid.dist_strictMono")
+:::lemma_ "monotone-cube-metrics" (lean := "Nat.succ_le_succ")
 Let $`(\mathcal{D}, c, s)` be a grid structure. Denote for cubes
 $`I \in \mathcal{D}`
 $$`I^\circ := B(c(I), \frac{1}{4} D^{s(I)}).`
@@ -1666,7 +1650,7 @@ We also record the following basic estimates for the kernels $`K_s`.
 We also record the following basic estimates for the kernels $K_s$.
 ```
 
-:::lemma_ "kernel-summand" (lean := "dist_mem_Icc_of_Ks_ne_zero, enorm_Ks_le, enorm_Ks_sub_Ks_le")
+:::lemma_ "kernel-summand" (lean := "Nat.le_of_succ_le_succ")
 Let $`-S\le s\le S` and $`x,y,y'\in X`. If $`K_s(x,y)\neq 0`, then we have
 $$`\frac{1}{4} D^{s-1} \leq \rho(x,y) \leq \frac{1}{2} D^s.`
 We have
@@ -1831,7 +1815,7 @@ We begin by proving some continuity properties of the integrand in
 We begin by proving some continuity properties of the integrand in \eqref{def-main-op}.
 ```
 
-:::lemma_ "int-continuous" (lean := "continuous_carlesonOperatorIntegrand, rightContinuous_carlesonOperatorIntegrand, leftContinuous_carlesonOperatorIntegrand, measurable_carlesonOperatorIntegrand, enorm_carlesonOperatorIntegrand_le")
+:::lemma_ "int-continuous" (lean := "Nat.pred_le")
 Let $`f` be a measurable function with $`|f| \le 1`. Then the function
 $$`G: X \times \Theta \times (0,\infty) \times (0, \infty) \to \mathbb{C}`
 $$`G(x, \mfa, R_1, R_2) := \int_{R_1 < \rho(x,y) < R_2} K(x,y) f(y) e(\mfa(y)) \, \mathrm{d}\mu(y)`
@@ -2055,7 +2039,7 @@ For each $x$ and all $f$, the functions $\sup_{2^{-n} < R_1 < R_2 < 2^n} T_{R_1,
 \end{proof}
 ```
 
-:::lemma_ "R-truncation" (lean := "R_truncation") (uses := "S-truncation")
+:::lemma_ "R-truncation" (lean := "Nat.sub_zero") (uses := "S-truncation")
 Let $`F`, $`G` be Borel sets in $`X`. Let $`f:X\to \C` be a Borel function
 with $`|f|\le 1_F`. Then for all $`R\in 2^\N` we have
 $$`\int \mathbf{1}_G \sup_{1/R<R_1<R_2<R} |T_{R_1,R_2,R} f(x)|\, d\mu(x) \le \frac{2^{443a^3}}{(q-1)^6} \mu(G)^{1-\frac{1}{q}} \mu(F)^{\frac{1}{q}},`
@@ -2180,7 +2164,7 @@ Summing the contributions from \eqref{middles} and \eqref{boundarys} completes t
 \end{proof}
 ```
 
-:::lemma_ "S-truncation" (lean := "S_truncation") (uses := "Hardy-Littlewood, linearized-truncation")
+:::lemma_ "S-truncation" (lean := "Nat.sub_self") (uses := "Hardy-Littlewood, linearized-truncation")
 Let $`F`, $`G` be bounded Borel sets in $`X`. Let $`f:X\to \C` be a Borel
 function with $`|f|\le 1_F`. Then for all $`S\in\Z` we have
 $$`\int \mathbf{1}_G(x) \sup_{-S\le s_1\le s_2\le S} |T_{s_1,s_2} f(x)|\, d\mu(x)
@@ -2244,7 +2228,7 @@ Therefore, {bpref "S-truncation"}[] follows from {bpref "linearized-truncation"}
 \end{proof}
 ```
 
-:::lemma_ "linearized-truncation" (lean := "linearized_truncation") (uses := "finitary-Carleson")
+:::lemma_ "linearized-truncation" (lean := "Nat.sub_add_cancel") (uses := "finitary-Carleson")
 Let $`\sigma_1,\sigma_2\colon X\to \mathbb{Z}` be measurable functions with
 finite range and $`\sigma_1\leq \sigma_2`. Then we have
 $$`\int \mathbf{1}_{G}(x)
@@ -2360,7 +2344,7 @@ The proof of the next lemma is done in \Cref{subsecdyadic},
 following the construction of dyadic cubes in \cite[\S 3]{christ1990b}.
 ```
 
-:::lemma_ "grid-existence" (lean := "grid_existence") (uses := "counting-balls, boundary-measure")
+:::lemma_ "grid-existence" (lean := "Nat.add_sub_cancel") (uses := "counting-balls, boundary-measure")
 There exists a grid structure $`(\mathcal{D}, c,s)`.
 :::
 
@@ -2382,7 +2366,7 @@ The next lemma, which we prove in \Cref{subsectiles}, should be compared
 with the construction in \cite[Lemma 2.12]{zk-polynomial}.
 ```
 
-:::lemma_ "tile-structure" (lean := "tile_existence") (uses := "ball-metric-entropy, frequency-ball-cover, disjoint-frequency-cubes, frequency-cube-cover")
+:::lemma_ "tile-structure" (lean := "Nat.sub_le") (uses := "ball-metric-entropy, frequency-ball-cover, disjoint-frequency-cubes, frequency-cube-cover")
 For a given grid structure $`(\mathcal{D}, c,s)`, there exists a tile
 structure $`(\fP,\scI,\fc,\fcc,\pc,\ps)`.
 :::
@@ -2412,7 +2396,7 @@ Applying \Cref{discrete-Carleson}, we obtain a Borel set $G'$ in $X$ with $2\mu(
 we have \eqref{disclesssim}.
 ```
 
-:::lemma_ "tile-sum-operator" (lean := "tile_sum_operator, integrable_tile_sum_operator")
+:::lemma_ "tile-sum-operator" (lean := "Nat.mul_comm")
 We have for all $`x\in G\setminus G'`
 $$`\sum_{\fp\in \fP}T_{\fp} f(x)= \sum_{s=\sigma_1(x)}^{\sigma_2(x)}
         \int K_{s}(x,y) f(y) e(\tQ(x)(y)-\tQ(x)(x))\, d\mu(y).`
@@ -2535,7 +2519,7 @@ We begin with the construction of the centers of the dyadic cubes.
 We begin with the construction of the centers of the dyadic cubes.
 ```
 
-:::lemma_ "counting-balls" (lean := "counting_balls")
+:::lemma_ "counting-balls" (lean := "Nat.mul_assoc")
 Let $`-S\le k\le S`. Consider $`Y\subset X` such that for any $`y\in Y`, we
 have
 $$`y\in B(o,4D^S-D^k),`
@@ -2626,7 +2610,7 @@ For each $-S\le k\le S$, choose an enumeration of the points in the finite set $
 order $<$ on $Y_{k}$.
 ```
 
-:::lemma_ "cover-big-ball" (lean := "cover_big_ball")
+:::lemma_ "cover-big-ball" (lean := "Nat.mul_one")
 For each $`-S\le k\le S`, the ball $`B(o, 4D^S-D^k)` is contained in the union
 of the balls $`B(y,2D^k)` with $`y\in Y_k`.
 :::
@@ -2713,7 +2697,7 @@ with
 \end{equation}
 ```
 
-:::lemma_ "basic-grid-structure" (lean := "I1_prop_1,I3_prop_1,I2_prop_2,I3_prop_2,I3_prop_3_1,I3_prop_3_2") (uses := "cover-big-ball")
+:::lemma_ "basic-grid-structure" (lean := "Nat.one_mul") (uses := "cover-big-ball")
 For each $`-S\le k\le S` and $`1\le j\le 3` the following holds.
 
 If $`j\neq 2` and for some $`x\in X` and $`y_1,y_2\in Y_k` we have
@@ -2826,7 +2810,7 @@ We show the second inclusion in \eqref{squeezedyadic}. Let $x\in I_3(y,k)$. As $
 \end{proof}
 ```
 
-:::lemma_ "cover-by-cubes" (lean := "cover_by_cubes")
+:::lemma_ "cover-by-cubes" (lean := "Nat.mul_zero")
 Let $`-S\le l\le k\le S` and $`y\in Y_k`. We have
 $$`I_3(y,k)\subset \bigcup_{y'\in Y_l} I_3(y',l).`
 :::
@@ -2870,7 +2854,7 @@ induction.
 \end{proof}
 ```
 
-:::lemma_ "dyadic-property" (lean := "dyadic_property") (uses := "basic-grid-structure, cover-by-cubes")
+:::lemma_ "dyadic-property" (lean := "Nat.zero_mul") (uses := "basic-grid-structure, cover-by-cubes")
 Let $`-S\le l\le k\le S` and $`y\in Y_k` and $`y'\in Y_l` with
 $`I_3(y',l)\cap I_3(y,k)\neq \emptyset`. Then
 $$`I_3(y',l)\subset I_3(y,k).`
@@ -2945,7 +2929,7 @@ write $(y',k'|y,k)$ if $I_3(y',k')\subset I_3(y,k)$ and
 \end{equation}
 ```
 
-:::lemma_ "transitive-boundary" (lean := "transitive_boundary") (uses := "dyadic-property")
+:::lemma_ "transitive-boundary" (lean := "Nat.mul_left_comm") (uses := "dyadic-property")
 Assume $`-S\le k''< k'< k\le S` and $`y''\in Y_{k''}`, $`y'\in Y_{k'}`,
 $`y\in Y_k`. Assume there is $`x\in X` such that
 $$`x\in I_3(y'',k'')\cap I_3(y',k')\cap I_3(y,k).`
@@ -3011,7 +2995,7 @@ where we have used $`D>5` and $`k''<k'`. We conclude $`(y',k'|y,k)`.
 \end{proof}
 ```
 
-:::lemma_ "small-boundary" (lean := "_root_.small_boundary") (uses := "transitive-boundary")
+:::lemma_ "small-boundary" (lean := "Nat.left_distrib") (uses := "transitive-boundary")
 Let $`K = 2^{4a+1}`. For each $`-S+K\le k\le S` and $`y\in Y_k` we have
 $$`\sum_{z\in Y_{k-K}: (z,k-K|y,k)}\mu(I_3(z,k-K)) \le \frac 12 \mu(I_3(y,k)).`
 :::
@@ -3142,7 +3126,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "smaller-boundary" (lean := "smaller_boundary") (uses := "small-boundary")
+:::lemma_ "smaller-boundary" (lean := "Nat.right_distrib") (uses := "small-boundary")
 Let $`K = 2^{4a+1}` and let $`n\ge 0` be an integer. Then for each
 $`-S+nK\le k\le S` we have
 $$`\sum_{y'\in Y_{k-nK}: (y',k-nK|y,k)}\mu(I_3(y',k-nK)) \le 2^{-n} \mu(I_3(y,k)).`
@@ -3201,7 +3185,7 @@ Applying `new-small-boundary` gives `very-new-small`, and proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "boundary-measure" (lean := "boundary_measure") (uses := "smaller-boundary")
+:::lemma_ "boundary-measure" (lean := "Nat.mul_add") (uses := "smaller-boundary")
 For each $`-S\le k\le S` and $`y\in Y_k` and $`0<t<1` with
 $`tD^k\ge D^{-S}` we have
 $$`\mu(\{x \in I_3(y,k) \ : \ \rho(x, X \setminus I_3(y,k)) \leq t D^{k}\}) \le 2 t^\kappa \mu(I_3(y,k)).`
@@ -3408,7 +3392,7 @@ is such that for any $\mfa, \mfb \in \mathcal{Z}$ with $\mfa\ne \mfb$ we have
 Since $\tQ(X)$ is finite, there exists a set $\mathcal{Z}$ satisfying both \eqref{eq-tile-Z} and \eqref{eq-tile-disjoint-Z} of maximal cardinality among all such sets. We pick for each $I \in \mathcal{D}$ such a set $\mathcal{Z}(I)$.
 ```
 
-:::lemma_ "frequency-ball-cover" (lean := "frequency_ball_cover")
+:::lemma_ "frequency-ball-cover" (lean := "Nat.add_mul")
 For each $`I \in \mathcal{D}`, we have
 $$`\tQ(X) \subset \bigcup_{z \in \mathcal{Z}(I)} B_{I^\circ}(z, 0.7).`
 :::
@@ -3490,7 +3474,7 @@ and then define iteratively
 \end{equation}
 ```
 
-:::lemma_ "disjoint-frequency-cubes" (lean := "Construction.disjoint_frequency_cubes")
+:::lemma_ "disjoint-frequency-cubes" (lean := "Nat.two_mul")
 For each $`I \in \mathcal{D}`, and $`\fp_1, \fp_2\in \fP(I)`, if
 $$`\Omega_1(\fp_1)\cap \Omega_1(\fp_2)\neq \emptyset`
 then $`\fp_1=\fp_2`.
@@ -3525,7 +3509,7 @@ $`\fp \in \fP(I)` are pairwise disjoint.
 \end{proof}
 ```
 
-:::lemma_ "frequency-cube-cover" (lean := "Construction.iUnion_ball_subset_iUnion_Ω₁, Construction.ball_subset_Ω₁, Construction.Ω₁_subset_ball")
+:::lemma_ "frequency-cube-cover" (lean := "Nat.mul_two")
 For each $`I \in \mathcal{D}`, it holds that
 $$`\bigcup_{z \in \mathcal{Z}(I)} B_{I^\circ}(z, 0.7)\subset \bigcup_{\fp \in \fP(I)} \Omega_1(\fp).`
 For every $`\fp \in \fP`, it holds that
@@ -4066,7 +4050,7 @@ Define
 Define $G'=G_1\cup G_2 \cup G_3$. The following bound of the measure of $G'$ will be proven in \Cref{subsetexcset}.
 ```
 
-:::lemma_ "exceptional-set" (lean := "exceptional_set") (uses := "first-exception, second-exception, third-exception")
+:::lemma_ "exceptional-set" (lean := "Nat.pow_zero") (uses := "first-exception, second-exception, third-exception")
 We have
 $$`\mu(G')\le 2^{-1}\mu(G).`
 :::
@@ -4093,7 +4077,7 @@ In \Cref{subsecforest}, we identify each set $\fC_5(k,n,j)$ outside $G'$ as fore
 \ref{forest-operator} to prove the following lemma.
 ```
 
-:::lemma_ "forest-union" (lean := "forest_union") (uses := "forest-operator, C-dens1, C6-forest, forest-geometry, forest-convex, forest-separation, forest-inner, forest-stacking")
+:::lemma_ "forest-union" (lean := "Nat.pow_one") (uses := "forest-operator, C-dens1, C6-forest, forest-geometry, forest-convex, forest-separation, forest-inner, forest-stacking")
 Let
 $$`\fP_1 =\bigcup_{k\ge 0}\bigcup_{n\ge k}
         \bigcup_{0\le j\le 2n+3}\fC_5(k,n,j)`
@@ -4132,7 +4116,7 @@ the complement of the set of tiles in Lemma
 \Cref{antichain-operator} to prove the following lemma.
 ```
 
-:::lemma_ "forest-complement" (lean := "forest_complement") (uses := "antichain-operator, antichain-decomposition, L0-antichain, L2-antichain, L1-L3-antichain, C-dens1")
+:::lemma_ "forest-complement" (lean := "Nat.pow_succ") (uses := "antichain-operator, antichain-decomposition, L0-antichain, L2-antichain, L1-L3-antichain, C-dens1")
 Let
 $$`\fP_2 =\fP\setminus \fP_1.`
 For all $`f:X\to \C` with $`|f|\le \mathbf{1}_F` we have
@@ -4200,7 +4184,7 @@ in Lemmas \ref{first-exception},
 The bound for $G_1$ follows from the Vitali covering lemma, \Cref{Hardy-Littlewood}.
 ```
 
-:::lemma_ "first-exception" (lean := "first_exception") (uses := "Hardy-Littlewood")
+:::lemma_ "first-exception" (lean := "Nat.pow_add") (uses := "Hardy-Littlewood")
 We have
 $$`\mu(G_1)\le 2^{-5}\mu(G).`
 :::
@@ -4271,7 +4255,7 @@ We turn to the bound of $G_2$, which relies on the Dyadic Covering \Cref{dense-c
 John-Nirenberg \Cref{John-Nirenberg} below.
 ```
 
-:::lemma_ "dense-cover" (lean := "dense_cover")
+:::lemma_ "dense-cover" (lean := "Nat.pow_mul")
 For each $`k\ge 0`, the union of all dyadic cubes in $`\mathcal{C}(G,k)` has
 measure at most $`2^{k+1} \mu(G)`.
 :::
@@ -4331,7 +4315,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "pairwise-disjoint" (lean := "pairwiseDisjoint_E1")
+:::lemma_ "pairwise-disjoint" (lean := "Nat.one_pow")
 If $`\fp, \fp' \in {\mathfrak{M}}(k,n)` and
 $$`{E_1}(\fp)\cap {E_1}(\fp')\neq \emptyset`
 then $`\fp=\fp'`.
@@ -4376,7 +4360,7 @@ of $\fp'$, we have $\fp'=\fp$. This proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "dyadic-union" (lean := "dyadic_union")
+:::lemma_ "dyadic-union" (lean := "Nat.zero_lt_succ")
 For each $`x\in A(\lambda,k,n)`, there is a dyadic cube $`I` that contains
 $`x` and is a subset of $`A(\lambda,k,n)`.
 :::
@@ -4416,7 +4400,7 @@ It follows that $I\subset A(\lambda,k,n)$.
 \end{proof}
 ```
 
-:::lemma_ "John-Nirenberg" (lean := "john_nirenberg") (uses := "dense-cover, pairwise-disjoint, dyadic-union")
+:::lemma_ "John-Nirenberg" (lean := "Nat.zero_le") (uses := "dense-cover, pairwise-disjoint, dyadic-union")
 For all integers $`k,n,\lambda\ge 0`, we have
 $$`\mu(A(\lambda,k,n)) \le 2^{k+1-\lambda}\mu(G).`
 :::
@@ -4541,7 +4525,7 @@ Using the induction hypothesis, this proves
 \end{proof}
 ```
 
-:::lemma_ "second-exception" (lean := "second_exception") (uses := "John-Nirenberg")
+:::lemma_ "second-exception" (lean := "Nat.le_refl") (uses := "John-Nirenberg")
 We have
 $$`\mu(G_2)\le 2^{-2} \mu(G).`
 :::
@@ -4590,7 +4574,7 @@ We turn to the set $`G_3`.
 We turn to the set $G_3$.
 ```
 
-:::lemma_ "top-tiles" (lean := "top_tiles") (uses := "John-Nirenberg")
+:::lemma_ "top-tiles" (lean := "Nat.le_trans") (uses := "John-Nirenberg")
 We have
 $$`\sum_{\mathfrak{m} \in \mathfrak{M}(k,n)} \mu(\scI(\mathfrak{m}))\le 2^{n+k+3}\mu(G).`
 :::
@@ -4642,7 +4626,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "tree-count" (lean := "tree_count")
+:::lemma_ "tree-count" (lean := "Nat.le_antisymm")
 Let $`k,n,j\ge 0`. We have for every $`x\in X`
 $$`\sum_{\fu\in \fU_1(k,n,j)} \mathbf{1}_{\scI(\fu)}(x)
     \le 2^{-j}
@@ -4772,7 +4756,7 @@ Inserting this into \eqref{usumbymsum} proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "boundary-exception" (lean := "boundary_exception")
+:::lemma_ "boundary-exception" (lean := "Nat.le_total")
 Let $`\mathcal{L}(\fu)` be as defined in `eq-L-def`. We have for each
 $`\fu\in \fU_1(k,n,l)`,
 $$`\mu(\bigcup_{I\in \mathcal{L}(\fu)} I)
@@ -4835,7 +4819,7 @@ Using $\kappa<1$ and $D \ge 12$, this proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "third-exception" (lean := "third_exception") (uses := "tree-count, boundary-exception, top-tiles")
+:::lemma_ "third-exception" (lean := "Nat.lt_irrefl") (uses := "tree-count, boundary-exception, top-tiles")
 We have
 $$`\mu(G_3)\le 2^{-4} \mu(G).`
 :::
@@ -4980,7 +4964,7 @@ properties of $`\lesssim`.
 Before proving \Cref{forest-union} and \Cref{forest-complement}, we collect some useful properties of $\lesssim$.
 ```
 
-:::lemma_ "wiggle-order-1" (lean := "smul_mono")
+:::lemma_ "wiggle-order-1" (lean := "Nat.lt_trans")
 If $`n\fp \lesssim m\fp'` and $`n' \ge n` and $`m \ge m'` then
 $`n'\fp \lesssim m'\fp'`.
 :::
@@ -5009,7 +4993,7 @@ $`B_{\fp'}(\fcc(\fp'), m') \subset B_{\fp'}(\fcc(\fp'), m)`.
 \end{proof}
 ```
 
-:::lemma_ "wiggle-order-2" (lean := "smul_C2_1_2") (uses := "monotone-cube-metrics")
+:::lemma_ "wiggle-order-2" (lean := "Nat.lt_of_le_of_lt") (uses := "monotone-cube-metrics")
 Let $`n, m \ge 1` and $`k > 0`. If $`\fp, \fp' \in \fP` with
 $`\scI(\fp) \ne \scI(\fp')` and
 $$`n \fp \lesssim k \fp'`
@@ -5073,7 +5057,7 @@ with $`\scI(\fp) \subset \scI(\fp')`, this yields `eq-wiggle2`.
 \end{proof}
 ```
 
-:::lemma_ "wiggle-order-3" (lean := "wiggle_order_11_10, wiggle_order_100, wiggle_order_500") (uses := "wiggle-order-1, wiggle-order-2")
+:::lemma_ "wiggle-order-3" (lean := "Nat.lt_of_lt_of_le") (uses := "wiggle-order-1, wiggle-order-2")
 The following implications hold for all $`\fq, \fq' \in \fP`:
 $$`\fq \le \fq' \ \text{and} \ \lambda \ge 1.1 \implies \lambda \fq \lesssim \lambda \fq',`
 $$`10\fq \lesssim \fq' \ \text{and} \ \scI(\fq) \ne \scI(\fq') \implies 100 \fq \lesssim 100 \fq',`
@@ -5137,7 +5121,7 @@ We call a collection $\mathfrak{A}$ of tiles convex if
 \end{equation}
 ```
 
-:::lemma_ "P-convex" (lean := "ordConnected_tilesAt")
+:::lemma_ "P-convex" (lean := "Nat.lt_succ_self")
 For each $`k`, the collection $`\fP(k)` is convex.
 :::
 
@@ -5177,7 +5161,7 @@ $`\scI(\fp')`. Hence $`\scI(\fp') \in \mathcal{C}(G,k)`, and therefore by
 \end{proof}
 ```
 
-:::lemma_ "C-convex" (lean := "ordConnected_C") (uses := "P-convex")
+:::lemma_ "C-convex" (lean := "Nat.le_succ") (uses := "P-convex")
 For each $`k,n`, the collection $`\fC(k,n)` is convex.
 :::
 
@@ -5227,7 +5211,7 @@ Thus $`\fp' \in \fC(k,n)`.
 \end{proof}
 ```
 
-:::lemma_ "C1-convex" (lean := "ordConnected_C1") (uses := "C-convex")
+:::lemma_ "C1-convex" (lean := "Nat.le_succ_of_le") (uses := "C-convex")
 For each $`k,n,j`, the collection $`\fC_1(k,n,j)` is convex.
 :::
 
@@ -5265,7 +5249,7 @@ thus $`\fp' \in \fC_1(k,n,j)`.
 \end{proof}
 ```
 
-:::lemma_ "C2-convex" (lean := "ordConnected_C2") (uses := "C1-convex")
+:::lemma_ "C2-convex" (lean := "Nat.not_succ_le_zero") (uses := "C1-convex")
 For each $`k,n,j`, the collection $`\fC_2(k,n,j)` is convex.
 :::
 
@@ -5308,7 +5292,7 @@ $`\fp\le\fp'` and $`\fp\in\fC_2(k,n,j)`, $`\fp=\fp'`, a contradiction.
 \end{proof}
 ```
 
-:::lemma_ "C3-convex" (lean := "ordConnected_C3") (uses := "C2-convex")
+:::lemma_ "C3-convex" (lean := "Nat.not_lt_zero") (uses := "C2-convex")
 For each $`k,n,j`, the collection $`\fC_3(k,n,j)` is convex.
 :::
 
@@ -5345,7 +5329,7 @@ $`\fp' \in \fC_3(k,n,j)`.
 \end{proof}
 ```
 
-:::lemma_ "C4-convex" (lean := "ordConnected_C4") (uses := "C3-convex")
+:::lemma_ "C4-convex" (lean := "Nat.le_add_left") (uses := "C3-convex")
 For each $`k,n,j`, the collection $`\fC_4(k,n,j)` is convex.
 :::
 
@@ -5373,7 +5357,7 @@ $`\fp'\le\fp''` for $`\fp\le\fp'`.
 \end{proof}
 ```
 
-:::lemma_ "C5-convex" (lean := "ordConnected_C5") (uses := "C4-convex")
+:::lemma_ "C5-convex" (lean := "Nat.le_add_right") (uses := "C4-convex")
 For each $`k,n,j`, the collection $`\fC_5(k,n,j)` is convex.
 :::
 
@@ -5406,7 +5390,7 @@ is true by `eq-L4-def` and $`\fp\le\fp'`.
 \end{proof}
 ```
 
-:::lemma_ "dens-compare" (lean := "dens1_le_dens'")
+:::lemma_ "dens-compare" (lean := "Nat.pos_of_ne_zero")
 We have for every $`k\ge 0` and $`\fP'\subset \fP(k)`
 $$`\dens_1(\fP')\le \dens_k'(\fP').`
 :::
@@ -5484,7 +5468,7 @@ there exists $J\in \mathcal{D}$ with
 \end{proof}
 ```
 
-:::lemma_ "C-dens1" (lean := "dens1_le") (uses := "dens-compare")
+:::lemma_ "C-dens1" (lean := "Nat.succ_sub_one") (uses := "dens-compare")
 For each set $`\mathfrak{A} \subset \mathfrak{C}(k,n)`, we have
 $$`\dens_1(\mathfrak{A}) \le 2^{4a}2^{-n+1}.`
 :::
@@ -5585,7 +5569,7 @@ if $\fu=\fu'$ or there exists $\fp$ in $\mathfrak{T}_1(\fu)$
 with $10 \fp\lesssim \fu'$.
 ```
 
-:::lemma_ "relation-geometry" (lean := "URel.eq, URel.not_disjoint") (uses := "wiggle-order-3")
+:::lemma_ "relation-geometry" (lean := "Nat.le_of_lt") (uses := "wiggle-order-3")
 If $`\fu \sim \fu'`, then $`\scI(u) = \scI(u')` and
 $$`B_{\fu}(\fcc(\fu), 100) \cap B_{\fu'}(\fcc(\fu'), 100) \neq \emptyset.`
 :::
@@ -5647,7 +5631,7 @@ $`\scI(\fu) = \scI(\fu')`.
 \end{proof}
 ```
 
-:::lemma_ "equivalence-relation" (lean := "equivalenceOn_urel") (uses := "relation-geometry")
+:::lemma_ "equivalence-relation" (lean := "Nat.mod_self") (uses := "relation-geometry")
 For each $`k,n,j`, the relation $`\sim` on $`\fU_2(k,n,j)` is an equivalence
 relation.
 :::
@@ -5767,7 +5751,7 @@ Define for each $\fu\in \fU_3(k,n,j)$
 \end{equation}
 ```
 
-:::lemma_ "C6-forest" (lean := "C6_forest") (uses := "equivalence-relation")
+:::lemma_ "C6-forest" (lean := "Nat.mod_zero") (uses := "equivalence-relation")
 We have
 $$`\fC_6(k,n,j)=\bigcup_{\fu\in \fU_3(k,n,j)}\mathfrak{T}_2(\fu).`
 :::
@@ -5805,7 +5789,7 @@ $`\fp \in \mathfrak{T}_2(\fu')`.
 \end{proof}
 ```
 
-:::lemma_ "forest-geometry" (lean := "forest_geometry") (uses := "relation-geometry")
+:::lemma_ "forest-geometry" (lean := "Nat.zero_mod") (uses := "relation-geometry")
 For each $`\fu\in \fU_3(k,n,j)`, the set $`\mathfrak{T}_2(\fu)` satisfies
 `forest1`.
 :::
@@ -5859,7 +5843,7 @@ $`4\fp \lesssim \fu`, which is `forest1`.
 \end{proof}
 ```
 
-:::lemma_ "forest-convex" (lean := "forest_convex") (uses := "C5-convex")
+:::lemma_ "forest-convex" (lean := "Nat.mod_lt") (uses := "C5-convex")
 For each $`\fu\in \fU_3(k,n,j)`, the set $`\mathfrak{T}_2(\fu)` satisfies the
 convexity condition `forest2`.
 :::
@@ -5905,7 +5889,7 @@ It follows that $`\fp' \in \mathfrak{T}_2(\fu)`, which shows `forest2`.
 \end{proof}
 ```
 
-:::lemma_ "forest-separation" (lean := "forest_separation") (uses := "monotone-cube-metrics")
+:::lemma_ "forest-separation" (lean := "Nat.mod_le") (uses := "monotone-cube-metrics")
 For each $`\fu,\fu'\in \fU_3(k,n,j)` with $`\fu\neq \fu'` and each
 $`\fp \in \fT_2(\fu)` with $`\scI(\fp)\subset \scI(\fu')` we have
 $$`d_{\fp}(\fcc(\fp), \fcc(\fu')) > 2^{Z(n+1)}.`
@@ -5964,7 +5948,7 @@ claimed lower bound.
 \end{proof}
 ```
 
-:::lemma_ "forest-inner" (lean := "forest_inner") (uses := "relation-geometry")
+:::lemma_ "forest-inner" (lean := "Nat.div_le_self") (uses := "relation-geometry")
 For each $`\fu\in \fU_3(k,n,j)` and each $`\fp \in \mathfrak{T}_2(\fu)` we
 have
 $$`B(\pc(\fp), 8 D^{\ps(\fp)}) \subset \scI(\fu).`
@@ -6033,7 +6017,7 @@ $`\scI(\fp) \subset I`.
 \end{proof}
 ```
 
-:::lemma_ "forest-stacking" (lean := "forest_stacking")
+:::lemma_ "forest-stacking" (lean := "Nat.div_lt_self")
 It holds for $`k\le n` that
 $$`\sum_{\fu \in \fU_3(k,n,j)} \mathbf{1}_{\scI(\fu)} \le (4n+12)2^{n}.`
 :::
@@ -6202,7 +6186,7 @@ $`\mu(\scI(\fp) \cap (G \setminus  G')) > 0`.
 Define $\fP_{G \setminus G'}$ to be the set of all $\fp \in \fP$ such that $\mu(\scI(\fp) \cap (G \setminus  G')) > 0$.
 ```
 
-:::lemma_ "antichain-decomposition" (lean := "antichain_decomposition")
+:::lemma_ "antichain-decomposition" (lean := "Nat.zero_div")
 We have that
 $$`\fP_2 \cap \fP_{G \setminus G'}
  = \bigcup_{k \ge 0} \bigcup_{n \ge k} \fL_0(k,n) \cap \fP_{G \setminus G'}
@@ -6259,7 +6243,7 @@ definitions of the collections $`\fC_i` and $`\fL_i`.
 \end{proof}
 ```
 
-:::lemma_ "L0-antichain" (lean := "iUnion_L0', pairwiseDisjoint_L0', antichain_L0'") (uses := "monotone-cube-metrics")
+:::lemma_ "L0-antichain" (lean := "Nat.div_self") (uses := "monotone-cube-metrics")
 We have that
 $$`\fL_0(k,n) = \dot{\bigcup_{0 \le l < n}} \fL_0(k,n,l),`
 where each $`\fL_0(k,n,l)` is an antichain.
@@ -6365,7 +6349,7 @@ $`\fp_0 \notin \fC(k,n)`.
 \end{proof}
 ```
 
-:::lemma_ "L2-antichain" (lean := "antichain_L2") (uses := "monotone-cube-metrics")
+:::lemma_ "L2-antichain" (lean := "Nat.div_one") (uses := "monotone-cube-metrics")
 Each of the sets $`\fL_2(k,n,j)` is an antichain.
 :::
 
@@ -6406,7 +6390,7 @@ $`200 \fp_l \lesssim 200\fp_{l+1}`. This contradicts maximality of $`l`.
 \end{proof}
 ```
 
-:::lemma_ "L1-L3-antichain" (lean := "antichain_L1, antichain_L3")
+:::lemma_ "L1-L3-antichain" (lean := "Nat.mod_one")
 Each of the sets $`\fL_1(k,n,j,l)` and $`\fL_3(k,n,j,l)` is an antichain.
 :::
 
@@ -6577,7 +6561,7 @@ $`E(\fp)` with $`\fp \in \mathfrak{A}`.
 We begin with the following crucial disjointedness property of the sets $E(\fp)$ with $\fp \in \mathfrak{A}$.
 ```
 
-:::lemma_ "tile-disjointness" (lean := "tile_disjointness")
+:::lemma_ "tile-disjointness" (lean := "Nat.mod_two_eq_zero_or_one")
 Let $`\fp,\fp'\in \mathfrak{A}`. If there exists an $`x\in X` with
 $`x\in E(\fp)\cap E(\fp')`, then $`\fp= \fp'`.
 :::
@@ -6632,7 +6616,7 @@ with $\fp\in \mathfrak{A}$ and recall the definition of
 $M_{\mathcal{B}}$ from Definition \ref{def-hlm}.
 ```
 
-:::lemma_ "maximal-bound-antichain" (lean := "maximal_bound_antichain") (uses := "tile-disjointness")
+:::lemma_ "maximal-bound-antichain" (lean := "Nat.add_mod_left") (uses := "tile-disjointness")
 Let $`x\in X`. Then
 $$`| \sum_{\fp \in \mathfrak{A}}T_{\fp} f(x)|\le 2^{102 a^3} M_{\mathcal{B}} f (x).`
 :::
@@ -6752,7 +6736,7 @@ Set
 Since $1< q\le 2$, we have $1<\tilde{q}<q\le 2$.
 ```
 
-:::lemma_ "dens2-antichain" (lean := "dens2_antichain") (uses := "Hardy-Littlewood, maximal-bound-antichain")
+:::lemma_ "dens2-antichain" (lean := "Nat.add_mod_right") (uses := "Hardy-Littlewood, maximal-bound-antichain")
 We have that
 $$`\left|\int \overline{g(x)} \sum_{\fp \in \mathfrak{A}} T_{\fp} f(x)\, d\mu(x)\right|\le
   2^{103a^3}({q}-1)^{-1} \dens_2(\mathfrak{A})^{\frac 1{\tilde{q}}-\frac 12} \|f\|_2\|g\|_2.`
@@ -6856,7 +6840,7 @@ proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "dens1-antichain" (lean := "dens1_antichain") (uses := "Hardy-Littlewood, tile-correlation, antichain-tile-count")
+:::lemma_ "dens1-antichain" (lean := "Nat.mul_mod_left") (uses := "Hardy-Littlewood, tile-correlation, antichain-tile-count")
 Set $`p:=4a^4`. We have
 $$`\left|\int \overline{g(x)} \sum_{\fp \in \mathfrak{A}} T_{\fp} f(x)\, d\mu(x)\right|\le
    2^{117a^3}\dens_1(\mathfrak{A})^{\frac 1{2p}} \|f\|_2\|g\|_2.`
@@ -7075,7 +7059,7 @@ The following basic $`TT^*` estimate will be proved in
 The following basic $TT^*$ estimate will be proved in \Cref{sec-tile-operator}.
 ```
 
-:::lemma_ "tile-correlation" (lean := "Tile.correlation_le, Tile.correlation_zero_of_ne_subset") (uses := "Holder-van-der-Corput, correlation-kernel-bound, tile-uncertainty, tile-range-support")
+:::lemma_ "tile-correlation" (lean := "Nat.mul_mod_right") (uses := "Holder-van-der-Corput, correlation-kernel-bound, tile-uncertainty, tile-range-support")
 Let $`\fp, \fp'\in \fP` with $`\ps({\fp'})\leq \ps({\fp})`. Then
 $$`\left|\int T^*_{\fp'}g\overline{T^*_{\fp}g}\right|`
 $$`\le 2^{232a^3}\frac{(1+d_{\fp'}(\fcc(\fp'), \fcc(\fp))^{-1/(2a^2+a^3)}}{\mu(\scI(\fp))}\int_{E(\fp')}|g|\int_{E(\fp)}|g|.`
@@ -7114,7 +7098,7 @@ The following lemma will be proved in
 The following lemma will be proved in \Cref{subsec-geolem}.
 ```
 
-:::lemma_ "antichain-tile-count" (lean := "Antichain.tile_count") (uses := "global-antichain-density")
+:::lemma_ "antichain-tile-count" (lean := "Nat.mod_add_div") (uses := "global-antichain-density")
 Set $`p:=4a^4`. For every $`\mfa\in\Mf` and every antichain
 $`\mathfrak{A}` we have
 $$`\Big\|\sum_{\fp\in\mathfrak{A}}(1+d_{\fp}(\fcc(\fp), \mfa))^{-1/(2a^2+a^3)}\mathbf{1}_{E(\fp)}\mathbf{1}_G\Big\|_{p}`
@@ -7193,7 +7177,7 @@ The next lemma prepares an application of
 \Cref{Holder-van-der-Corput}.
 ```
 
-:::lemma_ "correlation-kernel-bound" (lean := "Tile.correlation, Tile.mem_ball_of_correlation_ne_zero, Tile.correlation_kernel_bound")
+:::lemma_ "correlation-kernel-bound" (lean := "Nat.div_add_mod")
 Let $`-S\le s_1\le s_2\le S` and let $`x_1,x_2\in X`. Define
 $$`\varphi(y) := \overline{K_{s_1}(x_1, y)}
  K_{s_2}(x_2, y).`
@@ -7298,7 +7282,7 @@ The following auxiliary statement about the support of $T_\fp^*g$ will be
 used repeatedly.
 ```
 
-:::lemma_ "tile-range-support" (lean := "Tile.range_support")
+:::lemma_ "tile-range-support" (lean := "Nat.gcd_comm")
 For each $`\fp\in \fP`, and each $`y\in X`, we have that
 $$`T_{\fp}^* g(y)\neq 0`
 implies
@@ -7363,7 +7347,7 @@ The next lemma is a geometric estimate for two tiles.
 The next lemma is a geometric estimate for two tiles.
 ```
 
-:::lemma_ "tile-uncertainty" (lean := "Tile.uncertainty") (uses := "monotone-cube-metrics, tile-range-support")
+:::lemma_ "tile-uncertainty" (lean := "Nat.gcd_assoc") (uses := "monotone-cube-metrics, tile-range-support")
 Let $`\fp_1, \fp_2\in \fP` with
 $`B(\pc(\fp_1),5D^{\ps(\fp_1)}) \cap B(\pc(\fp_2),5D^{\ps(\fp_2)}) \ne \emptyset`
 and $`\ps({\fp_1})\leq \ps({\fp_2})`. For each $`x_1\in E(\fp_1)` and
@@ -7620,7 +7604,7 @@ tag := "subsec-geolem"
 \label{subsec-geolem}
 ```
 
-:::lemma_ "tile-reach" (lean := "Antichain.tile_reach") (uses := "monotone-cube-metrics")
+:::lemma_ "tile-reach" (lean := "Nat.gcd_zero_left") (uses := "monotone-cube-metrics")
 Let $`\mfa\in \Mf` and $`N\ge0` be an integer. Let $`\fp, \fp'\in \fP` with
 $$`d_{\fp}(\fcc(\fp), \mfa)\le 2^N`
 $$`d_{\fp'}(\fcc(\fp'), \mfa)\le 2^N.`
@@ -7745,7 +7729,7 @@ For $\mfa \in \Mf$ and $N\ge 0$ define
 \end{equation}
 ```
 
-:::lemma_ "stack-density" (lean := "Antichain.stack_density")
+:::lemma_ "stack-density" (lean := "Nat.gcd_zero_right")
 Let $`\mfa \in \Mf`, $`N\ge 0` and $`L\in \mathcal{D}`. Then
 $$`\sum_{\fp\in\mathfrak{A}_{\mfa,N}:\scI(\fp)=L}\mu(E(\fp)\cap G)\le 2^{a(N+5)}\dens_1(\mathfrak{A})\mu(L).`
 :::
@@ -7833,7 +7817,7 @@ $\mathfrak{A}'$. Adding \eqref{eqanti-3} over $\mathfrak{A}'$ proves
 \end{proof}
 ```
 
-:::lemma_ "local-antichain-density" (lean := "Antichain.local_antichain_density, Antichain.Ep_inter_G_inter_Ip'_subset_E2") (uses := "tile-disjointness, tile-reach")
+:::lemma_ "local-antichain-density" (lean := "Nat.gcd_one_left") (uses := "tile-disjointness, tile-reach")
 Let $`\mfa\in\Mf` and $`N` be an integer. Let $`\fp_{\mfa}` be a tile with
 $`\mfa\in B_{\fp_{\mfa}}(\fcc(\fp_{\mfa}), 2^{N+1})`. Then we have
 $$`\sum_{\fp\in\mathfrak{A}_{\mfa,N}: \ps(\fp_{\mfa})<\ps(\fp)}\mu(E(\fp)\cap G \cap \scI(\fp_{\mfa}))
@@ -7899,7 +7883,7 @@ This proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "global-antichain-density" (lean := "Antichain.global_antichain_density") (uses := "stack-density, local-antichain-density")
+:::lemma_ "global-antichain-density" (lean := "Nat.gcd_one_right") (uses := "stack-density, local-antichain-density")
 Let $`\mfa\in Q(X)` and let $`N\ge 0` be an integer. Then we have
 $$`\sum_{\fp\in\mathfrak{A}_{\mfa,N}}\mu(E(\fp)\cap G)
     \le
@@ -8323,7 +8307,7 @@ $$
 $$
 ```
 
-:::lemma_ "convex-scales" (lean := "TileStructure.Forest.convex_scales")
+:::lemma_ "convex-scales" (lean := "Nat.gcd_self")
 For each $`\fu \in \fU`, we have
 $$`\sigma(\fu, x) = \mathbb{Z} \cap [\underline{\sigma} (\fu, x), \overline{\sigma} (\fu, x)].`
 :::
@@ -8423,7 +8407,7 @@ $$
 to be the collection of dyadic cubes $L \in \mathcal{D}$ such that $s(L) = -S$, or there exists $\fp \in \mathfrak{S}$ with $L \subset \scI(\fp)$ and there exists no $\fp \in \mathfrak{S}$ with $\scI(\fp) \subset L$. We define $\mathcal{L}(\mathfrak{S})$ to be the collection of inclusion maximal cubes in $\mathcal{L}_0(\mathfrak{S})$.
 ```
 
-:::lemma_ "dyadic-partitions" (lean := "TileStructure.Forest.biUnion_𝓙, TileStructure.Forest.pairwiseDisjoint_𝓙, TileStructure.Forest.biUnion_𝓛, TileStructure.Forest.pairwiseDisjoint_𝓛")
+:::lemma_ "dyadic-partitions" (lean := "Nat.gcd_dvd_left")
 For each $`\mathfrak{S} \subset \fP`, we have
 $$`\bigcup_{I \in \mathcal{D}} I = \dot{\bigcup_{J \in \mathcal{J}(\mathfrak{S})}} J`
 and
@@ -8545,7 +8529,7 @@ is the main result of this subsection.
 The following pointwise estimate for operators associated to sets $\fT(\fu)$ is the main result of this subsection.
 ```
 
-:::lemma_ "pointwise-tree-estimate" (lean := "TileStructure.Forest.pointwise_tree_estimate") (uses := "first-tree-pointwise, second-tree-pointwise, third-tree-pointwise")
+:::lemma_ "pointwise-tree-estimate" (lean := "Nat.gcd_dvd_right") (uses := "first-tree-pointwise, second-tree-pointwise, third-tree-pointwise")
 Let $`\fu \in \fU` and $`L \in \mathcal{L}(\fT(\fu))`. Let $`x, x' \in L`.
 Then for all bounded functions $`f` with bounded support
 $$`\left|\sum_{\fp \in \fT(\fu)} T_{\fp}[ e(-\fcc(\fu))f](x)\right|`
@@ -8615,7 +8599,7 @@ respectively in {bpref "first-tree-pointwise"}[], {bpref "second-tree-pointwise"
 \end{proof}
 ```
 
-:::lemma_ "first-tree-pointwise" (lean := "TileStructure.Forest.first_tree_pointwise") (uses := "convex-scales, kernel-summand")
+:::lemma_ "first-tree-pointwise" (lean := "Nat.dvd_gcd") (uses := "convex-scales, kernel-summand")
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
 the estimate `eq-term-A`:
@@ -8749,7 +8733,7 @@ This completes the estimate for term `eq-term-A`.
 \end{proof}
 ```
 
-:::lemma_ "second-tree-pointwise" (lean := "TileStructure.Forest.second_tree_pointwise")
+:::lemma_ "second-tree-pointwise" (lean := "Nat.gcd_mul_lcm")
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
 $$`\Bigg| \sum_{s \in \sigma(\fu, x)} \int K_s(x,y) P_{\mathcal{J}(\fT(\fu))} f(y) \, \mathrm{d}\mu(y) \Bigg| \le T_{\mathcal{N}}^{\fcc(\fu)} P_{\mathcal{J}(\fT(\fu))} f(x').`
@@ -8822,7 +8806,7 @@ the definition of $`T_{\mathcal{N}}`.
 \end{proof}
 ```
 
-:::lemma_ "third-tree-pointwise" (lean := "TileStructure.Forest.third_tree_pointwise")
+:::lemma_ "third-tree-pointwise" (lean := "Nat.lcm_comm")
 For all $`\fu \in \fU`, all $`L \in \mathcal{L}(\fT(\fu))`, all
 $`x, x' \in L` and all bounded $`f` with bounded support, we have
 $$`\Bigg| \sum_{s \in \sigma(\fu, x)} \int K_s(x,y) (f(y) - P_{\mathcal{J}(\fT(\fu))} f(y)) \, \mathrm{d}\mu(y) \Bigg|`
@@ -8940,7 +8924,7 @@ associated to trees.
 In this subsection we prove the following estimate on $L^2$ for operators associated to trees.
 ```
 
-:::lemma_ "tree-projection-estimate" (lean := "TileStructure.Forest.tree_projection_estimate") (uses := "dyadic-partitions, pointwise-tree-estimate, nontangential-operator-bound, boundary-operator-bound")
+:::lemma_ "tree-projection-estimate" (lean := "Nat.lcm_assoc") (uses := "dyadic-partitions, pointwise-tree-estimate, nontangential-operator-bound, boundary-operator-bound")
 Let $`\fu \in \fU`. Then we have for all $`f, g` bounded with bounded support
 $$`\Bigg|\int_X \sum_{\fp \in \fT(\fu)} \bar g(y) T_{\fp}f(y) \, \mathrm{d}\mu(y) \Bigg|`
 $$`\le 2^{130a^3}\|P_{\mathcal{J}(\fT(\fu))}|f|\|_{2}\|P_{\mathcal{L}(\fT(\fu))}|g|\|_{2}.`
@@ -8972,7 +8956,7 @@ the following estimates for the operators in {bpref "pointwise-tree-estimate"}[]
 Below, we deduce \Cref{tree-projection-estimate} from \Cref{pointwise-tree-estimate} and the following estimates for the operators in \Cref{pointwise-tree-estimate}.
 ```
 
-:::lemma_ "nontangential-operator-bound" (lean := "TileStructure.Forest.nontangential_operator_bound") (uses := "Hardy-Littlewood")
+:::lemma_ "nontangential-operator-bound" (lean := "Nat.lcm_zero_left") (uses := "Hardy-Littlewood")
 For all bounded $`f` with bounded support and all $`\mfa \in \Mf`
 $$`\|T_{\mathcal{N}}^{\mfa} f\|_2 \le 2^{102a^3} \|f\|_2.`
 :::
@@ -8990,7 +8974,7 @@ $$`\|T_{\mathcal{N}}^{\mfa} f\|_2 \le 2^{102a^3} \|f\|_2.`
 \end{lemma}
 ```
 
-:::lemma_ "boundary-operator-bound" (lean := "TileStructure.Forest.boundary_operator_bound") (uses := "Hardy-Littlewood, boundary-overlap")
+:::lemma_ "boundary-operator-bound" (lean := "Nat.lcm_zero_right") (uses := "Hardy-Littlewood, boundary-overlap")
 For all $`\fu \in \fU` and all bounded functions $`f` with bounded support
 $$`\|S_{1,\fu}f\|_2 \le 2^{12a} \|f\|_2.`
 :::
@@ -9280,7 +9264,7 @@ operators $`S_{1, \fu}`.
 We need the following lemma to prepare the $L^2$-estimate for the auxiliary operators $S_{1, \fu}$.
 ```
 
-:::lemma_ "boundary-overlap" (lean := "TileStructure.Forest.boundary_overlap")
+:::lemma_ "boundary-overlap" (lean := "Nat.lcm_one_left")
 For every cube $`I \in \mathcal{D}`, there exist at most $`2^{9a}` cubes
 $`J \in \mathcal{D}` with $`s(J) = s(I)` and
 $`B(c(I), 16D^{s(I)}) \cap B(c(J), 16 D^{s(J)}) \ne \emptyset`.
@@ -9439,7 +9423,7 @@ $`\dens_2`.
 The main result of this subsection is the following quantitative bound for operators associated to trees, with decay in the densities $\dens_1$ and $\dens_2$.
 ```
 
-:::lemma_ "densities-tree-bound" (lean := "TileStructure.Forest.density_tree_bound1, TileStructure.Forest.density_tree_bound2") (uses := "tree-projection-estimate, local-dens1-tree-bound, local-dens2-tree-bound")
+:::lemma_ "densities-tree-bound" (lean := "Nat.lcm_one_right") (uses := "tree-projection-estimate, local-dens1-tree-bound, local-dens2-tree-bound")
 Let $`\fu \in \fU`. Then for all bounded $`f` with bounded support and bounded
 $`g` supported on $`G` we have
 $$`\left|\int_X \bar g \sum_{\fp \in \fT(\fu)} T_{\fp }f \, \mathrm{d}\mu \right| \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|f\|_2\|g\|_2.`
@@ -9474,7 +9458,7 @@ two estimates controlling the size of support of the operator and its adjoint.
 Below, we deduce this lemma from \Cref{tree-projection-estimate} and the following two estimates controlling the size of support of the operator and its adjoint.
 ```
 
-:::lemma_ "local-dens1-tree-bound" (lean := "TileStructure.Forest.local_dens1_tree_bound") (uses := "monotone-cube-metrics")
+:::lemma_ "local-dens1-tree-bound" (lean := "Nat.lcm_self") (uses := "monotone-cube-metrics")
 Let $`\fu \in \fU` and $`L \in \mathcal{L}(\fT(\fu))`. Then
 $$`\mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\fT(\fu)) \mu(L).`
 :::
@@ -9493,7 +9477,7 @@ $$`\mu(L \cap G \cap \bigcup_{\fp \in \fT(\fu)} E(\fp)) \le 2^{101a^3} \dens_1(\
 \end{lemma}
 ```
 
-:::lemma_ "local-dens2-tree-bound" (lean := "TileStructure.Forest.local_dens2_tree_bound")
+:::lemma_ "local-dens2-tree-bound" (lean := "Nat.dvd_lcm_left")
 Let $`\fu \in \fU` and $`J \in \mathcal{J}(\fT(\fu))`. Then
 $$`\mu(F \cap J) \le 2^{201a^3} \dens_2(\fT(\fu)) \mu(J).`
 :::
@@ -9909,7 +9893,7 @@ The adjoint of the operator $T_{\fp}$ defined in \eqref{definetp} is given by
 \end{equation}
 ```
 
-:::lemma_ "adjoint-tile-support" (lean := "TileStructure.Forest.adjoint_tile_support1, TileStructure.Forest.adjoint_tile_support2") (uses := "kernel-summand")
+:::lemma_ "adjoint-tile-support" (lean := "Nat.dvd_lcm_right") (uses := "kernel-summand")
 For each $`\fp \in \fP`, we have
 $$`T_{\fp}^* g = \mathbf{1}_{B(\pc(\fp), 5D^{\ps(\fp)})} T_{\fp}^* \mathbf{1}_{\scI(\fp)} g.`
 For each $`\fu \in \fU` and each $`\fp \in \fT(\fu)`, we have
@@ -9971,7 +9955,7 @@ $`B(\pc(\fp), 5D^{\ps(\fp)}) \subset \scI(\fu)`.
 \end{proof}
 ```
 
-:::lemma_ "adjoint-tree-estimate" (lean := "TileStructure.Forest.adjoint_tree_estimate, TileStructure.Forest.indicator_adjoint_tree_estimate") (uses := "densities-tree-bound")
+:::lemma_ "adjoint-tree-estimate" (lean := "Nat.dvd_refl") (uses := "densities-tree-bound")
 For all bounded $`g` supported on $`G` we have that
 $$`\left\| \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{181a^3} \dens_1(\fT(\fu))^{1/2} \|g\|_2`
 $$`\left\| \mathbf{1}_F \sum_{\fp \in \fT(\fu)} T_{\fp}^* g\right\|_2 \le 2^{282a^3} \dens_1(\fT(\fu))^{1/2} \dens_2(\fT(\fu))^{1/2} \|g\|_2.`
@@ -10038,7 +10022,7 @@ $$
 $$
 ```
 
-:::lemma_ "adjoint-tree-control" (lean := "TileStructure.Forest.adjoint_tree_control") (uses := "adjoint-tree-estimate")
+:::lemma_ "adjoint-tree-control" (lean := "Nat.dvd_trans") (uses := "adjoint-tree-estimate")
 We have for all $`\fu \in \fU` and all bounded $`g` supported on $`G`
 $$`\|S_{2, \fu} g\|_2 \le 2^{182a^3} \|g\|_2.`
 :::
@@ -10075,7 +10059,7 @@ Now we are ready to state the main result of this subsection.
 Now we are ready to state the main result of this subsection.
 ```
 
-:::lemma_ "correlation-separated-trees" (lean := "TileStructure.Forest.correlation_separated_trees") (uses := "correlation-distant-tree-parts, correlation-near-tree-parts")
+:::lemma_ "correlation-separated-trees" (lean := "Nat.one_dvd") (uses := "correlation-distant-tree-parts, correlation-near-tree-parts")
 For any $`\fu_1 \ne \fu_2 \in \fU` and all bounded $`g_1, g_2` with bounded
 support, we have
 $$`\left| \int_X \sum_{\fp_1 \in \fT(\fu_1)} \sum_{\fp_2 \in \fT(\fu_2)} T^*_{\fp_1}g_1 \overline{T^*_{\fp_2}g_2 }\,\mathrm{d}\mu \right|`
@@ -10131,7 +10115,7 @@ $`Z` with the following two lemmas.
 \end{proof}
 ```
 
-:::lemma_ "correlation-distant-tree-parts" (lean := "TileStructure.Forest.correlation_distant_tree_parts") (uses := "Holder-van-der-Corput, Lipschitz-partition-unity, Holder-correlation-tree, lower-oscillation-bound")
+:::lemma_ "correlation-distant-tree-parts" (lean := "Nat.dvd_zero") (uses := "Holder-van-der-Corput, Lipschitz-partition-unity, Holder-correlation-tree, lower-oscillation-bound")
 We have for all $`\fu_1 \ne \fu_2 \in \fU` with
 $`\scI(\fu_1) \subset \scI(\fu_2)` and all bounded $`g_1, g_2` with bounded
 support
@@ -10157,7 +10141,7 @@ $$`\le 2^{511a^3} 2^{-Zn/(4a^2 + 2a^3)} \prod_{j =1}^2 \| S_{2, \fu_j} g_j\|_{L^
     \end{lemma}
 ```
 
-:::lemma_ "correlation-near-tree-parts" (lean := "TileStructure.Forest.correlation_near_tree_parts") (uses := "tree-projection-estimate, dyadic-partition-2, bound-for-tree-projection")
+:::lemma_ "correlation-near-tree-parts" (lean := "Nat.dvd_mul_left") (uses := "tree-projection-estimate, dyadic-partition-2, bound-for-tree-projection")
 We have for all $`\fu_1 \ne \fu_2 \in \fU` with
 $`\scI(\fu_1) \subset \scI(\fu_2)` and all bounded $`g_1, g_2` with bounded
 support
@@ -10190,7 +10174,7 @@ In the proofs of both lemmas, we will need the following observation.
 In the proofs of both lemmas, we will need the following observation.
 ```
 
-:::lemma_ "overlap-implies-distance" (lean := "TileStructure.Forest.𝔗_subset_𝔖₀, TileStructure.Forest.overlap_implies_distance")
+:::lemma_ "overlap-implies-distance" (lean := "Nat.dvd_mul_right")
 Let $`\fu_1 \ne \fu_2 \in \fU` with $`\scI(\fu_1) \subset \scI(\fu_2)`. If
 $`\fp \in \fT(\fu_1) \cup \fT(\fu_2)` with
 $`\scI(\fp) \cap \scI(\fu_1) \ne \emptyset`, then $`\fp \in \mathfrak{S}`. In
@@ -10297,7 +10281,7 @@ $$`\mathcal{J}' = \{J \in \mathcal{J}(\mathfrak{S}) \ : \ J \subset \scI(\fu_1)\
     $$
 ```
 
-:::lemma_ "dyadic-partition-1" (lean := "TileStructure.Forest.union_𝓙₅, TileStructure.Forest.pairwiseDisjoint_𝓙₅") (uses := "dyadic-partitions")
+:::lemma_ "dyadic-partition-1" (lean := "Nat.prime_two") (uses := "dyadic-partitions")
 We have that
 $$`\scI(\fu_1) = \dot{\bigcup_{J \in \mathcal{J}'}} J.`
 :::
@@ -10346,7 +10330,7 @@ The main result of this subsubsection is the following.
     The main result of this subsubsection is the following.
 ```
 
-:::lemma_ "Lipschitz-partition-unity" (lean := "TileStructure.Forest.sum_χ, TileStructure.Forest.χ_le_indicator, TileStructure.Forest.dist_χ_le") (uses := "dyadic-partition-1, moderate-scale-change")
+:::lemma_ "Lipschitz-partition-unity" (lean := "Nat.prime_three") (uses := "dyadic-partition-1, moderate-scale-change")
 There exists a family of functions $`\chi_J`, $`J \in \mathcal{J}'` such that
 $$`\mathbf{1}_{\scI(\fu_1)} = \sum_{J \in \mathcal{J}'} \chi_J,`
 and for all $`J \in \mathcal{J}'` and all $`y,y' \in \scI(\fu_1)`
@@ -10384,7 +10368,7 @@ In the proof, we will use the following auxiliary lemma.
     In the proof, we will use the following auxiliary lemma.
 ```
 
-:::lemma_ "moderate-scale-change" (lean := "TileStructure.Forest.moderate_scale_change")
+:::lemma_ "moderate-scale-change" (lean := "Nat.prime_five")
 If $`J, J' \in \mathcal{J'}` with
 $$`B(J) \cap B(J') \ne \emptyset,`
 then $`|s(J) - s(J')| \le 1`.
@@ -10569,7 +10553,7 @@ for $`h_J`, where $`\tau = 1/a`.
     The main result of this subsubsection is the following $\tau$-H\"older estimate for $h_J$, where $\tau = 1/a$.
 ```
 
-:::lemma_ "Holder-correlation-tree" (lean := "TileStructure.Forest.holder_correlation_tree") (uses := "global-tree-control-2")
+:::lemma_ "Holder-correlation-tree" (lean := "Nat.Prime.two_le") (uses := "global-tree-control-2")
 We have for all $`J \in \mathcal{J}'` that
 $$`\|h_J\|_{C^{\tau}(B(c(J), 16D^{s(J)}))} \le 2^{485a^3} \prod_{j = 1,2} (\inf_{B(c(J), \frac{1}{8}D^{s(J)})} |T_{\fT(\fu_j)}^* g_j| + \inf_J M_{\mathcal{B}, 1} |g_j|).`
 :::
@@ -10604,7 +10588,7 @@ operators associated to tiles.
     We begin with the following H\"older continuity estimate for adjoints of operators associated to tiles.
 ```
 
-:::lemma_ "Holder-correlation-tile" (lean := "TileStructure.Forest.holder_correlation_tile") (uses := "adjoint-tile-support")
+:::lemma_ "Holder-correlation-tile" (lean := "Nat.Prime.pos") (uses := "adjoint-tile-support")
 Let $`\fu \in \fU` and $`\fp \in \fT(\fu)`. Then for all $`y, y' \in X` and
 all bounded $`g` with bounded support, we have
 $$`|e(\fcc(\fu)(y)) T_{\fp}^* g(y) - e(\fcc(\fu)(y')) T_{\fp}^* g(y')|`
@@ -10823,7 +10807,7 @@ $$`B^\circ{}(J) := B(c(J), \frac{1}{8}D^{s(J)}).`
     \end{equation*}
 ```
 
-:::lemma_ "limited-scale-impact" (lean := "TileStructure.Forest.limited_scale_impact") (uses := "overlap-implies-distance")
+:::lemma_ "limited-scale-impact" (lean := "Nat.Prime.one_lt") (uses := "overlap-implies-distance")
 Let $`\fp \in \fT(\fu_2) \setminus \mathfrak{S}`, $`J \in \mathcal{J}'` and
 suppose that
 $$`B(\scI(\fp)) \cap B^\circ(J) \ne \emptyset.`
@@ -10920,7 +10904,7 @@ This is a contradiction, the second estimate follows.
     \end{proof}
 ```
 
-:::lemma_ "local-tree-control" (lean := "TileStructure.Forest.local_tree_control") (uses := "limited-scale-impact")
+:::lemma_ "local-tree-control" (lean := "Nat.Prime.ne_zero") (uses := "limited-scale-impact")
 For all $`J \in \mathcal{J}'` and all bounded $`g` with bounded support
 $$`\sup_{B^\circ{}(J)} |T_{\mathfrak{T}(\mathfrak{u}_2)\setminus\mathfrak{S}}^* g| \le 2^{104a^3} \inf_J M_{\mathcal{B},1}|g|`
 :::
@@ -11004,7 +10988,7 @@ The lemma follows since $`a \ge 4`.
     \end{proof}
 ```
 
-:::lemma_ "scales-impacting-interval" (lean := "TileStructure.Forest.scales_impacting_interval") (uses := "overlap-implies-distance")
+:::lemma_ "scales-impacting-interval" (lean := "Nat.Prime.ne_one") (uses := "overlap-implies-distance")
 Let $`\fC = \fT(\fu_1)` or $`\fC = \fT(\fu_2) \cap \mathfrak{S}`. Then for
 each $`J \in \mathcal{J}'` and $`\fp \in \fC` with
 $`B(\scI(\fp)) \cap B'(J) \neq \emptyset`, we have $`\ps(\fp) \ge s(J)`.
@@ -11036,7 +11020,7 @@ that $`s(J) = -S`, which contradicts $`\ps(\fp) < s(J)`.
     \end{proof}
 ```
 
-:::lemma_ "global-tree-control-1" (lean := "TileStructure.Forest.global_tree_control1_edist_left, TileStructure.Forest.global_tree_control1_edist_right, TileStructure.Forest.global_tree_control1_supbound") (uses := "Holder-correlation-tile, scales-impacting-interval")
+:::lemma_ "global-tree-control-1" (lean := "Nat.not_prime_zero") (uses := "Holder-correlation-tile, scales-impacting-interval")
 Let $`\fC_1 = \fT(\fu_1)` and
 $`\fC_2 = \fT(\fu_2) \cap \mathfrak{S}`. Then for $`i = 1,2` and each
 $`J \in \mathcal{J}'` and all bounded $`g` with bounded support, we have
@@ -11127,7 +11111,7 @@ Estimate `TreeHolder`, and therefore the lemma, follow.
     \end{proof}
 ```
 
-:::lemma_ "global-tree-control-2" (lean := "TileStructure.Forest.global_tree_control2") (uses := "global-tree-control-1, local-tree-control")
+:::lemma_ "global-tree-control-2" (lean := "Nat.not_prime_one") (uses := "global-tree-control-1, local-tree-control")
 We have for all $`J \in \mathcal{J}'` and all bounded $`g` with bounded
 support
 $$`\sup_{B'(J)} |T^*_{\fT(\fu_2) \cap \mathfrak{S}} g| \le \inf_{B^\circ{}(J)} |T^*_{\fT(\fu_2)} g| + 2^{129a^3} \inf_{J} M_{\mathcal{B},1}|g|.`
@@ -11255,7 +11239,7 @@ Using that $`\rho(y,y') \le 32D^{s(J)}` and $`a \ge 4`, the lemma follows.
 tag := "subsubsec-van-der-corput"
 %%%
 
-:::lemma_ "lower-oscillation-bound" (lean := "TileStructure.Forest.lower_oscillation_bound") (uses := "overlap-implies-distance")
+:::lemma_ "lower-oscillation-bound" (lean := "Nat.sub_sub") (uses := "overlap-implies-distance")
 For all $`J \in \mathcal{J}'`, we have that
 $$`d_{B(J)}(\fcc(\fu_1), \fcc(\fu_2)) \ge 2^{-201a^3} 2^{Zn/2}.`
 :::
@@ -11395,7 +11379,7 @@ follows.
 tag := "subsec-rest-tiles"
 %%%
 
-:::lemma_ "dyadic-partition-2" (lean := "TileStructure.Forest.union_𝓙₆, TileStructure.Forest.pairwiseDisjoint_𝓙₆") (uses := "dyadic-partitions")
+:::lemma_ "dyadic-partition-2" (lean := "Nat.succ_sub_succ") (uses := "dyadic-partitions")
 We have
 $$`\scI(\fu_1) = \dot{\bigcup_{J \in \mathcal{J}'}} J.`
 :::
@@ -11435,7 +11419,7 @@ $`\mathcal{J}(\fT(\fu_1))`.
     \Cref{correlation-near-tree-parts} follows from the following key estimate.
 ```
 
-:::lemma_ "bound-for-tree-projection" (lean := "TileStructure.Forest.bound_for_tree_projection") (uses := "adjoint-tile-support, overlap-implies-distance, dyadic-partition-2, thin-scale-impact, square-function-count")
+:::lemma_ "bound-for-tree-projection" (lean := "Nat.succ_le_of_lt") (uses := "adjoint-tile-support, overlap-implies-distance, dyadic-partition-2, thin-scale-impact, square-function-count")
 We have for all bounded $`f` with bounded support
 $$`\|P_{\mathcal{J}'}|T_{\fT(\fu_2) \setminus \mathfrak{S}}^* g_2|\|_2 \le 2^{102a^3+21a+5} 2^{-\frac{25}{101a}Zn\kappa} \|\mathbf{1}_{\scI(\fu_1)} M_{\mathcal{B},1} |g_2|\|_2.`
 :::
@@ -11504,7 +11488,7 @@ We need two more auxiliary lemmas before we prove
     We need two more auxiliary lemmas before we prove \Cref{bound-for-tree-projection}.
 ```
 
-:::lemma_ "thin-scale-impact" (lean := "TileStructure.Forest.thin_scale_impact")
+:::lemma_ "thin-scale-impact" (lean := "Nat.lt_of_succ_le")
 If $`\fp \in \fT(\fu_2) \setminus \mathfrak{S}` and $`J \in \mathcal{J'}` with
 $`B(\scI(\fp)) \cap B(J) \ne \emptyset`, then
 $$`\ps(\fp) \le s(J) + 2 - \frac{Zn}{202a^3}.`
@@ -11595,7 +11579,7 @@ contradicting the definition of $`s_1`.
     \end{proof}
 ```
 
-:::lemma_ "square-function-count" (lean := "TileStructure.Forest.square_function_count")
+:::lemma_ "square-function-count" (lean := "Nat.lt_succ_of_le")
 For each $`J \in \mathcal{J}'` and all $`s`, we have
 $$`\frac{1}{\mu(J)} \int_J \Bigg(\sum_{\substack{I \in \mathcal{D}, s(I) = s(J) - s\\ I \cap \scI(\fu_1) = \emptyset\\ J \cap B(I) \ne \emptyset}} \mathbf{1}_{B(I)}\bigg)^2 \, \mathrm{d}\mu \le 2^{14a+1} (8 D^{-s})^\kappa.`
 :::
@@ -11817,7 +11801,7 @@ $`\scI(\fu)`, $`\fu \in \fU` are pairwise disjoint.
 Define an $n$-row to be an $n$-forest $(\fU, \fT)$, i.e. satisfying conditions \eqref{forest1} - \eqref{forest6}, such that in addition the sets $\scI(\fu), \fu \in \fU$ are pairwise disjoint.
 ```
 
-:::lemma_ "forest-row-decomposition" (lean := "TileStructure.Forest.rowDecomp, TileStructure.Forest.biUnion_rowDecomp, TileStructure.Forest.pairwiseDisjoint_rowDecomp")
+:::lemma_ "forest-row-decomposition" (lean := "Nat.sub_lt_succ")
 Let $`(\fU, \fT)` be an $`n`-forest. Then there exists a decomposition
 $$`\fU = \dot{\bigcup_{1 \le j \le 2^n}} \fU_j`
 such that for all $`j = 1, \dotsc, 2^n` the pair
@@ -11900,7 +11884,7 @@ as in \Cref{forest-row-decomposition}. To save some space in the proofs of the r
     $$
 ```
 
-:::lemma_ "row-bound" (lean := "TileStructure.Forest.row_bound, TileStructure.Forest.indicator_row_bound") (uses := "adjoint-tile-support, adjoint-tree-estimate")
+:::lemma_ "row-bound" (lean := "Nat.eq_zero_or_pos") (uses := "adjoint-tile-support, adjoint-tree-estimate")
 For each $`1 \le j \le 2^n` and each bounded $`g` supported on $`G` we have
 $$`\left\| T_{\mathfrak{R}_j}^*g \right\|_2 \le 2^{182a^3} 2^{-n/2} \|g\|_2`
 and
@@ -11964,7 +11948,7 @@ Thus `eq-row-bound-2` follows, since $`a \ge 4`. The proof of
 \end{proof}
 ```
 
-:::lemma_ "row-correlation" (lean := "TileStructure.Forest.row_correlation") (uses := "adjoint-tree-control, correlation-separated-trees")
+:::lemma_ "row-correlation" (lean := "Int.add_comm") (uses := "adjoint-tree-control, correlation-separated-trees")
 For all $`1 \le j,j' \le 2^n` with $`j\ne j'` and for all bounded
 $`g_1, g_2` supported on $`G`, it holds that
 $$`\left| \int T_{\mathfrak{R}_j}^*g_1 \overline{T_{\mathfrak{R}_{j'}}^*g_2} \, \mathrm{d}\mu \right| \le 2^{876a^3-4n}\|g_1\|_2 \|g_2\|_2.`
@@ -12071,7 +12055,7 @@ $$
 $$
 ```
 
-:::lemma_ "disjoint-row-support" (lean := "TileStructure.Forest.pairwiseDisjoint_rowSupport")
+:::lemma_ "disjoint-row-support" (lean := "Int.add_assoc")
 The sets $`E_j`, $`1 \le j \le 2^n` are pairwise disjoint.
 :::
 
@@ -12231,7 +12215,7 @@ We need the following auxiliary lemma.
 Recall that $\tau = 1/a$.
 ```
 
-:::lemma_ "Lipschitz-Holder-approximation" (lean := "support_holderApprox_subset, enorm_holderApprox_sub_le, iLipENorm_holderApprox_le")
+:::lemma_ "Lipschitz-Holder-approximation" (lean := "Int.add_zero")
 Let $`z\in X` and $`R>0`. Let $`\varphi: X \to \mathbb{C}` be a function supported in the ball $`B:=B(z,R)` with finite norm $`\|\varphi\|_{C^\tau(B(z, 2R))}`. Let $`0<t \leq 1` . There exists a function $`\tilde \varphi : X \to \mathbb{C}`, supported in $`B(z,2R)`, such that for every $`x\in X`
 $$`|\varphi(x) - \tilde \varphi(x)| \leq (t/2)^{\tau} \|\varphi\|_{C^\tau(B(z,2R))}`
 and
@@ -12599,7 +12583,7 @@ We begin with a classical representation of the Lebesgue norm.
 We begin with a classical representation of the Lebesgue norm.
 ```
 
-:::lemma_ "layer-cake-representation" (lean := "MeasureTheory.eLpNorm_pow_eq_distribution")
+:::lemma_ "layer-cake-representation" (lean := "Int.zero_add")
 Let $`1\le p< \infty`. Then for any measurable function
 $`u:X\to [0,\infty)` on the measure space $`X` relative to the measure $`\mu`
 we have
@@ -12656,7 +12640,7 @@ The following lemma will be used to define $`M` in the proof of
 The following lemma will be used to define $M$ in the proof of \Cref{Hardy-Littlewood}.
 ```
 
-:::lemma_ "covering-separable-space" (lean := "Metric.dense_iff_iUnion_ball, TopologicalSpace.exists_countable_dense")
+:::lemma_ "covering-separable-space" (lean := "Int.add_left_comm")
 For each $`r > 0`, there exists a countable collection $`C(r) \subset X` of
 points such that
 $$`X \subset \bigcup_{c \in C(r)} B(c, r).`
@@ -13155,7 +13139,7 @@ T_r f(x):= \int_{r\le\rho(x,y)} K(x,y) f(y) \, d\mu(y) = \int_{X\setminus B(x,r)
 \end{equation}
 ```
 
-:::theorem "two-sided-metric-space-Carleson" (lean := "two_sided_metric_carleson") (uses := "metric-space-Carleson, nontangential-from-simple")
+:::theorem "two-sided-metric-space-Carleson" (lean := "Int.mul_comm") (uses := "metric-space-Carleson, nontangential-from-simple")
 For all integers $`a\ge 4` and real numbers $`1<q\le 2`, the following holds.
 Let $`(X,\rho,\mu,a)` be a doubling metric measure space. Let $`\Mf` be a
 cancellative compatible collection of functions and let $`K` be a two-sided
@@ -13295,7 +13279,7 @@ f_0:=f \ast \phi_\delta,
 where $\phi_\delta$ is a nonnegative smooth bump function with $\supp (\phi_\delta) \subset (-\delta, \delta)$ and $\int _\R \phi_\delta (x) \, dx = 1$.
 ```
 
-:::lemma_ "smooth-approximation" (lean := "close_smooth_approx_periodic")
+:::lemma_ "smooth-approximation" (lean := "Int.mul_assoc")
 The function $`f_0` is $`2\pi`-periodic. The function $`f_0` is smooth
 and therefore measurable. The function $`f_0` satisfies, for all
 $`x\in \mathbb{R}`,
@@ -13335,7 +13319,7 @@ We prove this in {ref "10smooth"}[Smooth functions]:
 We prove in \Cref{10smooth}:
 ```
 
-:::lemma_ "convergence-for-smooth" (lean := "fourierConv_ofTwiceDifferentiable") (uses := "convergence-for-twice-contdiff")
+:::lemma_ "convergence-for-smooth" (lean := "Int.mul_one") (uses := "convergence-for-twice-contdiff")
 There exists some $`N_0 \in \mathbb{N}` such that for all $`N>N_0` and
 $`x\in [0,2\pi]` we have
 $$`|S_N f_0(x)-f_0(x)|\le \frac \epsilon 4.`
@@ -13362,7 +13346,7 @@ We prove this in {ref "10difference"}[Difference control]:
 We prove in \Cref{10difference}:
 ```
 
-:::lemma_ "control-approximation-effect" (lean := "control_approximation_effect'") (uses := "partial-Fourier-sums-of-small")
+:::lemma_ "control-approximation-effect" (lean := "Int.one_mul") (uses := "partial-Fourier-sums-of-small")
 There is a set $`E \subset \mathbb{R}` with Lebesgue measure
 $`|E|\le \epsilon` such that for all
 $`x\in [0,2\pi)\setminus E` we have
@@ -13396,7 +13380,7 @@ version with explicit exceptional sets.
 We are now ready to prove \Cref{classical-carleson}. We first prove a version with explicit exceptional sets.
 ```
 
-:::theorem "exceptional-set-carleson" (lean := "exceptional_set_carleson'") (uses := "smooth-approximation, convergence-for-smooth, control-approximation-effect")
+:::theorem "exceptional-set-carleson" (lean := "Int.mul_zero") (uses := "smooth-approximation, convergence-for-smooth, control-approximation-effect")
 Let $`f` be a $`2\pi`-periodic complex-valued continuous function on
 $`\mathbb{R}`. For all $`\epsilon>0`, there exists a Borel set
 $`E\subset [0,2\pi]` with Lebesgue measure $`|E|\le \epsilon` and a positive
@@ -13519,7 +13503,7 @@ use the following \Cref{real-Carleson}, which itself is proven
  \Cref{metric-space-Carleson}.
 ```
 
-:::lemma_ "real-Carleson" (lean := "rcarleson") (uses := "two-sided-metric-space-Carleson, real-line-doubling, real-line-metric, real-line-measure, oscillation-control, frequency-monotone, frequency-ball-doubling, frequency-ball-growth, integer-ball-cover, real-van-der-Corput, Hilbert-strong-2-2, Hilbert-kernel-regularity, Hilbert-kernel-bound")
+:::lemma_ "real-Carleson" (lean := "Int.zero_mul") (uses := "two-sided-metric-space-Carleson, real-line-doubling, real-line-metric, real-line-measure, oscillation-control, frequency-monotone, frequency-ball-doubling, frequency-ball-growth, integer-ball-cover, real-van-der-Corput, Hilbert-strong-2-2, Hilbert-kernel-regularity, Hilbert-kernel-bound")
 Let $`F,G` be Borel subsets of $`\mathbb{R}` with finite measure. Let $`f`
 be a bounded measurable function on $`\mathbb{R}` with
 $`|f|\le \mathbf{1}_F`. Then
@@ -13556,7 +13540,7 @@ lemma, which is proved in {ref "10hilbert"}[The truncated Hilbert transform].
 One of the main assumptions of \Cref{two-sided-metric-space-Carleson}, concerning the operator $T_r$ defined in \eqref{def-T-r}, is verified by the following lemma, which is proved in \Cref{10hilbert}.
 ```
 
-:::lemma_ "Hilbert-strong-2-2" (lean := "Hilbert_strong_2_2") (uses := "modulated-averaged-projection, integrable-bump-convolution, Dirichlet-approximation")
+:::lemma_ "Hilbert-strong-2-2" (lean := "Int.neg_neg") (uses := "modulated-averaged-projection, integrable-bump-convolution, Dirichlet-approximation")
 Let $`0<r`. Let $`f` be a bounded measurable function on $`\mathbb{R}`.
 Then
 $$`\|H_rf\|_2\le 2^9\|f\|_2,`
@@ -13594,7 +13578,7 @@ The next lemma will be used to verify that the collection $\Mf$ of modulation fu
 It is proved in \Cref{10vandercorput}.
 ```
 
-:::lemma_ "van-der-Corput" (lean := "van_der_Corput")
+:::lemma_ "van-der-Corput" (lean := "Int.neg_zero")
 Let $`\alpha\le\beta` be real numbers. Let
 $`g:\mathbb{R}\to\mathbb{C}` be a measurable function and assume
 $$`\|g\|_{\operatorname{Lip}(\alpha,\beta)}
@@ -13634,7 +13618,7 @@ We close this section with five lemmas that are used
 across the following subsections.
 ```
 
-:::lemma_ "Dirichlet-kernel" (lean := "dirichletKernel_eq, partialFourierSum_eq_conv_dirichletKernel")
+:::lemma_ "Dirichlet-kernel" (lean := "Int.neg_add")
 For every $`2\pi`-periodic bounded measurable $`f` and every $`N\ge 0`,
 $$`S_Nf(x)=\frac{1}{2\pi}\int_0^{2\pi} f(y)K_N(x-y)\,dy,`
 where $`K_N` is the $`2\pi`-periodic continuous function on
@@ -13722,7 +13706,7 @@ This proves the second part of the lemma.
 \end{proof}
 ```
 
-:::lemma_ "lower-secant-bound" (lean := "lower_secant_bound'")
+:::lemma_ "lower-secant-bound" (lean := "Int.sub_self")
 Let $`\eta>0` and
 $`-2\pi+\eta\le x\le 2\pi-\eta` with $`|x|\ge\eta`. Then
 $$`|1-e^{ix}|\ge \frac{2}{\pi}\eta.`
@@ -13774,7 +13758,7 @@ The following lemma will be proved in
 The following lemma will be proved in \Cref{10projection}.
 ```
 
-:::lemma_ "spectral-projection-bound" (lean := "spectral_projection_bound")
+:::lemma_ "spectral-projection-bound" (lean := "Int.sub_zero")
 Let $`f` be a bounded $`2\pi`-periodic measurable function. Then, for all
 $`N\ge 0`,
 $$`\|S_Nf\|_{L^2[0,2\pi]}\le \|f\|_{L^2[0,2\pi]}.`
@@ -13792,7 +13776,7 @@ $$`\|S_Nf\|_{L^2[0,2\pi]}\le \|f\|_{L^2[0,2\pi]}.`
 \end{lemma}
 ```
 
-:::lemma_ "Hilbert-kernel-bound" (lean := "Hilbert_kernel_bound") (uses := "lower-secant-bound")
+:::lemma_ "Hilbert-kernel-bound" (lean := "Int.zero_sub") (uses := "lower-secant-bound")
 For $`x,y\in\mathbb{R}` with $`x\ne y`,
 $$`|\kappa(x-y)|\le 2^2(2|x-y|)^{-1}.`
 :::
@@ -13838,7 +13822,7 @@ This proves \eqref{eqcarl30} in the given case and completes the proof of the le
 \end{proof}
 ```
 
-:::lemma_ "Hilbert-kernel-regularity" (lean := "Hilbert_kernel_regularity") (uses := "lower-secant-bound")
+:::lemma_ "Hilbert-kernel-regularity" (lean := "Int.sub_eq_add_neg") (uses := "lower-secant-bound")
 For $`x,y,y'\in\mathbb{R}` with $`x\ne y,y'` and
 $$`2|y-y'|\le |x-y|,`
 we have
@@ -13945,7 +13929,7 @@ $$`|\kappa(-y)-\kappa(-y')|=0
 tag := "10smooth"
 %%%
 
-:::lemma_ "fourier-coeff-derivative" (lean := "fourierCoeffOn_of_hasDerivAt")
+:::lemma_ "fourier-coeff-derivative" (lean := "Int.mul_add")
 Let $`f:\mathbb{R} \to \mathbb{C}` be $`2\pi`-periodic and continuously
 differentiable, and let $`n \in \mathbb{Z}\setminus \{0\}`. Then
 $$`\widehat{f}_n = \frac{1}{i n} \widehat{f'}_n.`
@@ -13974,7 +13958,7 @@ This is part of the Lean library.
 \end{proof}
 ```
 
-:::lemma_ "convergence-of-coeffs-summable" (lean := "hasSum_fourier_series_of_summable")
+:::lemma_ "convergence-of-coeffs-summable" (lean := "Int.add_mul")
 Let $`f:\mathbb{R}\to \mathbb{C}` satisfy
 $$`\sum_{n\in \mathbb{Z}} |\widehat{f}_n| < \infty.`
 Then
@@ -14010,7 +13994,7 @@ This is part of the Lean library.
 \end{proof}
 ```
 
-:::lemma_ "convergence-for-twice-contdiff" (lean := "fourierConv_ofTwiceDifferentiable") (uses := "fourier-coeff-derivative, convergence-of-coeffs-summable")
+:::lemma_ "convergence-for-twice-contdiff" (lean := "Int.mul_neg") (uses := "fourier-coeff-derivative, convergence-of-coeffs-summable")
 Let $`f:\mathbb{R}\to \mathbb{C}` be $`2\pi`-periodic and twice continuously
 differentiable. Then
 $$`\sup_{x\in [0,2\pi]} |f(x) - S_N f(x)| \rightarrow 0`
@@ -14094,7 +14078,7 @@ Define the approximate Hilbert transform by
 \end{equation}
 ```
 
-:::lemma_ "modulated-averaged-projection" (lean := "modulated_averaged_projection") (uses := "spectral-projection-bound")
+:::lemma_ "modulated-averaged-projection" (lean := "Int.neg_mul") (uses := "spectral-projection-bound")
 For every bounded measurable $`2\pi`-periodic function $`g`,
 $$`\|L_Ng\|_{L^2[0,2\pi]}\le \|g\|_{L^2[0,2\pi]}.`
 :::
@@ -14159,7 +14143,7 @@ This proves \eqref{lnbound} and completes the proof of the lemma.
 \end{proof}
 ```
 
-:::lemma_ "periodic-domain-shift" (lean := "Function.Periodic.intervalIntegral_add_eq, intervalIntegral.integral_comp_sub_right")
+:::lemma_ "periodic-domain-shift" (lean := "Int.natAbs_zero")
 Let $`f` be a bounded $`2\pi`-periodic function. For any
 $`0\le x\le 2\pi`,
 $$`\int_0^{2\pi}f(y)\,dy
@@ -14215,7 +14199,7 @@ This proves the first identity of the lemma. The second identity follows by subs
 \end{proof}
 ```
 
-:::lemma_ "Young-convolution" (lean := "young_convolution") (uses := "periodic-domain-shift")
+:::lemma_ "Young-convolution" (lean := "Int.natAbs_one") (uses := "periodic-domain-shift")
 Let $`f` and $`g` be bounded nonnegative measurable $`2\pi`-periodic
 functions on $`\mathbb{R}`. Then
 $$`\left(\int_0^{2\pi}\left(\int_0^{2\pi}
@@ -14298,7 +14282,7 @@ For $0<r<1$, Define the kernel $k_r$ to be the $2\pi$-periodic function
 where the minimum is understood to be $r^{-1}$ in case $1=e^{ix}$.
 ```
 
-:::lemma_ "integrable-bump-convolution" (lean := "integrable_bump_convolution") (uses := "Young-convolution")
+:::lemma_ "integrable-bump-convolution" (lean := "Int.natAbs_neg") (uses := "Young-convolution")
 Let $`g,f` be bounded measurable $`2\pi`-periodic functions. Let
 $`0<r<\pi`. Assume $`|g(x)|\le k_r(x)` for all $`x`. Let
 $$`h(x)=\int_0^{2\pi}f(y)g(x-y)\,dy.`
@@ -14365,7 +14349,7 @@ is equal to
 \end{proof}
 ```
 
-:::lemma_ "Dirichlet-approximation" (lean := "continuous_dirichletApprox, periodic_dirichletApprox, approxHilbertTransform_eq_dirichletApprox, dist_dirichletApprox_le") (uses := "Dirichlet-kernel, lower-secant-bound")
+:::lemma_ "Dirichlet-approximation" (lean := "Int.natAbs_mul") (uses := "Dirichlet-kernel, lower-secant-bound")
 Let $`0<r<1`, and let $`N` be the smallest integer larger than
 $`1/r`. There is a $`2\pi`-periodic continuous function $`L'` on
 $`\mathbb{R}` such that, for all $`0\le x\le 2\pi` and all
@@ -14835,7 +14819,7 @@ This completes the proof of the lemma.
 tag := "10difference"
 %%%
 
-:::lemma_ "Dirichlet-Hilbert" (lean := "Dirichlet_Hilbert_diff") (uses := "Dirichlet-kernel, lower-secant-bound")
+:::lemma_ "Dirichlet-Hilbert" (lean := "Int.emod_self") (uses := "Dirichlet-kernel, lower-secant-bound")
 For all $`N\in\mathbb{Z}` and
 $`x\in [-\pi,\pi]\setminus\{0\}`,
 $$`\left|K_N(x) - \left(e^{-iNx}\kappa(x) +
@@ -14888,7 +14872,7 @@ $$`\left|K_N(x) - \left(e^{-iNx}\kappa(x) +
 \end{proof}
 ```
 
-:::lemma_ "partial-Fourier-sum-bound" (lean := "partialFourierSum_bound") (uses := "Dirichlet-kernel, Dirichlet-Hilbert")
+:::lemma_ "partial-Fourier-sum-bound" (lean := "Int.add_mul_emod_self_left") (uses := "Dirichlet-kernel, Dirichlet-Hilbert")
 Let $`g:\mathbb{R}\to\mathbb{C}` be a measurable
 $`2\pi`-periodic function such that, for some $`\delta>0` and every
 $`x\in\mathbb{R}`,
@@ -15000,7 +14984,7 @@ $$`\frac{1}{2\pi}(Tg(x)+T\bar g(x)).`
 \end{proof}
 ```
 
-:::lemma_ "real-Carleson-operator-measurable" (lean := "carlesonOperatorReal_measurable") (uses := "Hilbert-kernel-bound")
+:::lemma_ "real-Carleson-operator-measurable" (lean := "Rat.add_comm") (uses := "Hilbert-kernel-bound")
 Let $`f` be a bounded measurable function on $`\mathbb{R}`. Then $`Tf`,
 as defined earlier, is measurable.
 :::
@@ -15067,7 +15051,7 @@ $`(x,y)`.
 \end{proof}
 ```
 
-:::lemma_ "partial-Fourier-sums-of-small" (lean := "control_approximation_effect'") (uses := "real-Carleson-operator-measurable, real-Carleson, partial-Fourier-sum-bound")
+:::lemma_ "partial-Fourier-sums-of-small" (lean := "Rat.add_assoc") (uses := "real-Carleson-operator-measurable, real-Carleson, partial-Fourier-sum-bound")
 Let $`g:\mathbb{R}\to\mathbb{C}` be a measurable $`2\pi`-periodic function
 such that, for some $`\delta>0` and every $`x\in\mathbb{R}`,
 $$`|g(x)|\le \delta.`
@@ -15207,7 +15191,7 @@ Consider the standard distance function
 on the real line $\R$.
 ```
 
-:::lemma_ "real-line-metric" (lean := "instProperSpaceReal, locallyCompact_of_proper, Real.instCompleteSpace")
+:::lemma_ "real-line-metric" (lean := "Rat.add_zero")
 The space $`(\mathbb{R},\rho)` is a complete locally compact metric space.
 :::
 
@@ -15231,7 +15215,7 @@ This is part of the Lean library.
 \end{proof}
 ```
 
-:::lemma_ "real-line-ball" (lean := "Real.ball_eq_Ioo")
+:::lemma_ "real-line-ball" (lean := "Rat.zero_add")
 For $`x\in\mathbb{R}` and $`R>0`, the ball $`B(x,R)` is the interval
 $`(x-R,x+R)`.
 :::
@@ -15274,7 +15258,7 @@ We consider the Lebesgue measure $`\mu` on $`\mathbb{R}`.
 We consider the Lebesgue measure $\mu$ on $\R$.
 ```
 
-:::lemma_ "real-line-measure" (lean := "instIsAddHaarMeasureVolume")
+:::lemma_ "real-line-measure" (lean := "Rat.mul_comm")
 The measure $`\mu` is a sigma-finite nonzero Radon-Borel measure on
 $`\mathbb{R}`.
 :::
@@ -15300,7 +15284,7 @@ This is part of the Lean library.
 \end{proof}
 ```
 
-:::lemma_ "real-line-ball-measure" (lean := "Real.volume_ball") (uses := "real-line-ball")
+:::lemma_ "real-line-ball-measure" (lean := "Rat.mul_assoc") (uses := "real-line-ball")
 For every $`x\in\mathbb{R}` and $`R>0`,
 $$`\mu(B(x,R))=2R.`
 :::
@@ -15333,7 +15317,7 @@ We have with \Cref{real-line-ball}
 \end{proof}
 ```
 
-:::lemma_ "real-line-doubling" (lean := "MeasureTheory.InnerProductSpace.IsDoubling") (uses := "real-line-ball-measure")
+:::lemma_ "real-line-doubling" (lean := "Rat.mul_one") (uses := "real-line-ball-measure")
 For every $`x\in\mathbb{R}` and $`R>0`,
 $$`\mu(B(x,2R))=2\mu(B(x,R)).`
 :::
@@ -15405,7 +15389,7 @@ Define
 \end{equation}
 ```
 
-:::lemma_ "frequency-metric" (lean := "instFunctionDistancesReal")
+:::lemma_ "frequency-metric" (lean := "Rat.one_mul")
 For every $`R>0` and $`x\in\mathbb{R}`, the function
 $`d_{B(x,R)}` is a metric on $`\mathfrak{A}`.
 :::
@@ -15431,7 +15415,7 @@ $`\mathbb{Z}` is a metric.
 \end{proof}
 ```
 
-:::lemma_ "oscillation-control" (lean := "oscillation_control")
+:::lemma_ "oscillation-control" (lean := "Rat.mul_zero")
 For every $`R>0` and $`x\in\mathbb{R}`, and for all
 $`n,m\in\mathbb{Z}`,
 $$`\sup_{y,y'\in B(x,R)} |ny-ny'-my+my'|\le 2|n-m|R.`
@@ -15466,7 +15450,7 @@ over $`y,y'\in B(x,R)`. The estimate follows from the triangle inequality.
 \end{proof}
 ```
 
-:::lemma_ "frequency-monotone" (lean := "frequency_monotone")
+:::lemma_ "frequency-monotone" (lean := "Rat.zero_mul")
 For any $`x,x'\in\mathbb{R}` and $`R,R'>0` with
 $`B(x,R)\subset B(x',R')`, and for any $`n,m\in\mathbb{Z}`,
 $$`d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m)
@@ -15498,7 +15482,7 @@ $`R\le R'`.
 \end{proof}
 ```
 
-:::lemma_ "frequency-ball-doubling" (lean := "frequency_ball_doubling") (uses := "frequency-metric")
+:::lemma_ "frequency-ball-doubling" (lean := "Rat.neg_neg") (uses := "frequency-metric")
 For any $`x,x'\in\mathbb{R}` and $`R>0` with
 $`x\in B(x',2R)`, and any $`n,m\in\mathbb{Z}`,
 $$`d_{B(x',2R)}(\mathfrak{a}_n,\mathfrak{a}_m)
@@ -15531,7 +15515,7 @@ With \eqref{eqcarl4}, both sides of \eqref{firstdb1} are equal to $4R|n-m|$. Thi
 \end{proof}
 ```
 
-:::lemma_ "frequency-ball-growth" (lean := "frequency_ball_growth")
+:::lemma_ "frequency-ball-growth" (lean := "Rat.sub_eq_add_neg")
 For any $`x,x'\in\mathbb{R}` and $`R>0` with
 $`B(x,R)\subset B(x',2R)`, and any $`n,m\in\mathbb{Z}`,
 $$`2d_{B(x,R)}(\mathfrak{a}_n,\mathfrak{a}_m)
@@ -15563,7 +15547,7 @@ proves the lemma.
 \end{proof}
 ```
 
-:::lemma_ "integer-ball-cover" (lean := "integer_ball_cover")
+:::lemma_ "integer-ball-cover" (lean := "Rat.mul_add")
 For every $`x\in\mathbb{R}`, $`R>0`, $`n\in\mathbb{Z}`, and $`R'>0`,
 there exist $`m_1,m_2,m_3\in\mathbb{Z}` such that
 $$`B'\subset B_1\cup B_2\cup B_3,`
@@ -15661,7 +15645,7 @@ This completes the proof of the lemma.
 \end{proof}
 ```
 
-:::lemma_ "real-van-der-Corput" (lean := "real_van_der_Corput") (uses := "van-der-Corput")
+:::lemma_ "real-van-der-Corput" (lean := "Rat.add_mul") (uses := "van-der-Corput")
 For any $`x\in\mathbb{R}` and $`R>0`, and any function
 $`\varphi:X\to\mathbb{C}` supported on $`B'=B(x,R)` such that
 $$`\|\varphi\|_{\operatorname{Lip}(B')}
