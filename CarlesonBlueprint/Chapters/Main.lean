@@ -1,11 +1,6 @@
 import Verso
 import VersoManual
 import VersoBlueprint
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.GCD.Basic
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.Int.Basic
-import Mathlib.Data.Rat.Defs
 import CarlesonBlueprint.TeXPrelude
 
 open Verso.Genre
