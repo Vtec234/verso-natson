@@ -9,8 +9,8 @@ for which such a file exists.
 Usage (from the repository root): `lean --run scripts/InsertConstants.lean`
 -/
 
-def constantListsDir : System.FilePath := "constant-lists"
-def mainLean : System.FilePath := "CarlesonBlueprint/Chapters/Main.lean"
+def constantListsDir : System.FilePath := "constant-lists" / "leanprover"
+def mainLean : System.FilePath := "CarlesonBlueprint" / "Chapters" / "Main.lean"
 def placeholder : String := "$MATHLIB_CONSTANT"
 
 open Lake
@@ -19,7 +19,8 @@ def findConstantList (version : ToolchainVer) : IO System.FilePath := do
   let mut best : Option (ToolchainVer × System.FilePath) := none
   for entry in ← constantListsDir.readDir do
     unless entry.fileName.endsWith ".txt" do continue
-    let ver := ToolchainVer.ofString (entry.fileName.dropSuffix ".txt").toString
+    let ver := ToolchainVer.ofString <|
+      "leanprover/" ++ (entry.fileName.dropSuffix ".txt").toString
     if (best.map (·.1)).all (· < ver) && ver ≤ version then
       best := some (ver, entry.path)
   match best with
@@ -28,7 +29,7 @@ def findConstantList (version : ToolchainVer) : IO System.FilePath := do
       IO.eprintln s!"note: constant list for toolchain '{version}' not found, falling back to latest constant list '{path}'"
     return path
   | none =>
-    throw <| IO.userError s!"no constant list for toolchain '{version}' and no fallback found"
+    throw <| IO.userError s!"no constant list for toolchain '{version}' found"
 
 /-- Parses a constant-list line `$MOD | $NAME` into `(mod, name)`. -/
 def parseListLine (line : String) : IO (String × String) :=
