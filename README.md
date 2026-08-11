@@ -1,11 +1,11 @@
 This is a fork of [ejgallego/verso-carleson](https://github.com/ejgallego/verso-carleson)
-which drops the dependendency on the Carleson formalization [fpvandoorn/carleson](https://github.com/fpvandoorn/carleson),
+which drops the dependency on the Carleson formalization [fpvandoorn/carleson](https://github.com/fpvandoorn/carleson),
 instead placing pseudorandomly selected theorems from mathlib in the same blueprint graph.
 Used as a real-world example for benchmarking Verso and Verso Blueprint builds.
 
 ## Adapting to new toolchains
 
-`scripts/ci-pre-build.sh` selects a pre-committed list of theorems
+`scripts/pre-build.sh` selects a pre-committed list of theorems
 from the latest mathlib tag equal to or below the current lean-toolchain.
 This list is fairly stable across mathlib releases
 (we select theorems with minimal hash),
