@@ -7,10 +7,10 @@ Used as a real-world example for benchmarking Verso and Verso Blueprint builds.
 
 `scripts/pre-build.sh` selects a pre-committed list of theorems
 from the latest mathlib tag equal to or below the current lean-toolchain.
-This list is fairly stable across mathlib releases
-(we select theorems with minimal hash),
-but when the list stops working (e.g. because a constant has been removed),
-a new list should be added by running
+This list is somewhat stable across mathlib releases
+(we select N theorems with minimal hash),
+but it stops working when a listed theorem is removed from mathlib.
+A new list should be added in this case by running
 
 ```shell
 TOOLCHAIN=$(cat lean-toolchain)
