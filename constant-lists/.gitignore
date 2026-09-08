@@ -1,0 +1,4 @@
+# The manifest depends on which toolchain the list is being computed for.
+# Re-generating on every CI run is the intended behavior.
+/lake-manifest.json
+/.lake/
