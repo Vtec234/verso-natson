@@ -42,6 +42,15 @@ jobs:
             exit 1
           fi
 
+      - name: Install elan
+        run: |
+          curl -sSfL https://elan.lean-lang.org/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Generate lake-manifest.json
+        working-directory: constant-lists
+        run: lake update
+
       - name: Install Lean
         uses: leanprover/lean-action@v1
         with:
