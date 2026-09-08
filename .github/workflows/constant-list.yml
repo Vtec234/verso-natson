@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Configure toolchain
         env:
@@ -51,13 +51,9 @@ jobs:
         working-directory: constant-lists
         run: lake update
 
-      - name: Install Lean
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          use-mathlib-cache: true
-          use-github-cache: false
-          lake-package-directory: constant-lists
+      - name: Fetch mathlib cache
+        working-directory: constant-lists
+        run: lake exe cache get
 
       - name: Compute constant list
         working-directory: constant-lists
