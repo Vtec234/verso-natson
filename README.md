@@ -11,8 +11,6 @@ This list is somewhat stable across mathlib releases
 (we select N theorems with minimal hash),
 but it stops working when a listed theorem is removed from mathlib.
 A new list should be added in this case by running
-
-```shell
-TOOLCHAIN=$(cat lean-toolchain)
-lake lean scripts/PrintConstants.lean > constant-lists/$TOOLCHAIN.txt
-```
+[the constant list workflow](../../actions/workflows/constant-list.yml)
+with the desired toolchain version (e.g. `v4.33.0`).
+The workflow commits the new list to `constant-lists/`.

@@ -1,0 +1,15 @@
+# Standalone package for computing lists of mathlib constants.
+# It requires only mathlib, not VersoBlueprint,
+# so that lists can be computed for toolchains
+# that VersoBlueprint does not (yet) support.
+
+# The mathlib revision below and `./lean-toolchain` are placeholders:
+# the CI workflow (`.github/workflows/constant-list.yml`)
+# overwrites both with the requested toolchain before building.
+
+name = "constant-lists"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.33.0"

@@ -1,0 +1,70 @@
+name: Constant list
+
+on:
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        description: "Toolchain version to compute the constant list for (e.g. v4.33.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+# Serialize runs on the same branch into a queue, so that two dispatches do not race on the push.
+concurrency:
+  group: constant-list-${{ github.ref }}
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure toolchain
+        env:
+          TOOLCHAIN_INPUT: ${{ inputs.toolchain }}
+        run: |
+          # Optionally strip "leanprover/lean4:" from the input
+          VERSION="${TOOLCHAIN_INPUT#leanprover/lean4:}"
+          # Validate toolchain version
+          if ! [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?$ ]]; then
+            echo "::error::Invalid toolchain '$TOOLCHAIN_INPUT'; expected e.g. v4.33.0 or v4.34.0-rc2"
+            exit 1
+          fi
+          echo "TOOLCHAIN=leanprover/lean4:$VERSION" >> "$GITHUB_ENV"
+          echo "leanprover/lean4:$VERSION" > constant-lists/lean-toolchain
+          sed -i "s|^rev = \"[^\"]*\"|rev = \"$VERSION\"|" constant-lists/lakefile.toml
+          if ! grep -Fq "rev = \"$VERSION\"" constant-lists/lakefile.toml; then
+            echo "Failed to write toolchain version."
+            exit 1
+          fi
+
+      - name: Install Lean
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          use-mathlib-cache: true
+          use-github-cache: false
+          lake-package-directory: constant-lists
+
+      - name: Compute constant list
+        working-directory: constant-lists
+        run: |
+          mkdir -p "$(dirname "$TOOLCHAIN")"
+          lake lean PrintConstants.lean > "$TOOLCHAIN.txt"
+
+      - name: Commit constant list
+        run: |
+          git config --global user.name "Wojciech Nawrocki"
+          git config --global user.email "Vtec234@users.noreply.github.com"
+          git add "constant-lists/$TOOLCHAIN.txt"
+          if git diff --cached --quiet; then
+            echo "Constant list for $TOOLCHAIN is unchanged; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: add constant list for $TOOLCHAIN"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
