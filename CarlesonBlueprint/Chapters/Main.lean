@@ -6502,7 +6502,7 @@ tag := "antichainboundary"
 
 Let an antichain $`\mathfrak{A}` and functions $`f`, $`g` as in
 {bpref "antichain-operator"}[] be given. We prove `eq-antiprop` in
-{bpref "sec-TTstar-TstarT"}[The density arguments] as the
+{ref "sec-TTstar-TstarT"}[The density arguments] as the
 geometric mean of two inequalities, each involving one of the two densities.
 One of these two inequalities will need a careful estimate formulated in
 {bpref "tile-correlation"}[] of the $`TT^*` correlation between two tile operators.
@@ -6599,7 +6599,7 @@ This proves the lemma.
 Let $`\mathcal{B}` be the collection of balls
 $$`B(\pc(\fp), 8D^{\ps(\fp)})`
 with $`\fp\in \mathfrak{A}` and recall the definition of $`M_{\mathcal{B}}`
-from {bpref "def-hlm"}[Definition `def-hlm`].
+from `def-hlm`.
 
 ```tex
 % witness-label: main.antichain.4
@@ -14561,7 +14561,7 @@ supported in $`[1,4]`, then
 $$`\|H_rf\|_{L^2[2,3]}\le 2^8\|f\|_{L^2(\mathbb{R})}.`
 Let $`\tilde f` be the $`2\pi`-periodic extension of $`f` to
 $`\mathbb{R}`, and let $`N` be the smallest integer larger than $`1/r`.
-Then {bpref "eqdifflhil"}[the identity `eqdifflhil`] shows that the kernels of $`H_r` and $`2\pi L_N`
+Then {bpref "Dirichlet-approximation"}[the identity `eqdifflhil`] shows that the kernels of $`H_r` and $`2\pi L_N`
 differ by at most $`12k_r` on $`[-\pi,\pi]`. Consider $`x\in[2,3]`. When computing
 $`H_rf(x)` and $`2\pi L_Nf(x)`, the kernels are computed at points of the
 form $`x-y` with $`f(y)\ne0`, hence $`y\in[1,4]`. Since $`x\in[2,3]`, the
