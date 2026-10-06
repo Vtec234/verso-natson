@@ -3,7 +3,7 @@ open Lake DSL
 
 require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.34.0"
 require verso from git "https://github.com/leanprover/verso.git" @ "v4.34.0"
-require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "v4.34.0"
+require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "v4.34.1"
 
 package CarlesonBlueprint where
   precompileModules := false
